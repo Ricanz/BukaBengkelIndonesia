@@ -21,7 +21,7 @@
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="{{asset('tadmin/media/logos/favicon.ico')}}" />
+		<link rel="shortcut icon" href="{{asset('tadmin/media/images/logo-192x192.png')}}" />
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -31,7 +31,7 @@
 		<div id="kt_header_mobile" class="header-mobile bg-primary header-mobile-fixed">
 			<!--begin::Logo-->
 			<a href="index.html">
-				<img alt="Logo" src="{{asset('tadmin/media/logos/logo-letter-9.png')}}" class="max-h-30px" />
+				<img alt="Logo" src="{{asset('tadmin/media/images/logo-192x192.png')}}" class="max-h-30px" />
 			</a>
 			<!--end::Logo-->
 			<!--begin::Toolbar-->
@@ -71,7 +71,7 @@
 								<div class="d-none d-lg-flex align-items-center mr-3">
 									<!--begin::Logo-->
 									<a href="index.html" class="mr-20">
-										<img alt="Logo" src="{{asset('tadmin/media/logos/logo-letter-9.png')}}" class="max-h-35px" />
+										<img alt="Logo" src="{{asset('tadmin/media/images/logo-192x192.png')}}" class="max-h-35px" />
 									</a>
 									<!--end::Logo-->
 									<!--begin::Desktop Search-->
@@ -935,8 +935,8 @@
 									<div class="topbar-item">
 										<div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
 											<div class="d-flex flex-column text-right pr-3">
-												<span class="text-white opacity-50 font-weight-bold font-size-sm d-none d-md-inline">Sean</span>
-												<span class="text-white font-weight-bolder font-size-sm d-none d-md-inline">UX Designer</span>
+												<span class="text-white opacity-50 font-weight-bold font-size-sm d-none d-md-inline">Seto</span>
+												<span class="text-white font-weight-bolder font-size-sm d-none d-md-inline">Super Admin</span>
 											</div>
 											<span class="symbol symbol-35">
 												<span class="symbol-label font-size-h5 font-weight-bold text-white bg-white-o-30">S</span>
@@ -963,7 +963,7 @@
 											<li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
 													<span class="menu-text">Dashboard</span>
-													<span class="menu-desc">Recent Updates &amp; Reports</span>
+													<span class="menu-desc">Buka Bengkel Indonesia</span>
 													<i class="menu-arrow"></i>
 												</a>
 												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
@@ -985,8 +985,8 @@
 											</li>
 											<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
-													<span class="menu-text">Features</span>
-													<span class="menu-desc">Components &amp; Elements</span>
+													<span class="menu-text">Cabang</span>
+													<span class="menu-desc">Daftar Bengkel Bukbeng</span>
 													<i class="menu-arrow"></i>
 												</a>
 												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
@@ -1800,8 +1800,8 @@
 											</li>
 											<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
-													<span class="menu-text">Crud</span>
-													<span class="menu-desc">Records &amp; Form Entries</span>
+													<span class="menu-text">Karyawan</span>
+													<span class="menu-desc">Data Karyawan Bukbeng</span>
 													<i class="menu-arrow"></i>
 												</a>
 												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
@@ -2783,8 +2783,8 @@
 											</li>
 											<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
-													<span class="menu-text">Apps</span>
-													<span class="menu-desc">Starter Applications</span>
+													<span class="menu-text">Standart Checking</span>
+													<span class="menu-desc">Laporan Standar Checking</span>
 													<i class="menu-arrow"></i>
 												</a>
 												<div class="menu-submenu menu-submenu-classic menu-submenu-left">
@@ -3547,8 +3547,8 @@
 											</li>
 											<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="javascript:;" class="menu-link menu-toggle">
-													<span class="menu-text">Pages</span>
-													<span class="menu-desc">Custom Pages</span>
+													<span class="menu-text">Complete Checking</span>
+													<span class="menu-desc">Laporan Complete Checking</span>
 													<i class="menu-arrow"></i>
 												</a>
 												<div class="menu-submenu menu-submenu-fixed menu-submenu-center" style="width:1150px">
