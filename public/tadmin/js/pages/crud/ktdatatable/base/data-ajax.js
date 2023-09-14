@@ -6,7 +6,6 @@ var KTDatatableRemoteAjaxDemo = function() {
 
     // basic demo
     var demo = function() {
-
         var datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
             data: {
