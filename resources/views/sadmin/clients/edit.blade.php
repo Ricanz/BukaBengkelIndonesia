@@ -64,6 +64,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Status</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <select name="status" id="status" class="form-control">
+                                <option value="{{ $client->status }}">{{ $client->status }}</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="deleted">Deleted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Deskripsi</label>
                         <textarea name="description" id="description" hidden></textarea>
                         <div class="col-lg-9 col-md-9 col-sm-12">

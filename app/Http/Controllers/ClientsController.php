@@ -137,6 +137,7 @@ class ClientsController extends Controller
         $client->code = $request->id;
         $client->address = $request->address;
         $client->city = $request->city;
+        $client->status = $request->status;
         $client->description = $request->description ? $request->description : $client->description;
         if ($client->save()) {
             return json_encode(['status'=> true, 'message'=> 'Success']);
