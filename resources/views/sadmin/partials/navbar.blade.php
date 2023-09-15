@@ -31,8 +31,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <a href="{{ url('/clients') }}" class="menu-link menu-toggle">
+                    <li class="menu-item">
+                        <a href="{{ url('/clients') }}" class="menu-link">
                             <span class="menu-text">Cabang</span>
                             <span class="menu-desc">Daftar Bengkel Bukbeng</span>
                         </a>

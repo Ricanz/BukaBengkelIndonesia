@@ -31,6 +31,7 @@ Route::get('/clients', [ClientsController::class, 'index'])->name('client');
 Route::get('/client/data', [ClientsController::class, 'data'])->name('client.data');
 Route::get('/client/edit/{id}', [ClientsController::class, 'edit'])->name('client.edit');
 Route::post('/clients', [ClientsController::class, 'store'])->name('client.store');
+Route::post('/client/update', [ClientsController::class, 'update'])->name('client.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

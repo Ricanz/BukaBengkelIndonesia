@@ -59,7 +59,7 @@ class ClientsController extends Controller
         $submit = Client::create([
             'title' => $request->name,
             'description' => $request->description,
-            'code' => $request->code,
+            'code' => $request->id,
             'image' => $img,
             'address' => $request->address,
             'city' => $request->city,
@@ -108,7 +108,6 @@ class ClientsController extends Controller
     public function edit($id)
     {
         $client = Client::findOrFail($id);
-        dd($client);
         return view('sadmin.clients.edit', compact('client'));
     }
 
@@ -119,9 +118,31 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'name' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'id' => 'required',
+            'client_id' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+        }
+
+        $client = Client::findOrFail($request->client_id);
+        $client->title = $request->name;
+        $client->code = $request->id;
+        $client->address = $request->address;
+        $client->city = $request->city;
+        $client->description = $request->description ? $request->description : $client->description;
+        if ($client->save()) {
+            return json_encode(['status'=> true, 'message'=> 'Success']);
+        } else {
+            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+        }
     }
 
     /**
