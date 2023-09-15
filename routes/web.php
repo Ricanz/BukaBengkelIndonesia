@@ -29,6 +29,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/clients', [ClientsController::class, 'index'])->name('client');
 Route::get('/client/data', [ClientsController::class, 'data'])->name('client.data');
+Route::post('/clients', [ClientsController::class, 'store'])->name('client.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -37,7 +38,19 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'name' => 'required',
+            'file' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+        }
+        
+        $submit = Client::create([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
     }
 
     /**

@@ -91,7 +91,8 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form" id="kt_form_1">
+                                    <form class="form" id="create_client_form" enctype="multipart/form-data">
+                                        @csrf
                                         <div class="image-input image-input-outline" id="kt_image_1">
                                             <div class="image-input-wrapper"
                                                 style="background-image: url(assets/media/users/100_1.jpg)"></div>
@@ -121,7 +122,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Deskripsi</label>
+                                            <label
+                                                class="col-form-label text-left col-lg-3 col-sm-12">Deskripsi</label>
+                                            <textarea name="description" id="description" hidden></textarea>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <div class="summernote" id="kt_summernote_1"></div>
                                             </div>
@@ -132,7 +135,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-light-primary font-weight-bold"
                                         data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary font-weight-bold">Save
+                                    <button type="submit" class="btn btn-primary font-weight-bold">Save
                                         changes</button>
                                 </div>
                                 </form>
@@ -162,29 +165,38 @@
     </div>
 
     @section('scripts')
-    <script>
-        var avatar1 = new KTImageInput('kt_image_1');
-        var KTSummernoteDemo = function () {
-        // Private functions
-        var demos = function () {
-        $('.summernote').summernote({
-        height: 150
-        });
-        }
+        <script>
+            var avatar1 = new KTImageInput('kt_image_1');
+            var KTSummernoteDemo = function() {
+                // Private functions
+                var demos = function() {
+                    $('.summernote').summernote({
+                        height: 150,
+                        callbacks: {
+                            onChange: function(contents, $editable) {
+                                $("#description").val(contents);
+                            }
+                        }
+                    });
+                }
 
-        return {
-        // public functions
-        init: function() {
-        demos();
-        }
-        };
-        }();
+                return {
+                    // public functions
+                    init: function() {
+                        demos();
+                    }
+                };
+            }();
 
-        // Initialization
-        jQuery(document).ready(function() {
-        KTSummernoteDemo.init();
-        });
-    </script>
+            // $('.summernote').summernote({
+            //     height: 150
+            // });
+
+            // Initialization
+            jQuery(document).ready(function() {
+                KTSummernoteDemo.init();
+            });
+        </script>
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/client.js')}}" type="application/javascript" ></script>
     @endsection
