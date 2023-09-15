@@ -85,8 +85,7 @@
                     <div class="separator separator-dashed my-10"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light-primary font-weight-bold"
-                        data-dismiss="modal">Close</button>
+                    <a href="{{ url('/clients') }}" class="btn btn-light-primary font-weight-bold">Back</a>
                     <button type="submit" class="btn btn-primary font-weight-bold">Save
                         changes</button>
                 </div>

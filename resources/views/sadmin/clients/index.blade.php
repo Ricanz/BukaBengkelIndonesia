@@ -182,9 +182,9 @@
                 <table class="table table-bordered table-hover table-checkable" id="kt_datatable">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Gambar</th>
                             <th>Nama</th>
+                            <th>Gambar</th>
+                            <th>ID</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>

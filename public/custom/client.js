@@ -44,9 +44,9 @@ var KTDatatablesDataSourceAjaxClient = function() {
 				},
 			},
 			columns: [
-				{data: 'id'},
-				{data: 'image'},
 				{data: 'title'},
+				{data: 'image'},
+				{data: 'code'},
 				{data: 'status'},
 				{data: 'created_at'},
 				{data: 'id', responsivePriority: -1},
@@ -54,15 +54,14 @@ var KTDatatablesDataSourceAjaxClient = function() {
 			columnDefs: [
 				{
                     targets: 1,
-					width: '150px',
-                    class: 'text-center',
+                    class: 'text-left',
 					render: function(data, type, full, meta) {
                         return `<img alt="Logo" src="${APP_URL}${data}" class="max-h-35px" />`
 					},
 				},
 				{
                     targets: 2,
-                    class: 'text-center',
+                    class: 'text-left',
                     render: function (data, type, full, meta) {
                         return '<a href="/client/edit/'+full.id+'">'+data+'</a>'
                     }
