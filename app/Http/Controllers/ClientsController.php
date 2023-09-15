@@ -107,7 +107,9 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        dd($client);
+        return view('sadmin.clients.edit', compact('client'));
     }
 
     /**

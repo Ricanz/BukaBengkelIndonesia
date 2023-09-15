@@ -220,10 +220,6 @@
                 };
             }();
 
-            // $('.summernote').summernote({
-            //     height: 150
-            // });
-
             // Initialization
             jQuery(document).ready(function() {
                 KTSummernoteDemo.init();
