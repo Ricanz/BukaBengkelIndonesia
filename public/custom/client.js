@@ -74,7 +74,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
 						return `
-                            <a class="nav-link" href="client/destroy/${full.id}" id="remove_client" data-client-id="${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+                            <a class="nav-link" href="client/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
 						`;
 					},
 				},
@@ -222,49 +222,3 @@ $("#update_client_form").on("submit", function (event) {
         }
     });
 });
-
-// $(".remove-client").on("click", function (event) {
-//     event.preventDefault();
-//     var token = $('meta[name="csrf-token"]').attr('content');
-//     var clientID = $(this).data("client-id");
-//     console.log(clientID);
-//     // $.ajax({
-//     //     headers: { 'X-CSRF-TOKEN': token },
-//     //     type : 'GET',
-//     //     url  : `/client/destroy${clientID}`,
-//     //     dataType: 'JSON',
-//     //     cache: false,
-//     //     contentType: false,
-//     //     processData: false,
-//     //     // success: function(data){
-//     //     //     if(data.status === true) {
-//     //     //         swal.fire({
-//     //     //             text: data.message,
-//     //     //             icon: "success",
-//     //     //             buttonsStyling: false,
-//     //     //             confirmButtonText: "Berhasil Hapus Client",
-//     //     //             customClass: {
-//     //     //                 confirmButton: "btn font-weight-bold btn-light-primary"
-//     //     //             }
-//     //     //         }).then(function() {
-//     //     //             location.reload()
-//     //     //         });
-//     //     //     }else {
-//     //     //         var values = '';
-//     //     //         jQuery.each(data.message, function (key, value) {
-//     //     //             values += value+"<br>";
-//     //     //         });
-
-//     //     //         swal.fire({
-//     //     //             html: values,
-//     //     //             icon: "error",
-//     //     //             buttonsStyling: false,
-//     //     //             confirmButtonText: "Ok, got it!",
-//     //     //             customClass: {
-//     //     //                 confirmButton: "btn font-weight-bold btn-light-primary"
-//     //     //             }
-//     //     //         }).then(function() { });
-//     //     //     }
-//     //     // }
-//     // });
-// });
