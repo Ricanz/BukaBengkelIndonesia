@@ -14,5 +14,7 @@
 <!--end::Page Vendors-->
 <!--begin::Page Scripts(used by this page)-->
 <script src="{{asset('tadmin/js/pages/widgets.js')}}"></script>
+<script>const APP_URL = "{{ env('APP_URL') }}";</script>
+
 <!--end::Page Scripts-->
 @yield('scripts');

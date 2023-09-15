@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Utils;
 use App\Models\Client;
+use App\Models\Employee;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -41,16 +45,47 @@ class ClientsController extends Controller
         $validation = Validator::make($request->all(), [
             'name' => 'required',
             'file' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'id' => 'required',
         ]);
 
         if ($validation->fails()) {
             return json_encode(['status'=> false, 'message'=> $validation->messages()]);
         }
+
+        $img = Utils::uploadImage($request->file, 300);
         
         $submit = Client::create([
-            'name' => $request->name,
-            'description' => $request->description
+            'title' => $request->name,
+            'description' => $request->description,
+            'code' => $request->code,
+            'image' => $img,
+            'address' => $request->address,
+            'city' => $request->city,
+            'status' => 'active',
         ]);
+
+        if ($submit) {
+            if ($request->kabeng) {
+                $email = Utils::generateEmail($request->kabeng);
+                $user = User::create([
+                    'name' => $request->kabeng,
+                    'email' => $email,
+                    'password' => Hash::make('pass.123'),
+                    'role' => 'client'
+                ]);
+                Employee::create([
+                    'user_id' => $user->id,
+                    'client_id' => $submit->id,
+                    'fullname' => $request->kabeng, 
+                    'is_kabeng' => true
+                ]);
+            }
+            return json_encode(['status'=> true, 'message'=> 'Success']);
+        } else {
+            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+        }
     }
 
     /**

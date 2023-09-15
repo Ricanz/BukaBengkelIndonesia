@@ -30,7 +30,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
 					width: '150px',
                     class: 'text-center',
 					render: function(data, type, full, meta) {
-                        return `<img alt="Logo" src=${data}" class="max-h-35px" />`
+                        return `<img alt="Logo" src="${APP_URL}${data}" class="max-h-35px" />`
 					},
 				},
 				{

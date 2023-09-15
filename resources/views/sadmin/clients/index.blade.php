@@ -95,14 +95,14 @@
                                         @csrf
                                         <div class="image-input image-input-outline" id="kt_image_1">
                                             <div class="image-input-wrapper"
-                                                style="background-image: url(assets/media/users/100_1.jpg)"></div>
+                                                style="background-image: url({{asset('tadmin/media/users/100_1.jpg')}})"></div>
 
                                             <label
                                                 class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                                 data-action="change" data-toggle="tooltip" title=""
                                                 data-original-title="Change avatar">
                                                 <i class="fa fa-pen icon-sm text-muted"></i>
-                                                <input type="file" name="profile_avatar"
+                                                <input type="file" name="file"
                                                     accept=".png, .jpg, .jpeg" />
                                                 <input type="hidden" name="profile_avatar_remove" />
                                             </label>
@@ -114,10 +114,42 @@
                                             </span>
                                         </div>
                                         <div class="form-group row">
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">ID</label>
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <input type="text" class="form-control" name="id"
+                                                    placeholder="Masukkan ID Cabang" />
+                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang *</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="name"
                                                     placeholder="Masukkan Nama Cabang" />
+                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat *</label>
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <input type="text" class="form-control" name="address"
+                                                    placeholder="Masukkan Alamat Cabang" />
+                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kota *</label>
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <input type="text" class="form-control" name="city"
+                                                    placeholder="Masukkan Kota Cabang" />
+                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kepala Cabang</label>
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <input type="text" class="form-control" name="kabeng"
+                                                    placeholder="Masukkan Nama Kepala Cabang" />
                                                 {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
                                             </div>
                                         </div>
