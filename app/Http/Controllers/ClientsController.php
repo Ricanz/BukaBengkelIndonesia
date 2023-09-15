@@ -154,12 +154,15 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::findOrFail($id);
+        $client->status = 'deleted';
+        $client->save();
+        return redirect()->back();
     }
 
     public function data()
     {
-        $data = Client::orderBy('id', 'desc');
+        $data = Client::where('status', '!=', 'deleted')->orderBy('id', 'desc');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 }

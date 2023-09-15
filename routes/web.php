@@ -32,6 +32,7 @@ Route::get('/client/data', [ClientsController::class, 'data'])->name('client.dat
 Route::get('/client/edit/{id}', [ClientsController::class, 'edit'])->name('client.edit');
 Route::post('/clients', [ClientsController::class, 'store'])->name('client.store');
 Route::post('/client/update', [ClientsController::class, 'update'])->name('client.update');
+Route::get('/client/destroy/{id}', [ClientsController::class, 'destroy'])->name('client.destroy');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
