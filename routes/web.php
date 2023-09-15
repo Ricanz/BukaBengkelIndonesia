@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,12 @@ Route::get('/client/edit/{id}', [ClientsController::class, 'edit'])->name('clien
 Route::post('/clients', [ClientsController::class, 'store'])->name('client.store');
 Route::post('/client/update', [ClientsController::class, 'update'])->name('client.update');
 Route::get('/client/destroy/{id}', [ClientsController::class, 'destroy'])->name('client.destroy');
+Route::get('/client/employee/{id}', [ClientsController::class, 'employee'])->name('client.employee');
+Route::get('/client/employee/data/{id}', [ClientsController::class, 'employee_data'])->name('client.employee.data');
+
+Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('employee.show');
+Route::post('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -162,7 +162,18 @@ class ClientsController extends Controller
 
     public function data()
     {
-        $data = Client::where('status', '!=', 'deleted')->orderBy('id', 'desc');
+        $data = Client::where('status', '!=', 'deleted')->orderBy('title');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
+    }
+
+    public function employee()
+    {
+        return view('sadmin.clients.employee');
+    }
+
+    public function employee_data($id)
+    {
+        $employee = Employee::with('user')->where('client_id', $id)->orderBy('fullname');
+        return DataTables::of($employee->get())->addIndexColumn()->make(true);
     }
 }

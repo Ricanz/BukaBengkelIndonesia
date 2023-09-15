@@ -26,6 +26,7 @@ var KTSummernoteDemo = function() {
 jQuery(document).ready(function() {
     KTSummernoteDemo.init();
 });
+
 var KTDatatablesDataSourceAjaxClient = function() {
 
 	var initTable1 = function() {
@@ -114,6 +115,97 @@ var KTDatatablesDataSourceAjaxClient = function() {
 
 }();
 
+var KTDatatablesDataClientEmployee = function() {
+
+	var initTable1 = function() {
+		var table = $('#table_client_employee');
+        const path = window.location.pathname;
+        const segments = path.split("/");
+        const id = segments[segments.length - 1];
+		// begin first table
+		table.DataTable({
+			responsive: true,
+			ajax: {
+				url: `/client/employee/data/${id}`,
+				type: 'GET',
+				data: {
+					pagination: {
+						perpage: 20,
+					},
+				},
+			},
+			columns: [
+				{data: 'fullname'},
+				{data: 'image'},
+				{data: 'user.email'},
+				{data: 'is_kabeng'},
+				{data: 'status'},
+				{data: 'created_at'},
+				{data: 'id', responsivePriority: -1},
+			],
+			columnDefs: [
+				{
+                    targets: 1,
+                    class: 'text-left',
+					render: function(data, type, full, meta) {
+                        return `<img alt="Logo" src="${APP_URL}${data}" class="max-h-35px" />`
+					},
+				},
+				{
+                    targets: 2,
+                    class: 'text-left',
+                    render: function (data, type, full, meta) {
+                        return '<a href="/employee/show/'+full.id+'">'+data+'</a>'
+                    }
+				},
+				{
+					targets: -1,
+					title: 'Actions',
+					orderable: false,
+                    class: 'remove-client',
+					render: function(data, type, full, meta) {
+						return `
+                            <a class="nav-link" href="client/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+						`;
+					},
+				},
+				{
+					width: '75px',
+					targets: -3,
+					render: function(data, type, full, meta) {
+						var status = {
+							"active": {'title': 'Active', 'class': 'label-light-success'},
+							"deleted": {'title': 'Deleted', 'class': ' label-light-danger'},
+							"inactive": {'title': 'Inactive', 'class': ' label-light-warning'},
+						};
+						if (typeof status[data] === 'undefined') {
+							return data;
+						}
+						return '<span class="label label-lg font-weight-bold ' + status[data].class + ' label-inline">' + status[data].title + '</span>';
+					},
+				},
+
+				{
+					targets: -2,
+					render: function(data, type, full, meta) {
+                        return to_date_time(data)
+					},
+				},
+			],
+		});
+	};
+
+	return {
+
+		//main function to initiate the module
+		init: function() {
+			initTable1();
+		},
+
+	};
+
+}();
+
 function to_date_time(date) {
     let tanggal = new Date(date);
     return tanggal.getFullYear()+"-"
@@ -128,6 +220,7 @@ function to_date_time(date) {
 
 jQuery(document).ready(function() {
 	KTDatatablesDataSourceAjaxClient.init();
+    KTDatatablesDataClientEmployee.init()
 });
 
 $("#create_client_form").on("submit", function (event) {
