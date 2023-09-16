@@ -11,7 +11,9 @@ class Utils
     public static function uploadImage($image, $width)
     {
         $img = Image::make($image);
-        $img->resize($width); // Resize to your desired dimensions
+        $img->resize($width, null, function ($constraint) {
+            $constraint->aspectRatio(); // Maintain aspect ratio
+        });
         $img->encode('jpg', 80); // Compress the image (quality: 80%)
 
         // Generate a unique filename for the processed image

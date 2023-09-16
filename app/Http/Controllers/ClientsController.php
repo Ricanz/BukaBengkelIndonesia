@@ -131,6 +131,9 @@ class ClientsController extends Controller
         if ($validation->fails()) {
             return json_encode(['status'=> false, 'message'=> $validation->messages()]);
         }
+        if ($request->has('file')) {
+            $img = Utils::uploadImage($request->file, 300);
+        }
 
         $client = Client::findOrFail($request->client_id);
         $client->title = $request->name;
@@ -138,6 +141,7 @@ class ClientsController extends Controller
         $client->address = $request->address;
         $client->city = $request->city;
         $client->status = $request->status;
+        $client->image = $request->has('file') ? $img : $client->image;
         $client->description = $request->description ? $request->description : $client->description;
         if ($client->save()) {
             return json_encode(['status'=> true, 'message'=> 'Success']);
