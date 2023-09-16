@@ -37,7 +37,9 @@ Route::get('/client/destroy/{id}', [ClientsController::class, 'destroy'])->name(
 Route::get('/client/employee/{id}', [ClientsController::class, 'employee'])->name('client.employee');
 Route::get('/client/employee/data/{id}', [ClientsController::class, 'employee_data'])->name('client.employee.data');
 
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('employee.show');
+Route::get('/employee/data', [EmployeeController::class, 'data'])->name('employee.data');
 Route::post('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
 
 

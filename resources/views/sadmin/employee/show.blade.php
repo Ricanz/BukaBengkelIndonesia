@@ -33,6 +33,13 @@
                         </span>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">ID</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="code"
+                                value="{{ $employee->code }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Nama Lengkap</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="fullname"

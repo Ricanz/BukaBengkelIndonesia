@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('client_id');
             $table->string('image')->nullable();
             $table->string('fullname');
+            $table->string('code')->nullable();
             $table->string('status')->default('active');
             $table->boolean('is_kabeng');
             $table->timestamps();

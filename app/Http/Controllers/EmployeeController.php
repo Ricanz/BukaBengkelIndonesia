@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmployeeController extends Controller
 {
@@ -18,7 +19,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('sadmin.employee.index');
     }
 
     /**
@@ -96,10 +97,12 @@ class EmployeeController extends Controller
         $employee->image = $request->has('file') ? $img : $employee->image;
         $employee->is_kabeng = $request->is_kabeng === "true" ? true : false;
         $employee->status = $request->status;
+        $employee->code = $request->code;
 
         $user = User::findOrFail($employee->user_id);
         $user->email = $request->email;
         $user->password = $request->password ? Hash::make($request->password) : $user->password;
+        $user->role = $request->is_kabeng === "true" ? "client" : "employee";
         if ($employee->save() && $user->save()) {
             return json_encode(['status'=> true, 'message'=> 'Success']);
         } else {
@@ -116,5 +119,19 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function data(Request $request)
+    {
+        if ($request->filter) {
+            if ($request->filter === 'client') {
+                $data = Employee::with('client')->where('is_kabeng', true)->where('status', '!=', 'deleted')->orderBy('fullname');
+            } else if($request->filter === 'employee'){
+                $data = Employee::with('client')->where('is_kabeng', false)->where('status', '!=', 'deleted')->orderBy('fullname');
+            }
+        } else {
+            $data = User::where('role', 'admin')->orderBy('name');
+        }
+        return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 }

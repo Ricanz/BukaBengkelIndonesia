@@ -44,3 +44,181 @@ $("#update_employee_form").on("submit", function (event) {
         }
     });
 });
+
+var KTDatatablesDataClientEmployee = function() {
+
+	var initTable1 = function() {
+		var table = $('#table_employee');
+        const urlParams = new URLSearchParams(window.location.search);
+        const filter = urlParams.get('filter');
+
+		// begin first table
+		table.DataTable({
+			responsive: true,
+			ajax: {
+				url: `/employee/data`,
+				type: 'GET',
+				data: {
+					pagination: {
+						perpage: 20,
+					},
+                    filter : filter
+				},
+			},
+			columns: [
+				{data: 'fullname'},
+				{data: 'is_kabeng'},
+				{data: 'code'},
+				{data: 'image'},
+				{data: 'client.title'},
+				{data: 'created_at'},
+				{data: 'id', responsivePriority: -1},
+			],
+			columnDefs: [
+				{
+                    targets: 3,
+                    class: 'text-left',
+					render: function(data, type, full, meta) {
+                        return `<img alt="Logo" src="${APP_URL}${data}" class="max-h-35px" />`
+					},
+				},
+				{
+                    targets: 2,
+                    class: 'text-left',
+                    render: function (data, type, full, meta) {
+                        return '<a href="/employee/show/'+full.id+'">'+data+'</a>'
+                    }
+				},
+				{
+					targets: -1,
+					title: 'Actions',
+					orderable: false,
+                    class: 'remove-client',
+					render: function(data, type, full, meta) {
+						return `
+                            <a class="nav-link" href="client/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+						`;
+					},
+				},
+				{
+					width: '75px',
+					targets: 1,
+					render: function(data, type, full, meta) {
+						var status = {
+							1: {'title': 'Kabeng', 'class': 'label-light-warning'},
+							0: {'title': 'Karyawan', 'class': ' label-light-info'},
+						};
+						if (typeof status[data] === 'undefined') {
+							return data;
+						}
+						return '<span class="label label-lg font-weight-bold ' + status[data].class + ' label-inline">' + status[data].title + '</span>';
+					},
+				},
+
+				{
+					targets: -2,
+					render: function(data, type, full, meta) {
+                        return to_date_time(data)
+					},
+				},
+			],
+		});
+	};
+
+	return {
+
+		//main function to initiate the module
+		init: function() {
+			initTable1();
+		},
+
+	};
+
+}();
+
+var KTDatatablesDataClientAdmin = function() {
+
+	var initTable1 = function() {
+		var table = $('#table_admin');
+
+		// begin first table
+		table.DataTable({
+			responsive: true,
+			ajax: {
+				url: `/employee/data`,
+				type: 'GET',
+				data: {
+					pagination: {
+						perpage: 20,
+					},
+				},
+			},
+			columns: [
+				{data: 'id'},
+				{data: 'name'},
+				{data: 'email'},
+				{data: 'created_at'},
+				{data: 'id', responsivePriority: -1},
+			],
+			columnDefs: [
+				{
+                    targets: 0,
+                    class: 'text-center',
+                    render: function (data, type, full, meta) {
+                        return 'View'
+                    }
+				},
+				{
+                    targets: 1,
+                    class: 'text-left',
+                    render: function (data, type, full, meta) {
+                        return '<a href="/employee/show/'+full.id+'">'+data+'</a>'
+                    }
+				},
+				{
+					targets: -1,
+					title: 'Actions',
+					orderable: false,
+                    class: 'remove-client',
+					render: function(data, type, full, meta) {
+						return `
+                            <a class="nav-link" href="client/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+						`;
+					},
+				},
+				{
+					targets: -2,
+					render: function(data, type, full, meta) {
+                        return to_date_time(data)
+					},
+				},
+			],
+		});
+	};
+
+	return {
+		//main function to initiate the module
+		init: function() {
+			initTable1();
+		},
+
+	};
+
+}();
+
+function to_date_time(date) {
+    let tanggal = new Date(date);
+    return tanggal.getFullYear()+"-"
+        + (tanggal.getMonth()+ 1 > 9 ? (tanggal.getMonth()+ 1).toString() : "0" + (tanggal.getMonth()+ 1).toString())
+        +"-"
+        +(tanggal.getDate() > 9 ? tanggal.getDate().toString() : "0" + tanggal.getDate().toString())
+        + " "
+        +(tanggal.getHours().toString() > 9 ? tanggal.getHours().toString() : "0" + tanggal.getHours().toString())
+        + ":" + (tanggal.getUTCMinutes().toString() > 9 ? tanggal.getUTCMinutes().toString() : "0" + tanggal.getUTCMinutes().toString())
+        + ":" + (tanggal.getUTCSeconds().toString() > 9 ? tanggal.getUTCSeconds().toString() : "0" + tanggal.getUTCSeconds().toString());
+}
+
+jQuery(document).ready(function() {
+    KTDatatablesDataClientEmployee.init();
+    KTDatatablesDataClientAdmin.init();
+});
