@@ -38,4 +38,9 @@ class Utils
 
         return $email;
     }
+
+    public static function emptyImage()
+    {
+        return null;
+    }
 }

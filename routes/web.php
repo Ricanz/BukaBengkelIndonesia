@@ -40,7 +40,9 @@ Route::get('/client/employee/data/{id}', [ClientsController::class, 'employee_da
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
 Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('employee.show');
 Route::get('/employee/data', [EmployeeController::class, 'data'])->name('employee.data');
+Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
 Route::post('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
+Route::get('/employee/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 
 
 Route::middleware('auth')->group(function () {

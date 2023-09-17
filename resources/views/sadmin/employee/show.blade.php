@@ -9,7 +9,6 @@
                     </span>
                     <h3 class="card-label">Detail Karyawan</h3>
                 </div>
-                <div class="card-toolbar">
             </div>
             <div class="card-body">
                 <form class="form" id="update_employee_form" enctype="multipart/form-data">
@@ -97,13 +96,13 @@
                         </div>
                     </div>
                     <div class="separator separator-dashed my-10"></div>
-                </div>
-                <div class="modal-footer">
-                    <a href="{{ url('/clients') }}" class="btn btn-light-primary font-weight-bold">Back</a>
-                    <button type="submit" class="btn btn-primary font-weight-bold">Save
-                        changes</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <a href="{{ url('/clients') }}" class="btn btn-light-primary font-weight-bold">Back</a>
+                        <button type="submit" class="btn btn-primary font-weight-bold">Save
+                            changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     @section('scripts')

@@ -40,7 +40,44 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required',
+            'cabang' => 'required',
+            'kabeng' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+        }
+        if ($request->has('file')) {
+            $img = Utils::uploadImage($request->file, 300);
+        }
+
+        $submit = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => strtolower($request->filter)
+        ]);
+        if($submit){
+            $submit_employee = Employee::create([
+                'fullname' => $request->name,
+                'image' => $request->has('file') ? $img : Utils::emptyImage(),
+                'user_id' => $submit->id,
+                'client_id' => $request->cabang,
+                'code' => $request->id,
+                'status' => $request->status,
+                'is_kabeng' => $request->kabeng === 'true' ? true : false
+            ]);
+            if ($submit_employee) {
+                return json_encode(['status'=> true, 'message'=> 'Success']);
+            } else {
+                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            }
+        }
     }
 
     /**
@@ -118,7 +155,15 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        $employee->status = 'deleted';
+        
+        $user = User::findOrFail($employee->user_id);
+        $user->status = 'deleted';
+        if ($employee->save() && $user->save()) {
+            return redirect()->back();
+        }
+        return json_encode(['status'=> false, 'message'=> 'Gagal Hapus!']);
     }
 
     public function data(Request $request)
