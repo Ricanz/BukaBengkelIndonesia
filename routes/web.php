@@ -55,7 +55,9 @@ Route::post('/type/store', [MasterTypeController::class, 'store'])->name('type.s
 
 Route::get('/checkings', [CheckingController::class, 'index'])->name('checking.index');
 Route::get('/checking/data', [CheckingController::class, 'data'])->name('checking.data');
+Route::get('/checking/edit/{id}', [CheckingController::class, 'show'])->name('checking.show');
 Route::post('/checkings', [CheckingController::class, 'store'])->name('checking.store');
+Route::post('/checking/update', [CheckingController::class, 'update'])->name('checking.update');
 Route::get('/checking/destroy/{id}', [CheckingController::class, 'destroy'])->name('checking.destroy');
 
 

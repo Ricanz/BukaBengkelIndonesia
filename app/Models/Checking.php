@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Checking extends Model
 {
@@ -35,5 +36,10 @@ class Checking extends Model
     public function type(): BelongsTo
     {
         return $this->belongsTo(MasterType::class, 'type_id');
+    }
+
+    public function standart(): HasOne
+    {
+        return $this->hasOne(StandartChecking::class, 'checking_id', 'id');
     }
 }

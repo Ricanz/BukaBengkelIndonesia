@@ -101,7 +101,7 @@
                                         <div class="form-group row">
                                             <label class="col-form-label text-left col-lg-3 col-sm-12">Wind Speed (2.5 m/s - 4 m/s)</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <input type="text" class="form-control" name="suhu"
+                                                <input type="text" class="form-control" name="wind"
                                                     placeholder="Masukkan Wind Speed Kendaraan" />
                                             </div>
                                         </div>
@@ -111,15 +111,14 @@
                                                 <textarea class="form-control" name="saran" id="exampleTextarea" rows="3"></textarea>
                                             </div>
                                         </div>
-                                        
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-primary font-weight-bold"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary font-weight-bold">Save
+                                                changes</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-primary font-weight-bold"
-                                        data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary font-weight-bold">Save
-                                        changes</button>
-                                </div>
-                                </form>
                             </div>
                         </div>
                     </div>

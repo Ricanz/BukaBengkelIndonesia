@@ -65,6 +65,7 @@ class CheckingController extends Controller
                 'high' => $request->high, 
                 'low' => $request->low, 
                 'suhu' => $request->suhu, 
+                'wind' => $request->wind, 
                 'saran' => $request->saran, 
                 'status' => 'active'
             ]);
@@ -82,7 +83,8 @@ class CheckingController extends Controller
      */
     public function show($id)
     {
-        //
+        $checking = Checking::with('employee', 'client', 'type', 'standart')->findOrFail($id);
+        return view('sadmin.checking.show', compact('checking'));
     }
 
     /**
@@ -103,9 +105,26 @@ class CheckingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $checking = Checking::findOrFail($request->checking_id);
+        $detail = StandartChecking::where('checking_id', $checking->id)->first();
+
+        $checking->wo = $request->wo;
+        $checking->plat_number = $request->nopol;
+
+        $detail->km = $request->km;
+        $detail->high = $request->km;
+        $detail->low = $request->low;
+        $detail->suhu = $request->suhu;
+        $detail->wind = $request->wind;
+        $detail->saran = $request->saran;
+
+        if ($checking->save() && $detail->save()) {
+            return json_encode(['status'=> true, 'message'=> 'Success']);
+        } else {
+            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+        }
     }
 
     /**
