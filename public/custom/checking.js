@@ -20,6 +20,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
 			columns: [
 				{data: 'plat_number'},
 				{data: 'wo'},
+				{data: 'checking_type'},
 				{data: 'employee.fullname'},
 				{data: 'type.name'},
 				{data: 'status'},

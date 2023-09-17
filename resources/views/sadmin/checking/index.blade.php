@@ -132,6 +132,7 @@
                         <tr>
                             <th>Nopol</th>
                             <th>No. WO</th>
+                            <th>Tipe</th>
                             <th>Karyawan</th>
                             <th>Type</th>
                             <th>Status</th>

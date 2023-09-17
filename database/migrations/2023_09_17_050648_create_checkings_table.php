@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('plat_number');
             $table->bigInteger('type_id');
             $table->string('status')->default('active');
+            $table->string('type')->default('Standart');
             $table->timestamps();
         });
     }

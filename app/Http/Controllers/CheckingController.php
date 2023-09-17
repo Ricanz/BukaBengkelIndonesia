@@ -55,7 +55,8 @@ class CheckingController extends Controller
             'wo' => $request->wo,
             'plat_number' => $request->nopol,
             'type_id' => $request->type,
-            'status' => 'active'
+            'status' => 'active',
+            'checking_type' => 'Standart'
         ]);
         if ($checking) {
             StandartChecking::create([
