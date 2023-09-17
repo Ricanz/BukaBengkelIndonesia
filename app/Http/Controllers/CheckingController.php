@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Utils;
 use App\Models\Checking;
+use App\Models\CheckingImage;
 use App\Models\StandartChecking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -144,6 +146,36 @@ class CheckingController extends Controller
     public function data()
     {
         $data = Checking::with('employee', 'client', 'type')->where('status', 'active');
+        return DataTables::of($data->get())->addIndexColumn()->make(true);
+    }
+
+    public function image(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'file' => 'required',
+            'description' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+        }
+
+        $submit = CheckingImage::create([
+            'image' => Utils::uploadImage($request->file, 300),
+            'checking_id' => $request->checking_id,
+            'desc_id' => $request->description,
+            'type' => 'pre'
+        ]);
+        if ($submit) {
+            return json_encode(['status'=> true, 'message'=> 'Success']);
+        } else {
+            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+        }
+    }
+
+    public function image_data(Request $request)
+    {
+        $data = CheckingImage::with('type')->where('checking_id', $request->id);
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 }

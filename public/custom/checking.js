@@ -1,5 +1,5 @@
 'use strict';
-
+var avatar1 = new KTImageInput('kt_image_1');
 var KTDatatablesDataSourceAjaxClient = function() {
 
 	var initTable1 = function() {
@@ -83,8 +83,62 @@ var KTDatatablesDataSourceAjaxClient = function() {
 
 }();
 
+var KTDatatablesDataSourceAjaxImage = function() {
+
+	var initTable1 = function() {
+		var table = $('#table_image');
+        var tableImage = document.getElementById('table_image');
+        var dataId = tableImage.getAttribute('data-id');
+		// begin first table
+		table.DataTable({
+			responsive: true,
+			ajax: {
+				url: '/checking/image',
+				type: 'GET',
+				data: {
+					pagination: {
+						perpage: 20,
+					},
+                    id: dataId
+				},
+			},
+			columns: [
+				{data: 'image'},
+				{data: 'type.description'},
+			],
+			columnDefs: [
+                {
+                    targets: 0,
+                    class: 'text-left',
+					render: function(data, type, full, meta) {
+                        return `<img alt="Image" src="${APP_URL}${data}" class="max-h-35px" />`
+					},
+				},
+				{
+                    targets: 1,
+                    class: 'text-left',
+                    render: function (data, type, full, meta) {
+                        return '<a href="/checking/edit/'+full.id+'">'+data+'</a>'
+                    }
+				},
+			],
+		});
+	};
+
+	return {
+
+		//main function to initiate the module
+		init: function() {
+			initTable1();
+		},
+
+	};
+
+}();
+
 jQuery(document).ready(function() {
 	KTDatatablesDataSourceAjaxClient.init();
+	KTDatatablesDataSourceAjaxImage.init();
 });
 
 function to_date_time(date) {
@@ -154,6 +208,52 @@ $("#update_checking_form").on("submit", function (event) {
         type : 'POST',
         data: formData,
         url  : '/checking/update',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            if(data.status === true) {
+                swal.fire({
+                    text: data.message,
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    location.reload()
+                });
+            }else {
+                var values = '';
+                jQuery.each(data.message, function (key, value) {
+                    values += value+"<br>";
+                });
+
+                swal.fire({
+                    html: values,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() { });
+            }
+        }
+    });
+});
+
+$("#create_image_form").on("submit", function (event) {
+    event.preventDefault();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var formData = new FormData(this);
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': token },
+        type : 'POST',
+        data: formData,
+        url  : '/checking/image',
         dataType: 'JSON',
         cache: false,
         contentType: false,

@@ -59,6 +59,8 @@ Route::get('/checking/edit/{id}', [CheckingController::class, 'show'])->name('ch
 Route::post('/checkings', [CheckingController::class, 'store'])->name('checking.store');
 Route::post('/checking/update', [CheckingController::class, 'update'])->name('checking.update');
 Route::get('/checking/destroy/{id}', [CheckingController::class, 'destroy'])->name('checking.destroy');
+Route::get('/checking/image', [CheckingController::class, 'image_data'])->name('checking.image_data');
+Route::post('/checking/image', [CheckingController::class, 'image'])->name('checking.image');
 
 
 
