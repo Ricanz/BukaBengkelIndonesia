@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MasterTypeController;
@@ -51,6 +52,11 @@ Route::get('/type/edit/{id}', [MasterTypeController::class, 'show'])->name('type
 Route::get('/type/destroy/{id}', [MasterTypeController::class, 'destroy'])->name('type.destroy');
 Route::post('/type/update', [MasterTypeController::class, 'update'])->name('type.update');
 Route::post('/type/store', [MasterTypeController::class, 'store'])->name('type.store');
+
+Route::get('/checkings', [CheckingController::class, 'index'])->name('checking.index');
+Route::get('/checking/data', [CheckingController::class, 'data'])->name('checking.data');
+Route::post('/checkings', [CheckingController::class, 'store'])->name('checking.store');
+Route::get('/checking/destroy/{id}', [CheckingController::class, 'destroy'])->name('checking.destroy');
 
 
 
