@@ -89,6 +89,59 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="modal fade" id="editImage" data-backdrop="static" tabindex="-1" role="dialog"
+                        aria-labelledby="staticBackdrop" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Foto</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="form" id="update_image_form" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="id" id="editId">
+                                        <div class="image-input image-input-outline" id="kt_image_2">
+                                            <div class="image-input-wrapper" id="checkImage"
+                                                style="">
+                                            </div>
+
+                                            <label
+                                                class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                data-action="change" data-toggle="tooltip" title=""
+                                                data-original-title="Change avatar">
+                                                <i class="fa fa-pen icon-sm text-muted"></i>
+                                                <input type="file" name="file" accept=".png, .jpg, .jpeg" />
+                                                <input type="hidden" name="profile_avatar_remove" />
+                                            </label>
+
+                                            <span
+                                                class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
+                                                data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
+                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                            </span>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <div class="form-group row">
+                                                    <label class="col-form-label text-left col-lg-3 col-sm-12" id="editLabel"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-primary font-weight-bold"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary font-weight-bold">Save
+                                                changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -184,6 +237,7 @@
                         <tr>
                             <th>Image</th>
                             <th>Description</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>

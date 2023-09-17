@@ -178,4 +178,18 @@ class CheckingController extends Controller
         $data = CheckingImage::with('type')->where('checking_id', $request->id);
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
+
+    public function image_update(Request $request)
+    {
+        if ($request->has('file')) {
+            $img = Utils::uploadImage($request->file, 300);
+            $image = CheckingImage::findOrFail($request->id);
+            $image->image = $img;
+            if ($image->save()) {
+                return json_encode(['status'=> true, 'message'=> 'Success']);
+            } else {
+                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            }
+        }
+    }
 }

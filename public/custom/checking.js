@@ -1,5 +1,6 @@
 'use strict';
 var avatar1 = new KTImageInput('kt_image_1');
+var avatar2 = new KTImageInput('kt_image_2');
 var KTDatatablesDataSourceAjaxClient = function() {
 
 	var initTable1 = function() {
@@ -105,6 +106,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
 			columns: [
 				{data: 'image'},
 				{data: 'type.description'},
+				{data: 'id', responsivePriority: -1},
 			],
 			columnDefs: [
                 {
@@ -116,10 +118,21 @@ var KTDatatablesDataSourceAjaxImage = function() {
 				},
 				{
                     targets: 1,
-                    class: 'text-left',
+                    class: 'text-left edit_image',
                     render: function (data, type, full, meta) {
-                        return '<a href="/checking/edit/'+full.id+'">'+data+'</a>'
+                        return `<p id="edit_image" data-image="${full.image}" onclick="test">${data}</p>`
                     }
+				},{
+					targets: -1,
+					title: 'Actions',
+					orderable: false,
+                    class: 'remove-client',
+					render: function(data, type, full, meta) {
+						return `
+                            <a class="nav-link" href="javascript:void()" onclick="myFunction('${full.image}', '${full.type.description}', '${full.id}')" data-toggle="modal"
+                            data-target="#editImage"><i class="nav-icon la la-edit"></i><span class="nav-text"></span></a>
+						`;
+					},
 				},
 			],
 		});
@@ -140,6 +153,12 @@ jQuery(document).ready(function() {
 	KTDatatablesDataSourceAjaxClient.init();
 	KTDatatablesDataSourceAjaxImage.init();
 });
+
+function myFunction(data, desc, id) {
+    $('#checkImage').css('background-image', `url(${data})`);
+    $('#editLabel').html(`${desc}`);
+    $('#editId').val(`${id}`);
+}
 
 function to_date_time(date) {
     let tanggal = new Date(date);
@@ -254,6 +273,52 @@ $("#create_image_form").on("submit", function (event) {
         type : 'POST',
         data: formData,
         url  : '/checking/image',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            if(data.status === true) {
+                swal.fire({
+                    text: data.message,
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    location.reload()
+                });
+            }else {
+                var values = '';
+                jQuery.each(data.message, function (key, value) {
+                    values += value+"<br>";
+                });
+
+                swal.fire({
+                    html: values,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() { });
+            }
+        }
+    });
+});
+
+$("#update_image_form").on("submit", function (event) {
+    event.preventDefault();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var formData = new FormData(this);
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': token },
+        type : 'POST',
+        data: formData,
+        url  : '/checking/image/update',
         dataType: 'JSON',
         cache: false,
         contentType: false,
