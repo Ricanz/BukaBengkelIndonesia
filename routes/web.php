@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MasterTypeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,14 @@ Route::get('/employee/data', [EmployeeController::class, 'data'])->name('employe
 Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
 Route::post('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
 Route::get('/employee/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+
+Route::get('/types', [MasterTypeController::class, 'index'])->name('type.index');
+Route::get('/type/data', [MasterTypeController::class, 'data'])->name('type.data');
+Route::get('/type/edit/{id}', [MasterTypeController::class, 'show'])->name('type.show');
+Route::get('/type/destroy/{id}', [MasterTypeController::class, 'destroy'])->name('type.destroy');
+Route::post('/type/update', [MasterTypeController::class, 'update'])->name('type.update');
+Route::post('/type/store', [MasterTypeController::class, 'store'])->name('type.store');
+
 
 
 Route::middleware('auth')->group(function () {
