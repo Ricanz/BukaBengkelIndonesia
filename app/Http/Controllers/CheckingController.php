@@ -175,7 +175,7 @@ class CheckingController extends Controller
 
     public function image_data(Request $request)
     {
-        $data = CheckingImage::with('type')->where('checking_id', $request->id);
+        $data = CheckingImage::with('type')->where('checking_id', $request->id)->where('status', '!=', 'deleted');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 
@@ -191,5 +191,13 @@ class CheckingController extends Controller
                 return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
             }
         }
+    }
+
+    public function image_destroy($id)
+    {
+        $image = CheckingImage::findOrFail($id);
+        $image->status = 'deleted';
+        $image->save();
+        return redirect()->back();
     }
 }

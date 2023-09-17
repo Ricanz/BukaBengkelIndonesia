@@ -62,7 +62,7 @@ Route::get('/checking/destroy/{id}', [CheckingController::class, 'destroy'])->na
 Route::get('/checking/image', [CheckingController::class, 'image_data'])->name('checking.image_data');
 Route::post('/checking/image', [CheckingController::class, 'image'])->name('checking.image');
 Route::post('/checking/image/update', [CheckingController::class, 'image_update'])->name('checking.image_update');
-
+Route::get('/checking/image/destroy/{id}', [CheckingController::class, 'image_destroy'])->name('checking.image_destroy');
 
 
 Route::middleware('auth')->group(function () {

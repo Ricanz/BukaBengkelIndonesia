@@ -131,6 +131,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
 						return `
                             <a class="nav-link" href="javascript:void()" onclick="myFunction('${full.image}', '${full.type.description}', '${full.id}')" data-toggle="modal"
                             data-target="#editImage"><i class="nav-icon la la-edit"></i><span class="nav-text"></span></a>
+                            <a class="nav-link" href="javascript:void()" onclick="deleteFunction('${full.id}')"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
 						`;
 					},
 				},
@@ -158,6 +159,10 @@ function myFunction(data, desc, id) {
     $('#checkImage').css('background-image', `url(${data})`);
     $('#editLabel').html(`${desc}`);
     $('#editId').val(`${id}`);
+}
+
+function deleteFunction(id){
+    window.location.href = `/checking/image/destroy/${id}`
 }
 
 function to_date_time(date) {
