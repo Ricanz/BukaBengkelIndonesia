@@ -94,7 +94,7 @@
                                             </svg>
                                             <!--end::Svg Icon-->
                                         </span>
-                                        <span class="menu-text">Super Admin</span>
+                                        <span class="menu-text">Admin</span>
                                     </a>
                                 </li>
                                 <li class="menu-item menu-item-submenu">
