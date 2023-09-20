@@ -7,6 +7,7 @@ use App\Models\Checking;
 use App\Models\CheckingImage;
 use App\Models\StandartChecking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -29,7 +30,7 @@ class CheckingController extends Controller
      */
     public function create()
     {
-        //
+        return view('sadmin.checking.create');
     }
 
     /**
@@ -50,8 +51,10 @@ class CheckingController extends Controller
             return json_encode(['status'=> false, 'message'=> $validation->messages()]);
         }
 
+        $user = Auth::user();
+
         $checking = Checking::create([
-            'user_id' => 1,
+            'user_id' => $user->id,
             'employee_id' => 1,
             'client_id' => 1,
             'wo' => $request->wo,

@@ -8,28 +8,11 @@
             <div id="kt_header_menu" class="header-menu header-menu-left header-menu-mobile header-menu-layout-default">
                 <!--begin::Header Nav-->
                 <ul class="menu-nav">
-                    <li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here" data-menu-toggle="hover" aria-haspopup="true">
-                        <a href="javascript:;" class="menu-link menu-toggle">
+                    <li class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here">
+                        <a href="{{ url('/') }}" class="menu-link">
                             <span class="menu-text">Dashboard</span>
                             <span class="menu-desc">Buka Bengkel Indonesia</span>
-                            <i class="menu-arrow"></i>
                         </a>
-                        <div class="menu-submenu menu-submenu-classic menu-submenu-left">
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
-                                    <a href="index.html" class="menu-link">
-                                        <span class="menu-text">Latest Updated</span>
-                                        <span class="menu-desc"></span>
-                                    </a>
-                                </li>
-                                <li class="menu-item" aria-haspopup="true">
-                                    <a target="_blank" href="https://preview.keenthemes.com/metronic/demo9/builder.html" class="menu-link">
-                                        <span class="menu-text">Layout Builder</span>
-                                        <span class="menu-desc"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover" aria-haspopup="true">
                         <a href="javascript:;" class="menu-link menu-toggle">
@@ -174,7 +157,7 @@
                                     </a>
                                 </li>
                                 <li class="menu-item" aria-haspopup="true">
-                                    <a href="custom/apps/inbox.html" class="menu-link">
+                                    <a href="{{ route('checking.create') }}" class="menu-link">
                                         <span class="svg-icon menu-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/General/Shield-check.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

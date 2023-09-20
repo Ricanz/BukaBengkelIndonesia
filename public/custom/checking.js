@@ -201,7 +201,7 @@ $("#create_checking_form").on("submit", function (event) {
                         confirmButton: "btn font-weight-bold btn-light-primary"
                     }
                 }).then(function() {
-                    location.reload()
+                    window.location.href = '/checking/standart' 
                 });
             }else {
                 var values = '';
