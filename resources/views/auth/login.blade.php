@@ -3,7 +3,6 @@
 <!--begin::Head-->
 
 <head>
-    <base href="../../../../">
     <meta charset="utf-8" />
     <title>Login | Buka Bengkel Indonesia</title>
     <meta name="description" content="Login page example" />
@@ -22,7 +21,7 @@
     <!--end::Global Theme Styles-->
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="{{ asset('tadmin/media/logos/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ asset('tadmin/media/images/logo-192x192.png') }}" />
 </head>
 <!--end::Head-->
 <!--begin::Body-->
