@@ -86,7 +86,7 @@
                 "theme": {
                     "base": {
                         "white": "#ffffff",
-                        "primary": "#0BB783",
+                        "primary": "#0978d3",
                         "secondary": "#E5EAEE",
                         "success": "#1BC5BD",
                         "info": "#8950FC",
