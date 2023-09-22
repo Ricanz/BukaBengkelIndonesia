@@ -148,7 +148,7 @@ class CheckingController extends Controller
 
     public function data()
     {
-        $data = Checking::with('employee', 'client', 'type')->where('status', 'active');
+        $data = Checking::with('employee', 'client', 'types')->where('status', 'active');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 
