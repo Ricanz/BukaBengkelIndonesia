@@ -145,7 +145,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <h6 class="card-label">Tipe {{ $checking->checking_type }}</h6>
+                <h6 class="card-label">{{ $checking->checking_type }} Checking</h6>
                 <form class="form" id="update_checking_form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
@@ -166,7 +166,7 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="type" id="type" class="form-control">
-                                <option value="{{ $checking->type_id }}" selected>{{ $checking->type->name }}</option>
+                                <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}</option>
                                 @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach

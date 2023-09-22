@@ -33,7 +33,7 @@ class Checking extends Model
         return $this->belongsTo(Employee::class, 'sa_id');
     }
 
-    public function type(): BelongsTo
+    public function types(): BelongsTo
     {
         return $this->belongsTo(MasterType::class, 'type_id');
     }

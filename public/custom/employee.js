@@ -53,6 +53,7 @@ $("#update_employee_form").on("submit", function (event) {
     event.preventDefault();
     var token = $('meta[name="csrf-token"]').attr('content');
     var formData = new FormData(this);
+    console.log(formData);
     $.ajax({
         headers: { 'X-CSRF-TOKEN': token },
         type : 'POST',
