@@ -28,9 +28,9 @@ class Checking extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function sa(): BelongsTo
+    public function advisor(): BelongsTo
     {
-        return $this->belongsTo(Employee::class, 'sa_id');
+        return $this->belongsTo(ServiceAdvisor::class, 'sa_id');
     }
 
     public function types(): BelongsTo

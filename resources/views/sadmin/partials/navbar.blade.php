@@ -347,14 +347,14 @@
                         <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover"
                             aria-haspopup="true">
                             <a href="javascript:;" class="menu-link menu-toggle">
-                                <span class="menu-text">Teknisi</span>
-                                <span class="menu-desc">Daftar Teknisi Bukbeng</span>
+                                <span class="menu-text">Karyawan</span>
+                                <span class="menu-desc">Daftar Karyawan Bukbeng</span>
                                 <i class="menu-arrow"></i>
                             </a>
                             <div class="menu-submenu menu-submenu-classic menu-submenu-left">
                                 <ul class="menu-subnav">
                                     <li class="menu-item menu-item-submenu">
-                                        <a href="{{ url('employees?filter=client') }}" class="menu-link">
+                                        <a href="{{ url('advisor') }}" class="menu-link">
                                             <span class="svg-icon menu-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Box2.svg-->
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -408,7 +408,6 @@
                             <a href="{{ url('checking/standart') }}" class="menu-link">
                                 <span class="menu-text">Standart Checking</span>
                                 <span class="menu-desc">Laporan Standar Checking</span>
-                                <i class="menu-arrow"></i>
                             </a>
                         </li>
                         <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">

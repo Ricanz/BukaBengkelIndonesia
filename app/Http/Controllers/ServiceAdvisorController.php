@@ -132,11 +132,11 @@ class ServiceAdvisorController extends Controller
         if ($user->role === 'client') {
             $user_id = $user->id;
             $data = ServiceAdvisor::with('client')->whereHas('client', function ($query) use ($user_id) {
-                $query->where('kabeng_id', $user_id);
+                $query->where('kabeng_id', $user_id)->orderBy('name', 'asc');
             })->where('status', 'active');
             
         } else if ($user->role === 'admin'){
-            $data = ServiceAdvisor::with('client')->where('status', 'active');
+            $data = ServiceAdvisor::with('client')->where('status', 'active')->orderBy('name', 'asc');
         }
 
         return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);

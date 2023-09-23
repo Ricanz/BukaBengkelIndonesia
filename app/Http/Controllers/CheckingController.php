@@ -46,6 +46,7 @@ class CheckingController extends Controller
             'wo' => 'required',
             'nopol' => 'required',
             'type' => 'required',
+            'advisor' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -57,13 +58,14 @@ class CheckingController extends Controller
         $user = Auth::user();
         if ($user->role === 'employee') {
             $employee = Employee::where('user_id', $user->id)->first();
-            $employe_id = $employee->id;
+            $employee_id = $employee->id;
             $client_id = $employee->client_id;
         }
         $checking = Checking::create([
             'user_id' => $user->id,
-            'employee_id' => $employe_id,
+            'employee_id' => $employee_id,
             'client_id' => $client_id,
+            'sa_id' => $request->advisor,
             'wo' => $request->wo,
             'plat_number' => $request->nopol,
             'type_id' => $request->type,
@@ -158,14 +160,14 @@ class CheckingController extends Controller
         $user = Auth::user();
         if ($user->role === 'client') {
             $user_id = $user->id;
-            $data = Checking::with('employee', 'client', 'types')->whereHas('client', function ($query) use ($user_id) {
+            $data = Checking::with('employee', 'client', 'types', 'advisor')->whereHas('client', function ($query) use ($user_id) {
                 $query->where('kabeng_id', $user_id);
             })->where('status', 'active');
             
         } else if ($user->role === 'employee'){
-            $data = Checking::with('employee', 'client', 'types')->where('user_id', $user->id)->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor')->where('user_id', $user->id)->where('status', 'active');
         } else {
-            $data = Checking::with('employee', 'client', 'types')->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor')->where('status', 'active');
         }
         return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);
     }

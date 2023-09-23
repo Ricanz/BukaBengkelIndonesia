@@ -28,6 +28,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <select name="advisor" id="advisor" class="form-control">
+                                <option value="" selected>Pilih Service Advisor</option>
+                                @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                    <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="type" id="type" class="form-control">

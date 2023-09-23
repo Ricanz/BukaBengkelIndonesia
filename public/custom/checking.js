@@ -23,6 +23,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
 				{data: 'wo'},
 				{data: 'checking_type'},
 				{data: 'employee.fullname'},
+				{data: 'advisor.name'},
 				{data: 'types.name'},
 				{data: 'status'},
 				{data: 'created_at'},
