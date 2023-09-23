@@ -6,6 +6,8 @@ use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MasterTypeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceAdvisorController;
+use App\Models\ServiceAdvisor;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,7 +48,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/access', [AccessController::class, 'index'])->name('access');
 
-
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('employee.show');
     Route::get('/employee/data', [EmployeeController::class, 'data'])->name('employee.data');
@@ -72,6 +73,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/checking/image', [CheckingController::class, 'image'])->name('checking.image');
     Route::post('/checking/image/update', [CheckingController::class, 'image_update'])->name('checking.image_update');
     Route::get('/checking/image/destroy/{id}', [CheckingController::class, 'image_destroy'])->name('checking.image_destroy');
+
+    Route::get('/advisor', [ServiceAdvisorController::class, 'index'])->name('advisor.index');
+    Route::get('/advisor/data', [ServiceAdvisorController::class, 'data'])->name('advisor.data');
+    Route::post('/advisor/store', [ServiceAdvisorController::class, 'store'])->name('advisor.store');
+    Route::get('/advisor/show/{id}', [ServiceAdvisorController::class, 'show'])->name('advisor.show');
+    Route::post('/advisor/update', [ServiceAdvisorController::class, 'update'])->name('advisor.update');
+    Route::get('/advisor/destroy/{id}', [ServiceAdvisorController::class, 'destroy'])->name('advisor.destroy');
+
 });
 
 require __DIR__ . '/auth.php';
