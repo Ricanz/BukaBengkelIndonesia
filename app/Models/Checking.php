@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Checking extends Model
 {
     protected $fillable = [
-        'user_id', 'employee_id', 'client_id', 'sa_id', 'wo', 'plat_number', 'type_id', 'status', 'checking_type'
+        'user_id', 'employee_id', 'client_id', 'sa_id', 'wo', 'plat_number', 'type_id', 'status', 'checking_type', 'number'
     ];
 
     public function client(): BelongsTo

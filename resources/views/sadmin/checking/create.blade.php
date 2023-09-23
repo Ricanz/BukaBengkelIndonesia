@@ -17,14 +17,14 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wo"
-                                placeholder="Masukkan Nomor Wo" />
+                                placeholder="Masukkan Nomor Wo" value="{{App\Helpers\Utils::generateWo()}}"/>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Nopol</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="nopol"
-                                placeholder="Masukkan Nopol Kendaraan" />
+                                placeholder="Masukkan No. Polisi Kendaraan" />
                         </div>
                     </div>
                     <div class="form-group row">

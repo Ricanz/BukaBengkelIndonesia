@@ -61,6 +61,11 @@ class CheckingController extends Controller
             $employee_id = $employee->id;
             $client_id = $employee->client_id;
         }
+
+        $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
+        $nextNumber = (int)$lastNumber + 1;
+        $formattedNextNumber = sprintf('%06d', $nextNumber);
+
         $checking = Checking::create([
             'user_id' => $user->id,
             'employee_id' => $employee_id,
@@ -70,7 +75,8 @@ class CheckingController extends Controller
             'plat_number' => $request->nopol,
             'type_id' => $request->type,
             'status' => 'active',
-            'checking_type' => 'Standart'
+            'checking_type' => 'Standart',
+            'number' => $formattedNextNumber
         ]);
         if ($checking) {
             StandartChecking::create([

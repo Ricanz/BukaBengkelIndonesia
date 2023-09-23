@@ -229,7 +229,6 @@
         <script>
             $(document).ready(function() {
                 $("#tambahBengkel").click(function() {
-
                     var kuota = <?php echo App\Models\Employee::where('status', 'active')
                         ->where('user_id', Auth::user()->id)
                         ->pluck('quota')

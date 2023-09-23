@@ -24,6 +24,7 @@ return new class extends Migration
             $table->bigInteger('type_id');
             $table->string('status')->default('active');
             $table->string('checking_type')->default('Standart');
+            $table->string('number')->nullable();
             $table->timestamps();
         });
     }

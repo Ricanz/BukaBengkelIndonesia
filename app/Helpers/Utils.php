@@ -2,6 +2,10 @@
 
 namespace App\Helpers;
 
+use App\Models\Checking;
+use App\Models\Employee;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
@@ -32,7 +36,7 @@ class Utils
     {
         // Menghilangkan spasi dan mengubah huruf menjadi lowercase
         $fullName = strtolower(str_replace(' ', '.', $name));
-        
+
         // Menghasilkan alamat email dengan format "nama@domain.com"
         $email = $fullName . '@bukbeng.com';
 
@@ -42,5 +46,23 @@ class Utils
     public static function emptyImage()
     {
         return null;
+    }
+
+    public static function generateWo()
+    {
+        $user = Auth::user();
+        $now = Carbon::now();
+        $employee = Employee::with('client')->where('user_id', $user->id)->first();
+        $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
+
+        $nextNumber = (int)$lastNumber + 1;
+
+        $formattedNextNumber = sprintf('%06d', $nextNumber);
+        $main = 'BBI';
+        $current_year = $now->year;
+        $client_code = $employee->client->code;
+
+        $finalWo = $main . '-' . $current_year . '-' . $client_code . '-' . $formattedNextNumber;
+        return $finalWo;
     }
 }
