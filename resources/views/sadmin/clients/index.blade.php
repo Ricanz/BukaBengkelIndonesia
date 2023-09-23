@@ -85,7 +85,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Cabang</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Bengkel</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
@@ -122,7 +122,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang *</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="name"
                                                     placeholder="Masukkan Nama Cabang" />
@@ -130,7 +130,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat *</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="address"
                                                     placeholder="Masukkan Alamat Cabang" />
@@ -138,22 +138,24 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kota *</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kota</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="city"
                                                     placeholder="Masukkan Kota Cabang" />
                                                 {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kepala
-                                                Cabang</label>
-                                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <input type="text" class="form-control" name="kabeng"
-                                                    placeholder="Masukkan Nama Kepala Cabang" />
-                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                        @if (Auth::user()->role === 'admin')
+                                            <div class="form-group row">
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Kepala
+                                                    Cabang</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                    <input type="text" class="form-control" name="kabeng"
+                                                        placeholder="Masukkan Nama Kepala Cabang" />
+                                                    {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                         <div class="form-group row">
                                             <label
                                                 class="col-form-label text-left col-lg-3 col-sm-12">Deskripsi</label>

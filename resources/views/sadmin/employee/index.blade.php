@@ -7,7 +7,7 @@
                     <span class="card-icon">
                         <i class="flaticon2-supermarket text-primary"></i>
                     </span>
-                    <h3 class="card-label">Data Karyawan</h3>
+                    <h3 class="card-label">Data Teknisi</h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -26,7 +26,7 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                        </span>New Record</button>
+                        </span>Tambah Teknisi</button>
                     <!--end::Button-->
 
                     <!-- Modal-->
@@ -82,27 +82,18 @@
                                                 <select name="cabang" id="cabang" class="form-control">
                                                     <option value="" selected>
                                                         Pilih Cabang</option>
-                                                    @foreach (App\Models\Client::where('status', 'active')->get() as $client)
-                                                        <option value="{{ $client->id }}">{{ $client->title }}
-                                                        </option>
-                                                    @endforeach
+                                                        @if (Auth::user()->role === 'admin')
+                                                            @foreach (App\Models\Client::where('status', 'active')->get() as $client)
+                                                                <option value="{{ $client->id }}">{{ $client->title }}
+                                                                </option>
+                                                            @endforeach
+                                                        @elseif (Auth::user()->role === 'client')
+                                                            @foreach (App\Models\Client::where('status', 'active')->where('kabeng_id', Auth::user()->id)->get() as $client)
+                                                                <option value="{{ $client->id }}">{{ $client->title }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
                                                 </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kepala
-                                                Bengkel</label>
-                                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <div class="radio-inline">
-                                                    <label class="radio">
-                                                        <input type="radio" name="kabeng" value="true" />
-                                                        <span></span>Ya</label>
-                                                    <label class="radio">
-                                                        <input type="radio" name="kabeng" value="false"
-                                                            checked />
-                                                        <span></span>Tidak</label>
-                                                    <label class="radio">
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row">

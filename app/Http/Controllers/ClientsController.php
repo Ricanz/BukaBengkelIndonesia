@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -56,36 +57,49 @@ class ClientsController extends Controller
 
         $img = Utils::uploadImage($request->file, 300);
         
-        $submit = Client::create([
-            'title' => $request->name,
-            'description' => $request->description,
-            'code' => $request->id,
-            'image' => $img,
-            'address' => $request->address,
-            'city' => $request->city,
-            'status' => 'active',
-        ]);
-
-        if ($submit) {
-            if ($request->kabeng) {
-                $email = Utils::generateEmail($request->kabeng);
-                $user = User::create([
-                    'name' => $request->kabeng,
-                    'email' => $email,
-                    'password' => Hash::make('pass.123'),
-                    'role' => 'client'
-                ]);
-                Employee::create([
-                    'user_id' => $user->id,
-                    'client_id' => $submit->id,
-                    'fullname' => $request->kabeng, 
-                    'is_kabeng' => true
-                ]);
+        if ($request->kabeng) {
+            $email = Utils::generateEmail($request->kabeng);
+            $user = User::create([
+                'name' => $request->kabeng,
+                'email' => $email,
+                'password' => Hash::make('pass.123'),
+                'role' => 'client'
+            ]);
+            $submit = Client::create([
+                'title' => $request->name,
+                'description' => $request->description,
+                'code' => $request->id,
+                'image' => $img,
+                'address' => $request->address,
+                'city' => $request->city,
+                'status' => 'active',
+                'kabeng_id' => $user->id
+            ]);
+            Employee::create([
+                'user_id' => $user->id,
+                'client_id' => $submit->id,
+                'fullname' => $request->kabeng, 
+                'is_kabeng' => true
+            ]);
+            if ($submit) {
+                return json_encode(['status'=> true, 'message'=> 'Success']);
             }
-            return json_encode(['status'=> true, 'message'=> 'Success']);
         } else {
-            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            $submit = Client::create([
+                'title' => $request->name,
+                'description' => $request->description,
+                'code' => $request->id,
+                'image' => $img,
+                'address' => $request->address,
+                'city' => $request->city,
+                'status' => 'active',
+                'kabeng_id' => Auth::user()->id
+            ]);
+            if ($submit) {
+                return json_encode(['status'=> true, 'message'=> 'Success']);
+            }
         }
+        return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
     }
 
     /**
@@ -166,18 +180,24 @@ class ClientsController extends Controller
 
     public function data()
     {
-        $data = Client::where('status', '!=', 'deleted')->orderBy('title');
+        $user = Auth::user();
+        if ($user->role === 'client') {
+            $data = Client::where('status', '!=', 'deleted')->where('kabeng_id', $user->id)->orderBy('title');
+        } else {
+            $data = Client::where('status', '!=', 'deleted')->orderBy('title');
+        }
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 
-    public function employee()
+    public function employee($id)
     {
-        return view('sadmin.clients.employee');
+        $client = Client::findOrFail($id);
+        return view('sadmin.clients.employee', compact('client'));
     }
 
     public function employee_data($id)
     {
-        $employee = Employee::with('user')->where('client_id', $id)->orderBy('fullname');
+        $employee = Employee::with('user')->where('client_id', $id)->where('is_kabeng', false)->orderBy('fullname');
         return DataTables::of($employee->get())->addIndexColumn()->make(true);
     }
 }

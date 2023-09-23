@@ -7,7 +7,7 @@
                     <span class="card-icon">
                         <i class="flaticon2-tools text-primary"></i>
                     </span>
-                    <h3 class="card-label">Data Teknisi</h3>
+                    <h3 class="card-label">Teknisi Bengkel {{ $client->title }}</h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -35,19 +35,17 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Cabang</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Teknisi</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form class="form" id="create_client_form" enctype="multipart/form-data">
+                                    <form class="form" id="create_employee_form" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="cabang" id="cabang" value="{{ $client->id }}">
                                         <div class="image-input image-input-outline" id="kt_image_1">
-                                            <div class="image-input-wrapper"
-                                                style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
-                                            </div>
-
+                                            <div class="image-input-wrapper" style="background-image: url()"></div>
                                             <label
                                                 class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                                 data-action="change" data-toggle="tooltip" title=""
@@ -67,61 +65,50 @@
                                             <label class="col-form-label text-left col-lg-3 col-sm-12">ID</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="id"
-                                                    placeholder="Masukkan ID Cabang" />
-                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                    placeholder="Masukkan ID Karyawan" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang *</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Nama
+                                                Lengkap</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="name"
-                                                    placeholder="Masukkan Nama Cabang" />
-                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                    placeholder="Masukkan Nama Karyawan" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat *</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Email</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <input type="text" class="form-control" name="address"
-                                                    placeholder="Masukkan Alamat Cabang" />
-                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                <input type="text" class="form-control" name="email"
+                                                    placeholder="Masukkan Email Karyawan" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kota *</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Password</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <input type="text" class="form-control" name="city"
-                                                    placeholder="Masukkan Kota Cabang" />
-                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                <input type="password" class="form-control" name="password"
+                                                    placeholder="Masukkan Password Karyawan" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kepala
-                                                Cabang</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Status</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <input type="text" class="form-control" name="kabeng"
-                                                    placeholder="Masukkan Nama Kepala Cabang" />
-                                                {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                <select name="status" id="status" class="form-control">
+                                                    <option value="active" selected>Active</option>
+                                                    <option value="inactive">Inactive</option>
+                                                    <option value="deleted">Deleted</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label
-                                                class="col-form-label text-left col-lg-3 col-sm-12">Deskripsi</label>
-                                            <textarea name="description" id="description" hidden></textarea>
-                                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <div class="summernote" id="kt_summernote_1"></div>
-                                            </div>
-                                        </div>
-
                                         <div class="separator separator-dashed my-10"></div>
+                                        <div class="modal-footer">
+                                            <a href="{{ url('/clients') }}"
+                                                class="btn btn-light-primary font-weight-bold">Back</a>
+                                            <button type="submit" class="btn btn-primary font-weight-bold">Save
+                                                changes</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light-primary font-weight-bold"
-                                        data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary font-weight-bold">Save
-                                        changes</button>
-                                </div>
-                                </form>
                             </div>
                         </div>
                     </div>

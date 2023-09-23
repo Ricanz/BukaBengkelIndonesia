@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('kabeng_id')->nullable();
             $table->string('title');
             $table->string('code');
             $table->string('status');

@@ -6,6 +6,7 @@ use App\Helpers\Utils;
 use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -43,14 +44,13 @@ class EmployeeController extends Controller
         $validation = Validator::make($request->all(), [
             'id' => 'required',
             'name' => 'required',
-            'cabang' => 'required',
-            'kabeng' => 'required',
             'email' => 'required',
             'password' => 'required',
+            'cabang' => 'required',
         ]);
 
         if ($validation->fails()) {
-            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
         if ($request->has('file')) {
             $img = Utils::uploadImage($request->file, 300);
@@ -62,7 +62,7 @@ class EmployeeController extends Controller
             'password' => Hash::make($request->password),
             'role' => strtolower($request->filter)
         ]);
-        if($submit){
+        if ($submit) {
             $submit_employee = Employee::create([
                 'fullname' => $request->name,
                 'image' => $request->has('file') ? $img : Utils::emptyImage(),
@@ -70,12 +70,12 @@ class EmployeeController extends Controller
                 'client_id' => $request->cabang,
                 'code' => $request->id,
                 'status' => $request->status,
-                'is_kabeng' => $request->kabeng === 'true' ? true : false
+                'is_kabeng' => false
             ]);
             if ($submit_employee) {
-                return json_encode(['status'=> true, 'message'=> 'Success']);
+                return json_encode(['status' => true, 'message' => 'Success']);
             } else {
-                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+                return json_encode(['status' => false, 'message' => 'Something went wrong.']);
             }
         }
     }
@@ -90,7 +90,6 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         return view('sadmin.employee.show', compact('employee'));
-
     }
 
     /**
@@ -122,7 +121,7 @@ class EmployeeController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
         if ($request->has('file')) {
@@ -141,9 +140,9 @@ class EmployeeController extends Controller
         $user->password = $request->password ? Hash::make($request->password) : $user->password;
         $user->role = $request->is_kabeng === "true" ? "client" : "employee";
         if ($employee->save() && $user->save()) {
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            return json_encode(['status' => true, 'message' => 'Success']);
         } else {
-            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }
 
@@ -157,26 +156,66 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $employee->status = 'deleted';
-        
+
         $user = User::findOrFail($employee->user_id);
         $user->status = 'deleted';
         if ($employee->save() && $user->save()) {
             return redirect()->back();
         }
-        return json_encode(['status'=> false, 'message'=> 'Gagal Hapus!']);
+        return json_encode(['status' => false, 'message' => 'Gagal Hapus!']);
     }
 
     public function data(Request $request)
     {
+        $user = Auth::user();
+        $data = [];
         if ($request->filter) {
-            if ($request->filter === 'client') {
-                $data = Employee::with('client')->where('is_kabeng', true)->where('status', '!=', 'deleted')->orderBy('fullname');
-            } else if($request->filter === 'employee'){
-                $data = Employee::with('client')->where('is_kabeng', false)->where('status', '!=', 'deleted')->orderBy('fullname');
+            if ($user->role === 'client') {
+
+                $user_id = $user->id;
+                switch ($request->filter) {
+                    case 'client':
+                        $data = Employee::with('client')
+                            ->whereHas('client', function ($query) use ($user_id) {
+                                $query->where('kabeng_id', $user_id);
+                            })
+                            ->where('is_kabeng', true)
+                            ->where('status', '!=', 'deleted')
+                            ->orderBy('fullname')
+                            ->get();
+                        break;
+                    case 'employee':
+                        $data = Employee::with('client')
+                            ->whereHas('client', function ($query) use ($user_id) {
+                                $query->where('kabeng_id', $user_id);
+                            })
+                            ->where('is_kabeng', false)
+                            ->where('status', '!=', 'deleted')
+                            ->orderBy('fullname')
+                            ->get();
+                        break;
+                    default:
+                        $data = [];
+                        break;
+                }
+            } else {
+                switch ($request->filter) {
+                    case 'client':
+                        $data = Employee::with('client')->where('is_kabeng', true)->where('status', '!=', 'deleted')->orderBy('fullname')->get();
+                        break;
+                    case 'employee':
+                        $data = Employee::with('client')->where('is_kabeng', false)->where('status', '!=', 'deleted')->orderBy('fullname')->get();
+                        break;
+                    default:
+                        $data = [];
+                        break;
+                }
             }
+            return DataTables::of($data)->addIndexColumn()->make(true);
         } else {
             $data = User::where('role', 'admin')->orderBy('name');
+            return DataTables::of($data->get())->addIndexColumn()->make(true);
         }
-        return DataTables::of($data->get())->addIndexColumn()->make(true);
+        return DataTables::of($data)->addIndexColumn()->make(true);
     }
 }
