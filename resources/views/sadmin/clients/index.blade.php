@@ -61,8 +61,7 @@
                     </div>
                     <!--end::Dropdown-->
                     <!--begin::Button-->
-                    <button type="button" class="btn btn-primary font-weight-bolder" data-toggle="modal"
-                        data-target="#exampleModalCenter">
+                    <button type="button" class="btn btn-primary font-weight-bolder" id="tambahBengkel">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -76,12 +75,28 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                        </span>New Record</button>
+                        </span>Tambah Bengkel</button>
                     <!--end::Button-->
-
+                    <!-- Modal Maaf Kuota Habis -->
+                    <div class="modal fade" id="kuotaHabisModal" tabindex="-1" role="dialog"
+                        aria-labelledby="kuotaHabisModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Maaf Kuota Bengkel Habis</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i aria-hidden="true" class="ki ki-close"></i>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Hubungi Support Buka Bengkel Indonesia untuk informasi lebih lanjut</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Modal-->
-                    <div class="modal fade" id="exampleModalCenter" data-backdrop="static" tabindex="-1" role="dialog"
-                        aria-labelledby="staticBackdrop" aria-hidden="true">
+                    <div class="modal fade" id="modalTambahBengkel" data-backdrop="static" tabindex="-1"
+                        role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -122,13 +137,24 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Bengkel</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="name"
-                                                    placeholder="Masukkan Nama Cabang" />
+                                                    placeholder="Masukkan Nama Bengkel" />
                                                 {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
                                             </div>
                                         </div>
+                                        @if (Auth::user()->role === 'admin')
+                                            <div class="form-group row">
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Kuota
+                                                    Bengkel</label>
+                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                    <input type="text" class="form-control" name="kuota"
+                                                        placeholder="Masukkan Kuota Bengkel" />
+                                                    {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
+                                                </div>
+                                            </div>
+                                        @endif
                                         <div class="form-group row">
                                             <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
@@ -200,6 +226,26 @@
     </div>
 
     @section('scripts')
+        <script>
+            $(document).ready(function() {
+                $("#tambahBengkel").click(function() {
+
+                    var kuota = <?php echo App\Models\Employee::where('status', 'active')
+                        ->where('user_id', Auth::user()->id)
+                        ->pluck('quota')
+                        ->first(); ?>;
+                    var total_bengkel = <?php echo App\Models\Client::where('status', 'active')
+                        ->where('kabeng_id', Auth::user()->id)
+                        ->count(); ?>;
+
+                    if (kuota === total_bengkel) {
+                        $('#kuotaHabisModal').modal('show');
+                    } else {
+                        $('#modalTambahBengkel').modal('show');
+                    }
+                });
+            });
+        </script>
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/client.js')}}" type="application/javascript" ></script>
     @endsection

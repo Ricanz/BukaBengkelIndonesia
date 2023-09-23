@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('client_id');
+            $table->integer('quota')->default(0);
             $table->string('image')->nullable();
             $table->string('fullname');
             $table->string('code')->nullable();

@@ -79,7 +79,8 @@ class ClientsController extends Controller
                 'user_id' => $user->id,
                 'client_id' => $submit->id,
                 'fullname' => $request->kabeng, 
-                'is_kabeng' => true
+                'is_kabeng' => true,
+                'quota' => $request->kuota
             ]);
             if ($submit) {
                 return json_encode(['status'=> true, 'message'=> 'Success']);
