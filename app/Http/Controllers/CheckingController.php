@@ -97,7 +97,7 @@ class CheckingController extends Controller
      */
     public function show($id)
     {
-        $checking = Checking::with('employee', 'client', 'types', 'standart')->findOrFail($id);
+        $checking = Checking::with('employee', 'client', 'types', 'standart', 'advisor')->findOrFail($id);
         return view('sadmin.checking.show', compact('checking'));
     }
 
@@ -126,6 +126,7 @@ class CheckingController extends Controller
 
         $checking->wo = $request->wo;
         $checking->plat_number = $request->nopol;
+        $checking->sa_id = $request->advisor;
 
         $detail->km = $request->km;
         $detail->high = $request->km;
