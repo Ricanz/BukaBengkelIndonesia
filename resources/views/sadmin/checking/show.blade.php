@@ -12,6 +12,10 @@
                 @if (Auth::user()->role === 'employee')
                     <div class="card-toolbar">
                         <!--begin::Button-->
+                        <button type="button" class="btn btn-success font-weight-bolder mr-2" id="finishCheck">Finish Check</button>
+                        <!--end::Button-->
+
+                        <!--begin::Button-->
                         <button type="button" class="btn btn-primary font-weight-bolder" data-toggle="modal"
                             data-target="#exampleModalCenter">
                             <span class="svg-icon svg-icon-md">
@@ -37,7 +41,8 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Foto Checking</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
                                             <i aria-hidden="true" class="ki ki-close"></i>
                                         </button>
                                     </div>
@@ -56,7 +61,8 @@
                                                     data-action="change" data-toggle="tooltip" title=""
                                                     data-original-title="Change avatar">
                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                    <input type="file" name="file" accept=".png, .jpg, .jpeg" />
+                                                    <input type="file" name="file"
+                                                        accept=".png, .jpg, .jpeg" />
                                                     <input type="hidden" name="profile_avatar_remove" />
                                                 </label>
 
@@ -159,7 +165,8 @@
                         <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="wo" value="{{ $checking->wo }}" />
+                            <input type="text" class="form-control" name="wo"
+                                value="{{ $checking->wo }}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -173,7 +180,8 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="advisor" id="advisor" class="form-control">
-                                <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}</option>
+                                <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
+                                </option>
                                 @if (Auth::user()->role === 'employee')
                                     @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
                                         <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>

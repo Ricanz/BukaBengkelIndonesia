@@ -9,8 +9,12 @@ use App\Models\Employee;
 use App\Models\StandartChecking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Unique;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
+use Illuminate\Http\Response;
 
 class CheckingController extends Controller
 {
@@ -50,7 +54,7 @@ class CheckingController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
         $employee_id = 1;
         $client_id = 1;
@@ -80,18 +84,18 @@ class CheckingController extends Controller
         ]);
         if ($checking) {
             StandartChecking::create([
-                'checking_id' => $checking->id, 
-                'km' => $request->km, 
-                'high' => $request->high, 
-                'low' => $request->low, 
-                'suhu' => $request->suhu, 
-                'wind' => $request->wind, 
-                'saran' => $request->saran, 
+                'checking_id' => $checking->id,
+                'km' => $request->km,
+                'high' => $request->high,
+                'low' => $request->low,
+                'suhu' => $request->suhu,
+                'wind' => $request->wind,
+                'saran' => $request->saran,
                 'status' => 'active'
             ]);
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            return json_encode(['status' => true, 'message' => 'Success']);
         } else {
-            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }
 
@@ -142,9 +146,9 @@ class CheckingController extends Controller
         $detail->saran = $request->saran;
 
         if ($checking->save() && $detail->save()) {
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            return json_encode(['status' => true, 'message' => 'Success']);
         } else {
-            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }
 
@@ -170,8 +174,7 @@ class CheckingController extends Controller
             $data = Checking::with('employee', 'client', 'types', 'advisor')->whereHas('client', function ($query) use ($user_id) {
                 $query->where('kabeng_id', $user_id);
             })->where('status', 'active');
-            
-        } else if ($user->role === 'employee'){
+        } else if ($user->role === 'employee') {
             $data = Checking::with('employee', 'client', 'types', 'advisor')->where('user_id', $user->id)->where('status', 'active');
         } else {
             $data = Checking::with('employee', 'client', 'types', 'advisor')->where('status', 'active');
@@ -187,7 +190,7 @@ class CheckingController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
         $submit = CheckingImage::create([
@@ -197,9 +200,9 @@ class CheckingController extends Controller
             'type' => 'pre'
         ]);
         if ($submit) {
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            return json_encode(['status' => true, 'message' => 'Success']);
         } else {
-            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }
 
@@ -216,9 +219,9 @@ class CheckingController extends Controller
             $image = CheckingImage::findOrFail($request->id);
             $image->image = $img;
             if ($image->save()) {
-                return json_encode(['status'=> true, 'message'=> 'Success']);
+                return json_encode(['status' => true, 'message' => 'Success']);
             } else {
-                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+                return json_encode(['status' => false, 'message' => 'Something went wrong.']);
             }
         }
     }
@@ -229,5 +232,34 @@ class CheckingController extends Controller
         $image->status = 'deleted';
         $image->save();
         return redirect()->back();
+    }
+
+    public function pdf()
+    {
+        $data = [
+            'imagePath'    => public_path('img/profile.png'),
+            'name'         => 'John Doe',
+            'address'      => 'USA',
+            'mobileNumber' => '000000000',
+            'email'        => 'john.doe@email.com'
+        ];
+
+        $pdf = PDF::loadView('pdf.pre-check', $data);
+
+        // Simpan file PDF ke dalam storage
+        $directory = 'pdf/';
+        if (!Storage::exists($directory)) {
+            Storage::makeDirectory($directory);
+        }
+        $fileName = uniqid().'-pre-check.pdf'; // Nama file yang diinginkan
+        $pdf->save(Storage::path($directory . $fileName));
+
+        // Ambil file PDF dari storage dan kirimkan sebagai respons
+        $file = Storage::get($directory . $fileName);
+
+        return new Response($file, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $fileName . '"'
+        ]);
     }
 }

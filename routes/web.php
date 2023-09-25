@@ -29,6 +29,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/pre-check', function () {
+    return view('pdf.pre-check');
+});
+
+Route::get('/check-pdf', [CheckingController::class, 'pdf'])->name('checking.pdf');
+
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('sadmin.index');

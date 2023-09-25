@@ -361,3 +361,49 @@ $("#update_image_form").on("submit", function (event) {
         }
     });
 });
+
+$("#finishCheck").on("click", function (event) {
+    alert("halo")
+    event.preventDefault();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': token },
+        type : 'GET',
+        // data: formData,
+        url  : '/check-pdf',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            if(data.status === true) {
+                swal.fire({
+                    text: data.message,
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    location.reload()
+                });
+            }else {
+                var values = '';
+                jQuery.each(data.message, function (key, value) {
+                    values += value+"<br>";
+                });
+
+                swal.fire({
+                    html: values,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() { });
+            }
+        }
+    });
+});
