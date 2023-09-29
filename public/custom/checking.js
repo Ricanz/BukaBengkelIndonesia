@@ -370,7 +370,7 @@ $("#finishCheck").on("click", function (event) {
         headers: { 'X-CSRF-TOKEN': token },
         type : 'GET',
         // data: formData,
-        url  : '/check-pdf',
+        url  : '/check-pdf/20',
         dataType: 'JSON',
         cache: false,
         contentType: false,
@@ -386,7 +386,7 @@ $("#finishCheck").on("click", function (event) {
                         confirmButton: "btn font-weight-bold btn-light-primary"
                     }
                 }).then(function() {
-                    location.reload()
+                    location.href = data.data
                 });
             }else {
                 var values = '';

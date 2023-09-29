@@ -3,26 +3,25 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hasil Pengecekan</title>
-    <!-- Tambahkan link CSS Tailwind CSS Anda di sini -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="{{ asset('tadmin/css/precheck.css') }}"> --}}
+
 </head>
 
-<body class="bg-white">
-    <div class="container mx-auto mt-8 p-4 mb-10">
+<body style="max-width: 749px">
+    <div style="width: 100%; margin: auto;" class="container mx-auto mt-8 p-4 mb-10">
         <div>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Toyota_Motor_North_America_logo_%282019%29.png/1280px-Toyota_Motor_North_America_logo_%282019%29.png"
-                alt="Logo" class="w-2/6 h-auto float-left">
+                alt="Logo" style="width: 200px; height: auto; float: left; margin-bottom: 20px" class="w-client-logo h-auto float-left">
         </div>
-        <div class="flex w-full py-4">
-            <div class="w-7/12 bg-blue-200 p-4">
+        <div style="display: flex; width: 100%; padding-top: 16px; padding-bottom: 16px;" class="flex w-full py-4">
+            <div style="width: 60%; background-color: aquamarine; opacity: 100;" class="w-70 left-head p-4">
                 <h1 class="text-5xl uppercase font-bold mb-3">PRE-CHECK Standart</h1>
                 <h2 class="text-4xl uppercase font-bold mb-2">B 2457 PKL</h2>
                 <h3 class="text-3xl mb-2">Voxy</h3>
                 <p class="text-lg">Saran Perbaikan : <span class="font-semibold">Super Light</span></p>
             </div>
-            <div class="w-5/12 bg-green-200 p-4">
+            <div style="width: 30%; background-color:burlywood; padding: 16px;" class="w-30 right-head p-4">
                 <p class="font-semibold text-lg text-right">S.A : Muhammad Faisal</p>
                 <p class="text-right text-lg">Sabtu, 09-09-2023 | 14:33</p>
                 <p class="text-right text-lg">No. WO : BBI-2023-LTN98-000006</p>
@@ -31,28 +30,28 @@
                 <p class="font-semibold text-lg text-right">Rudi Hartanto</p>
             </div>
         </div>
-        <h1 class="text-3xl font-semibold mb-4">Hasil Pengecekan</h1>
+        <h1 class="text-3xl font-semibold text-center mb-4">Hasil Pengecekan</h1>
 
         <!-- Tabel -->
-        <div class="container mb-4">
-            <div class="w-full flex">
-                <div class="flex-1 bg-blue-200 p-4 rounded-tl-3xl rounded-tr-3xl">
+        <div class="container result mb-4">
+            <div class="w-full result-head flex">
+                <div class="result-head-content p-4">
                     <h4 class="font-bold text-xl text-center uppercase">Standart Normal</h4>
                 </div>
-                <div class="flex-1 bg-green-200 p-4 rounded-tl-3xl rounded-tr-3xl">
+                <div class="result-head-content p-4">
                     <h4 class="font-bold text-xl text-center uppercase">Pre Check</h4>
                 </div>
-                <div class="flex-1 bg-yellow-200 p-4 rounded-tl-3xl rounded-tr-3xl">
+                <div class="result-head-content p-4">
                     <h4 class="font-bold text-xl text-center uppercase">Tambahan Pemeriksaan</h4>
                 </div>
             </div>
-            <div class="w-full flex justify-center">
-                <div class="flex-1 p-4">
+            <div class="w-full flex result-body justify-center">
+                <div class="flex-1 result-body-content p-4">
                     <div class="flex justify-center">
-                        <div class="w-1/5">
+                        <div class="w-20 icon-check">
                             <img src="https://cdn-icons-png.flaticon.com/512/11319/11319047.png" alt="" class="px-4">
                         </div>
-                        <div class="w-4/5">
+                        <div class="w-80">
                             <h4 class="text-xl text-left">High Pressure :</h4>
                             <h4 class="font-semibold text-xl text-left">199.1 Psi - 277.5 Psi</h4>
                         </div>
@@ -66,13 +65,13 @@
                     <h4 class="font-semibold text-xl text-left mx-4">Berfungsi Normal</h4>
                 </div>
             </div>
-            <div class="w-full bg-gray-100 flex justify-center">
-                <div class="flex-1 p-4">
+            <div class="w-full flex result-body justify-center">
+                <div class="flex-1 result-body-content p-4">
                     <div class="flex justify-center">
-                        <div class="w-1/5">
+                        <div style="width: 50px" class="w-20 icon-check">
                             <img src="https://cdn-icons-png.flaticon.com/512/11319/11319047.png" alt="" class="px-4">
                         </div>
-                        <div class="w-4/5">
+                        <div class="w-80">
                             <h4 class="text-xl text-left">High Pressure :</h4>
                             <h4 class="font-semibold text-xl text-left">199.1 Psi - 277.5 Psi</h4>
                         </div>
@@ -86,13 +85,13 @@
                     <h4 class="font-semibold text-xl text-left mx-4">Berfungsi Normal</h4>
                 </div>
             </div>
-            <div class="w-full flex justify-center">
-                <div class="flex-1 p-4">
+            <div class="w-full flex result-body justify-center">
+                <div class="flex-1 result-body-content p-4">
                     <div class="flex justify-center">
-                        <div class="w-1/5">
+                        <div class="w-20 icon-check">
                             <img src="https://cdn-icons-png.flaticon.com/512/11319/11319047.png" alt="" class="px-4">
                         </div>
-                        <div class="w-4/5">
+                        <div class="w-80">
                             <h4 class="text-xl text-left">High Pressure :</h4>
                             <h4 class="font-semibold text-xl text-left">199.1 Psi - 277.5 Psi</h4>
                         </div>
@@ -106,13 +105,13 @@
                     <h4 class="font-semibold text-xl text-left mx-4">Berfungsi Normal</h4>
                 </div>
             </div>
-            <div class="w-full bg-gray-100 flex justify-center">
-                <div class="flex-1 p-4">
+            <div class="w-full flex result-body justify-center">
+                <div class="flex-1 result-body-content p-4">
                     <div class="flex justify-center">
-                        <div class="w-1/5">
+                        <div class="w-20 icon-check">
                             <img src="https://cdn-icons-png.flaticon.com/512/11319/11319047.png" alt="" class="px-4">
                         </div>
-                        <div class="w-4/5">
+                        <div class="w-80">
                             <h4 class="text-xl text-left">High Pressure :</h4>
                             <h4 class="font-semibold text-xl text-left">199.1 Psi - 277.5 Psi</h4>
                         </div>
@@ -129,58 +128,51 @@
         </div>
 
         <!-- Gambar -->
-        <h2 class="text-4xl uppercase font-bold text-center py-10">Kondisi Mobil Anda</h2>
-        <div class="grid grid-cols-3 gap-4 mb-4">
+
+        <h4 class="text-3xl font-semibold text-left mb-4">Sumber Refrensi</h4>
+        <h2 class="text-4xl uppercase font-bold text-center py-10 mb-4">Kondisi Mobil Anda</h2>
+        <div class="condition mb-4">
             <!-- Gambar 1 -->
-            <div class="bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
-                <img src="https://dummyimage.com/250/ffffff/000000" alt="Gambar 1" class="w-full h-auto">
-                <div class="bg-blue-200">
+            <div class="condition-content my-4">
+                <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg" alt="Gambar 1" class="w-full h-auto">
+                <div class="title">
                     <h4 class="font-semibold text-xl text-center p-4">Tampak Depan Mobil</h4>
                 </div>
             </div>
-
-            <!-- Gambar 2 -->
-            <div class="bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
-                <img src="https://dummyimage.com/250/ffffff/000000" alt="Gambar 2" class="w-full h-auto">
-                <div class="bg-blue-200">
+            <div class="condition-content bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
+                <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg" alt="Gambar 1" class="w-full h-auto">
+                <div class="title">
                     <h4 class="font-semibold text-xl text-center p-4">Tampak Depan Mobil</h4>
                 </div>
             </div>
-
-            <!-- Gambar 3 -->
-            <div class="bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
-                <img src="https://dummyimage.com/250/ffffff/000000" alt="Gambar 3" class="w-full h-auto">
-                <div class="bg-blue-200">
+            <div class="condition-content bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
+                <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg" alt="Gambar 1" class="w-full h-auto">
+                <div class="title">
                     <h4 class="font-semibold text-xl text-center p-4">Tampak Depan Mobil</h4>
                 </div>
             </div>
-
-            <!-- Gambar 4 -->
-            <div class="bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
-                <img src="https://dummyimage.com/250/ffffff/000000" alt="Gambar 4" class="w-full h-auto">
-                <div class="bg-blue-200">
+            <div class="condition-content bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
+                <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg" alt="Gambar 1" class="w-full h-auto">
+                <div class="title">
                     <h4 class="font-semibold text-xl text-center p-4">Tampak Depan Mobil</h4>
                 </div>
             </div>
-
-            <!-- Gambar 5 -->
-            <div class="bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
-                <img src="https://dummyimage.com/250/ffffff/000000" alt="Gambar 5" class="w-full h-auto">
-                <div class="bg-blue-200">
+            <div class="condition-content bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
+                <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg" alt="Gambar 1" class="w-full h-auto">
+                <div class="title">
                     <h4 class="font-semibold text-xl text-center p-4">Tampak Depan Mobil</h4>
                 </div>
             </div>
-
-            <!-- Gambar 6 -->
-            <div class="bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
-                <img src="https://dummyimage.com/250/ffffff/000000" alt="Gambar 6" class="w-full h-auto">
-                <div class="bg-blue-200">
+            <div class="condition-content bg-white shadow-md rounded-bl-3xl rounded-br-3xl overflow-hidden my-4">
+                <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg" alt="Gambar 1" class="w-full h-auto">
+                <div class="title">
                     <h4 class="font-semibold text-xl text-center p-4">Tampak Depan Mobil</h4>
                 </div>
             </div>
+            <div class="background absolute bg-custom"></div>
         </div>
 
-        <div class="container bg-pink-200 rounded-xl p-6">
+        <div class="container notes bg-pink-200">
             <p class="font-semibold text-left text-lg mb-2">*Lakukan Service Mobil Anda</p>
             <p class="text-left text-lg">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer

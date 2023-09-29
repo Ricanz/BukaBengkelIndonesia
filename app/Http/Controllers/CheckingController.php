@@ -234,32 +234,26 @@ class CheckingController extends Controller
         return redirect()->back();
     }
 
-    public function pdf()
+    public function pdf($id)
     {
-        $data = [
-            'imagePath'    => public_path('img/profile.png'),
-            'name'         => 'John Doe',
-            'address'      => 'USA',
-            'mobileNumber' => '000000000',
-            'email'        => 'john.doe@email.com'
-        ];
 
-        $pdf = PDF::loadView('pdf.pre-check', $data);
+        return view('pdf/pre-check');
+        // $checking = Checking::with('advisor', 'client', 'standart')->find($id);
+        // $pdf = PDF::loadView('pdf.precheck');
+        // return $pdf->download('user.pdf');
 
         // Simpan file PDF ke dalam storage
-        $directory = 'pdf/';
-        if (!Storage::exists($directory)) {
-            Storage::makeDirectory($directory);
-        }
-        $fileName = uniqid().'-pre-check.pdf'; // Nama file yang diinginkan
-        $pdf->save(Storage::path($directory . $fileName));
+        // $directory = 'app/pdf/';
+        // if (!Storage::exists($directory)) {
+        //     Storage::makeDirectory($directory);
+        // }
+        // $fileName = uniqid().'-pre-check.pdf'; // Nama file yang diinginkan
+        // $pdf->save(Storage::path($directory . $fileName));
 
-        // Ambil file PDF dari storage dan kirimkan sebagai respons
-        $file = Storage::get($directory . $fileName);
+        // // Ambil file PDF dari storage dan kirimkan sebagai respons
+        // $file = Storage::get($directory . $fileName);
+        // $storageLink = Storage::url($directory.$fileName);
 
-        return new Response($file, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . $fileName . '"'
-        ]);
+        // return json_encode(['status' => true, 'message' => 'Success', 'data' => $storageLink]);
     }
 }
