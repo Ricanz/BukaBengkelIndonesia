@@ -16,7 +16,11 @@ $("#create_employee_form").on("submit", function (event) {
         cache: false,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
         success: function(data){
+            swal.hideLoading();
             if(data.status === true) {
                 swal.fire({
                     text: data.message,
@@ -63,7 +67,11 @@ $("#update_employee_form").on("submit", function (event) {
         cache: false,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
         success: function(data){
+            swal.hideLoading();
             if(data.status === true) {
                 swal.fire({
                     text: data.message,
