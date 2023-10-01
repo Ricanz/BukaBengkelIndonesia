@@ -278,7 +278,27 @@ return array(
          * @var bool
          */
         "enable_html5_parser" => true,
+
     ),
+
+    'pdf' => [
+        'enabled' => true,
+        'binary'  => env('WKHTMLTOPDF_BINARY', '/usr/local/bin/wkhtmltopdf'),
+        'timeout' => false,
+        'options' => [
+            'enable-javascript' => true,
+            'javascript-delay' => 1000,
+            'viewport-size' => '1280x1024',
+            'no-images' => true,
+            'dpi' => 96,
+            'no-outline' => true,
+            'print-media-type' => false,
+            'disable-smart-shrinking' => false,
+            'page-size' => 'A4',
+        ],
+        'env'     => [],
+    ],
+    
 
 
 );

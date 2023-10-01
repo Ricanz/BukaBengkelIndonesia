@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Checking extends Model
@@ -41,5 +42,10 @@ class Checking extends Model
     public function standart(): HasOne
     {
         return $this->hasOne(StandartChecking::class, 'checking_id', 'id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(CheckingImage::class, 'checking_id', 'id');
     }
 }

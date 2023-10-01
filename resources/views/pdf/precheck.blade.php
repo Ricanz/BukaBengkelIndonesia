@@ -281,7 +281,7 @@
 
     <div id="content" style="width: 800px;">
         <div id="image-head" style="width: auto; height:50px; margin-bottom:15px">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Toyota_Motor_North_America_logo_%282019%29.png/1280px-Toyota_Motor_North_America_logo_%282019%29.png"
+            <img src="{{ 'http://127.0.0.1:8000'.$checking->client->image }}"
                 alt="Logo" style="height:75px;object-fit:contain">
         </div>
         <div id="head-content">
@@ -290,16 +290,16 @@
                     <tr>
                         <td id="left-head">
                             <p id="ch-one">PRE-CHECK STANDAR</p>
-                            <p id="ch-two">B 2457 PKL</p>
-                            <p id="ch-three">Voxy</p>
-                            <p id="ch-four">Saran Perbaikan : <strong>Super Light</strong></p>
+                            <p id="ch-two">{{ $checking->plat_number }}</p>
+                            <p id="ch-three">{{ $checking->types->name }}</p>
+                            <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->standart->saran }}</strong></p>
                         </td>
                         <td id="right-head">
-                            <p id="rh-one">S.A : Muhammad Faisal</p>
-                            <p id="rh-two">Sabtu, 09-09-2023 | 14:33</p>
-                            <p id="rh-three">No. WO : BBI-2023-LTN98-000006</b></p>
+                            <p id="rh-one">S.A : {{ $checking->advisor->name }}</p>
+                            <p id="rh-two">{{ $checking->created_at->format('DD, d-m-Y | H:i') }}</p>
+                            <p id="rh-three">No. WO : {{ $checking->wo }}</b></p>
                             <p id="rh-four">*Lakukan Service Mobil Anda</p>
-                            <p id="rh-five">Teknisi: <b><label id="rh-five">Rudi Hartanto</label></b>
+                            <p id="rh-five">Teknisi: <b><label id="rh-five">{{ $checking->employee->fullname }}</label></b>
                             </p>
                         </td>
                     </tr>
@@ -376,13 +376,13 @@
                         Motor Fan: <br><b>Ganti ≤ 100.000 km</b>
                     </td>
                 </tr>
-                <tr class="nobod-rc">
+                {{-- <tr class="nobod-rc">
                     <td colspan="3">
                         <p>*Sumber Referensi </p>
                         <p class="logo-denso"><img src="http://127.0.0.1:8002/tadmin/images/denso-logo.png"
                                 width="50" height="20" /></p>
                     </td>
-                </tr>
+                </tr> --}}
             </table>
         </div>
         <div id="image-check">
@@ -397,19 +397,19 @@
                 <tr id="ic-two">
                     <td class="ic-three">
                         <div class="ic-mt">
-                            <img src="" class="ic-b" width="246" height="180" />
+                            <img src="http://127.0.0.1:8000/storage/public/1696060144_6517d2f02a919.jpg" class="ic-b" width="246" height="180" />
                             <p class="text-center"><b>Tampak Depan Mobil</b></p>
                         </div>
                     </td>
                     <td class="ic-three">
                         <div class="ic-mt">
-                            <img src="" class="ic-b" width="246" height="180" />
+                            <img src="https://bukabengkelindonesia.com/assets/theme/images/bbi/logo-192x192.png" class="ic-b" width="246" height="180" />
                             <p class="text-center"><b>KM</b> KM
                         </div>
                     </td>
                     <td class="ic-three">
                         <div class="ic-mt">
-                            <img src="" class="ic-b" width="246" height="180" />
+                            <img src="https://development.bukabengkelindonesia.com/tadmin/media/images/logo-192x192.png" class="ic-b" width="246" height="180" />
                             <p class="text-center"><b>SUHU & Windspeed</b></p>
                         </div>
                     </td>

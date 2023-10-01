@@ -33,7 +33,7 @@ Route::get('/pre-check', function () {
     return view('pdf.precheck');
 });
 
-Route::get('/check-pdf', [CheckingController::class, 'pdf'])->name('checking.pdf');
+Route::get('/check-pdf/{id}', [CheckingController::class, 'pdf'])->name('download');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {

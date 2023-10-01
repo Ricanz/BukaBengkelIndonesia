@@ -22,14 +22,15 @@ class Utils
 
         // Generate a unique filename for the processed image
         $processedImageName = time() . '_' . uniqid() . '.jpg';
-
+        // $image->storeAs('images', $processedImageName);
+        // $imageUrl = 'storage/images/' . $processedImageName;
         // Save the processed image to storage
         $processedImagePath = 'public/' . $processedImageName;
         Storage::put($processedImagePath, $img->stream());
 
         // Generate the storage link for the processed image
         $storageLink = Storage::url($processedImagePath);
-        return $storageLink;
+        return $storageLink;;
     }
 
     public static function generateEmail($name)

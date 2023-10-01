@@ -12,7 +12,7 @@
                 @if (Auth::user()->role === 'employee')
                     <div class="card-toolbar">
                         <!--begin::Button-->
-                        <button type="button" class="btn btn-success font-weight-bolder mr-2" id="finishCheck">Finish Check</button>
+                        <a href="{{ route('download', 20) }}" class="btn btn-success font-weight-bolder mr-2">Finish Check</a>
                         <!--end::Button-->
 
                         <!--begin::Button-->

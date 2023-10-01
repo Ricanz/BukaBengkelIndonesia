@@ -236,23 +236,25 @@ class CheckingController extends Controller
 
     public function pdf($id)
     {
+        $checking = Checking::with('advisor', 'client', 'standart', 'images', 'types', 'employee')->find($id);
+        // dd($checking);
+        // return view('pdf.precheck', compact('checking'));
+        $data = [
+            'checking' => $checking, // Mengirim objek Checking ke view
+        ];
+        $pdf = PDF::loadView('pdf.precheck', $data);
+        
+        return $pdf->download('user.pdf');
 
-        return view('pdf/pre-check');
-        // $checking = Checking::with('advisor', 'client', 'standart')->find($id);
-        // $pdf = PDF::loadView('pdf.precheck');
-        // return $pdf->download('user.pdf');
-
-        // Simpan file PDF ke dalam storage
         // $directory = 'app/pdf/';
         // if (!Storage::exists($directory)) {
         //     Storage::makeDirectory($directory);
         // }
-        // $fileName = uniqid().'-pre-check.pdf'; // Nama file yang diinginkan
+        // $fileName = uniqid().'-pre-check.pdf'; 
         // $pdf->save(Storage::path($directory . $fileName));
 
-        // // Ambil file PDF dari storage dan kirimkan sebagai respons
-        // $file = Storage::get($directory . $fileName);
         // $storageLink = Storage::url($directory.$fileName);
+        // return $storageLink;
 
         // return json_encode(['status' => true, 'message' => 'Success', 'data' => $storageLink]);
     }
