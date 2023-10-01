@@ -201,4 +201,26 @@ class ClientsController extends Controller
         $employee = Employee::with('user')->where('client_id', $id)->where('is_kabeng', false)->orderBy('fullname');
         return DataTables::of($employee->get())->addIndexColumn()->make(true);
     }
+
+    public function kuota()
+    {
+        $auth = Auth::user();
+        if ($auth->role === 'admin') {
+            return json_encode(['status'=> true, 'message'=> 'Success']);
+        } else if($auth->role === 'client'){
+            $kuota = Employee::where('status', 'active')
+            ->where('user_id', $auth->id)
+            ->pluck('quota')
+            ->first();
+
+            $total_bengkel = Client::where('status', 'active')
+            ->where('kabeng_id', $auth->id)
+            ->count();
+
+            if ($kuota === $total_bengkel) {
+                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            }
+            return json_encode(['status'=> true, 'message'=> 'Success']);
+        }
+    }
 }

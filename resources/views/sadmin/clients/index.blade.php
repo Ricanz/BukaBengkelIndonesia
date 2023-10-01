@@ -95,8 +95,8 @@
                         </div>
                     </div>
                     <!-- Modal-->
-                    <div class="modal fade" id="modalTambahBengkel" data-backdrop="static" tabindex="-1"
-                        role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                    <div class="modal fade" id="modalTambahBengkel" data-backdrop="static" tabindex="-1" role="dialog"
+                        aria-labelledby="staticBackdrop" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -227,23 +227,25 @@
 
     @section('scripts')
         <script>
-            $(document).ready(function() {
-                $("#tambahBengkel").click(function() {
-                    var kuota = <?php echo App\Models\Employee::where('status', 'active')
-                        ->where('user_id', Auth::user()->id)
-                        ->pluck('quota')
-                        ->first(); ?>;
-                    var total_bengkel = <?php echo App\Models\Client::where('status', 'active')
-                        ->where('kabeng_id', Auth::user()->id)
-                        ->count(); ?>;
-
-                    if (kuota === total_bengkel) {
-                        $('#kuotaHabisModal').modal('show');
-                    } else {
-                        $('#modalTambahBengkel').modal('show');
+            // $(document).ready(function() {
+            $("#tambahBengkel").click(function() {
+                $.ajax({
+                    url: '/get-kuota-and-total', // Ganti dengan URL yang sesuai
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        if (data.status) {
+                            $('#modalTambahBengkel').modal('show');
+                        } else {
+                            $('#kuotaHabisModal').modal('show');
+                        }
+                    },
+                    error: function() {
+                        // Tangani kesalahan jika ada
                     }
                 });
             });
+            // });
         </script>
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/client.js')}}" type="application/javascript" ></script>

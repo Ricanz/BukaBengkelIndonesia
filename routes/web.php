@@ -87,6 +87,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/advisor/update', [ServiceAdvisorController::class, 'update'])->name('advisor.update');
     Route::get('/advisor/destroy/{id}', [ServiceAdvisorController::class, 'destroy'])->name('advisor.destroy');
 
+
+    Route::get('/get-kuota-and-total', [ClientsController::class, 'kuota'])->name('clients.kuota');
 });
 
 require __DIR__ . '/auth.php';
