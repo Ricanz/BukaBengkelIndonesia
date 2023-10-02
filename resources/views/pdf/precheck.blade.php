@@ -398,7 +398,7 @@
                 @foreach ($checking->standart->images as $item)
                     <td class="ic-three">
                         <div class="ic-mt">
-                            <img src="{{'https://bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
+                            <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
                             <p class="text-center"><b>KM</b> KM
                         </div>
                     </td>
