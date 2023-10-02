@@ -281,7 +281,7 @@
 
     <div id="content" style="width: 800px;">
         <div id="image-head" style="width: auto; height:50px; margin-bottom:15px">
-            <img src="{{ 'http://127.0.0.1:8000'.$checking->client->image }}"
+            <img src="{{ 'https://development.bukabengkelindonesia.com'.$checking->client->image }}"
                 alt="Logo" style="height:75px;object-fit:contain">
         </div>
         <div id="head-content">
