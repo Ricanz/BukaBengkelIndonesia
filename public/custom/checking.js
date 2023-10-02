@@ -106,7 +106,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
 			},
 			columns: [
 				{data: 'image'},
-				{data: 'type.description'},
+				{data: 'types.description'},
 				{data: 'id', responsivePriority: -1},
 			],
 			columnDefs: [
@@ -130,7 +130,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
 						return `
-                            <a class="nav-link" href="javascript:void()" onclick="myFunction('${full.image}', '${full.type.description}', '${full.id}')" data-toggle="modal"
+                            <a class="nav-link" href="javascript:void()" onclick="myFunction('${full.image}', '${full.types.description}', '${full.id}')" data-toggle="modal"
                             data-target="#editImage"><i class="nav-icon la la-edit"></i><span class="nav-text"></span></a>
                             <a class="nav-link" href="javascript:void()" onclick="deleteFunction('${full.id}')"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
 						`;
