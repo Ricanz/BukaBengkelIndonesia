@@ -43,9 +43,4 @@ class Checking extends Model
     {
         return $this->hasOne(StandartChecking::class, 'checking_id', 'id');
     }
-
-    public function images(): HasMany
-    {
-        return $this->hasMany(CheckingImage::class, 'checking_id', 'id');
-    }
 }

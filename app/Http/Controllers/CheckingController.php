@@ -236,8 +236,8 @@ class CheckingController extends Controller
 
     public function pdf($id)
     {
-        $checking = Checking::with('advisor', 'client', 'standart', 'images', 'types', 'employee')->find($id);
-        // dd($checking);
+        $checking = Checking::with('advisor', 'client', 'standart', 'types', 'employee')->find($id);
+        // dd($checking->standart->images[0]->types);
         // return view('pdf.precheck', compact('checking'));
         $data = [
             'checking' => $checking, // Mengirim objek Checking ke view

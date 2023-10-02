@@ -17,7 +17,7 @@ class CheckingImage extends Model
         return $this->belongsTo(StandartChecking::class, 'client_id');
     }
 
-    public function type(): BelongsTo
+    public function types(): BelongsTo
     {
         return $this->belongsTo(MasterChecking::class, 'desc_id');
     }

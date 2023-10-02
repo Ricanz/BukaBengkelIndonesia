@@ -16,4 +16,9 @@ class StandartChecking extends Model
     {
         return $this->belongsTo(Checking::class, 'checking_id');
     }
+    
+    public function images()
+    {
+        return $this->hasMany(CheckingImage::class, 'checking_id');
+    }
 }

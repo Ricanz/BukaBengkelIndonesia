@@ -280,7 +280,7 @@
     </div> --}}
 
     <div id="content" style="width: 800px;">
-        <div id="image-head" style="width: auto; height:50px; margin-bottom:15px">
+        <div id="image-head" style="width: auto; height:50px; margin-bottom:15px; padding: 10px;">
             <img src="{{ 'https://development.bukabengkelindonesia.com'.$checking->client->image }}"
                 alt="Logo" style="height:75px;object-fit:contain">
         </div>
@@ -322,60 +322,24 @@
                     <th>PRE-CHECK</th>
                     <th>TAMBAHAN PEMERIKSAAN</th>
                 </tr>
-                <tr>
-                    <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
-                            width="30" height="30" />
-                    </td>
-                    <td class="bodl-rc">
-                        High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
-                    </td>
-                    <td class="bodl-rc text-center">
-                        <strong>226.9</strong> Psi
-                    </td>
-                    <td class="bodl-rc">
-                        Kompressor: <br><b>Berfungsi Normal</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
-                            width="30" height="30" />
-                    </td>
-                    <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
-                    <td class="bodl-rc text-center">
-                        <strong>21.1</strong> Psi
-                    </td>
-                    <td class="bodl-rc">
-                        Cabin Air Filter: <br><b>Bersih</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
-                            width="30" height="30" />
-                    </td>
-                    <td class="bodl-rc">Suhu Blower: <br><b>4 째C - 7 째C</b></td>
-                    <td class="bodl-rc text-center">
-                        <strong>10</strong> °C
-                    </td>
-                    <td class="bodl-rc">
-                        Blower: <br><b>Bersih</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
-                            width="30" height="30" />
-                    </td>
-                    <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
-                    <td class="bodl-rc text-center">
-                        <strong>2.2</strong> m/s
-                    </td>
-                    <td class="bodl-rc">
-                        Motor Fan: <br><b>Ganti ≤ 100.000 km</b>
-                    </td>
-                </tr>
+                @foreach ($checking->standart->images as $item)
+                    <tr>
+                        <td class="bodr-rc">
+                            <img src="{{ 'https://development.bukabengkelindonesia.com'.$item->image }}"
+                                width="30" height="30" />
+                        </td>
+                        <td class="bodl-rc">
+                            High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
+                        </td>
+                        <td class="bodl-rc text-center">
+                            <strong>226.9</strong> Psi
+                        </td>
+                        <td class="bodl-rc">
+                            Kompressor: <br><b>Berfungsi Normal</b>
+                        </td>
+                    </tr>
+                    
+                @endforeach
                 {{-- <tr class="nobod-rc">
                     <td colspan="3">
                         <p>*Sumber Referensi </p>
