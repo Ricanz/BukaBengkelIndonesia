@@ -107,7 +107,7 @@
         }
 
         #line-neck {
-            background-color: #0ca1c2;
+            /* background-color: #0ca1c2; */
             font-weight: bold;
             font-size: 16px;
             color: #FFFFFF;
@@ -118,11 +118,11 @@
         table.tb-note {
             border-collapse: collapse;
             width: 100%;
-            border: solid 3px #0ca1c2;
+            /* border: solid 3px #0ca1c2; */
         }
 
         tr.br-topn td {
-            border-right: solid 3px #0ca1c2;
+            /* border-right: solid 3px #0ca1c2; */
         }
 
         #n-three {
@@ -164,30 +164,30 @@
 
         .tb-rc th {
             padding: 3px 10px;
-            border: solid 3px #0ca1c2;
+            /* border: solid 3px #0ca1c2; */
         }
 
         .bod-rc {
             padding: 0px 0px 0px 15px;
-            border: solid 3px #0ca1c2;
+            /* border: solid 3px #0ca1c2; */
         }
 
         .bodl-rc {
             padding: 0px 0px 0px 15px;
-            border: solid 3px #0ca1c2;
+            /* border: solid 3px #0ca1c2; */
             border-left: none;
         }
 
         .bodr-rc {
             width: 20px;
             padding: 0px 0px 0px 15px;
-            border: solid 3px #0ca1c2;
+            /* border: solid 3px #0ca1c2; */
             border-right: none;
         }
 
         .bodl-rc {
             padding: 0px 0px 0px 15px;
-            border: solid 3px #0ca1c2;
+            /* border: solid 3px #0ca1c2; */
             border-left: none;
         }
 
@@ -208,7 +208,7 @@
             font-size: 18px;
             color: #FFFFFF;
             padding: 5px 0px;
-            background-color: #0ca1c2;
+            /* background-color: #0ca1c2; */
             border-radius: 10px;
             width: 50%;
         }
@@ -269,7 +269,17 @@
         }
 
         #check-one {
-            background-image: linear-gradient(to right, red, yellow);
+            background-color: #1f2690;
+        }
+
+        #condition {
+            padding-left: 20px;
+        }
+
+        #condition h2 {
+            color: #1f2690;
+            text-transform: uppercase;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -280,7 +290,7 @@
     </div> --}}
 
     <div id="content" style="width: 800px;">
-        <div id="image-head" style="width: auto; height:50px; margin-bottom:15px; padding: 10px;">
+        <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px;">
             <img src="{{ 'https://development.bukabengkelindonesia.com'.$checking->client->image }}"
                 alt="Logo" style="height:75px;object-fit:contain">
         </div>
@@ -306,24 +316,15 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div id="warning">
-            <table cellspacing="0" style="width:100%;" class="container tb-warning">
-                <tr>
-                    <td>
-                        <p id="warning-one">Lakukan service mobil anda</p>
-                    </td>
-                </tr>
-            </table>
-        </div> --}}
         <div id="result-check">
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
-                    <th id="check-one" colspan="2">STANDAR NORMAL</th>
-                    <th>PRE-CHECK</th>
-                    <th>TAMBAHAN PEMERIKSAAN</th>
+                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
+                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
+                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">TAMBAHAN PEMERIKSAAN</th>
                 </tr>
                 <tr>
-                    <td class="bodr-rc">
+                    <td class="bodr-rc" style="padding: 10px;">
                         <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_high_pressure.png"
                             width="30" height="30" />
                     </td>
@@ -337,8 +338,8 @@
                         Kompressor: <br><b>Berfungsi Normal</b>
                     </td>
                 </tr>
-                <tr>
-                    <td class="bodr-rc">
+                <tr style="background-color: #f6f8fd;">
+                    <td class="bodr-rc"  style="padding: 10px;">
                         <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_low_pressure.png"
                             width="30" height="30" />
                     </td>
@@ -351,7 +352,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="bodr-rc">
+                    <td class="bodr-rc"  style="padding: 10px;">
                         <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_temperature.png"
                             width="30" height="30" />
                     </td>
@@ -363,8 +364,8 @@
                         Blower: <br><b>Bersih</b>
                     </td>
                 </tr>
-                <tr>
-                    <td class="bodr-rc">
+                <tr style="background-color: #f6f8fd;">
+                    <td class="bodr-rc"  style="padding: 10px;">
                         <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_windspeed.png"
                             width="30" height="30" />
                     </td>
@@ -378,11 +379,21 @@
                 </tr>
             </table>
         </div>
-        <div>
-            <div>
-                *Sumber Refrensi
-                
-            </div>
+        <div id="condition">
+            <table cellspacing="0" style="width:100%;">
+                <tr id="ic-two-two" style=" padding-left: 20px;">
+                    <td class="ic-three" style="width: 200px;">
+                        *Sumber Refrensi
+                        <div id="image-head" style="width: auto; height:50px;">
+                            <img src="https://development.bukabengkelindonesia.com/storage/1696161843_6519603377c87.jpg"
+                                alt="Logo" style="height:25px;object-fit:contain">
+                        </div>
+                    </td>
+                    <td class="ic-three">
+                        <h2 id="condition">KONDISI MOBIL ANDA</h2>
+                    </td>
+                </tr>
+            </table>
         </div>
         <div id="image-check-two">
             <center>
