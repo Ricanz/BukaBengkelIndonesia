@@ -322,24 +322,60 @@
                     <th>PRE-CHECK</th>
                     <th>TAMBAHAN PEMERIKSAAN</th>
                 </tr>
-                @foreach ($checking->standart->images as $item)
-                    <tr>
-                        <td class="bodr-rc">
-                            <img src="{{ 'https://development.bukabengkelindonesia.com'.$item->image }}"
-                                width="30" height="30" />
-                        </td>
-                        <td class="bodl-rc">
-                            High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
-                        </td>
-                        <td class="bodl-rc text-center">
-                            <strong>226.9</strong> Psi
-                        </td>
-                        <td class="bodl-rc">
-                            Kompressor: <br><b>Berfungsi Normal</b>
-                        </td>
-                    </tr>
-                    
-                @endforeach
+                <tr>
+                    <td class="bodr-rc">
+                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                            width="30" height="30" />
+                    </td>
+                    <td class="bodl-rc">
+                        High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
+                    </td>
+                    <td class="bodl-rc text-center">
+                        <strong>226.9</strong> Psi
+                    </td>
+                    <td class="bodl-rc">
+                        Kompressor: <br><b>Berfungsi Normal</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bodr-rc">
+                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                            width="30" height="30" />
+                    </td>
+                    <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
+                    <td class="bodl-rc text-center">
+                        <strong>21.1</strong> Psi
+                    </td>
+                    <td class="bodl-rc">
+                        Cabin Air Filter: <br><b>Bersih</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bodr-rc">
+                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                            width="30" height="30" />
+                    </td>
+                    <td class="bodl-rc">Suhu Blower: <br><b>4 째C - 7 째C</b></td>
+                    <td class="bodl-rc text-center">
+                        <strong>10</strong> °C
+                    </td>
+                    <td class="bodl-rc">
+                        Blower: <br><b>Bersih</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bodr-rc">
+                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                            width="30" height="30" />
+                    </td>
+                    <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
+                    <td class="bodl-rc text-center">
+                        <strong>2.2</strong> m/s
+                    </td>
+                    <td class="bodl-rc">
+                        Motor Fan: <br><b>Ganti ≤ 100.000 km</b>
+                    </td>
+                </tr>
                 {{-- <tr class="nobod-rc">
                     <td colspan="3">
                         <p>*Sumber Referensi </p>
@@ -359,28 +395,24 @@
                     <td></td>
                 </tr>
                 <tr id="ic-two">
-                    <td class="ic-three">
-                        <div class="ic-mt">
-                            <img src="http://127.0.0.1:8000/storage/public/1696060144_6517d2f02a919.jpg" class="ic-b" width="246" height="180" />
-                            <p class="text-center"><b>Tampak Depan Mobil</b></p>
-                        </div>
-                    </td>
+                @foreach ($checking->standart->images as $item)
                     <td class="ic-three">
                         <div class="ic-mt">
                             <img src="https://bukabengkelindonesia.com/assets/theme/images/bbi/logo-192x192.png" class="ic-b" width="246" height="180" />
                             <p class="text-center"><b>KM</b> KM
                         </div>
                     </td>
-                    <td class="ic-three">
+                @endforeach
+                    {{-- <td class="ic-three">
                         <div class="ic-mt">
                             <img src="https://development.bukabengkelindonesia.com/tadmin/media/images/logo-192x192.png" class="ic-b" width="246" height="180" />
                             <p class="text-center"><b>SUHU & Windspeed</b></p>
                         </div>
-                    </td>
+                    </td> --}}
                 </tr>
             </table>
         </div>
-        <div id="image-check-two">
+        {{-- <div id="image-check-two">
             <table cellspacing="0" style="width:100%;" class="container">
                 <tr>
                     <td>
@@ -397,7 +429,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> --}}
 
         <div id="line-neck">
             <table cellspacing="0" style="width:100%;" class="container">
