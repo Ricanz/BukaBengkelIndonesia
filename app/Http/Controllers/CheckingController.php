@@ -91,6 +91,10 @@ class CheckingController extends Controller
                 'suhu' => $request->suhu,
                 'wind' => $request->wind,
                 'saran' => $request->saran,
+                'compressor' => $request->compressor,
+                'cabin' => $request->cabin,
+                'blower' => $request->blower,
+                'fan' => $request->fan,
                 'status' => 'active'
             ]);
             return json_encode(['status' => true, 'message' => 'Success']);
@@ -139,11 +143,15 @@ class CheckingController extends Controller
         $checking->sa_id = $request->advisor;
 
         $detail->km = $request->km;
-        $detail->high = $request->km;
+        $detail->high = $request->high;
         $detail->low = $request->low;
         $detail->suhu = $request->suhu;
         $detail->wind = $request->wind;
         $detail->saran = $request->saran;
+        $detail->compressor = $request->compressor;
+        $detail->cabin = $request->cabin;
+        $detail->blower = $request->blower;
+        $detail->fan = $request->fan;
 
         if ($checking->save() && $detail->save()) {
             return json_encode(['status' => true, 'message' => 'Success']);
@@ -238,13 +246,20 @@ class CheckingController extends Controller
     {
         $checking = Checking::with('advisor', 'client', 'standart', 'types', 'employee')->find($id);
         // dd($checking->standart->images[0]->types);
-        // return view('pdf.precheck', compact('checking'));
+        // $first_batch = $checking->standart->images->slice(0, 3); // 3 data pertama
+        // $second_batch = $checking->standart->images->slice(3, 2);
+        // return view('pdf.precheck', compact('checking', 'first_batch', 'second_batch'));
+        $firstBatch = $checking->standart->images->slice(0, 3); // 3 data pertama
+        $secondBatch = $checking->standart->images->slice(3, 2);
         $data = [
-            'checking' => $checking, // Mengirim objek Checking ke view
+            'checking' => $checking,
+            'first_batch' => $firstBatch,
+            'second_batch' => $secondBatch
         ];
+
         $pdf = PDF::loadView('pdf.precheck', $data);
         
-        return $pdf->download('user.pdf');
+        return $pdf->download('user1.pdf');
 
         // $directory = 'app/pdf/';
         // if (!Storage::exists($directory)) {

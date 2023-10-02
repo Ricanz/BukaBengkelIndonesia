@@ -324,14 +324,14 @@
                 </tr>
                 <tr>
                     <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_high_pressure.png"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">
                         High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
                     </td>
                     <td class="bodl-rc text-center">
-                        <strong>226.9</strong> Psi
+                        <strong>{{ $checking->standart->high }}</strong> Psi
                     </td>
                     <td class="bodl-rc">
                         Kompressor: <br><b>Berfungsi Normal</b>
@@ -339,12 +339,12 @@
                 </tr>
                 <tr>
                     <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_low_pressure.png"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
                     <td class="bodl-rc text-center">
-                        <strong>21.1</strong> Psi
+                        <strong>{{ $checking->standart->high }}</strong> Psi
                     </td>
                     <td class="bodl-rc">
                         Cabin Air Filter: <br><b>Bersih</b>
@@ -352,12 +352,12 @@
                 </tr>
                 <tr>
                     <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_temperature.png"
                             width="30" height="30" />
                     </td>
-                    <td class="bodl-rc">Suhu Blower: <br><b>4 째C - 7 째C</b></td>
+                    <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 7 °C</b></td>
                     <td class="bodl-rc text-center">
-                        <strong>10</strong> °C
+                        <strong>{{ $checking->standart->suhu }}</strong> °C
                     </td>
                     <td class="bodl-rc">
                         Blower: <br><b>Bersih</b>
@@ -365,71 +365,62 @@
                 </tr>
                 <tr>
                     <td class="bodr-rc">
-                        <img src="https://autonetmagz.com/wp-content/uploads/2015/04/Honda-Civic-Concept-Tampak-Depan.jpg"
+                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_windspeed.png"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
                     <td class="bodl-rc text-center">
-                        <strong>2.2</strong> m/s
+                        <strong>{{ $checking->standart->wind }}</strong> m/s
                     </td>
                     <td class="bodl-rc">
                         Motor Fan: <br><b>Ganti ≤ 100.000 km</b>
                     </td>
                 </tr>
-                {{-- <tr class="nobod-rc">
-                    <td colspan="3">
-                        <p>*Sumber Referensi </p>
-                        <p class="logo-denso"><img src="http://127.0.0.1:8002/tadmin/images/denso-logo.png"
-                                width="50" height="20" /></p>
-                    </td>
-                </tr> --}}
             </table>
         </div>
-        <div id="image-check">
-            <table cellspacing="0" style="width:100%;">
-                <tr>
-                    <td></td>
-                    <td id="ic-one">
-                        <p class="text-center">KONDISI MOBIL ANDA</p>
-                    </td>
-                    <td></td>
-                </tr>
-                <tr id="ic-two">
-                @foreach ($checking->standart->images as $item)
-                    <td class="ic-three">
-                        <div class="ic-mt">
-                            <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
-                            <p class="text-center"><b>KM</b> KM
-                        </div>
-                    </td>
-                @endforeach
-                    {{-- <td class="ic-three">
-                        <div class="ic-mt">
-                            <img src="https://development.bukabengkelindonesia.com/tadmin/media/images/logo-192x192.png" class="ic-b" width="246" height="180" />
-                            <p class="text-center"><b>SUHU & Windspeed</b></p>
-                        </div>
-                    </td> --}}
-                </tr>
-            </table>
+        <div>
+            <div>
+                *Sumber Refrensi
+                
+            </div>
         </div>
-        {{-- <div id="image-check-two">
-            <table cellspacing="0" style="width:100%;" class="container">
-                <tr>
-                    <td>
-                        <div class="ic-mt text-center" id="ict-one">
-                            <img src="" class="ic-b" width="246" height="180" />
-                            <p class="text-center"><b>Blower</b></p>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="ic-mt text-center" id="ict-two">
-                            <img src="" class="ic-b" width="246" height="180" />
-                            <p class="text-center"><b>Cabin Air Filter / Evaporator</b></p>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div> --}}
+        <div id="image-check-two">
+            <center>
+                <table cellspacing="0" style="width:100%;">
+                    <tr id="ic-two-two">
+                    @foreach ($first_batch as $key => $item)
+                        <td class="ic-three">
+                            <center>
+                                <div class="ic-mt">
+                                    <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
+                                    <p class="text-center">{{$item->types->description}}</p>
+                                </div>
+                            </center>
+                        </td>
+                    @endforeach
+                    </tr>
+                </table>
+            </center>
+        </div>
+
+        <div id="image-check-two">
+            <center>
+                <table cellspacing="0" style="width:100%;">
+                    <tr id="ic-two-two">
+                    @foreach ($second_batch as $key => $item)
+                        <td class="ic-three">
+                            <center>
+                                <div class="ic-mt">
+                                    <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
+                                    <p class="text-center">{{$item->types->description}}</p>
+                                </div>
+                            </center>
+                        </td>
+                    @endforeach
+                    </tr>
+                </table>
+            </center>
+        </div>
 
         <div id="line-neck">
             <table cellspacing="0" style="width:100%;" class="container">

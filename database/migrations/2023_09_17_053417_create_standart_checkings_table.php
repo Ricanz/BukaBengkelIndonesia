@@ -22,6 +22,11 @@ return new class extends Migration
             $table->string('suhu')->nullable();
             $table->string('saran')->nullable();
             $table->string('status')->default('active');
+            $table->string('compressor')->nullable();
+            $table->string('cabin')->nullable();
+            $table->string('blower')->nullable();
+            $table->string('fan')->nullable();
+
             $table->timestamps();
         });
     }

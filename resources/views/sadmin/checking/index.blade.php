@@ -49,23 +49,27 @@
                                                     Wo</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <input type="text" class="form-control" name="wo"
-                                                        placeholder="Masukkan Nomor Wo" value="{{App\Helpers\Utils::generateWo()}}"/>
+                                                        placeholder="Masukkan Nomor Wo"
+                                                        value="{{ App\Helpers\Utils::generateWo() }}" />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">No.
+                                                    Polisi</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <input type="text" class="form-control" name="nopol"
                                                         placeholder="Masukkan No. Polisi Kendaraan" />
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Service
+                                                    Advisor</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="advisor" id="advisor" class="form-control">
                                                         <option value="" selected>Pilih Service Advisor</option>
-                                                        @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
-                                                            <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
+                                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                                            <option value="{{ $advisor->id }}">{{ $advisor->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -123,6 +127,39 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <input type="text" class="form-control" name="wind"
                                                         placeholder="Masukkan Wind Speed Kendaraan" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Kompressor:
+                                                </label>
+                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                    <input type="text" class="form-control" name="compressor"
+                                                        placeholder="Masukkan Kompresor" max="30" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air
+                                                    Filter: </label>
+                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                    <input type="text" class="form-control" name="cabin"
+                                                        placeholder="Masukkan Cabin Air Filter" max="30" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Blower:
+                                                </label>
+                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                    <input type="text" class="form-control" name="blower"
+                                                        placeholder="Masukkan Blower" max="30" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan:
+                                                </label>
+                                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                                    <input type="text" class="form-control" name="fan"
+                                                        placeholder="Masukkan Motor Fan" max="30" />
                                                 </div>
                                             </div>
                                             <div class="form-group row">

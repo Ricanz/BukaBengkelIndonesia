@@ -237,8 +237,36 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Wind Speed (2.5 m/s - 4 m/s)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="suhu"
+                            <input type="text" class="form-control" name="wind"
                                 value="{{ $checking->standart->wind }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kompresor</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="compressor"
+                                value="{{ $checking->standart->compressor }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="cabin"
+                                value="{{ $checking->standart->cabin }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Blower</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="blower"
+                                value="{{ $checking->standart->blower }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="fan"
+                                value="{{ $checking->standart->fan }}" />
                         </div>
                     </div>
                     <div class="form-group row">

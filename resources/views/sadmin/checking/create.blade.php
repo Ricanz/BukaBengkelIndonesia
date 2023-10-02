@@ -87,6 +87,34 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kompressor: </label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="compressor"
+                                placeholder="Masukkan Kompresor" max="30" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter: </label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="cabin"
+                                placeholder="Masukkan Cabin Air Filter" max="30" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Blower: </label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="blower"
+                                placeholder="Masukkan Blower" max="30" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan: </label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="fan"
+                                placeholder="Masukkan Motor Fan" max="30" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <textarea class="form-control" name="saran" id="exampleTextarea" rows="3"></textarea>
