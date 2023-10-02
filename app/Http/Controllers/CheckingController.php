@@ -208,7 +208,7 @@ class CheckingController extends Controller
 
     public function image_data(Request $request)
     {
-        $data = CheckingImage::with('type')->where('checking_id', $request->id)->where('status', '!=', 'deleted');
+        $data = CheckingImage::with('types')->where('checking_id', $request->id)->where('status', '!=', 'deleted');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 
