@@ -286,6 +286,24 @@
             text-align: center;
         }
 
+        /* #background-table {
+            background-color: #1f2690;
+            height: 250px;
+            border-radius: 30px;
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            width: 90%;
+            z-index: -1;
+        } */
+
+        #parent {
+            position: relative;
+            /* background-color: #03b115; */
+        }
+
     </style>
 </head>
 
@@ -400,48 +418,50 @@
                 </tr>
             </table>
         </div>
-        <div id="image-check-two" style="padding: 0 85px 0 85px">
-            <center>
-                <table cellspacing="0" style="width:100%;">
-                    <tr id="ic-two-two">
-                    @foreach ($first_batch as $key => $item)
-                        <td class="ic-three">
-                            <center>
-                                <div class="ic-mt">
-                                    <div id="bg-image">
-                                        <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                        <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                    </div>
-                                </div>
-                            </center>
-                        </td>
-                    @endforeach
-                    </tr>
-                </table>
-            </center>
-        </div>
-
-        <div id="image-check-two" style="padding: 0 85px 0 85px">
-            <center>
-                <table cellspacing="0" style="width:100%;">
-                    <tr id="ic-two-two">
-                    @foreach ($second_batch as $key => $item)
-                        <td class="ic-three" style="text-align: center;">
-                            <center>
-                                <div class="ic-mt">
+        <div id="parent">
+            <div id="background-table"></div>
+            <div id="image-check-two" style="padding: 0 85px 0 85px">
+                <center>
+                    <table cellspacing="0" style="width:100%;">
+                        <tr id="ic-two-two">
+                        @foreach ($first_batch as $key => $item)
+                            <td class="ic-three">
+                                <center>
+                                    <div class="ic-mt">
                                         <div id="bg-image">
                                             <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
                                             <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
                                         </div>
-                                </div>
-                            </center>
-                        </td>
-                    @endforeach
-                    </tr>
-                </table>
-            </center>
+                                    </div>
+                                </center>
+                            </td>
+                        @endforeach
+                        </tr>
+                    </table>
+                </center>
+            </div>
+    
+            <div id="image-check-two" style="padding: 0 85px 0 85px">
+                <center>
+                    <table cellspacing="0" style="width:100%;">
+                        <tr id="ic-two-two">
+                        @foreach ($second_batch as $key => $item)
+                            <td class="ic-three" style="text-align: center;">
+                                <center>
+                                    <div class="ic-mt">
+                                            <div id="bg-image">
+                                                <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                            </div>
+                                    </div>
+                                </center>
+                            </td>
+                        @endforeach
+                        </tr>
+                    </table>
+                </center>
+            </div>
         </div>
-
 
         <div id="line-notes">
             <table cellspacing="0" style="width:100%;" class="container">
@@ -471,17 +491,6 @@
                 </tr>
             </table>
         </div>
-
-
-        {{-- <div id="line-neck">
-            <table cellspacing="0" style="width:100%;" class="container">
-                <tr>
-                    <td>
-                        <p class="text-center">Alamat</p>
-                    </td>
-                </tr>
-            </table>
-        </div> --}}
     </div>
 
 </body>
