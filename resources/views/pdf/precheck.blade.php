@@ -107,7 +107,6 @@
         }
 
         #line-neck {
-            /* background-color: #0ca1c2; */
             font-weight: bold;
             font-size: 16px;
             color: #FFFFFF;
@@ -118,11 +117,6 @@
         table.tb-note {
             border-collapse: collapse;
             width: 100%;
-            /* border: solid 3px #0ca1c2; */
-        }
-
-        tr.br-topn td {
-            /* border-right: solid 3px #0ca1c2; */
         }
 
         #n-three {
@@ -164,30 +158,25 @@
 
         .tb-rc th {
             padding: 3px 10px;
-            /* border: solid 3px #0ca1c2; */
         }
 
         .bod-rc {
             padding: 0px 0px 0px 15px;
-            /* border: solid 3px #0ca1c2; */
         }
 
         .bodl-rc {
             padding: 0px 0px 0px 15px;
-            /* border: solid 3px #0ca1c2; */
             border-left: none;
         }
 
         .bodr-rc {
             width: 20px;
             padding: 0px 0px 0px 15px;
-            /* border: solid 3px #0ca1c2; */
             border-right: none;
         }
 
         .bodl-rc {
             padding: 0px 0px 0px 15px;
-            /* border: solid 3px #0ca1c2; */
             border-left: none;
         }
 
@@ -208,7 +197,6 @@
             font-size: 18px;
             color: #FFFFFF;
             padding: 5px 0px;
-            /* background-color: #0ca1c2; */
             border-radius: 10px;
             width: 50%;
         }
@@ -219,10 +207,6 @@
 
         .ic-three {
             width: 70%;
-        }
-
-        .ic-b {
-            border: 3px solid #0ca1c2;
         }
 
         #ict-one {
@@ -281,6 +265,27 @@
             text-transform: uppercase;
             font-weight: bold;
         }
+
+        #bg-image {
+            padding-bottom: 35px;
+            background-color: #23a5ea;
+            width: 200px;
+            height: 130px;
+            border-radius: 0 10px 10px 10px;
+        }
+
+        #line-notes {
+            padding: 20px;
+            margin: 20px 60px 20px 60px;
+            background-color: #fae3eb;
+            border-radius: 20px;
+        }
+
+        #footer{
+            background-color: #1f2690;
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -316,7 +321,7 @@
                 </tbody>
             </table>
         </div>
-        <div id="result-check">
+        <div id="result-check" style="margin-top: 10px;">
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
                     <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
@@ -379,7 +384,7 @@
                 </tr>
             </table>
         </div>
-        <div id="condition">
+        <div id="condition" style="margin-top: 10px;">
             <table cellspacing="0" style="width:100%;">
                 <tr id="ic-two-two" style=" padding-left: 20px;">
                     <td class="ic-three" style="width: 200px;">
@@ -395,7 +400,7 @@
                 </tr>
             </table>
         </div>
-        <div id="image-check-two">
+        <div id="image-check-two" style="padding: 0 85px 0 85px">
             <center>
                 <table cellspacing="0" style="width:100%;">
                     <tr id="ic-two-two">
@@ -403,8 +408,10 @@
                         <td class="ic-three">
                             <center>
                                 <div class="ic-mt">
-                                    <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
-                                    <p class="text-center">{{$item->types->description}}</p>
+                                    <div id="bg-image">
+                                        <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                        <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                    </div>
                                 </div>
                             </center>
                         </td>
@@ -414,16 +421,18 @@
             </center>
         </div>
 
-        <div id="image-check-two">
+        <div id="image-check-two" style="padding: 0 85px 0 85px">
             <center>
                 <table cellspacing="0" style="width:100%;">
                     <tr id="ic-two-two">
                     @foreach ($second_batch as $key => $item)
-                        <td class="ic-three">
+                        <td class="ic-three" style="text-align: center;">
                             <center>
                                 <div class="ic-mt">
-                                    <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="246" height="180" />
-                                    <p class="text-center">{{$item->types->description}}</p>
+                                        <div id="bg-image">
+                                            <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                            <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                        </div>
                                 </div>
                             </center>
                         </td>
@@ -433,7 +442,38 @@
             </center>
         </div>
 
-        <div id="line-neck">
+
+        <div id="line-notes">
+            <table cellspacing="0" style="width:100%;" class="container">
+                <tr>
+                    <td>
+                        <p><strong>Catatan Pemeriksaan:</strong></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="footer" style="padding: 20px 0 20px 0;position:absolute;bottom:0; width:100%">
+            <table cellspacing="0" style="width:100%;" class="container">
+                <tr>
+                    <td>
+                        <p style="text-align: center; color: white;">
+                            Jl. Dr. Satrio No. C2, Simpangan, Kec. Cikarang Utara, Kabupaten Bekasi, Jawa Barat 17530.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+
+        {{-- <div id="line-neck">
             <table cellspacing="0" style="width:100%;" class="container">
                 <tr>
                     <td>
@@ -441,7 +481,7 @@
                     </td>
                 </tr>
             </table>
-        </div>
+        </div> --}}
     </div>
 
 </body>
