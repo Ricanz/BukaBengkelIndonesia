@@ -311,7 +311,7 @@
                         </td>
                         <td id="right-head">
                             <p id="rh-one">S.A : {{ $checking->advisor->name }}</p>
-                            <p id="rh-two">{{ $checking->created_at->format('DD, d-m-Y | H:i') }}</p>
+                            <p id="rh-two">{{ $checking->created_at->format('D, d-m-Y | H:i') }}</p>
                             <p id="rh-three">No. WO : {{ $checking->wo }}</b></p>
                             <p id="rh-four">*Lakukan Service Mobil Anda</p>
                             <p id="rh-five">Teknisi: <b><label id="rh-five">{{ $checking->employee->fullname }}</label></b>
