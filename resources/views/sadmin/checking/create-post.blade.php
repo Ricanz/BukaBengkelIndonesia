@@ -33,9 +33,11 @@
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="advisor" id="advisor" class="form-control">
                                 <option value="{{ $check->sa_id }}" selected>{{ $check->advisor->name }}
-                                @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
-                                    <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
-                                @endforeach
+                                    @if (Auth::user()->role !== 'admin')
+                                        @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                            <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
+                                        @endforeach
+                                    @endif
                             </select>
                         </div>
                     </div>
