@@ -11,6 +11,7 @@ class MasterChecking extends Model
         'icon',
         'name',
         'description',
-        'status'
+        'status',
+        'type'
     ];
 }

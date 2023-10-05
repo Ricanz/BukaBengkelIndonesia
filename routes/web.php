@@ -110,6 +110,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/master/edit/{id}', [MasterController::class, 'edit'])->name('master.edit');
     Route::post('/master/update', [MasterController::class, 'update'])->name('advisor.update');
 
+    Route::get('/master/complete', [MasterController::class, 'index'])->name('master.index');
+
+
 
     Route::get('/get-kuota-and-total', [ClientsController::class, 'kuota'])->name('clients.kuota');
 });

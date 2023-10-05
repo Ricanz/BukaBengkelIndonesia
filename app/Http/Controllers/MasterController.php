@@ -55,7 +55,7 @@ class MasterController extends Controller
             'name' => $request->name,
             'description' => $request->name,
             'status' => 'active',
-            'type' => 'standart',
+            'type' => $request->type,
         ]);
         if ($submit) {
             return json_encode(['status' => true, 'message' => 'Success']);
@@ -127,7 +127,7 @@ class MasterController extends Controller
 
     public function data(Request $request)
     {
-        $data = MasterChecking::where('status', '!=', 'deleted')->where('type', 'standart');
+        $data = MasterChecking::where('status', '!=', 'deleted')->where('type', $request->filter);
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 }

@@ -1,7 +1,9 @@
 var avatar1 = new KTImageInput('kt_image_1');
 
 var KTDatatablesDataSourceAjaxType = function() {
-
+    var parts = location.href.split('/');
+    var lastSegment = parts.pop() || parts.pop();  // handle potential trailing slash
+    
 	var initTable1 = function() {
 		var table = $('#kt_datatable');
 
@@ -15,6 +17,7 @@ var KTDatatablesDataSourceAjaxType = function() {
 					pagination: {
 						perpage: 20,
 					},
+                    filter: lastSegment
 				},
 			},
 			columns: [

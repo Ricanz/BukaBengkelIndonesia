@@ -49,7 +49,7 @@
                                         </a>
                                     </li>
                                     <li class="menu-item menu-item-submenu">
-                                        <a href="{{ url('types') }}" class="menu-link">
+                                        <a href="{{ url('master/complete') }}" class="menu-link">
                                             <span class="svg-icon menu-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Box2.svg-->
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <span class="menu-text">Post Checking</span>
+                                            <span class="menu-text">Complete Checking</span>
                                         </a>
                                     </li>
                                 </ul>

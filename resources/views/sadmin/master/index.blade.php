@@ -7,7 +7,7 @@
                     <span class="card-icon">
                         <i class="flaticon2-supermarket text-primary"></i>
                     </span>
-                    <h3 class="card-label">Master Data Standart Checking</h3>
+                    <h3 class="card-label">Master Data {{ Str::ucfirst(request()->segment(count(request()->segments())))}} Checking</h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -35,7 +35,7 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Master Standart Checking</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Master {{ Str::ucfirst(request()->segment(count(request()->segments())))}} Checking</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
@@ -43,6 +43,7 @@
                                 <div class="modal-body">
                                     <form class="form" id="create_master_form" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="type" value="{{ request()->segment(count(request()->segments())) }}">
                                         <div class="image-input image-input-outline" id="kt_image_1">
                                             <div class="image-input-wrapper" style="background-image: url()"></div>
 
