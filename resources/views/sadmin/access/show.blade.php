@@ -35,9 +35,15 @@
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="client_id" id="client_id" class="form-control">
                                 <option value="{{ $employee->client->id }}">{{ $employee->client->title }}</option>
-                                @foreach(App\Models\Client::where('status', 'active')->where('kabeng_id', Auth::user()->id)->get() as $client)
-                                    <option value="{{ $client->id }}">{{ $client->title }}</option>
-                                @endforeach
+                                @if (Auth::user()->role === 'client')
+                                    @foreach(App\Models\Client::where('status', 'active')->where('kabeng_id', Auth::user()->id)->get() as $client)
+                                        <option value="{{ $client->id }}">{{ $client->title }}</option>
+                                    @endforeach
+                                @elseif (Auth::user()->role === 'admin')
+                                    @foreach(App\Models\Client::where('status', 'active')->get() as $client)
+                                        <option value="{{ $client->id }}">{{ $client->title }}</option>
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                     </div>

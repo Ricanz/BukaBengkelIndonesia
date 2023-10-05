@@ -109,7 +109,7 @@
                                         </a>
                                     </li>
                                     <li class="menu-item menu-item-submenu">
-                                        <a href="{{ url('clients') }}" class="menu-link">
+                                        <a href="{{ url('access') }}" class="menu-link">
                                             <span class="svg-icon menu-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Box2.svg-->
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -378,7 +378,7 @@
                                         </a>
                                     </li>
                                     <li class="menu-item menu-item-submenu">
-                                        <a href="{{ url('clients') }}" class="menu-link">
+                                        <a href="{{ url('access') }}" class="menu-link">
                                             <span class="svg-icon menu-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Box2.svg-->
                                                 <svg xmlns="http://www.w3.org/2000/svg"
