@@ -26,6 +26,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
 				{data: 'advisor.name'},
 				{data: 'types.name'},
 				{data: 'status'},
+				{data: 'status'},
 				{data: 'created_at'},
 				{data: 'id', responsivePriority: -1},
 			],
@@ -45,6 +46,17 @@ var KTDatatablesDataSourceAjaxClient = function() {
 					render: function(data, type, full, meta) {
 						return `
                             <a class="nav-link" href="checking/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+						`;
+					},
+				},
+				{
+					targets: -4,
+					title: 'Post Check',
+					orderable: false,
+                    class: 'remove-client',
+					render: function(data, type, full, meta) {
+						return `
+                            <a href="/checking/pro/create/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
 						`;
 					},
 				},
@@ -395,6 +407,52 @@ $("#finishCheck").on("click", function (event) {
                     }
                 }).then(function() {
                     location.href = data.data
+                });
+            }else {
+                var values = '';
+                jQuery.each(data.message, function (key, value) {
+                    values += value+"<br>";
+                });
+
+                swal.fire({
+                    html: values,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() { });
+            }
+        }
+    });
+});
+
+$("#create_checking_post_form").on("submit", function (event) {
+    event.preventDefault();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var formData = new FormData(this);
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': token },
+        type : 'POST',
+        data: formData,
+        url  : '/checkings/post',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function(data){
+            if(data.status === true) {
+                swal.fire({
+                    text: data.message,
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    window.location.href = '/checking/standart' 
                 });
             }else {
                 var values = '';

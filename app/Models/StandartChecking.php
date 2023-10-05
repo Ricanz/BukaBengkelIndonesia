@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class StandartChecking extends Model
 {
     protected $fillable = [
-        'checking_id', 'km', 'high', 'low', 'suhu', 'wind', 'saran', 'status', 'compressor', 'cabin', 'blower', 'fan'
+        'checking_id', 'km', 'high', 'low', 'suhu', 'wind', 'saran', 'status', 'compressor', 'cabin', 'blower', 'fan', 'type'
     ];
 
     public function checking(): BelongsTo

@@ -36,7 +36,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Standart Checking</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Standart Checking (Pre)</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <i aria-hidden="true" class="ki ki-close"></i>
                                         </button>
@@ -44,6 +44,7 @@
                                     <div class="modal-body">
                                         <form class="form" id="create_checking_form" enctype="multipart/form-data">
                                             @csrf
+                                            <input type="hidden" name="type" value="pre">
                                             <div class="form-group row">
                                                 <label class="col-form-label text-left col-lg-3 col-sm-12">No.
                                                     Wo</label>
@@ -195,6 +196,7 @@
                             <th>Teknisi</th>
                             <th>SA</th>
                             <th>Kendaraan</th>
+                            <th>Post Check</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>

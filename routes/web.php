@@ -80,6 +80,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/checking/image/update', [CheckingController::class, 'image_update'])->name('checking.image_update');
     Route::get('/checking/image/destroy/{id}', [CheckingController::class, 'image_destroy'])->name('checking.image_destroy');
 
+    // Standart Post Check
+    Route::get('/checking/pro/create/post/{id}', [CheckingController::class, 'create_post'])->name('checking.create_post');
+    Route::post('/checkings/post', [CheckingController::class, 'store_post'])->name('checking.store_post');
+
     Route::get('/advisor', [ServiceAdvisorController::class, 'index'])->name('advisor.index');
     Route::get('/advisor/data', [ServiceAdvisorController::class, 'data'])->name('advisor.data');
     Route::post('/advisor/store', [ServiceAdvisorController::class, 'store'])->name('advisor.store');

@@ -7,31 +7,32 @@
                     <span class="card-icon">
                         <i class="flaticon2-supermarket text-primary"></i>
                     </span>
-                    <h3 class="card-label">Standart Checking (Pre)</h3>
+                    <h3 class="card-label">Standart Checking (Post)</h3>
                 </div>
             </div>
             <div class="card-body">
-                <form class="form" id="create_checking_form" enctype="multipart/form-data">
+                <form class="form" id="create_checking_post_form" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="id" value="{{ $check->id }}">
+                    <input type="hidden" name="type_check" value="post">
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wo"
-                                placeholder="Masukkan Nomor Wo" value="{{App\Helpers\Utils::generateWo()}}"/>
+                                placeholder="Masukkan Nomor Wo" value="{{$check->wo}}" disabled/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="nopol"
-                                placeholder="Masukkan No. Polisi Kendaraan" />
+                            <input type="text" class="form-control" name="nopol" value="{{ $check->nopol }}" disabled />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="advisor" id="advisor" class="form-control">
-                                <option value="" selected>Pilih Service Advisor</option>
+                                <option value="{{ $check->sa_id }}" selected>{{ $check->advisor->name }}
                                 @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
                                     <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
                                 @endforeach
@@ -42,7 +43,7 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="type" id="type" class="form-control">
-                                <option value="" selected>Pilih Tipe</option>
+                                <option value="{{ $check->type_id }}" selected>{{ $check->types->name }}
                                 @foreach(App\Models\MasterType::where('status', 'active')->get() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
