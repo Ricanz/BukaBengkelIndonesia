@@ -4,6 +4,7 @@ use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MasterTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceAdvisorController;
@@ -39,10 +40,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('sadmin.index');
     });
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // Clients or Admin
     Route::get('/clients', [ClientsController::class, 'index'])->name('client');
     Route::get('/client/data', [ClientsController::class, 'data'])->name('client.data');
     Route::get('/client/edit/{id}', [ClientsController::class, 'edit'])->name('client.edit');
@@ -54,6 +57,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/access', [AccessController::class, 'index'])->name('access');
 
+    // Employees
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');
     Route::get('/employee/show/{id}', [EmployeeController::class, 'show'])->name('employee.show');
     Route::get('/employee/data', [EmployeeController::class, 'data'])->name('employee.data');
@@ -61,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
     Route::get('/employee/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 
+    // Types
     Route::get('/types', [MasterTypeController::class, 'index'])->name('type.index');
     Route::get('/type/data', [MasterTypeController::class, 'data'])->name('type.data');
     Route::get('/type/edit/{id}', [MasterTypeController::class, 'show'])->name('type.show');
@@ -68,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/type/update', [MasterTypeController::class, 'update'])->name('type.update');
     Route::post('/type/store', [MasterTypeController::class, 'store'])->name('type.store');
 
+    // Standart Checking
     Route::get('/checking/standart', [CheckingController::class, 'index'])->name('checking.index');
     Route::get('/checking/standart/create', [CheckingController::class, 'create'])->name('checking.create');
     Route::get('/checking/data', [CheckingController::class, 'data'])->name('checking.data');
@@ -85,12 +91,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/checking/pro/view/post/{id}', [CheckingController::class, 'show_post'])->name('checking.show_post');
     Route::post('/checkings/post', [CheckingController::class, 'store_post'])->name('checking.store_post');
 
+    // Advisors
     Route::get('/advisor', [ServiceAdvisorController::class, 'index'])->name('advisor.index');
     Route::get('/advisor/data', [ServiceAdvisorController::class, 'data'])->name('advisor.data');
     Route::post('/advisor/store', [ServiceAdvisorController::class, 'store'])->name('advisor.store');
     Route::get('/advisor/show/{id}', [ServiceAdvisorController::class, 'show'])->name('advisor.show');
     Route::post('/advisor/update', [ServiceAdvisorController::class, 'update'])->name('advisor.update');
     Route::get('/advisor/destroy/{id}', [ServiceAdvisorController::class, 'destroy'])->name('advisor.destroy');
+
+    // Master
+    Route::get('/master/standart', [MasterController::class, 'index'])->name('master.index');
+    Route::get('/master/data', [MasterController::class, 'data'])->name('master.data');
+    Route::post('/master/store', [MasterController::class, 'store'])->name('master.store');
+    Route::get('/master/destroy/{id}', [MasterController::class, 'destroy'])->name('master.destroy');
+    Route::get('/master/edit/{id}', [MasterController::class, 'edit'])->name('master.edit');
+    Route::post('/master/update', [MasterController::class, 'update'])->name('advisor.update');
 
 
     Route::get('/get-kuota-and-total', [ClientsController::class, 'kuota'])->name('clients.kuota');

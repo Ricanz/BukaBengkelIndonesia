@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class MasterChecking extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'icon',
+        'name',
+        'description',
+        'status'
+    ];
 }
