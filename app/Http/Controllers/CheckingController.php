@@ -314,7 +314,7 @@ class CheckingController extends Controller
         // $second_batch = $checking->standart->images->slice(3, 2);
         // return view('pdf.precheck', compact('checking', 'first_batch', 'second_batch'));
         $firstBatch = $checking->standart->images->slice(0, 3); // 3 data pertama
-        $secondBatch = $checking->standart->images->slice(3, 2);
+        $secondBatch = $checking->standart->images->slice(3, 3);
         $data = [
             'checking' => $checking,
             'first_batch' => $firstBatch,
