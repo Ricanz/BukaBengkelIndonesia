@@ -82,6 +82,7 @@ Route::middleware('auth')->group(function () {
 
     // Standart Post Check
     Route::get('/checking/pro/create/post/{id}', [CheckingController::class, 'create_post'])->name('checking.create_post');
+    Route::get('/checking/pro/view/post/{id}', [CheckingController::class, 'show_post'])->name('checking.show_post');
     Route::post('/checkings/post', [CheckingController::class, 'store_post'])->name('checking.store_post');
 
     Route::get('/advisor', [ServiceAdvisorController::class, 'index'])->name('advisor.index');

@@ -55,9 +55,15 @@ var KTDatatablesDataSourceAjaxClient = function() {
 					orderable: false,
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
-						return `
-                            <a href="/checking/pro/create/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
-						`;
+                        if (full.post !== null) {
+                            return `
+                                <a href="/checking/pro/view/post/${full.id}" class="btn btn-success font-weight-bolder">Lihat</a>
+                            `;
+                        } else {
+                            return `
+                                <a href="/checking/pro/create/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
+                            `;
+                        }
 					},
 				},
 				{

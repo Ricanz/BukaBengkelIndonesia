@@ -43,4 +43,9 @@ class Checking extends Model
     {
         return $this->hasOne(StandartChecking::class, 'checking_id', 'id');
     }
+
+    public function post(): HasOne
+    {
+        return $this->hasOne(StandartChecking::class, 'checking_id', 'id')->where('type', 'post');
+    }
 }

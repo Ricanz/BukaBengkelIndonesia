@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('cabin')->nullable();
             $table->string('blower')->nullable();
             $table->string('fan')->nullable();
+            $table->string('type')->nullable();
 
             $table->timestamps();
         });

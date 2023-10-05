@@ -116,7 +116,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Hasil Pengerjaan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <textarea class="form-control" name="saran" id="exampleTextarea" rows="3"></textarea>
                         </div>

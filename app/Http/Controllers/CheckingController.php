@@ -180,13 +180,13 @@ class CheckingController extends Controller
         $user = Auth::user();
         if ($user->role === 'client') {
             $user_id = $user->id;
-            $data = Checking::with('employee', 'client', 'types', 'advisor')->whereHas('client', function ($query) use ($user_id) {
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->whereHas('client', function ($query) use ($user_id) {
                 $query->where('kabeng_id', $user_id);
             })->where('status', 'active');
         } else if ($user->role === 'employee') {
-            $data = Checking::with('employee', 'client', 'types', 'advisor')->where('user_id', $user->id)->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('user_id', $user->id)->where('status', 'active');
         } else {
-            $data = Checking::with('employee', 'client', 'types', 'advisor')->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('status', 'active');
         }
         return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);
     }
@@ -298,6 +298,12 @@ class CheckingController extends Controller
         } else {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
+    }
+
+    public function show_post($id)
+    {
+        $checking = Checking::with('employee', 'client', 'types', 'standart', 'advisor')->findOrFail($id);
+        return view('sadmin.checking.show-post', compact('checking'));
     }
 
     public function pdf($id)

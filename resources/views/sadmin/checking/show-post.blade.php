@@ -7,7 +7,7 @@
                     <span class="card-icon">
                         <i class="flaticon2-supermarket text-primary"></i>
                     </span>
-                    <h3 class="card-label">Detail Checking (Pre)</h3>
+                    <h3 class="card-label">Detail Checking (Post)</h3>
                 </div>
                 @if (Auth::user()->role === 'employee')
                     <div class="card-toolbar">
@@ -166,14 +166,14 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wo"
-                                value="{{ $checking->wo }}" />
+                                value="{{ $checking->wo }}" disabled/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="nopol"
-                                value="{{ $checking->plat_number }}" />
+                                value="{{ $checking->plat_number }}" disabled/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                     <div class="separator separator-dashed my-10"></div>
-                    <h2>Hasil Pre Check</h2>
+                    <h2>Hasil Post Check</h2>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Kilometer Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
