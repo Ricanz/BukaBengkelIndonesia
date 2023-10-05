@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class AccessController extends Controller
 {
@@ -17,27 +21,6 @@ class AccessController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -45,18 +28,8 @@ class AccessController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $employee = Employee::findOrFail($id);
+        return view('sadmin.access.show', compact('employee'));
     }
 
     /**
@@ -66,19 +39,40 @@ class AccessController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'client_id' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
+        }
+
+        $employee = Employee::findOrFail($request->employee_id);
+        $employee->client_id = $request->client_id;
+        
+        if ($employee->save()) {
+            return json_encode(['status' => true, 'message' => 'Success']);
+        }
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function data(Request $request)
     {
-        //
+        $user = Auth::user();
+        $data = [];
+        if ($user->role === 'client') {
+            $user_id = $user->id;
+            $data = Employee::with('client')
+                ->whereHas('client', function ($query) use ($user_id) {
+                    $query->where('kabeng_id', $user_id);
+                })
+                ->where('is_kabeng', false)
+                ->where('status', 'active')
+                ->orderBy('fullname')
+                ->get();
+        }
+        return DataTables::of($data)->addIndexColumn()->make(true);
     }
 }

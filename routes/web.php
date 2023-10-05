@@ -56,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/client/employee/data/{id}', [ClientsController::class, 'employee_data'])->name('client.employee.data');
 
     Route::get('/access', [AccessController::class, 'index'])->name('access');
+    Route::get('/access/data', [AccessController::class, 'data'])->name('access.data');
+    Route::get('/access/show/{id}', [AccessController::class, 'show'])->name('access.show');
+    Route::post('/access/update', [AccessController::class, 'update'])->name('access.update');
 
     // Employees
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employee.index');

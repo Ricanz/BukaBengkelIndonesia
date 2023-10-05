@@ -265,6 +265,105 @@ var KTDatatablesDataClientAdmin = function() {
 
 }();
 
+var KTDatatablesDataAccess = function() {
+	var initTable1 = function() {
+		var table = $('#table_access');
+        const urlParams = new URLSearchParams(window.location.search);
+        const filter = urlParams.get('filter');
+
+		// begin first table
+		table.DataTable({
+			responsive: true,
+			ajax: {
+				url: `/access/data`,
+				type: 'GET',
+				data: {
+					pagination: {
+						perpage: 20,
+					},
+                    filter : filter
+				},
+			},
+			columns: [
+				{data: 'fullname'},
+				{data: 'code'},
+				{data: 'client.title'},
+			],
+			columnDefs: [
+				{
+                    targets: 1,
+                    class: 'text-left',
+                    render: function (data, type, full, meta) {
+                        return '<a href="/access/show/'+full.id+'">'+data+'</a>'
+                    }
+				},
+			],
+		});
+	};
+
+	return {
+
+		//main function to initiate the module
+		init: function() {
+			initTable1();
+		},
+
+	};
+
+}();
+
+
+$("#update_access_form").on("submit", function (event) {
+    event.preventDefault();
+    var token = $('meta[name="csrf-token"]').attr('content');
+    var formData = new FormData(this);
+    console.log(formData);
+    $.ajax({
+        headers: { 'X-CSRF-TOKEN': token },
+        type : 'POST',
+        data: formData,
+        url  : '/access/update',
+        dataType: 'JSON',
+        cache: false,
+        contentType: false,
+        processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
+        success: function(data){
+            swal.hideLoading();
+            if(data.status === true) {
+                swal.fire({
+                    text: data.message,
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() {
+                    location.reload()
+                });
+            }else {
+                var values = '';
+                jQuery.each(data.message, function (key, value) {
+                    values += value+"<br>";
+                });
+
+                swal.fire({
+                    html: values,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn font-weight-bold btn-light-primary"
+                    }
+                }).then(function() { });
+            }
+        }
+    });
+});
+
 function to_date_time(date) {
     let tanggal = new Date(date);
     return tanggal.getFullYear()+"-"
@@ -280,4 +379,5 @@ function to_date_time(date) {
 jQuery(document).ready(function() {
     KTDatatablesDataClientEmployee.init();
     KTDatatablesDataClientAdmin.init();
+    KTDatatablesDataAccess.init();
 });
