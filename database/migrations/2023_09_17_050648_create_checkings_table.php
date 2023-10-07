@@ -23,8 +23,10 @@ return new class extends Migration
             $table->string('plat_number');
             $table->bigInteger('type_id');
             $table->string('status')->default('active');
-            $table->string('checking_type')->default('Standart');
+            $table->string('checking_type')->default('standart');
             $table->string('number')->nullable();
+            $table->string('saran')->nullable();
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }

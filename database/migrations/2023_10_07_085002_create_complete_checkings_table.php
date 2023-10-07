@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('master_checking_id');
             $table->bigInteger('checking_id');
             $table->string('value');
+            $table->string('value_title');
             $table->string('type');
             $table->string('status')->default('active');
             $table->timestamps();

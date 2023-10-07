@@ -12,6 +12,7 @@ class CompleteChecking extends Model
         'master_checking_id',
         'checking_id',
         'value',
+        'value_title',
         'type',
         'status'
     ];

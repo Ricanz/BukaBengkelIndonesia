@@ -79,7 +79,7 @@ class CheckingController extends Controller
             'plat_number' => $request->nopol,
             'type_id' => $request->type,
             'status' => 'active',
-            'checking_type' => 'Standart',
+            'checking_type' => 'standart',
             'number' => $formattedNextNumber
         ]);
         if ($checking) {
@@ -180,13 +180,13 @@ class CheckingController extends Controller
         $user = Auth::user();
         if ($user->role === 'client') {
             $user_id = $user->id;
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Standart')->whereHas('client', function ($query) use ($user_id) {
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'standart')->whereHas('client', function ($query) use ($user_id) {
                 $query->where('kabeng_id', $user_id);
             })->where('status', 'active');
         } else if ($user->role === 'employee') {
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Standart')->where('user_id', $user->id)->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'standart')->where('user_id', $user->id)->where('status', 'active');
         } else {
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Standart')->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'standart')->where('status', 'active');
         }
         return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);
     }

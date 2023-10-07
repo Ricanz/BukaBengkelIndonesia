@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Checking;
+use App\Models\CompleteChecking;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 class CompleteController extends Controller
@@ -37,7 +40,61 @@ class CompleteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = Validator::make($request->all(), [
+            'wo' => 'required',
+            'nopol' => 'required',
+            'type' => 'required',
+            'advisor' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
+        }
+        $employee_id = 1;
+        $client_id = 1;
+
+        $user = Auth::user();
+        if ($user->role === 'employee') {
+            $employee = Employee::where('user_id', $user->id)->first();
+            $employee_id = $employee->id;
+            $client_id = $employee->client_id;
+        }
+
+        $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
+        $nextNumber = (int)$lastNumber + 1;
+        $formattedNextNumber = sprintf('%06d', $nextNumber);
+
+        $checking = Checking::create([
+            'user_id' => $user->id,
+            'employee_id' => $employee_id,
+            'client_id' => $client_id,
+            'sa_id' => $request->advisor,
+            'wo' => $request->wo,
+            'plat_number' => $request->nopol,
+            'type_id' => $request->type,
+            'status' => 'active',
+            'checking_type' => 'complete',
+            'number' => $formattedNextNumber,
+            'saran' => $request->saran,
+            'note' => $request->catatan,
+        ]);
+        if ($checking) {
+            if (count($request->master) > 0) {
+                foreach ($request->master as $key => $value) {
+                    CompleteChecking::create([
+                        'master_checking_id' => $value,
+                        'checking_id' => $checking->id,
+                        'type' => $request->checking_type ? $request->checking_type : 'pre',
+                        'status' => 'active',
+                        'value_title' => $request->judul_hasil[$key],
+                        'value' => $request->result[$key]
+                    ]);
+                }
+            }
+            return json_encode(['status' => true, 'message' => 'Success']);
+        } else {
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+        }
     }
 
     /**
