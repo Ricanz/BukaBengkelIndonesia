@@ -251,9 +251,9 @@
                             </a>
                         </li>
                         <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-                            <a href="javascript:;" class="menu-link menu-toggle">
+                            <a href="{{ url('checking/complete') }}" class="menu-link menu-toggle">
                                 <span class="menu-text">Complete Checking</span>
-                                <span class="menu-desc">SOON - Laporan Complete Checking</span>
+                                <span class="menu-desc">Laporan Complete Checking</span>
                                 <i class="menu-arrow"></i>
                             </a>
                         </li>
@@ -360,7 +360,7 @@
                                             <span class="menu-text">Daftar Complete Checking</span>
                                         </a>
                                     </li>
-                                    <li class="menu-item" aria-haspopup="true">
+                                    {{-- <li class="menu-item" aria-haspopup="true">
                                         <a href="{{ route('checking.create') }}" class="menu-link">
                                             <span class="svg-icon menu-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Shield-check.svg-->
@@ -383,7 +383,7 @@
                                             </span>
                                             <span class="menu-text">Tambah Checking</span>
                                         </a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </div>
                         </li>
@@ -524,9 +524,9 @@
                             </a>
                         </li>
                         <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-                            <a href="javascript:;" class="menu-link menu-toggle">
+                            <a href="{{ url('checking/complete') }}" class="menu-link menu-toggle">
                                 <span class="menu-text">Complete Checking</span>
-                                <span class="menu-desc">SOON - Laporan Complete Checking</span>
+                                <span class="menu-desc">Laporan Complete Checking</span>
                                 <i class="menu-arrow"></i>
                             </a>
                         </li>
