@@ -38,9 +38,11 @@ class MasterController extends Controller
      */
     public function store(Request $request)
     {
+
         $validation = Validator::make($request->all(), [
             'file' => 'required',
-            'name' => 'required',
+            'label_judul' => 'required',
+            'label_foto' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -52,11 +54,12 @@ class MasterController extends Controller
 
         $submit = MasterChecking::create([
             'icon' => $request->has('file') ? env('APP_URL').$img : null,
-            'name' => $request->name,
-            'description' => $request->name,
+            'name' => $request->label_judul,
+            'description' => $request->label_foto,
             'status' => 'active',
             'type' => $request->type,
         ]);
+
         if ($submit) {
             return json_encode(['status' => true, 'message' => 'Success']);
         } else {
@@ -100,8 +103,8 @@ class MasterController extends Controller
         if (!$data) {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
-        $data->name = $request->name ? $request->name : $data->name;
-        $data->description = $request->name ? $request->name : $data->name;
+        $data->name = $request->label_judul ? $request->label_judul : $data->label_judul;
+        $data->description = $request->label_foto ? $request->label_foto : $data->label_foto;
         $data->status = $request->status ? $request->status : $data->status;
         if ($data->save()) {
             return json_encode(['status' => true, 'message' => 'Success']);

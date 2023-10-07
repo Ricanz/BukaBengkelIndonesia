@@ -63,10 +63,17 @@
                                             </span>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Title</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label Judul</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
-                                                <input type="text" class="form-control" name="name"
-                                                    placeholder="Masukkan Judul atau Nama Data" />
+                                                <input type="text" class="form-control" name="label_judul"
+                                                    placeholder="Masukkan Label Judul" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label Foto</label>
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <input type="text" class="form-control" name="label_foto"
+                                                    placeholder="Masukkan Label Foto" />
                                             </div>
                                         </div>
                                         <div class="separator separator-dashed my-10"></div>
@@ -89,8 +96,9 @@
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Title</th>
                             <th>Icon</th>
+                            <th>Label Judul</th>
+                            <th>Label Foto</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>

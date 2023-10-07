@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccessController;
 use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\CompleteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MasterTypeController;
@@ -112,6 +113,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/master/complete', [MasterController::class, 'index'])->name('master.index');
 
+    // Complete Checking
+    Route::get('/checking/complete', [CompleteController::class, 'index'])->name('complete.index');
+    
 
 
     Route::get('/get-kuota-and-total', [ClientsController::class, 'kuota'])->name('clients.kuota');

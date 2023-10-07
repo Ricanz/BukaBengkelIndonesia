@@ -32,10 +32,17 @@
                         </span>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Title</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Label Judul</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="name"
+                            <input type="text" class="form-control" name="label_judul"
                                 value="{{ $data->name }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Label Foto</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="label_foto"
+                                value="{{ $data->description }}"/>
                         </div>
                     </div>
                     <div class="form-group row">

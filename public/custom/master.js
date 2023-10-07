@@ -24,6 +24,7 @@ var KTDatatablesDataSourceAjaxType = function() {
 				{data: 'id'},
 				{data: 'icon'},
 				{data: 'name'},
+				{data: 'description'},
 				{data: 'status'},
 				{data: 'created_at'},
 				{data: 'id', responsivePriority: -1},
