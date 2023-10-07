@@ -1,6 +1,18 @@
 'use strict';
 var avatar1 = new KTImageInput('kt_image_1');
 var avatar2 = new KTImageInput('kt_image_2');
+
+$(document).ready(function() {
+    // Menggunakan event click pada tombol "Tambah Check"
+    $("#addCheckButton").click(function() {
+        // Clone elemen form-group dan tambahkan ke dalam form-container
+        var clonedFormGroup = $(".check-group").first().clone();
+        $("#form-container").append(clonedFormGroup);
+
+        // Kosongkan nilai input yang telah diclone
+        clonedFormGroup.find("input[type='text']").val("");
+    });
+});
 var KTDatatablesDataSourceAjaxClient = function() {
 
 	var initTable1 = function() {
@@ -35,7 +47,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
                     targets: 1,
                     class: 'text-left',
                     render: function (data, type, full, meta) {
-                        return '<a href="/checking/edit/'+full.id+'">'+data+'</a>'
+                        return '<a href="/complete/edit/'+full.id+'">'+data+'</a>'
                     }
 				},
 				{
@@ -250,7 +262,7 @@ $("#update_checking_form").on("submit", function (event) {
         headers: { 'X-CSRF-TOKEN': token },
         type : 'POST',
         data: formData,
-        url  : '/checking/update',
+        url  : '/complete/update',
         dataType: 'JSON',
         cache: false,
         contentType: false,

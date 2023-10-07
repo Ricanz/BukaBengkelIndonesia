@@ -12,7 +12,8 @@
                 @if (Auth::user()->role === 'employee')
                     <div class="card-toolbar">
                         <!--begin::Button-->
-                        <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Finish Check</a>
+                        <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank"
+                            class="btn btn-success font-weight-bolder mr-2">Finish Check</a>
                         <!--end::Button-->
 
                         <!--begin::Button-->
@@ -41,16 +42,14 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Foto Checking</h5>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <i aria-hidden="true" class="ki ki-close"></i>
                                         </button>
                                     </div>
                                     <div class="modal-body">
                                         <form class="form" id="create_image_form" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="checking_id"
-                                                value="{{ $checking->standart->id }}">
+                                            <input type="hidden" name="checking_id" value="{{ $checking->id }}">
                                             <div class="image-input image-input-outline" id="kt_image_1">
                                                 <div class="image-input-wrapper"
                                                     style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
@@ -61,8 +60,7 @@
                                                     data-action="change" data-toggle="tooltip" title=""
                                                     data-original-title="Change avatar">
                                                     <i class="fa fa-pen icon-sm text-muted"></i>
-                                                    <input type="file" name="file"
-                                                        accept=".png, .jpg, .jpeg" />
+                                                    <input type="file" name="file" accept=".png, .jpg, .jpeg" />
                                                     <input type="hidden" name="profile_avatar_remove" />
                                                 </label>
 
@@ -165,8 +163,7 @@
                         <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="wo"
-                                value="{{ $checking->wo }}" />
+                            <input type="text" class="form-control" name="wo" value="{{ $checking->wo }}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -204,81 +201,40 @@
                     </div>
                     <div class="separator separator-dashed my-10"></div>
                     <h2>Hasil Pre Check</h2>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kilometer Kendaraan</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="km"
-                                value="{{ $checking->standart->km }}" />
-                        </div>
+                    <div id="form-container">
+                        @for ($i = 0; $i < count($checking->complete); $i++)
+                            <div class="form-group row check-group">
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <select name="master[]" id="master[]" class="form-control">
+                                        <option value="{{ $checking->complete[$i]->master_checking_id }}" selected>{{ $checking->complete[$i]->master->name }}</option>
+                                        @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
+                                            <option value="{{ $type->id }}">{{ $type->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                                    <input type="text" class="form-control" name="judul_hasil[]"
+                                        placeholder="Cth: Kompresor" value="{{ $checking->complete[$i]->value_title }}" />
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                                    <input type="text" class="form-control" name="result[]"
+                                        placeholder="Cth: Berfungsi Normal" value="{{ $checking->complete[$i]->value }}" />
+                                </div>
+                            </div>
+                        @endfor
                     </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">High Pressure (199.1 Psi - 227.5
-                            Psi)</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="high"
-                                value="{{ $checking->standart->high }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Low Pressure (21.3 Psi - 35.5
-                            Psi)</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="low"
-                                value="{{ $checking->standart->low }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower (4 °C - 7 °C)</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="suhu"
-                                value="{{ $checking->standart->suhu }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Wind Speed (2.5 m/s - 4 m/s)</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="wind"
-                                value="{{ $checking->standart->wind }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kompresor</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="compressor"
-                                value="{{ $checking->standart->compressor }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="cabin"
-                                value="{{ $checking->standart->cabin }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Blower</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="blower"
-                                value="{{ $checking->standart->blower }}" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="fan"
-                                value="{{ $checking->standart->fan }}" />
-                        </div>
-                    </div>
+                    <a href="#" id="addCheckButton">Tambah Check</a>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <textarea class="form-control" name="saran" id="exampleTextarea" rows="3" maxlength="75">{{ $checking->standart->saran }}</textarea>
+                            <textarea class="form-control" name="saran" id="exampleTextarea" rows="3" maxlength="75">{{ $checking->saran }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Catatan Pemeriksaan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <textarea class="form-control" name="catatan" id="exampleTextarea" rows="3" maxlength="255">{{ $checking->standart->note }}</textarea>
+                            <textarea class="form-control" name="catatan" id="exampleTextarea" rows="3" maxlength="255">{{ $checking->note }}</textarea>
                         </div>
                     </div>
                     @if (Auth::user()->role === 'employee')
@@ -297,7 +253,7 @@
             <div class="card-body">
                 <!--begin: Datatable-->
                 <table class="table table-bordered table-hover table-checkable" id="table_image"
-                    data-id={{ $checking->standart->id }}>
+                    data-id={{ $checking->id }}>
                     <thead>
                         <tr>
                             <th>Image</th>
@@ -312,6 +268,6 @@
     </div>
     @section('scripts')
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-        <script src="{{url('/custom/checking.js')}}" type="application/javascript" ></script>
+        <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
     @endsection
 </x-app-layout>

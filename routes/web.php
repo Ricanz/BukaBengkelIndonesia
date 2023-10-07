@@ -117,6 +117,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/checking/complete', [CompleteController::class, 'index'])->name('complete.index');
     Route::get('/complete/data', [CompleteController::class, 'data'])->name('complete.data');
     Route::post('/complete/store', [CompleteController::class, 'store'])->name('complete.store');
+    Route::get('/complete/edit/{id}', [CompleteController::class, 'show'])->name('complete.show');
+    Route::post('/complete/update', [CompleteController::class, 'update'])->name('complete.update');
     
 
 

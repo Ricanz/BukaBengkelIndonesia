@@ -120,7 +120,13 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Hasil Pengerjaan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <textarea class="form-control" name="saran" id="exampleTextarea" rows="3"></textarea>
+                            <textarea class="form-control" name="saran" id="exampleTextarea" rows="3" maxlength="75"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Catatan Pemeriksaan</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <textarea class="form-control" name="catatan" id="exampleTextarea" rows="3" maxlength="255"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

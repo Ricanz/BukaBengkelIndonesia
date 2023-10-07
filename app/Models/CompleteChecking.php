@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CompleteChecking extends Model
 {
@@ -16,4 +17,9 @@ class CompleteChecking extends Model
         'type',
         'status'
     ];
+
+    public function master(): BelongsTo
+    {
+        return $this->belongsTo(MasterChecking::class, 'master_checking_id');
+    }
 }

@@ -167,18 +167,5 @@
     @section('scripts')
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
-        <script>
-            $(document).ready(function() {
-                // Menggunakan event click pada tombol "Tambah Check"
-                $("#addCheckButton").click(function() {
-                    // Clone elemen form-group dan tambahkan ke dalam form-container
-                    var clonedFormGroup = $(".check-group").first().clone();
-                    $("#form-container").append(clonedFormGroup);
-
-                    // Kosongkan nilai input yang telah diclone
-                    clonedFormGroup.find("input[type='text']").val("");
-                });
-            });
-        </script>
     @endsection
 </x-app-layout>

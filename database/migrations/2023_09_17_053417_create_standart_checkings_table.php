@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('low')->nullable();
             $table->string('suhu')->nullable();
             $table->string('saran')->nullable();
+            $table->string('note')->nullable();
             $table->string('status')->default('active');
             $table->string('compressor')->nullable();
             $table->string('cabin')->nullable();

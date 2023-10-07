@@ -97,6 +97,7 @@ class CompleteController extends Controller
         }
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -105,18 +106,8 @@ class CompleteController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $checking = Checking::with('complete')->where('id', $id)->where('checking_type', 'complete')->first();
+        return view('sadmin.complete.show', compact('checking'));
     }
 
     /**
@@ -126,9 +117,40 @@ class CompleteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request)
+    {  
+        $checking = Checking::findOrFail($request->checking_id);
+
+        $checking->wo = $request->wo;
+        $checking->plat_number = $request->nopol;
+        $checking->sa_id = $request->advisor;
+        $checking->saran = $request->saran;
+        $checking->note = $request->catatan;
+
+        if ($checking->save()) {
+            if (count($request->master) > 0) {
+                foreach ($request->master as $key => $value) {
+                    $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
+                    if ($complete) {
+                        $complete->value_title = $request->judul_hasil[$key];
+                        $complete->value = $request->result[$key];
+                        $complete->save();
+                    } else {
+                        CompleteChecking::create([
+                            'master_checking_id' => $value,
+                            'checking_id' => $checking->id,
+                            'type' => $request->checking_type ? $request->checking_type : 'pre',
+                            'status' => 'active',
+                            'value_title' => $request->judul_hasil[$key],
+                            'value' => $request->result[$key]
+                        ]);
+                    }
+                }
+            }
+            return json_encode(['status' => true, 'message' => 'Success']);
+        } else {
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+        }
     }
 
     /**

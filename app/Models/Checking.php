@@ -48,4 +48,9 @@ class Checking extends Model
     {
         return $this->hasOne(StandartChecking::class, 'checking_id', 'id')->where('type', 'post');
     }
+
+    public function complete(): HasMany
+    {
+        return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'pre');
+    }
 }
