@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Checking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class CompleteController extends Controller
 {
@@ -80,5 +83,21 @@ class CompleteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function data()
+    {
+        $user = Auth::user();
+        if ($user->role === 'client') {
+            $user_id = $user->id;
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Complete')->whereHas('client', function ($query) use ($user_id) {
+                $query->where('kabeng_id', $user_id);
+            })->where('status', 'active');
+        } else if ($user->role === 'employee') {
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Complete')->where('user_id', $user->id)->where('status', 'active');
+        } else {
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Complete')->where('status', 'active');
+        }
+        return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);
     }
 }

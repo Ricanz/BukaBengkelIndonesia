@@ -211,6 +211,6 @@
 
     @section('scripts')
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-        <script src="{{url('/custom/checking.js')}}" type="application/javascript" ></script>
+        <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
     @endsection
 </x-app-layout>
