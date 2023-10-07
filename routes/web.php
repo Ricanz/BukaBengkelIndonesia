@@ -119,6 +119,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/complete/store', [CompleteController::class, 'store'])->name('complete.store');
     Route::get('/complete/edit/{id}', [CompleteController::class, 'show'])->name('complete.show');
     Route::post('/complete/update', [CompleteController::class, 'update'])->name('complete.update');
+    Route::get('/complete/image', [CompleteController::class, 'image_data'])->name('complete.image_data');
+    Route::post('/complete/image', [CompleteController::class, 'image'])->name('complete.image');
+    Route::post('/complete/image/update', [CompleteController::class, 'image_update'])->name('complete.image_update');
     
 
 

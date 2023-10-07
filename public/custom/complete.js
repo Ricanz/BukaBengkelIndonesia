@@ -57,7 +57,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
 						return `
-                            <a class="nav-link" href="checking/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+                            <a class="nav-link" href="/checking/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
 						`;
 					},
 				},
@@ -125,7 +125,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
 		table.DataTable({
 			responsive: true,
 			ajax: {
-				url: '/checking/image',
+				url: '/complete/image',
 				type: 'GET',
 				data: {
 					pagination: {
@@ -136,7 +136,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
 			},
 			columns: [
 				{data: 'image'},
-				{data: 'types.description'},
+				{data: 'master.description'},
 				{data: 'id', responsivePriority: -1},
 			],
 			columnDefs: [
@@ -160,7 +160,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
 						return `
-                            <a class="nav-link" href="javascript:void()" onclick="myFunction('${full.image}', '${full.types.description}', '${full.id}')" data-toggle="modal"
+                            <a class="nav-link" href="javascript:void()" onclick="myFunction('${full.image}', '${full.master.description}', '${full.id}')" data-toggle="modal"
                             data-target="#editImage"><i class="nav-icon la la-edit"></i><span class="nav-text"></span></a>
                             <a class="nav-link" href="javascript:void()" onclick="deleteFunction('${full.id}')"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
 						`;
@@ -221,7 +221,11 @@ $("#create_checking_form").on("submit", function (event) {
         cache: false,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
         success: function(data){
+            swal.hideLoading();
             if(data.status === true) {
                 swal.fire({
                     text: data.message,
@@ -267,7 +271,11 @@ $("#update_checking_form").on("submit", function (event) {
         cache: false,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
         success: function(data){
+            swal.hideLoading();
             if(data.status === true) {
                 swal.fire({
                     text: data.message,
@@ -308,12 +316,16 @@ $("#create_image_form").on("submit", function (event) {
         headers: { 'X-CSRF-TOKEN': token },
         type : 'POST',
         data: formData,
-        url  : '/checking/image',
+        url  : '/complete/image',
         dataType: 'JSON',
         cache: false,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
         success: function(data){
+            swal.hideLoading();
             if(data.status === true) {
                 swal.fire({
                     text: data.message,
@@ -354,7 +366,7 @@ $("#update_image_form").on("submit", function (event) {
         headers: { 'X-CSRF-TOKEN': token },
         type : 'POST',
         data: formData,
-        url  : '/checking/image/update',
+        url  : '/complete/image/update',
         dataType: 'JSON',
         cache: false,
         contentType: false,

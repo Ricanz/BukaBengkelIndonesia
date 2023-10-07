@@ -45,7 +45,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
 						return `
-                            <a class="nav-link" href="checking/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
+                            <a class="nav-link" href="/checking/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
 						`;
 					},
 				},

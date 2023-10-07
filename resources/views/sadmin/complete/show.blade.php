@@ -76,7 +76,7 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="description" id="description" class="form-control">
                                                         <option value="" selected>Pilih Deskripsi</option>
-                                                        @foreach (App\Models\MasterChecking::where('status', 'active')->get() as $check)
+                                                        @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $check)
                                                             <option value="{{ $check->id }}">
                                                                 {{ $check->description }}
                                                             </option>
@@ -239,8 +239,8 @@
                     </div>
                     @if (Auth::user()->role === 'employee')
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-light-primary font-weight-bold"
-                                data-dismiss="modal">Close</button>
+                            <a href="{{ url('/checking/complete') }}" class="btn btn-light-primary font-weight-bold"
+                                data-dismiss="modal">Close</a>
                             <button type="submit" class="btn btn-primary font-weight-bold">Save
                                 changes</button>
                         </div>
