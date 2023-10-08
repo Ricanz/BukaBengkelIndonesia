@@ -86,6 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checking/update', [CheckingController::class, 'update'])->name('checking.update');
     Route::get('/checking/destroy/{id}', [CheckingController::class, 'destroy'])->name('checking.destroy');
     Route::get('/checking/image', [CheckingController::class, 'image_data'])->name('checking.image_data');
+    Route::get('/checking/image/post', [CheckingController::class, 'image_post_data'])->name('checking.image_post_data');
     Route::post('/checking/image', [CheckingController::class, 'image'])->name('checking.image');
     Route::post('/checking/image/update', [CheckingController::class, 'image_update'])->name('checking.image_update');
     Route::get('/checking/image/destroy/{id}', [CheckingController::class, 'image_destroy'])->name('checking.image_destroy');

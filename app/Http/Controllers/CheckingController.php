@@ -16,7 +16,7 @@ use Yajra\DataTables\Facades\DataTables;
 use PDF;
 use Illuminate\Http\Response;
 
-class CheckingController extends Controller
+class  CheckingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -191,22 +191,27 @@ class CheckingController extends Controller
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
+        $checking = StandartChecking::find($request->checking_id);
+
+        if (!$checking) {
+            return json_encode(['status' => false, ['message' => 'Something went wrong.']]);
+        }
         $submit = CheckingImage::create([
             'image' => Utils::uploadImage($request->file, 300),
             'checking_id' => $request->checking_id,
             'desc_id' => $request->description,
-            'type' => 'pre'
+            'type' => $checking->type
         ]);
         if ($submit) {
             return json_encode(['status' => true, 'message' => 'Success']);
         } else {
-            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+            return json_encode(['status' => false, ['message' => 'Something went wrong.']]);
         }
     }
 
     public function image_data(Request $request)
     {
-        $data = CheckingImage::with('types')->where('checking_id', $request->id)->where('status', '!=', 'deleted');
+        $data = CheckingImage::with('types')->where('checking_id', $request->id)->where('type', $request->type)->where('status', '!=', 'deleted');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 

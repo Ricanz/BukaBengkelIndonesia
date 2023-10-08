@@ -50,7 +50,7 @@
                                         <form class="form" id="create_image_form" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="checking_id"
-                                                value="{{ $checking->standart->id }}">
+                                                value="{{ $checking->post->id }}">
                                             <div class="image-input image-input-outline" id="kt_image_1">
                                                 <div class="image-input-wrapper"
                                                     style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
@@ -78,7 +78,7 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="description" id="description" class="form-control">
                                                         <option value="" selected>Pilih Deskripsi</option>
-                                                        @foreach (App\Models\MasterChecking::where('status', 'active')->get() as $check)
+                                                        @foreach (App\Models\MasterChecking::where('status', 'active')->where('type', 'standart')->get() as $check)
                                                             <option value="{{ $check->id }}">
                                                                 {{ $check->description }}
                                                             </option>
@@ -297,7 +297,8 @@
             <div class="card-body">
                 <!--begin: Datatable-->
                 <table class="table table-bordered table-hover table-checkable" id="table_image"
-                    data-id={{ $checking->standart->id }}>
+                    data-id={{ $checking->post->id }}
+                    data-type="post">
                     <thead>
                         <tr>
                             <th>Image</th>
