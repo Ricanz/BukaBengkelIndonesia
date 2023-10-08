@@ -67,13 +67,13 @@ var KTDatatablesDataSourceAjaxClient = function() {
 					orderable: false,
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
-                        if (full.post !== null) {
+                        if (full.complete_post !== null) {
                             return `
-                                <a href="/checking/pro/view/post/${full.id}" class="btn btn-success font-weight-bolder">Lihat</a>
+                                <a href="/complete/pro/view/post/${full.id}" class="btn btn-success font-weight-bolder">Lihat</a>
                             `;
                         } else {
                             return `
-                                <a href="/checking/pro/create/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
+                                <a href="/complete/pro/create/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
                             `;
                         }
 					},
@@ -466,12 +466,16 @@ $("#create_checking_post_form").on("submit", function (event) {
         headers: { 'X-CSRF-TOKEN': token },
         type : 'POST',
         data: formData,
-        url  : '/checkings/post',
+        url  : '/completes/post',
         dataType: 'JSON',
         cache: false,
         contentType: false,
         processData: false,
+        beforeSend: function() {
+            swal.showLoading();
+        },
         success: function(data){
+            swal.hideLoading()
             if(data.status === true) {
                 swal.fire({
                     text: data.message,
@@ -482,7 +486,7 @@ $("#create_checking_post_form").on("submit", function (event) {
                         confirmButton: "btn font-weight-bold btn-light-primary"
                     }
                 }).then(function() {
-                    window.location.href = '/checking/standart' 
+                    window.location.href = '/checking/complete' 
                 });
             }else {
                 var values = '';

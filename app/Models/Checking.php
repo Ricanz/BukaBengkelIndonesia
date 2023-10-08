@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Checking extends Model
 {
     protected $fillable = [
-        'user_id', 'employee_id', 'client_id', 'sa_id', 'wo', 'plat_number', 'type_id', 'status', 'checking_type', 'number', 'saran','note'
+        'user_id', 'employee_id', 'client_id', 'sa_id', 'wo', 'plat_number', 'type_id', 'status', 'checking_type', 'number', 'saran','note', 'saran_post', 'note_post'
     ];
 
     public function client(): BelongsTo
@@ -52,5 +52,15 @@ class Checking extends Model
     public function complete(): HasMany
     {
         return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'pre');
+    }
+
+    public function complete_post(): HasOne
+    {
+        return $this->hasOne(CompleteChecking::class, 'checking_id', 'id')->where('type', 'post');
+    }
+
+    public function complete_posts(): HasMany
+    {
+        return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'post');
     }
 }

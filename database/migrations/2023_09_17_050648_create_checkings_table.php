@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('number')->nullable();
             $table->string('saran')->nullable();
             $table->string('note')->nullable();
+            $table->string('saran_post')->nullable();
+            $table->string('note_post')->nullable();
             $table->timestamps();
         });
     }

@@ -171,13 +171,13 @@ class CompleteController extends Controller
         $user = Auth::user();
         if ($user->role === 'client') {
             $user_id = $user->id;
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Complete')->whereHas('client', function ($query) use ($user_id) {
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'complete_post')->where('checking_type', 'Complete')->whereHas('client', function ($query) use ($user_id) {
                 $query->where('kabeng_id', $user_id);
             })->where('status', 'active');
         } else if ($user->role === 'employee') {
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Complete')->where('user_id', $user->id)->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'complete_post')->where('checking_type', 'Complete')->where('user_id', $user->id)->where('status', 'active');
         } else {
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'Complete')->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'advisor', 'complete_post')->where('checking_type', 'Complete')->where('status', 'active');
         }
         return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);
     }
@@ -226,5 +226,61 @@ class CompleteController extends Controller
                 return json_encode(['status' => false, 'message' => 'Something went wrong.']);
             }
         }
+    }
+
+    
+    public function create_post($id){
+        $checking = Checking::with('advisor', 'types')->find($id);
+        return view('sadmin.complete.create-post', compact('checking'));
+    }
+
+    public function store_post(Request $request)
+    {
+        $employee_id = 1;
+        $client_id = 1;
+
+        $user = Auth::user();
+        if ($user->role === 'employee') {
+            $employee = Employee::where('user_id', $user->id)->first();
+        }
+
+        $checking = Checking::where('id', $request->checking_id)->first();
+        if (!$checking) {
+            return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
+        }
+        $checking->saran_post = $request->saran;
+        $checking->note_post = $request->catatan;
+        if ($checking->save()) {
+            if (count($request->master) > 0) {
+                foreach ($request->master as $key => $value) {
+                    $complete = CompleteChecking::where('type', 'post')->where('master_checking_id', $value)->where('checking_id', $checking->id)->first();
+                    if (!$complete) {
+                        $complete->value_title = $request->judul_hasil[$key];
+                        $complete->value = $request->result[$key];
+                        $complete->save();
+                    } else {
+                        CompleteChecking::create([
+                            'master_checking_id' => $value,
+                            'checking_id' => $checking->id,
+                            'type' => 'post',
+                            'status' => 'active',
+                            'value_title' => $request->judul_hasil[$key],
+                            'value' => $request->result[$key]
+                        ]);
+
+                    }
+                }
+            }
+            return json_encode(['status' => true, 'message' => 'Success']);
+        } else {
+            return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
+        }
+    }
+
+    public function show_post($id)
+    {
+        $checking = Checking::with('employee', 'client', 'types', 'advisor', 'complete_posts')->findOrFail($id);
+        // dd($checking->complete_posts[0]);
+        return view('sadmin.complete.show-post', compact('checking'));
     }
 }

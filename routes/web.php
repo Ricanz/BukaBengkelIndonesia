@@ -123,7 +123,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/complete/image', [CompleteController::class, 'image'])->name('complete.image');
     Route::post('/complete/image/update', [CompleteController::class, 'image_update'])->name('complete.image_update');
     
-
+    // Complete Post Check
+    Route::get('/complete/pro/create/post/{id}', [CompleteController::class, 'create_post'])->name('complete.create_post');
+    Route::get('/complete/pro/view/post/{id}', [CompleteController::class, 'show_post'])->name('complete.show_post');
+    Route::post('/completes/post', [CompleteController::class, 'store_post'])->name('complete.store_post');
 
     Route::get('/get-kuota-and-total', [ClientsController::class, 'kuota'])->name('clients.kuota');
 });
