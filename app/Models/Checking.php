@@ -41,12 +41,12 @@ class Checking extends Model
 
     public function standart(): HasOne
     {
-        return $this->hasOne(StandartChecking::class, 'checking_id', 'id');
+        return $this->hasOne(StandartChecking::class, 'checking_id', 'id')->where('status', 'active');
     }
 
     public function post(): HasOne
     {
-        return $this->hasOne(StandartChecking::class, 'checking_id', 'id')->where('type', 'post');
+        return $this->hasOne(StandartChecking::class, 'checking_id', 'id')->where('type', 'post')->where('status', 'active');
     }
 
     public function complete(): HasMany

@@ -239,50 +239,41 @@ class CheckingController extends Controller
 
     public function store_post(Request $request)
     {
-        // $validation = Validator::make($request->all(), [
-        //     'wo' => 'required',
-        //     'nopol' => 'required',
-        //     'type' => 'required',
-        //     'advisor' => 'required',
-        // ]);
-
-        // if ($validation->fails()) {
-        //     return json_encode(['status' => false, 'message' => $validation->messages()]);
-        // }
-        $employee_id = 1;
-        $client_id = 1;
-
-        $user = Auth::user();
-        if ($user->role === 'employee') {
-            $employee = Employee::where('user_id', $user->id)->first();
-            $employee_id = $employee->id;
-            $client_id = $employee->client_id;
-        }
-
-        $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
-        $nextNumber = (int)$lastNumber + 1;
-        $formattedNextNumber = sprintf('%06d', $nextNumber);
-
         $checking = Checking::where('id', $request->id)->first();
         if (!$checking) {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
-        if ($checking) {
-            StandartChecking::create([
-                'checking_id' => $checking->id,
-                'km' => $request->km,
-                'high' => $request->high,
-                'low' => $request->low,
-                'suhu' => $request->suhu,
-                'wind' => $request->wind,
-                'saran' => $request->saran,
-                'compressor' => $request->compressor,
-                'cabin' => $request->cabin,
-                'blower' => $request->blower,
-                'fan' => $request->fan,
-                'status' => 'active',
-                'type' => $request->type_check ? $request->type_check : 'post'
-            ]);
+        $checking->saran_post = $request->saran;
+        $checking->note_post = $request->catatan;
+        if ($checking->save()) {
+            $post = StandartChecking::where('checking_id', $checking->id)->where('status', 'active')->where('type', 'post')->first();
+            if (!$post) {
+                $post->km = $request->km;
+                $post->high = $request->high;
+                $post->low = $request->low;
+                $post->suhu = $request->suhu;
+                $post->wind = $request->wind;
+                $post->compressor = $request->compressor;
+                $post->cabin = $request->cabin;
+                $post->blower = $request->blower;
+                $post->fan = $request->fan;
+                $post->save();
+            } else {
+                StandartChecking::create([
+                    'checking_id' => $checking->id,
+                    'km' => $request->km,
+                    'high' => $request->high,
+                    'low' => $request->low,
+                    'suhu' => $request->suhu,
+                    'wind' => $request->wind,
+                    'compressor' => $request->compressor,
+                    'cabin' => $request->cabin,
+                    'blower' => $request->blower,
+                    'fan' => $request->fan,
+                    'status' => 'active',
+                    'type' => 'post'
+                ]);
+            }
             return json_encode(['status' => true, 'message' => 'Success']);
         } else {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
@@ -291,7 +282,7 @@ class CheckingController extends Controller
 
     public function show_post($id)
     {
-        $checking = Checking::with('employee', 'client', 'types', 'standart', 'advisor')->findOrFail($id);
+        $checking = Checking::with('employee', 'client', 'types', 'post', 'advisor')->findOrFail($id);
         return view('sadmin.checking.show-post', compact('checking'));
     }
 

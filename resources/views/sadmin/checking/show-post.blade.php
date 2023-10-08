@@ -179,7 +179,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="advisor" id="advisor" class="form-control">
+                            <select name="advisor" id="advisor" class="form-control" disabled>
                                 <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
                                 </option>
                                 @if (Auth::user()->role === 'employee')
@@ -193,7 +193,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="type" id="type" class="form-control">
+                            <select name="type" id="type" class="form-control" disabled>
                                 <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
                                 </option>
                                 @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
@@ -208,7 +208,7 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Kilometer Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="km"
-                                value="{{ $checking->standart->km }}" />
+                                value="{{ $checking->post->km }}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -216,7 +216,7 @@
                             Psi)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="high"
-                                value="{{ $checking->standart->high }}" />
+                                value="{{ $checking->post->high }}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -224,61 +224,61 @@
                             Psi)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="low"
-                                value="{{ $checking->standart->low }}" />
+                                value="{{ $checking->post->low }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower (4 °C - 7 °C)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="suhu"
-                                value="{{ $checking->standart->suhu }}" />
+                                value="{{ $checking->post->suhu }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Wind Speed (2.5 m/s - 4 m/s)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wind"
-                                value="{{ $checking->standart->wind }}" />
+                                value="{{ $checking->post->wind }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Kompresor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="compressor"
-                                value="{{ $checking->standart->compressor }}" />
+                                value="{{ $checking->post->compressor }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="cabin"
-                                value="{{ $checking->standart->cabin }}" />
+                                value="{{ $checking->post->cabin }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Blower</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="blower"
-                                value="{{ $checking->standart->blower }}" />
+                                value="{{ $checking->post->blower }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="fan"
-                                value="{{ $checking->standart->fan }}" />
+                                value="{{ $checking->post->fan }}" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <textarea class="form-control" name="saran" id="exampleTextarea" rows="3" maxlength="75">{{ $checking->standart->saran }}</textarea>
+                            <textarea class="form-control" name="saran" id="exampleTextarea" rows="3" maxlength="75">{{ $checking->saran_post }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Catatan Pemeriksaan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <textarea class="form-control" name="catatan" id="exampleTextarea" rows="3" maxlength="255">{{ $checking->standart->note }}</textarea>
+                            <textarea class="form-control" name="catatan" id="exampleTextarea" rows="3" maxlength="255">{{ $checking->note_post }}</textarea>
                         </div>
                     </div>
                     @if (Auth::user()->role === 'employee')

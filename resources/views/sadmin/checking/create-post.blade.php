@@ -25,7 +25,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="nopol" value="{{ $check->nopol }}" disabled />
+                            <input type="text" class="form-control" name="nopol" value="{{ $check->plat_number }}" disabled />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="separator separator-dashed my-10"></div>
-                    <h2>Hasil Pre Check</h2>
+                    <h2>Hasil Post Check</h2>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Kilometer Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
