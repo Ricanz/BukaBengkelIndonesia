@@ -201,7 +201,8 @@ class  CheckingController extends Controller
             'image' => Utils::uploadImage($request->file, 300),
             'checking_id' => $request->checking_id,
             'desc_id' => $request->description,
-            'type' => $checking->type
+            'type' => $checking->type,
+            'checking_type' => $request->checking_type,
         ]);
         if ($submit) {
             return json_encode(['status' => true, 'message' => 'Success']);
@@ -212,7 +213,7 @@ class  CheckingController extends Controller
 
     public function image_data(Request $request)
     {
-        $data = CheckingImage::with('types')->where('checking_id', $request->id)->where('type', $request->type)->where('status', '!=', 'deleted');
+        $data = CheckingImage::with('types')->where('checking_id', $request->id)->where('type', $request->type)->where('checking_type', $request->checkingType)->where('status', 'active');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 

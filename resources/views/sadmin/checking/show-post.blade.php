@@ -49,8 +49,9 @@
                                     <div class="modal-body">
                                         <form class="form" id="create_image_form" enctype="multipart/form-data">
                                             @csrf
-                                            <input type="hidden" name="checking_id"
-                                                value="{{ $checking->post->id }}">
+                                            <input type="hidden" name="checking_id" value="{{ $checking->post->id }}">
+                                            <input type="hidden" name="checking_type" value="standart">
+                                            <input type="hidden" name="type" value="post">
                                             <div class="image-input image-input-outline" id="kt_image_1">
                                                 <div class="image-input-wrapper"
                                                     style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
@@ -298,7 +299,8 @@
                 <!--begin: Datatable-->
                 <table class="table table-bordered table-hover table-checkable" id="table_image"
                     data-id={{ $checking->post->id }}
-                    data-type="post">
+                    data-type="post"
+                    data-checkingType="standart">
                     <thead>
                         <tr>
                             <th>Image</th>

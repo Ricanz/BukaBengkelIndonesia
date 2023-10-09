@@ -110,6 +110,7 @@ var KTDatatablesDataSourceAjaxImage = function() {
         var tableImage = document.getElementById('table_image');
         var dataId = tableImage.getAttribute('data-id');
         var dataType = tableImage.getAttribute('data-type');
+        var dataCheckingType = tableImage.getAttribute('data-checkingType');
 		// begin first table
 		table.DataTable({
 			responsive: true,
@@ -121,7 +122,8 @@ var KTDatatablesDataSourceAjaxImage = function() {
 						perpage: 20,
 					},
                     id: dataId,
-                    type: dataType
+                    type: dataType,
+                    checkingType: dataCheckingType
 				},
 			},
 			columns: [

@@ -50,6 +50,8 @@
                                         <form class="form" id="create_image_form" enctype="multipart/form-data">
                                             @csrf
                                             <input type="hidden" name="checking_id" value="{{ $checking->id }}">
+                                            <input type="hidden" name="tyoe" value="pre">
+                                            <input type="hidden" name="checking_type" value="complete">
                                             <div class="image-input image-input-outline" id="kt_image_1">
                                                 <div class="image-input-wrapper"
                                                     style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
@@ -253,7 +255,9 @@
             <div class="card-body">
                 <!--begin: Datatable-->
                 <table class="table table-bordered table-hover table-checkable" id="table_image"
-                    data-id={{ $checking->id }}>
+                    data-id={{ $checking->id }}
+                    data-type="pre"
+                    data-checkingType="complete">
                     <thead>
                         <tr>
                             <th>Image</th>

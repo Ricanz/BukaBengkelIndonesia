@@ -51,6 +51,8 @@
                                             @csrf
                                             <input type="hidden" name="checking_id"
                                                 value="{{ $checking->standart->id }}">
+                                            <input type="hidden" name="checking_type" value="standart">
+                                            <input type="hidden" name="type" value="pre">
                                             <div class="image-input image-input-outline" id="kt_image_1">
                                                 <div class="image-input-wrapper"
                                                     style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
@@ -78,7 +80,7 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="description" id="description" class="form-control">
                                                         <option value="" selected>Pilih Deskripsi</option>
-                                                        @foreach (App\Models\MasterChecking::where('status', 'active')->get() as $check)
+                                                        @foreach (App\Models\MasterChecking::where('type', 'standart')->where('status', 'active')->get() as $check)
                                                             <option value="{{ $check->id }}">
                                                                 {{ $check->description }}
                                                             </option>
@@ -297,7 +299,9 @@
             <div class="card-body">
                 <!--begin: Datatable-->
                 <table class="table table-bordered table-hover table-checkable" id="table_image"
-                    data-id={{ $checking->standart->id }}>
+                    data-id={{ $checking->standart->id }}
+                    data-type="pre"
+                    data-checkingType="standart">
                     <thead>
                         <tr>
                             <th>Image</th>

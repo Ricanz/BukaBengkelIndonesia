@@ -184,7 +184,7 @@ class CompleteController extends Controller
 
     public function image_data(Request $request)
     {
-        $data = CompleteImage::with('master')->where('checking_id', $request->id)->where('status', '!=', 'deleted');
+        $data = CompleteImage::with('master')->where('checking_id', $request->id)->where('type', $request->type)->where('status', '!=', 'deleted');
         return DataTables::of($data->get())->addIndexColumn()->make(true);
     }
 
@@ -203,7 +203,7 @@ class CompleteController extends Controller
 
         $submit = CompleteImage::create([
             'image' => Utils::uploadImage($request->file, 300),
-            'checking_id' => $complete->id,
+            'checking_id' => $complete->checking_id,
             'desc_id' => $request->description,
             'type' => $complete->type
         ]);
@@ -226,6 +226,14 @@ class CompleteController extends Controller
                 return json_encode(['status' => false, 'message' => 'Something went wrong.']);
             }
         }
+    }
+
+    public function image_destroy($id)
+    {
+        $image = CompleteImage::findOrFail($id);
+        $image->status = 'deleted';
+        $image->save();
+        return redirect()->back();
     }
 
     

@@ -121,6 +121,8 @@ var KTDatatablesDataSourceAjaxImage = function() {
 		var table = $('#table_image');
         var tableImage = document.getElementById('table_image');
         var dataId = tableImage.getAttribute('data-id');
+        var dataType = tableImage.getAttribute('data-type');
+        var dataCheckingType = tableImage.getAttribute('data-checkingType');
 		// begin first table
 		table.DataTable({
 			responsive: true,
@@ -131,7 +133,9 @@ var KTDatatablesDataSourceAjaxImage = function() {
 					pagination: {
 						perpage: 20,
 					},
-                    id: dataId
+                    id: dataId,
+                    type: dataType,
+                    checkingType: dataCheckingType
 				},
 			},
 			columns: [
@@ -193,7 +197,7 @@ function myFunction(data, desc, id) {
 }
 
 function deleteFunction(id){
-    window.location.href = `/checking/image/destroy/${id}`
+    window.location.href = `/complete/image/destroy/${id}`
 }
 
 function to_date_time(date) {

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class CheckingImage extends Model
 {
     protected $fillable = [
-        'checking_id', 'image', 'desc_id', 'type'
+        'checking_id', 'image', 'desc_id', 'type', 'checking_type'
     ];
 
     public function standart(): BelongsTo

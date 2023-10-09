@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('master_checkings', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->default('standart');
+            $table->string('type')->default('pre');
+            $table->string('checking_type')->nullable();
             $table->string('name');
             $table->string('description');
             $table->string('status')->default('active');

@@ -124,6 +124,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/complete/image', [CompleteController::class, 'image_data'])->name('complete.image_data');
     Route::post('/complete/image', [CompleteController::class, 'image'])->name('complete.image');
     Route::post('/complete/image/update', [CompleteController::class, 'image_update'])->name('complete.image_update');
+    Route::get('/complete/image/destroy/{id}', [CompleteController::class, 'image_destroy'])->name('complete.image_destroy');
     
     // Complete Post Check
     Route::get('/complete/pro/create/post/{id}', [CompleteController::class, 'create_post'])->name('complete.create_post');
