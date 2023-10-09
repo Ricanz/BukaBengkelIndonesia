@@ -304,6 +304,14 @@
             /* background-color: #03b115; */
         }
 
+        .pass-check {
+            color: #03b115 !important;
+        }
+
+        .not-pass-check {
+            color: #e95e5e !important;
+        }
+
     </style>
 </head>
 
@@ -354,9 +362,15 @@
                     <td class="bodl-rc">
                         High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
                     </td>
-                    <td class="bodl-rc text-center">
-                        <strong>{{ $checking->standart->high }}</strong> Psi
-                    </td>
+                    @if ((int)$checking->standart->high >= 199.1 && (int)$checking->standart->high <= 227.5)
+                        <td class="bodl-rc text-center pass-check">
+                            <strong>{{ $checking->standart->high }}</strong> Psi
+                        </td>
+                    @elseif((int)$checking->standart->high < 199.1 || (int)$checking->standart->high > 227.5)
+                        <td class="bodl-rc text-center not-pass-check">
+                            <strong>{{ $checking->standart->high }}</strong> Psi
+                        </td>
+                    @endif
                     <td class="bodl-rc">
                         Kompressor: <br><b>{{ $checking->standart->compressor }}</b>
                     </td>
@@ -367,9 +381,15 @@
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
-                    <td class="bodl-rc text-center">
-                        <strong>{{ $checking->standart->high }}</strong> Psi
-                    </td>
+                    @if ((int)$checking->standart->low >= 21.3 && (int)$checking->standart->low <= 35.5)
+                        <td class="bodl-rc text-center pass-check">
+                            <strong>{{ $checking->standart->low }}</strong> Psi
+                        </td>
+                    @elseif((int)$checking->standart->low < 21.3)
+                        <td class="bodl-rc text-center not-pass-check">
+                            <strong>{{ $checking->standart->low }}</strong> Psi
+                        </td>
+                    @endif
                     <td class="bodl-rc">
                         Cabin Air Filter: <br><b>{{ $checking->standart->cabin }}</b>
                     </td>
@@ -380,9 +400,15 @@
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 7 °C</b></td>
-                    <td class="bodl-rc text-center">
-                        <strong>{{ $checking->standart->suhu }}</strong> °C
-                    </td>
+                    @if ((int)$checking->standart->suhu >= 4 && (int)$checking->standart->suhu <= 7)
+                        <td class="bodl-rc text-center pass-check">
+                            <strong>{{ $checking->standart->suhu }}</strong> °C
+                        </td>
+                    @elseif((int)$checking->standart->suhu < 4 || (int)$checking->standart->suhu > 7)
+                        <td class="bodl-rc text-center not-pass-check">
+                            <strong>{{ $checking->standart->suhu }}</strong> °C
+                        </td>
+                    @endif
                     <td class="bodl-rc">
                         Blower: <br><b>{{ $checking->standart->blower }}</b>
                     </td>
@@ -393,9 +419,15 @@
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
-                    <td class="bodl-rc text-center">
-                        <strong>{{ $checking->standart->wind }}</strong> m/s
-                    </td>
+                    @if ((int)$checking->standart->wind >= 2.5 && (int)$checking->standart->wind <= 4)
+                        <td class="bodl-rc text-center pass-check">
+                            <strong>{{ $checking->standart->wind }}</strong> m/s
+                        </td>
+                    @elseif((int)$checking->standart->wind < 2.5 || (int)$checking->standart->wind > 4)
+                        <td class="bodl-rc text-center not-pass-check">
+                            <strong>{{ $checking->standart->wind }}</strong> m/s
+                        </td>
+                    @endif
                     <td class="bodl-rc">
                         Motor Fan: <br><b>{{ $checking->standart->fan }}</b>
                     </td>

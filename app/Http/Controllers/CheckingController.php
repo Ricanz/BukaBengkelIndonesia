@@ -295,9 +295,9 @@ class  CheckingController extends Controller
     {
         $checking = Checking::with('advisor', 'client', 'standart', 'types', 'employee')->find($id);
         // dd($checking->standart->images[0]->types);
-        // $first_batch = $checking->standart->images->slice(0, 3); // 3 data pertama
-        // $second_batch = $checking->standart->images->slice(3, 2);
-        // return view('pdf.precheck', compact('checking', 'first_batch', 'second_batch'));
+        $first_batch = $checking->standart->images->slice(0, 3); // 3 data pertama
+        $second_batch = $checking->standart->images->slice(3, 2);
+        return view('pdf.precheck', compact('checking', 'first_batch', 'second_batch'));
         $firstBatch = $checking->standart->images->slice(0, 3); // 3 data pertama
         $secondBatch = $checking->standart->images->slice(3, 3);
         $data = [
