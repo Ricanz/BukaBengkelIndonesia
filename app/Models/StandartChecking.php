@@ -21,4 +21,9 @@ class StandartChecking extends Model
     {
         return $this->hasMany(CheckingImage::class, 'checking_id');
     }
+
+    public function images_post()
+    {
+        return $this->hasMany(CheckingImage::class, 'checking_id')->where('type', 'post');
+    }
 }

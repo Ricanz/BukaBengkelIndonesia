@@ -166,20 +166,20 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wo"
-                                value="{{ $checking->wo }}" />
+                                value="{{ $checking->wo }}" disabled />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="nopol"
-                                value="{{ $checking->plat_number }}" />
+                                value="{{ $checking->plat_number }}" disabled />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="advisor" id="advisor" class="form-control">
+                            <select name="advisor" id="advisor" class="form-control" disabled>
                                 <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
                                 </option>
                                 @if (Auth::user()->role === 'employee')
@@ -193,7 +193,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="type" id="type" class="form-control">
+                            <select name="type" id="type" class="form-control" disabled>
                                 <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
                                 </option>
                                 @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)

@@ -307,19 +307,27 @@ class  CheckingController extends Controller
         ];
 
         $pdf = PDF::loadView('pdf.precheck', $data);
-        
-        return $pdf->download('user1.pdf');
+        $pdf_name = $checking->client->title.'-'.'Pre-Check-'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
+        return $pdf->download($pdf_name);
+    }
 
-        // $directory = 'app/pdf/';
-        // if (!Storage::exists($directory)) {
-        //     Storage::makeDirectory($directory);
-        // }
-        // $fileName = uniqid().'-pre-check.pdf'; 
-        // $pdf->save(Storage::path($directory . $fileName));
+    public function pdf_post($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'post', 'types', 'employee')->find($id);
+        // dd($checking->standart->images[0]->types);
+        // $first_batch = $checking->standart->images->slice(0, 3); // 3 data pertama
+        // $second_batch = $checking->standart->images->slice(3, 2);
+        // return view('pdf.postcheck', compact('checking', 'first_batch', 'second_batch'));
+        $firstBatch = $checking->post->images_post->slice(0, 3); // 3 data pertama
+        $secondBatch = $checking->post->images_post->slice(3, 3);
+        $data = [
+            'checking' => $checking,
+            'first_batch' => $firstBatch,
+            'second_batch' => $secondBatch
+        ];
 
-        // $storageLink = Storage::url($directory.$fileName);
-        // return $storageLink;
-
-        // return json_encode(['status' => true, 'message' => 'Success', 'data' => $storageLink]);
+        $pdf = PDF::loadView('pdf.postcheck', $data);
+        $pdf_name = $checking->client->title.'-'.'Post-Check-'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
+        return $pdf->download($pdf_name);
     }
 }

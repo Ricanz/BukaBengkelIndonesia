@@ -322,10 +322,10 @@
                 <tbody style="width: 100%">
                     <tr>
                         <td id="left-head">
-                            <p id="ch-one">PRE-CHECK STANDAR</p>
+                            <p id="ch-one">POST-CHECK STANDAR</p>
                             <p id="ch-two">{{ $checking->plat_number }}</p>
                             <p id="ch-three">{{ $checking->types->name }}</p>
-                            <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->standart->saran }}</strong></p>
+                            <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->saran_post }}</strong></p>
                         </td>
                         <td id="right-head">
                             <p id="rh-one">S.A : {{ $checking->advisor->name }}</p>
@@ -343,8 +343,9 @@
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
                     <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
-                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
-                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">TAMBAHAN PEMERIKSAAN</th>
+                    <th style="width: 15%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
+                    <th style="width: 15%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">POST-CHECK</th>
+                    <th style="width: 30%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">TAMBAHAN PEMERIKSAAN</th>
                 </tr>
                 <tr>
                     <td class="bodr-rc" style="padding: 10px;">
@@ -357,8 +358,11 @@
                     <td class="bodl-rc text-center">
                         <strong>{{ $checking->standart->high }}</strong> Psi
                     </td>
+                    <td class="bodl-rc text-center">
+                        <strong>{{ $checking->post->high }}</strong> Psi
+                    </td>
                     <td class="bodl-rc">
-                        Kompressor: <br><b>{{ $checking->standart->compressor }}</b>
+                        Kompressor: <br><b>{{ $checking->post->compressor }}</b>
                     </td>
                 </tr>
                 <tr style="background-color: #f6f8fd;">
@@ -368,10 +372,13 @@
                     </td>
                     <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
                     <td class="bodl-rc text-center">
-                        <strong>{{ $checking->standart->high }}</strong> Psi
+                        <strong>{{ $checking->standart->low }}</strong> Psi
+                    </td>
+                    <td class="bodl-rc text-center">
+                        <strong>{{ $checking->post->low }}</strong> Psi
                     </td>
                     <td class="bodl-rc">
-                        Cabin Air Filter: <br><b>{{ $checking->standart->cabin }}</b>
+                        Cabin Air Filter: <br><b>{{ $checking->post->cabin }}</b>
                     </td>
                 </tr>
                 <tr>
@@ -383,8 +390,11 @@
                     <td class="bodl-rc text-center">
                         <strong>{{ $checking->standart->suhu }}</strong> °C
                     </td>
+                    <td class="bodl-rc text-center">
+                        <strong>{{ $checking->post->suhu }}</strong> °C
+                    </td>
                     <td class="bodl-rc">
-                        Blower: <br><b>{{ $checking->standart->blower }}</b>
+                        Blower: <br><b>{{ $checking->post->blower }}</b>
                     </td>
                 </tr>
                 <tr style="background-color: #f6f8fd;">
@@ -396,8 +406,11 @@
                     <td class="bodl-rc text-center">
                         <strong>{{ $checking->standart->wind }}</strong> m/s
                     </td>
+                    <td class="bodl-rc text-center">
+                        <strong>{{ $checking->post->wind }}</strong> m/s
+                    </td>
                     <td class="bodl-rc">
-                        Motor Fan: <br><b>{{ $checking->standart->fan }}</b>
+                        Motor Fan: <br><b>{{ $checking->post->fan }}</b>
                     </td>
                 </tr>
             </table>
@@ -473,7 +486,7 @@
                 <tr>
                     <td>
                         <p>
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            {{ $checking->note_post }}
                         </p>
                     </td>
                 </tr>
