@@ -131,13 +131,14 @@ class  CheckingController extends Controller
         $checking->wo = $request->wo;
         $checking->plat_number = $request->nopol;
         $checking->sa_id = $request->advisor;
+        $checking->saran = $request->saran;
+        $checking->note = $request->note;
 
         $detail->km = $request->km;
         $detail->high = $request->high;
         $detail->low = $request->low;
         $detail->suhu = $request->suhu;
         $detail->wind = $request->wind;
-        $detail->saran = $request->saran;
         $detail->compressor = $request->compressor;
         $detail->cabin = $request->cabin;
         $detail->blower = $request->blower;
