@@ -333,7 +333,7 @@
                             <p id="ch-one">PRE-CHECK STANDAR</p>
                             <p id="ch-two">{{ $checking->plat_number }}</p>
                             <p id="ch-three">{{ $checking->types->name }}</p>
-                            <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->standart->saran }}</strong></p>
+                            <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->saran }}</strong></p>
                         </td>
                         <td id="right-head">
                             <p id="rh-one">S.A : {{ $checking->advisor->name }}</p>
@@ -505,7 +505,7 @@
                 <tr>
                     <td>
                         <p>
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                            {{ $checking->note }}
                         </p>
                     </td>
                 </tr>
