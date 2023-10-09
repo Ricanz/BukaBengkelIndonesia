@@ -132,7 +132,7 @@ class  CheckingController extends Controller
         $checking->plat_number = $request->nopol ? $request->nopol : $checking->plat_number;
         $checking->sa_id = $request->advisor ? $request->advisor : $checking->sa_id;
         $checking->saran = $request->saran;
-        $checking->note = $request->note;
+        $checking->note = $request->catatan;
 
         $detail->km = $request->km;
         $detail->high = $request->high;
