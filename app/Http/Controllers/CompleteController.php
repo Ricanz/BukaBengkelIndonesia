@@ -121,13 +121,14 @@ class CompleteController extends Controller
      */
     public function update(Request $request)
     {  
+        dd($request->all());
         $checking = Checking::findOrFail($request->checking_id);
 
-        $checking->wo = $request->wo;
-        $checking->plat_number = $request->nopol;
-        $checking->sa_id = $request->advisor;
-        $checking->saran = $request->saran;
-        $checking->note = $request->catatan;
+        $checking->wo = $request->wo ? $request->wo : $checking->wo;
+        $checking->plat_number = $request->nopol ? $request->nopol : $checking->plat_number;
+        $checking->sa_id = $request->advisor ? $request->advisor : $checking->sa_id;
+        $checking->saran = $request->saran ? $request->saran : $checking->saran;
+        $checking->note = $request->catatan ? $request->catatan : $checking->note;
 
         if ($checking->save()) {
             if (count($request->master) > 0) {
@@ -199,7 +200,7 @@ class CompleteController extends Controller
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
-        $complete = CompleteChecking::where('checking_id', $request->checking_id)->first();
+        $complete = CompleteChecking::where('checking_id', $request->checking_id)->where('type', $request->type)->first();
 
         $submit = CompleteImage::create([
             'image' => Utils::uploadImage($request->file, 300),
@@ -244,14 +245,6 @@ class CompleteController extends Controller
 
     public function store_post(Request $request)
     {
-        $employee_id = 1;
-        $client_id = 1;
-
-        $user = Auth::user();
-        if ($user->role === 'employee') {
-            $employee = Employee::where('user_id', $user->id)->first();
-        }
-
         $checking = Checking::where('id', $request->checking_id)->first();
         if (!$checking) {
             return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
@@ -262,7 +255,7 @@ class CompleteController extends Controller
             if (count($request->master) > 0) {
                 foreach ($request->master as $key => $value) {
                     $complete = CompleteChecking::where('type', 'post')->where('master_checking_id', $value)->where('checking_id', $checking->id)->first();
-                    if (!$complete) {
+                    if ($complete) {
                         $complete->value_title = $request->judul_hasil[$key];
                         $complete->value = $request->result[$key];
                         $complete->save();
