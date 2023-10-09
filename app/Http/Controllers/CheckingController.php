@@ -128,9 +128,9 @@ class  CheckingController extends Controller
         $checking = Checking::findOrFail($request->checking_id);
         $detail = StandartChecking::where('checking_id', $checking->id)->first();
 
-        $checking->wo = $request->wo;
-        $checking->plat_number = $request->nopol;
-        $checking->sa_id = $request->advisor;
+        $checking->wo = $request->wo ? $request->wo : $checking->wo;
+        $checking->plat_number = $request->nopol ? $request->nopol : $checking->plat_number;
+        $checking->sa_id = $request->advisor ? $request->advisor : $checking->sa_id;
         $checking->saran = $request->saran;
         $checking->note = $request->note;
 
