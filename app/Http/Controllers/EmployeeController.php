@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserExport;
 use App\Helpers\Utils;
 use App\Models\Employee;
 use App\Models\User;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class EmployeeController extends Controller
 {
@@ -217,5 +220,9 @@ class EmployeeController extends Controller
             return DataTables::of($data->get())->addIndexColumn()->make(true);
         }
         return DataTables::of($data)->addIndexColumn()->make(true);
+    }
+
+    public function download(){
+        return Excel::download(new UserExport, 'pengguna-'.date('y-m-d').'.xlsx');
     }
 }

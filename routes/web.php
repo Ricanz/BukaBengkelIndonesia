@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/employee/store', [EmployeeController::class, 'store'])->name('employee.store');
     Route::post('/employee/update', [EmployeeController::class, 'update'])->name('employee.update');
     Route::get('/employee/destroy/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+    Route::get('/employee/download', [EmployeeController::class, 'download'])->name('employee.download');
 
     // Types
     Route::get('/types', [MasterTypeController::class, 'index'])->name('type.index');
