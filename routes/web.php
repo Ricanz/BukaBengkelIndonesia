@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/client/destroy/{id}', [ClientsController::class, 'destroy'])->name('client.destroy');
     Route::get('/client/employee/{id}', [ClientsController::class, 'employee'])->name('client.employee');
     Route::get('/client/employee/data/{id}', [ClientsController::class, 'employee_data'])->name('client.employee.data');
+    Route::get('/client/download', [ClientsController::class, 'download_bengkel'])->name('client.download');
 
     Route::get('/access', [AccessController::class, 'index'])->name('access');
     Route::get('/access/data', [AccessController::class, 'data'])->name('access.data');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BengkelExport;
 use App\Helpers\Utils;
 use App\Models\Client;
 use App\Models\Employee;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 
 class ClientsController extends Controller
@@ -222,5 +225,9 @@ class ClientsController extends Controller
             }
             return json_encode(['status'=> true, 'message'=> 'Success']);
         }
+    }
+
+    public function download_bengkel(){
+        return Excel::download(new BengkelExport, 'bengkel-'.date('y-m-d').'.xlsx');
     }
 }

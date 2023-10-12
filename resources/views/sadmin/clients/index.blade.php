@@ -39,19 +39,11 @@
                                     Choose an option:</li>
                                 <li class="navi-item">
                                 <li class="navi-item">
-                                    <a href="#" class="navi-link">
+                                    <a href="{{ route('client.download') }}" target="blank" class="navi-link">
                                         <span class="navi-icon">
                                             <i class="la la-file-text-o"></i>
                                         </span>
                                         <span class="navi-text">CSV</span>
-                                    </a>
-                                </li>
-                                <li class="navi-item">
-                                    <a href="#" class="navi-link">
-                                        <span class="navi-icon">
-                                            <i class="la la-file-pdf-o"></i>
-                                        </span>
-                                        <span class="navi-text">PDF</span>
                                     </a>
                                 </li>
                             </ul>
