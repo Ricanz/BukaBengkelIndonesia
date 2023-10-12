@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checking/image', [CheckingController::class, 'image'])->name('checking.image');
     Route::post('/checking/image/update', [CheckingController::class, 'image_update'])->name('checking.image_update');
     Route::get('/checking/image/destroy/{id}', [CheckingController::class, 'image_destroy'])->name('checking.image_destroy');
+    Route::get('/checking/download', [CheckingController::class, 'download'])->name('checking.download');
 
     // Standart Post Check
     Route::get('/checking/pro/create/post/{id}', [CheckingController::class, 'create_post'])->name('checking.create_post');

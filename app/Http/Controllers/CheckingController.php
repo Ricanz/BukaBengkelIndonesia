@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CheckingExport as ExportsCheckingExport;
 use App\Helpers\Utils;
 use App\Models\Checking;
 use App\Models\CheckingImage;
 use App\Models\Employee;
 use App\Models\StandartChecking;
+use CheckingExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Unique;
 use Yajra\DataTables\Facades\DataTables;
 use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Response;
 
 class  CheckingController extends Controller
@@ -331,5 +334,9 @@ class  CheckingController extends Controller
         $pdf = PDF::loadView('pdf.postcheck', $data);
         $pdf_name = $checking->client->title.'-'.'Post-Check-'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
         return $pdf->download($pdf_name);
+    }
+
+    public function download(){
+        return Excel::download(new ExportsCheckingExport, 'checking-'.date('y-m-d').'.xlsx');
     }
 }
