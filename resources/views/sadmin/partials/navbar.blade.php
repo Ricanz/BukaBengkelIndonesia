@@ -349,7 +349,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="menu-item menu-item-submenu menu-item-rel"
+                        <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover"
                             aria-haspopup="true">
                             <a href="javascript:;" class="menu-link menu-toggle">
                                 <span class="menu-text">Complete Checking</span>
