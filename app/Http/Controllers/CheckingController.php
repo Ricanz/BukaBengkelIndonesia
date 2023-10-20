@@ -196,6 +196,13 @@ class  CheckingController extends Controller
         if ($validation->fails()) {
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
+        
+        $file = $request->file('file'); // Pastikan 'file' adalah nama field di form Anda
+        $extension = $file->getClientOriginalExtension();
+
+        if ($extension == 'heic' || $extension == 'heif') {
+            return json_encode(['status' => false, ['message' => 'Tidak bisa upload dengan format .HEIC dan .HEIF']]);
+        }
 
         $checking = StandartChecking::find($request->checking_id);
 
