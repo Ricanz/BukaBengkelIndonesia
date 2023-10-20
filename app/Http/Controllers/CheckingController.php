@@ -134,6 +134,8 @@ class  CheckingController extends Controller
         $checking->wo = $request->wo ? $request->wo : $checking->wo;
         $checking->plat_number = $request->nopol ? $request->nopol : $checking->plat_number;
         $checking->sa_id = $request->advisor ? $request->advisor : $checking->sa_id;
+        $checking->type_id = $request->type ? $request->type : $checking->type_id;
+        
         $checking->saran = $request->saran;
         $checking->note = $request->catatan;
 
