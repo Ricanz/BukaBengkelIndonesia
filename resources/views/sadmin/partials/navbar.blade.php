@@ -349,7 +349,7 @@
                                 </ul>
                             </div>
                         </li>
-                        <li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover"
+                        <li class="menu-item menu-item-submenu menu-item-rel"
                             aria-haspopup="true">
                             <a href="javascript:;" class="menu-link menu-toggle">
                                 <span class="menu-text">Complete Checking</span>
@@ -545,8 +545,8 @@
                                 <span class="menu-desc">Laporan Standar Checking</span>
                             </a>
                         </li>
-                        <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-                            <a href="{{ url('checking/complete') }}" class="menu-link menu-toggle">
+                        <li class="menu-item menu-item-submenu menu-item-rel">
+                            <a href="{{ url('checking/complete') }}" class="menu-link">
                                 <span class="menu-text">Complete Checking</span>
                                 <span class="menu-desc">Laporan Complete Checking</span>
                                 <i class="menu-arrow"></i>
