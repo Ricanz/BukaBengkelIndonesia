@@ -239,15 +239,18 @@
                     url: '/get-kuota-and-total', // Ganti dengan URL yang sesuai
                     type: 'GET',
                     dataType: 'json',
+                    beforeSend: function() {
+                        swal.showLoading();
+                    },
                     success: function(data) {
+                        swal.close();
                         if (data.status) {
                             $('#modalTambahBengkel').modal('show');
                         } else {
                             $('#kuotaHabisModal').modal('show');
-                        }
-                    },
+                    }},
                     error: function() {
-                        // Tangani kesalahan jika ada
+                        swal.hideLoading();
                     }
                 });
             });

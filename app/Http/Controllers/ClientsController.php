@@ -237,7 +237,7 @@ class ClientsController extends Controller
             $total_bengkel = Client::where('status', 'active')
             ->where('kabeng_id', $auth->id)
             ->count();
-
+            
             if ($kuota === $total_bengkel) {
                 return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
             }
