@@ -229,8 +229,7 @@ class ClientsController extends Controller
         if ($auth->role === 'admin') {
             return json_encode(['status'=> true, 'message'=> 'Success']);
         } else if($auth->role === 'client'){
-            $kuota = Employee::where('status', 'active')
-            ->where('user_id', $auth->id)
+            $kuota = Employee::where('user_id', $auth->id)
             ->pluck('quota')
             ->first();
 
