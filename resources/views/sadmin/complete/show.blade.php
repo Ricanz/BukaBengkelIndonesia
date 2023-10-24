@@ -13,7 +13,7 @@
                     <div class="card-toolbar">
                         <!--begin::Button-->
                         <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank"
-                            class="btn btn-success font-weight-bolder mr-2">Finish Check</a>
+                            class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
                         <!--end::Button-->
 
                         <!--begin::Button-->

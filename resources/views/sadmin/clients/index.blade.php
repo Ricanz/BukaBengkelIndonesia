@@ -244,7 +244,6 @@
                     },
                     success: function(data) {
                         swal.close();
-                        console.log(data);
                         if (data.kuota === data.total) {
                             $('#kuotaHabisModal').modal('show');
                         } else {

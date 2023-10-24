@@ -11,7 +11,7 @@
         }
 
         body {
-            /* font-family: "Times New Roman", Times, serif; */
+            font-family: Dejavu Sans; 
         }
 
         .container {
@@ -65,10 +65,12 @@
         }
 
         #bg-wt {
-            margin-top: 135px;
-            margin-left: 80px;
-            width: 600px;
-            height: 600px;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: -4%;
+            left: 147%;
+            opacity: 0.1;
         }
 
         #head {
@@ -222,8 +224,7 @@
             font-weight: bold;
             font-size: 28px;
             text-align: left;
-            font-family: 'Segoe UI', 'Tahoma', Geneva, Verdana, sans-serif;
-            font-weight: 600;
+            font-family: Dejavu Sans !important; 
         }
 
         #ch-two {
@@ -316,12 +317,12 @@
 </head>
 
 <body>
-    {{-- <div id="background">
-        <img src="assets/theme/images/bbi-ul/images/img-pcs/wt.png" id="bg-wt">
-    </div> --}}
+    <div id="background">
+        <img src="https://development.bukabengkelindonesia.com/tadmin/media/images/logo-192x192.png" id="bg-wt">
+    </div>
 
     <div id="content" style="width: 800px;">
-        <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px;">
+        <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
             <img src="{{ 'https://development.bukabengkelindonesia.com'.$checking->client->image }}"
                 alt="Logo" style="height:75px;object-fit:contain">
         </div>
@@ -330,7 +331,7 @@
                 <tbody style="width: 100%">
                     <tr>
                         <td id="left-head">
-                            <p id="ch-one">PRE-CHECK STANDAR</p>
+                            <p id="ch-one" style="font-family: Dejavu Sans;">PRE-CHECK STANDAR</p>
                             <p id="ch-two">{{ $checking->plat_number }}</p>
                             <p id="ch-three">{{ $checking->types->name }}</p>
                             <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->saran }}</strong></p>

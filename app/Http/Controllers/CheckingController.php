@@ -350,7 +350,8 @@ class  CheckingController extends Controller
 
         $pdf = PDF::loadView('pdf.postcheck', $data);
         $pdf_name = $checking->client->title.'-'.'Post-Check-'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
-        return $pdf->download($pdf_name);
+        $pdf->setPaper('A4');
+        return $pdf->stream($pdf_name);
     }
 
     public function download(){
