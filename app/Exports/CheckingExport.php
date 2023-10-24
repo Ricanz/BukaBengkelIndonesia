@@ -18,14 +18,20 @@ class CheckingExport implements FromCollection, WithHeadings, WithTitle
 {
     public function collection()
     {
-        // Data dari resource Anda
-        $checkings = Checking::with('standart', 'post')->where('status', 'active')->get();
-        $data = CheckingExportResource::collection($checkings);
-        // Ubah data dari resource menjadi array
-        $dataArray = $data->toArray(new JsonResource([]));
-        // dd($dataArray);  
+        // Mengambil data User
+        $users = Checking::all();
 
-        return $dataArray;
+        // Mengonversi data menggunakan UserResource
+        // $data = CheckingExportResource::collection($users);
+
+        // Mengubah data dari resource menjadi array
+        // $dataArray = $data->toArray();
+        $data = $users->map(function($user) {
+            return (new CheckingExportResource($user))->toArray();
+        });
+
+        // Mengembalikan data sebagai koleksi
+        return $data;
     }
 
     public function title(): string

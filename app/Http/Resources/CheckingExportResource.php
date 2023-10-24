@@ -15,7 +15,7 @@ class CheckingExportResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'wo' => $this->wo
+            'wo' => $this->wo,
         ];
     }
 }
