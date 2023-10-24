@@ -245,11 +245,11 @@
                     success: function(data) {
                         swal.close();
                         console.log(data);
-                        // if (!data.status) {
-                        //     $('#kuotaHabisModal').modal('show');
-                        // } else {
-                        //     $('#modalTambahBengkel').modal('show');
-                            // }
+                        if (!data.kuota === data.total_bengkel) {
+                            $('#kuotaHabisModal').modal('show');
+                        } else {
+                            $('#modalTambahBengkel').modal('show');
+                            }
                         },
                     error: function() {
                         swal.close();
