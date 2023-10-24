@@ -134,6 +134,8 @@ class  CheckingController extends Controller
         $checking->wo = $request->wo ? $request->wo : $checking->wo;
         $checking->plat_number = $request->nopol ? $request->nopol : $checking->plat_number;
         $checking->sa_id = $request->advisor ? $request->advisor : $checking->sa_id;
+        $checking->type_id = $request->type ? $request->type : $checking->type_id;
+        
         $checking->saran = $request->saran;
         $checking->note = $request->catatan;
 
@@ -173,13 +175,19 @@ class  CheckingController extends Controller
         $user = Auth::user();
         if ($user->role === 'client') {
             $user_id = $user->id;
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'standart')->whereHas('client', function ($query) use ($user_id) {
+            $data = Checking::with('employee', 'client', 'types', 'post')->with('advisor', function($q){
+                $q->with('client');
+            })->where('checking_type', 'standart')->whereHas('client', function ($query) use ($user_id) {
                 $query->where('kabeng_id', $user_id);
             })->where('status', 'active');
         } else if ($user->role === 'employee') {
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'standart')->where('user_id', $user->id)->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'post')->with('advisor', function($q){
+                $q->with('client');
+            })->where('checking_type', 'standart')->where('user_id', $user->id)->where('status', 'active');
         } else {
-            $data = Checking::with('employee', 'client', 'types', 'advisor', 'post')->where('checking_type', 'standart')->where('status', 'active');
+            $data = Checking::with('employee', 'client', 'types', 'post')->with('advisor', function($q){
+                $q->with('client');
+            })->where('checking_type', 'standart')->where('status', 'active');
         }
         return DataTables::of($data->orderByDesc('created_at')->get())->addIndexColumn()->make(true);
     }
@@ -193,6 +201,13 @@ class  CheckingController extends Controller
 
         if ($validation->fails()) {
             return json_encode(['status' => false, 'message' => $validation->messages()]);
+        }
+        
+        $file = $request->file('file'); // Pastikan 'file' adalah nama field di form Anda
+        $extension = $file->getClientOriginalExtension();
+
+        if ($extension == 'heic' || $extension == 'heif') {
+            return json_encode(['status' => false, ['message' => 'Tidak bisa upload dengan format .HEIC dan .HEIF']]);
         }
 
         $checking = StandartChecking::find($request->checking_id);
@@ -313,7 +328,9 @@ class  CheckingController extends Controller
 
         $pdf = PDF::loadView('pdf.precheck', $data);
         $pdf_name = $checking->client->title.'-'.'Pre-Check-'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
-        return $pdf->download($pdf_name);
+        $pdf->setPaper('A4');
+        return $pdf->stream($pdf_name);
+        // return $pdf->download($pdf_name);
     }
 
     public function pdf_post($id)
@@ -333,7 +350,8 @@ class  CheckingController extends Controller
 
         $pdf = PDF::loadView('pdf.postcheck', $data);
         $pdf_name = $checking->client->title.'-'.'Post-Check-'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
-        return $pdf->download($pdf_name);
+        $pdf->setPaper('A4');
+        return $pdf->stream($pdf_name);
     }
 
     public function download(){

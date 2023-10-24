@@ -39,6 +39,13 @@ var KTDatatablesDataSourceAjaxClient = function() {
                     }
 				},
 				{
+                    targets: 4,
+                    class: 'text-left',
+                    render: function (data, type, full, meta) {
+                        return `${data} - ${full.advisor.client.title}`
+                    }
+				},
+				{
 					targets: -1,
 					title: 'Actions',
 					orderable: false,

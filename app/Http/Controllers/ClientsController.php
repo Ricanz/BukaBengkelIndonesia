@@ -7,6 +7,7 @@ use App\Helpers\Utils;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -125,8 +126,11 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        $client = Client::findOrFail($id);
-        return view('sadmin.clients.edit', compact('client'));
+        $client = Client::with('kabeng')->findOrFail($id);
+        $count = Client::where('kabeng_id', $client->kabeng_id)->where('status', 'active')->count();
+        $quota = Employee::where('user_id', $client->kabeng_id)->pluck('quota')->first();
+        $expired_at = Carbon::parse($client->expired_at)->format('d M Y');
+        return view('sadmin.clients.edit', compact('client', 'count', 'quota', 'expired_at'));
     }
 
     /**
@@ -154,6 +158,20 @@ class ClientsController extends Controller
         }
 
         $client = Client::findOrFail($request->client_id);
+
+        if (isset($request->quota)) {
+            $kabeng = Employee::where('user_id', $client->kabeng_id)->where('is_kabeng', true)->first();
+            
+            $kabeng->quota = $request->quota;
+            $kabeng->save();
+        }
+
+        if (isset($request->expired_at)) {
+            Client::where('kabeng_id', $client->kabeng_id)->update([
+                'expired_at' => $request->expired_at
+            ]);
+        }
+
         $client->title = $request->name;
         $client->code = $request->id;
         $client->address = $request->address;
@@ -211,19 +229,15 @@ class ClientsController extends Controller
         if ($auth->role === 'admin') {
             return json_encode(['status'=> true, 'message'=> 'Success']);
         } else if($auth->role === 'client'){
-            $kuota = Employee::where('status', 'active')
-            ->where('user_id', $auth->id)
+            $kuota = Employee::where('user_id', $auth->id)
             ->pluck('quota')
             ->first();
 
             $total_bengkel = Client::where('status', 'active')
             ->where('kabeng_id', $auth->id)
             ->count();
-
-            if ($kuota === $total_bengkel) {
-                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
-            }
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            
+            return json_encode(['status'=> true, 'message'=> 'Success', 'total' => $total_bengkel, 'kuota' => floatval($kuota)]);
         }
     }
 

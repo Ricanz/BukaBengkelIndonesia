@@ -48,6 +48,7 @@ class MasterController extends Controller
         if ($validation->fails()) {
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
+        
         if ($request->has('file')) {
             $img = Utils::uploadImage($request->file, 300);
         }

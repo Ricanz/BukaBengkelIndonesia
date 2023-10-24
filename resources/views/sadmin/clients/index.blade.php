@@ -199,18 +199,32 @@
             </div>
             <div class="card-body">
                 <!--begin: Datatable-->
-                <table class="table table-bordered table-hover table-checkable" id="kt_datatable">
-                    <thead>
-                        <tr>
-                            <th>Nama</th>
-                            <th>Gambar</th>
-                            <th>ID</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                </table>
+                @if (Auth::user()->role === 'client')
+                    <table class="table table-bordered table-hover table-checkable" id="kt_datatable_admin">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Gambar</th>
+                                <th>ID</th>
+                                <th>Status</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                    </table>
+                @else
+                    <table class="table table-bordered table-hover table-checkable" id="kt_datatable">
+                        <thead>
+                            <tr>
+                                <th>Nama</th>
+                                <th>Gambar</th>
+                                <th>ID</th>
+                                <th>Status</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                @endif
                 <!--end: Datatable-->
             </div>
         </div>
@@ -225,15 +239,19 @@
                     url: '/get-kuota-and-total', // Ganti dengan URL yang sesuai
                     type: 'GET',
                     dataType: 'json',
-                    success: function(data) {
-                        if (data.status) {
-                            $('#modalTambahBengkel').modal('show');
-                        } else {
-                            $('#kuotaHabisModal').modal('show');
-                        }
+                    beforeSend: function() {
+                        swal.showLoading();
                     },
+                    success: function(data) {
+                        swal.close();
+                        if (data.kuota === data.total) {
+                            $('#kuotaHabisModal').modal('show');
+                        } else {
+                            $('#modalTambahBengkel').modal('show');
+                            }
+                        },
                     error: function() {
-                        // Tangani kesalahan jika ada
+                        swal.close();
                     }
                 });
             });

@@ -9,12 +9,12 @@
                     </span>
                     <h3 class="card-label">Detail Checking (Pre)</h3>
                 </div>
-                @if (Auth::user()->role === 'employee')
-                    <div class="card-toolbar">
-                        <!--begin::Button-->
-                        <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Finish Check</a>
-                        <!--end::Button-->
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
+                    <!--end::Button-->
 
+                    @if (Auth::user()->role === 'employee')
                         <!--begin::Button-->
                         <button type="button" class="btn btn-primary font-weight-bolder" data-toggle="modal"
                             data-target="#exampleModalCenter">
@@ -155,55 +155,99 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                @endif
+                    @endif
+                </div>
             </div>
             <div class="card-body">
                 <h6 class="card-label">{{ $checking->checking_type }} Checking</h6>
                 <form class="form" id="update_checking_form" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group row">
-                        <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="wo"
-                                value="{{ $checking->wo }}" disabled />
+                    @if (Auth::user()->role === 'employee')
+                        <div class="form-group row">
+                            <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="wo"
+                                    value="{{ $checking->wo }}" disabled />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="nopol"
-                                value="{{ $checking->plat_number }}" disabled />
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="nopol"
+                                    value="{{ $checking->plat_number }}" disabled />
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="advisor" id="advisor" class="form-control" disabled>
-                                <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
-                                </option>
-                                @if (Auth::user()->role === 'employee')
-                                    @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
-                                        <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <select name="advisor" id="advisor" class="form-control" disabled>
+                                    <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
+                                    </option>
+                                    @if (Auth::user()->role === 'employee')
+                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                            <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <select name="type" id="type" class="form-control" disabled>
+                                    <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
+                                    </option>
+                                    @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
                                     @endforeach
-                                @endif
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="type" id="type" class="form-control" disabled>
-                                <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
-                                </option>
-                                @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                @endforeach
-                            </select>
+                    @else
+                        <div class="form-group row">
+                            <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="wo"
+                                    value="{{ $checking->wo }}" />
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="nopol"
+                                    value="{{ $checking->plat_number }}" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <select name="advisor" id="advisor" class="form-control">
+                                    <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
+                                    </option>
+                                    @if (Auth::user()->role === 'employee')
+                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                            <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <select name="type" id="type" class="form-control">
+                                    <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
+                                    </option>
+                                    @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="separator separator-dashed my-10"></div>
                     <h2>Hasil Pre Check</h2>
                     <div class="form-group row">
@@ -283,14 +327,14 @@
                             <textarea class="form-control" name="catatan" id="exampleTextarea" rows="3" maxlength="255">{{ $checking->note }}</textarea>
                         </div>
                     </div>
-                    @if (Auth::user()->role === 'employee')
+                    {{-- @if (Auth::user()->role === 'employee') --}}
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light-primary font-weight-bold"
                                 data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary font-weight-bold">Save
                                 changes</button>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                 </form>
             </div>
         </div>

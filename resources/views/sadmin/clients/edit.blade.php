@@ -55,19 +55,38 @@
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="id"
                                 value="{{ $client->code }}"/>
-                            {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang *</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Cabang</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="name"
                             value="{{ $client->title }}" />
-                            {{-- <span class="form-text text-muted">Informasi nama cabang</span> --}}
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat *</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Total Begkel</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="count"
+                            value="{{ $count }}" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kuota</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="quota"
+                            value="{{ $quota }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Tanggal Kadaluwarsa {{ $expired_at }}</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="date" class="form-control" name="expired_at"
+                            value="{{ $client->expired_at }}" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Alamat</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="address"
                                 value="{{ $client->address }}" />
@@ -75,7 +94,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kota *</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kota</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="city"
                                 value="{{ $client->city }}" />

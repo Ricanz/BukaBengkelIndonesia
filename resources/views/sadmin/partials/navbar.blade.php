@@ -271,14 +271,12 @@
                             <a href="{{ url('checking/standart') }}" class="menu-link">
                                 <span class="menu-text">Standart Checking</span>
                                 <span class="menu-desc">Laporan Standar Checking</span>
-                                <i class="menu-arrow"></i>
                             </a>
                         </li>
-                        <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-                            <a href="{{ url('checking/complete') }}" class="menu-link menu-toggle">
+                        <li class="menu-item menu-item-submenu">
+                            <a href="{{ url('checking/complete') }}" class="menu-link">
                                 <span class="menu-text">Complete Checking</span>
                                 <span class="menu-desc">Laporan Complete Checking</span>
-                                <i class="menu-arrow"></i>
                             </a>
                         </li>
                     </ul>
@@ -547,8 +545,8 @@
                                 <span class="menu-desc">Laporan Standar Checking</span>
                             </a>
                         </li>
-                        <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-                            <a href="{{ url('checking/complete') }}" class="menu-link menu-toggle">
+                        <li class="menu-item menu-item-submenu menu-item-rel">
+                            <a href="{{ url('checking/complete') }}" class="menu-link">
                                 <span class="menu-text">Complete Checking</span>
                                 <span class="menu-desc">Laporan Complete Checking</span>
                                 <i class="menu-arrow"></i>
