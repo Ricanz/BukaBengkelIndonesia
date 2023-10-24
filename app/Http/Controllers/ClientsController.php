@@ -237,11 +237,7 @@ class ClientsController extends Controller
             ->where('kabeng_id', $auth->id)
             ->count();
             
-            if ($kuota === $total_bengkel) {
-                
-                return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
-            }
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            return json_encode(['status'=> true, 'message'=> 'Success', 'total' => $total_bengkel, 'kuota' => $kuota]);
         }
     }
 

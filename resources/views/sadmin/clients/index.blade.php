@@ -244,13 +244,15 @@
                     },
                     success: function(data) {
                         swal.close();
-                        if (!data.status) {
-                            $('#kuotaHabisModal').modal('show');
-                        } else {
-                            $('#modalTambahBengkel').modal('show');
-                    }},
+                        console.log(data);
+                        // if (!data.status) {
+                        //     $('#kuotaHabisModal').modal('show');
+                        // } else {
+                        //     $('#modalTambahBengkel').modal('show');
+                            // }
+                        },
                     error: function() {
-                        swal.hideLoading();
+                        swal.close();
                     }
                 });
             });
