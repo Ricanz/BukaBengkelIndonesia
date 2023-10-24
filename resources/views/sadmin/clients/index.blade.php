@@ -244,10 +244,10 @@
                     },
                     success: function(data) {
                         swal.close();
-                        if (data.status) {
-                            $('#modalTambahBengkel').modal('show');
-                        } else {
+                        if (!data.status) {
                             $('#kuotaHabisModal').modal('show');
+                        } else {
+                            $('#modalTambahBengkel').modal('show');
                     }},
                     error: function() {
                         swal.hideLoading();

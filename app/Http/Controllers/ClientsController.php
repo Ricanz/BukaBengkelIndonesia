@@ -238,6 +238,7 @@ class ClientsController extends Controller
             ->count();
             
             if ($kuota === $total_bengkel) {
+                
                 return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
             }
             return json_encode(['status'=> true, 'message'=> 'Success']);
