@@ -15,7 +15,9 @@ class CompleteChecking extends Model
         'value',
         'value_title',
         'type',
-        'status'
+        'status',
+        'val_check',
+        'pass'
     ];
 
     public function master(): BelongsTo

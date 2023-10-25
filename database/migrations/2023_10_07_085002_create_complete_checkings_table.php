@@ -18,6 +18,8 @@ return new class extends Migration
             $table->bigInteger('sa_id')->nullable();
             $table->bigInteger('master_checking_id');
             $table->bigInteger('checking_id');
+            $table->string('val_check');
+            $table->boolean('pass');
             $table->string('value');
             $table->string('value_title');
             $table->string('type');

@@ -215,6 +215,18 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
+                                    <input type="text" class="form-control" name="hasil[]"
+                                        placeholder="Cth: 261 Psi" value="{{ $checking->complete[$i]->val_check }}" />
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
+                                    <div class="form-control">
+                                        <input class="form-control-input" name="hasil_check[]" type="checkbox" value="true" id="{{ $i }}">
+                                        <label class="form-control-label">
+                                          Centang jika Lolos
+                                        </label>
+                                      </div>
+                                </div>
                                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                                     <input type="text" class="form-control" name="judul_hasil[]"
                                         placeholder="Cth: Kompresor" value="{{ $checking->complete[$i]->value_title }}" />
