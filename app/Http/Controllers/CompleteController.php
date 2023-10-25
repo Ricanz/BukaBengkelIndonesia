@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 class CompleteController extends Controller
 {
@@ -283,5 +284,27 @@ class CompleteController extends Controller
         $checking = Checking::with('employee', 'client', 'types', 'advisor', 'complete_posts')->findOrFail($id);
         // dd($checking->complete_posts[0]);
         return view('sadmin.complete.show-post', compact('checking'));
+    }
+
+    public function pdf($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
+        // dd($checking->complete[0], $checking->complete[0]->master);
+        // $first_batch = $checking->complete->images->slice(0, 3); // 3 data pertama
+        // $second_batch = $checking->complete->images->slice(3, 2);
+        // return view('pdf.precheck', compact('checking', 'first_batch', 'second_batch'));
+        // $firstBatch = $checking->complete->images->slice(0, 3); // 3 data pertama
+        // $secondBatch = $checking->complete->images->slice(3, 3);
+        $data = [
+            'checking' => $checking,
+            // 'first_batch' => $firstBatch,
+            // 'second_batch' => $secondBatch
+        ];
+
+        $pdf = PDF::loadView('pdf.precheck-complete', $data);
+        $pdf_name = $checking->client->title.'-'.'Complete-Pre-Check'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
+        $pdf->setPaper('A4');
+        return $pdf->stream($pdf_name);
+        // return $pdf->download($pdf_name);
     }
 }
