@@ -289,16 +289,20 @@ class CompleteController extends Controller
     public function pdf($id)
     {
         $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
-        // dd($checking->complete[0], $checking->complete[0]->master);
-        // $first_batch = $checking->complete->images->slice(0, 3); // 3 data pertama
-        // $second_batch = $checking->complete->images->slice(3, 2);
-        // return view('pdf.precheck', compact('checking', 'first_batch', 'second_batch'));
-        // $firstBatch = $checking->complete->images->slice(0, 3); // 3 data pertama
-        // $secondBatch = $checking->complete->images->slice(3, 3);
+        $images = CompleteImage::where('checking_id', $checking->id)->where('status', 'active')->get();
+        
+        $firstBatch = $images->slice(0, 3); // 3 data pertama
+        $secondBatch = $images->slice(3, 3);
+        $thirdBatch = $images->slice(6, 3);
+        $fourthBatch = $images->slice(9, 3);
+        // return view('pdf.precheck-complete', compact('checking', 'first_batch', 'second_batch', 'third_batch', 'fourth_batch'));
+
         $data = [
             'checking' => $checking,
-            // 'first_batch' => $firstBatch,
-            // 'second_batch' => $secondBatch
+            'first_batch' => $firstBatch,
+            'second_batch' => $secondBatch,
+            'third_batch' => $thirdBatch,
+            'fourth_batch' => $fourthBatch
         ];
 
         $pdf = PDF::loadView('pdf.precheck-complete', $data);

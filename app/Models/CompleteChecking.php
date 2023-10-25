@@ -22,4 +22,19 @@ class CompleteChecking extends Model
     {
         return $this->belongsTo(MasterChecking::class, 'master_checking_id');
     }
+
+    public function checking(): BelongsTo
+    {
+        return $this->belongsTo(Checking::class, 'checking_id');
+    }
+    
+    public function images()
+    {
+        return $this->hasMany(CheckingImage::class, 'checking_id');
+    }
+
+    public function images_post()
+    {
+        return $this->hasMany(CheckingImage::class, 'checking_id')->where('type', 'post');
+    }
 }

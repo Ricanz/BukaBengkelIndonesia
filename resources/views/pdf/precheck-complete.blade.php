@@ -73,6 +73,15 @@
             opacity: 0.1;
         }
 
+        #page-2 {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: -4%;
+            left: 141%;
+            opacity: 0.1;
+        }
+
         #head {
             padding: 10px 0px 10px 0px;
         }
@@ -390,56 +399,126 @@
                                 alt="Logo" style="height:25px;object-fit:contain">
                         </div>
                     </td>
-                    <td class="ic-three">
-                        <h2 id="condition">KONDISI MOBIL ANDA</h2>
-                    </td>
                 </tr>
             </table>
         </div>
-        {{-- <div id="parent">
-            <div id="background-table"></div>
-            <div id="image-check-two" style="padding: 0 85px 0 85px">
-                <center>
-                    <table cellspacing="0" style="width:100%;">
-                        <tr id="ic-two-two">
-                        @foreach ($first_batch as $key => $item)
-                            <td class="ic-three">
-                                <center>
-                                    <div class="ic-mt">
-                                        <div id="bg-image">
-                                            <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                            <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                        </div>
-                                    </div>
-                                </center>
-                            </td>
-                        @endforeach
-                        </tr>
-                    </table>
-                </center>
+        
+        <div id="condition" style="page-break-before: always;">
+            <div id="background">
+                <img src="https://development.bukabengkelindonesia.com/tadmin/media/images/logo-192x192.png" id="page-2">
             </div>
-    
-            <div id="image-check-two" style="padding: 0 85px 0 85px">
-                <center>
-                    <table cellspacing="0" style="width:100%;">
-                        <tr id="ic-two-two">
-                        @foreach ($second_batch as $key => $item)
-                            <td class="ic-three" style="text-align: center;">
-                                <center>
-                                    <div class="ic-mt">
+            <table cellspacing="0" style="width:100%;">
+                <tr id="ic-two-two" style=" padding-left: 20px;">
+                    <td class="ic-three" style="width: 200px;">
+                        <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
+                            <img src="{{ 'https://development.bukabengkelindonesia.com'.$checking->client->image }}"
+                                alt="Logo" style="height:75px;object-fit:contain">
+                        </div>
+                    </td>
+                    <td class="ic-three"></td>
+                </tr>
+                <tr id="ic-two-two" style=" padding-left: 20px;" align="center">
+                    <td class="ic-three" colspan="2" style="padding-left: 2%;">
+                        <p id="ch-one" style="font-family: Dejavu Sans;">PRE-CHECK COMPLETE</p>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <h2 id="condition" align="center" style="color: #1f2690; margin: 0; padding: 0;">KONDISI MOBIL ANDA</h2>
+        <div id="parent">
+            <div id="background-table"></div>
+            @if (count($first_batch) > 0)
+                <div id="image-check-two" style="padding: 0 85px 0 85px">
+                    <center>
+                        <table cellspacing="0" style="width:100%;">
+                            <tr id="ic-two-two">
+                            @foreach ($first_batch as $key => $item)
+                                <td class="ic-three">
+                                    <center>
+                                        <div class="ic-mt">
                                             <div id="bg-image">
                                                 <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
                                             </div>
-                                    </div>
-                                </center>
-                            </td>
-                        @endforeach
-                        </tr>
-                    </table>
-                </center>
-            </div>
-        </div> --}}
+                                        </div>
+                                    </center>
+                                </td>
+                            @endforeach
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            @endif
+
+            @if (count($second_batch) > 0)
+                <div id="image-check-two" style="padding: 0 85px 0 85px">
+                    <center>
+                        <table cellspacing="0" style="width:100%;">
+                            <tr id="ic-two-two">
+                            @foreach ($second_batch as $key => $item)
+                                <td class="ic-three">
+                                    <center>
+                                        <div class="ic-mt">
+                                            <div id="bg-image">
+                                                <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </td>
+                            @endforeach
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            @endif
+
+            @if (count($third_batch) > 0)
+                <div id="image-check-two" style="padding: 0 85px 0 85px">
+                    <center>
+                        <table cellspacing="0" style="width:100%;">
+                            <tr id="ic-two-two">
+                            @foreach ($third_batch as $key => $item)
+                                <td class="ic-three">
+                                    <center>
+                                        <div class="ic-mt">
+                                            <div id="bg-image">
+                                                <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </td>
+                            @endforeach
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            @endif
+            @if (count($fourth_batch) > 0)
+                <div id="image-check-two" style="padding: 0 85px 0 85px">
+                    <center>
+                        <table cellspacing="0" style="width:100%;">
+                            <tr id="ic-two-two">
+                            @foreach ($fourth_batch as $key => $item)
+                                <td class="ic-three">
+                                    <center>
+                                        <div class="ic-mt">
+                                            <div id="bg-image">
+                                                <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                            </div>
+                                        </div>
+                                    </center>
+                                </td>
+                            @endforeach
+                            </tr>
+                        </table>
+                    </center>
+                </div>
+            @endif
+        </div>
 
         <div id="line-notes">
             <table cellspacing="0" style="width:100%;" class="container">
