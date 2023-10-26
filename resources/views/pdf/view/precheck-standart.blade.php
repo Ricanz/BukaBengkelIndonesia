@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Hasil Pengecekan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;900&family=Sometype+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset("pdf/precheck-new.css") }}">
+
 </head>
 
 <body>
@@ -22,7 +26,7 @@
                 <tbody style="width: 100%">
                     <tr>
                         <td id="left-head">
-                            <p id="ch-one" style="font-family: Dejavu Sans;">PRE-CHECK STANDAR</p>
+                            <p id="ch-one" style="font-family: 'Poppins', sans-serif;">PRE-CHECK STANDAR</p>
                             <p id="ch-two">{{ $checking->plat_number }}</p>
                             <p id="ch-three">{{ $checking->types->name }}</p>
                             <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->saran }}</strong></p>

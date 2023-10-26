@@ -10,6 +10,11 @@ body {
 p {
     margin: 0;
     padding: 0;
+    font-family: 'Sometype Mono', monospace;
+}
+
+td{
+    font-family: 'Sometype Mono', monospace;
 }
 
 .uppercase {
@@ -223,7 +228,7 @@ tr.nobod-rc td {
     font-weight: bold;
     font-size: 28px;
     text-align: left;
-    font-family: Dejavu Sans !important; 
+    font-family: 'Poppins' !important; 
 }
 
 #ch-two {
@@ -232,6 +237,7 @@ tr.nobod-rc td {
     font-size: 23px;
     color: #1f2690;
     text-align: left;
+    font-family: 'Montserrat';
 }
 
 #ch-three {
@@ -239,6 +245,7 @@ tr.nobod-rc td {
     font-weight: bold;
     font-size: 18px;
     text-align: left;
+    font-family: 'Montserrat';
 }
 
 #ch-three {
@@ -255,6 +262,7 @@ tr.nobod-rc td {
 #check-one {
     background-color: #1f2690;
     background-image: linear-gradient(to left, #1f2690, #23a5ea);
+    font-family: 'Montserrat';
 }
 
 #condition {
@@ -265,6 +273,7 @@ tr.nobod-rc td {
     color: #1f2690;
     text-transform: uppercase;
     font-weight: bold;
+    font-family: 'Poppins';
 }
 
 #bg-image {
