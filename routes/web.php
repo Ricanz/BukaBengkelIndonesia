@@ -40,6 +40,8 @@ Route::get('/check-pdf/post/{id}', [CheckingController::class, 'pdf_post'])->nam
 Route::get('/complete-pre/pdf/{id}', [CompleteController::class, 'pdf'])->name('download.complete_pre');
 Route::get('/complete-post/pdf/{id}', [CompleteController::class, 'pdf_post'])->name('download.complete_post');
 
+Route::get('/view/standart-pdf/{id}', [CheckingController::class, 'view_pdf'])->name('pdf');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {

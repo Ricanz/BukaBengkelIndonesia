@@ -354,6 +354,14 @@ class  CheckingController extends Controller
         return $pdf->stream($pdf_name);
     }
 
+    public function view_pdf($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'standart', 'types', 'employee')->find($id);
+        // dd($checking->standart->images[0]->types);
+        $images = $checking->standart->images;
+        return view('pdf.view.precheck-standart', compact('checking', 'images'));
+    }
+
     public function download(){
         return Excel::download(new ExportsCheckingExport, 'checking-'.date('y-m-d').'.xlsx');
     }
