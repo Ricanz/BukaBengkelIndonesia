@@ -318,10 +318,10 @@ class CompleteController extends Controller
         // return $pdf->download($pdf_name);
     }
 
-    public function pdf_pro($id)
+    public function pdf_post($id)
     {
         $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
-        $images = CompleteImage::where('checking_id', $checking->id)->where('status', 'active')->get();
+        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'post')->where('status', 'active')->get();
 
         $firstBatch = $images->slice(0, 3); // 3 data pertama
         $secondBatch = $images->slice(3, 3);
@@ -337,8 +337,8 @@ class CompleteController extends Controller
             'fourth_batch' => $fourthBatch
         ];
 
-        $pdf = PDF::loadView('pdf.precheck-complete', $data);
-        $pdf_name = $checking->client->title . '-' . 'Complete-Pre-Check' . $checking->wo . '-' . now()->format('d-m-Y') . '.pdf';
+        $pdf = PDF::loadView('pdf.postcheck-complete', $data);
+        $pdf_name = $checking->client->title . '-' . 'Complete-Post-Check' . $checking->wo . '-' . now()->format('d-m-Y') . '.pdf';
         $pdf->setPaper('A4');
         return $pdf->stream($pdf_name);
         // return $pdf->download($pdf_name);
