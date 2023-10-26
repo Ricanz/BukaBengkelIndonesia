@@ -90,7 +90,9 @@ class CompleteController extends Controller
                         'type' => $request->checking_type ? $request->checking_type : 'pre',
                         'status' => 'active',
                         'value_title' => $request->judul_hasil[$key],
-                        'value' => $request->result[$key]
+                        'value' => $request->result[$key],
+                        'val_check' => $request->hasil[$key],
+                        'pass' => $request->hasil_check[$key]
                     ]);
                 }
             }
@@ -122,7 +124,7 @@ class CompleteController extends Controller
      */
     public function update(Request $request)
     {  
-        dd($request->all());
+        // dd($request->all());
         $checking = Checking::findOrFail($request->checking_id);
 
         $checking->wo = $request->wo ? $request->wo : $checking->wo;
@@ -133,11 +135,14 @@ class CompleteController extends Controller
 
         if ($checking->save()) {
             if (count($request->master) > 0) {
+                $total_record = CompleteChecking::where('checking_id', $checking->id)->where('type', $checking->checking_type)->count();
                 foreach ($request->master as $key => $value) {
-                    $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
-                    if ($complete) {
+                    if ($key < $total_record) {
+                        $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
                         $complete->value_title = $request->judul_hasil[$key];
                         $complete->value = $request->result[$key];
+                        $complete->val_check = $request->hasil[$key];
+                        $complete->pass = $request->hasil_check[$key];
                         $complete->save();
                     } else {
                         CompleteChecking::create([
@@ -146,7 +151,9 @@ class CompleteController extends Controller
                             'type' => $request->checking_type ? $request->checking_type : 'pre',
                             'status' => 'active',
                             'value_title' => $request->judul_hasil[$key],
-                            'value' => $request->result[$key]
+                            'value' => $request->result[$key],
+                            'val_check' => $request->hasil[$key],
+                            'pass' => $request->hasil_check[$key]
                         ]);
                     }
                 }

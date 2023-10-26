@@ -220,12 +220,11 @@
                                         placeholder="Cth: 261 Psi" value="{{ $checking->complete[$i]->val_check }}" />
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
-                                    <div class="form-control">
-                                        <input class="form-control-input" name="hasil_check[]" type="checkbox" value="true" id="{{ $i }}">
-                                        <label class="form-control-label">
-                                          Centang jika Lolos
-                                        </label>
-                                      </div>
+                                    <select name="hasil_check[]" id="hasil_check[]" class="form-control">
+                                        <option value="{{ $checking->complete[$i]->pass }}" selected>{{ $checking->complete[$i]->pass ? "Lolos" : "Tidak Lolos" }}</option>
+                                        <option value="1">Lolos</option>
+                                        <option value="0" >Tidak Lolos</option>
+                                    </select>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                                     <input type="text" class="form-control" name="judul_hasil[]"
@@ -238,7 +237,7 @@
                             </div>
                         @endfor
                     </div>
-                    <a href="#" id="addCheckButton">Tambah Check</a>
+                    <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">

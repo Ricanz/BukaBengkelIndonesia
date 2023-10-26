@@ -379,8 +379,8 @@
                         <td class="bodl-rc">
                             {{ $item->master->description }}: <br><b>{{ $item->master->name }}</b>
                         </td>
-                        <td class="bodl-rc text-center not-pass-check">
-                            <strong>Belom Ada</strong> Psi
+                        <td class="bodl-rc text-center {{ !$item->pass ? "not-pass-check" : "pass-check" }}">
+                            <strong>{{$item->val_check}}</strong>
                         </td>
                         <td class="bodl-rc">
                             {{ $item->value_title }}: <br><b>{{ $item->value }}</b>
