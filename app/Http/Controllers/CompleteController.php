@@ -255,6 +255,7 @@ class CompleteController extends Controller
     public function store_post(Request $request)
     {
         $checking = Checking::where('id', $request->checking_id)->first();
+        
         if (!$checking) {
             return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
         }
@@ -295,7 +296,7 @@ class CompleteController extends Controller
     public function pdf($id)
     {
         $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
-        $images = CompleteImage::where('checking_id', $checking->id)->where('status', 'active')->get();
+        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'pre')->where('status', 'active')->get();
 
         $firstBatch = $images->slice(0, 3); // 3 data pertama
         $secondBatch = $images->slice(3, 3);
@@ -342,5 +343,21 @@ class CompleteController extends Controller
         $pdf->setPaper('A4');
         return $pdf->stream($pdf_name);
         // return $pdf->download($pdf_name);
+    }
+
+    public function view_pdf($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
+        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'pre')->where('status', 'active')->get();
+
+        return view('pdf.view.precheck-complete', compact('checking', 'images'));
+    }
+
+    public function view_pdf_post($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
+        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'post')->where('status', 'active')->get();
+
+        return view('pdf.view.precheck-complete', compact('checking', 'images'));
     }
 }

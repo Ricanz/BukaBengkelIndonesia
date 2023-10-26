@@ -12,7 +12,7 @@
                 <div class="card-toolbar">
                     <!--begin::Button-->
                     <a href="{{ route('download.standart_post', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
-                    <a href="{{ route('pdf.standart_post', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-warning font-weight-bolder mr-2">Lihat Hasil</a>
+                    <a href="{{ route('pdf.standart_post', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-warning font-weight-bolder mr-2 mb-2">Lihat Hasil</a>
                     <!--end::Button-->
 
                     <!--begin::Button-->

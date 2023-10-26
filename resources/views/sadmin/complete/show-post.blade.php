@@ -9,13 +9,15 @@
                     </span>
                     <h3 class="card-label">Detail Complete Checking (Post)</h3>
                 </div>
-                @if (Auth::user()->role === 'employee')
-                    <div class="card-toolbar">
-                        <!--begin::Button-->
+                <div class="card-toolbar">
+                    <!--begin::Button-->
                         <a href="{{ route('download.complete_post', request()->segment(count(request()->segments()))) }}" target="blank"
-                            class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
-                        <!--end::Button-->
-
+                        class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
+                        <a href="{{ route('pdf.complete_post', request()->segment(count(request()->segments()))) }}"
+                            target="blank" class="btn btn-warning font-weight-bolder mr-2 mb-2">Lihat Hasil</a>
+                            <!--end::Button-->
+                            
+                        @if (Auth::user()->role === 'employee')
                         <!--begin::Button-->
                         <button type="button" class="btn btn-primary font-weight-bolder" data-toggle="modal"
                             data-target="#exampleModalCenter">
@@ -153,8 +155,8 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
-                @endif
             </div>
             <div class="card-body">
                 <h6 class="card-label">{{ $checking->checking_type }} Checking</h6>
