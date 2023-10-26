@@ -161,10 +161,10 @@
             </div>
             <div class="card-body">
                 <h6 class="card-label">{{ $checking->checking_type }} Checking</h6>
-                <form class="form" id="update_checking_form" enctype="multipart/form-data">
+                <form class="form" id="create_checking_post_form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
-                        <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
+                        <input type="hidden" name="id" id="id" value="{{ $checking->id }}">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wo"
