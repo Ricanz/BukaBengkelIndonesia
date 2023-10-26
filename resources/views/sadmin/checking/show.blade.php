@@ -12,6 +12,7 @@
                 <div class="card-toolbar">
                     <!--begin::Button-->
                     <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
+                    <a href="{{ route('pdf.standart_pre', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-warning font-weight-bolder mr-2">Lihat Hasil</a>
                     <!--end::Button-->
 
                     @if (Auth::user()->role === 'employee')

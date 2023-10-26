@@ -1,12 +1,6 @@
 
-*{
-    max-width: 800px;
-}
-
 body {
     font-family: Dejavu Sans; 
-    width: 200px;
-
 }
 
 .container {
@@ -55,8 +49,9 @@ p {
 }
 
 #content {
-    position: absolute;
-    z-index: 1;
+    max-width: 800px;
+    margin: auto;
+    position: relative
 }
 
 #bg-wt {
