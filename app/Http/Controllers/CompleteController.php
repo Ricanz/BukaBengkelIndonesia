@@ -9,6 +9,7 @@ use App\Models\CompleteImage;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 use PDF;
@@ -123,8 +124,7 @@ class CompleteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {  
-        // dd($request->all());
+    {
         $checking = Checking::findOrFail($request->checking_id);
 
         $checking->wo = $request->wo ? $request->wo : $checking->wo;
@@ -135,7 +135,7 @@ class CompleteController extends Controller
 
         if ($checking->save()) {
             if (count($request->master) > 0) {
-                $total_record = CompleteChecking::where('checking_id', $checking->id)->where('type', $checking->checking_type)->count();
+                $total_record = CompleteChecking::where('checking_id', $checking->id)->where('type', 'pre')->count();
                 foreach ($request->master as $key => $value) {
                     if ($key < $total_record) {
                         $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
@@ -148,7 +148,7 @@ class CompleteController extends Controller
                         CompleteChecking::create([
                             'master_checking_id' => $value,
                             'checking_id' => $checking->id,
-                            'type' => $request->checking_type ? $request->checking_type : 'pre',
+                            'type' => 'pre',
                             'status' => 'active',
                             'value_title' => $request->judul_hasil[$key],
                             'value' => $request->result[$key],
@@ -245,8 +245,9 @@ class CompleteController extends Controller
         return redirect()->back();
     }
 
-    
-    public function create_post($id){
+
+    public function create_post($id)
+    {
         $checking = Checking::with('advisor', 'types')->find($id);
         return view('sadmin.complete.create-post', compact('checking'));
     }
@@ -257,31 +258,29 @@ class CompleteController extends Controller
         if (!$checking) {
             return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
         }
-        $checking->saran_post = $request->saran;
-        $checking->note_post = $request->catatan;
-        if ($checking->save()) {
-            if (count($request->master) > 0) {
-                foreach ($request->master as $key => $value) {
-                    $complete = CompleteChecking::where('type', 'post')->where('master_checking_id', $value)->where('checking_id', $checking->id)->first();
-                    if ($complete) {
-                        $complete->value_title = $request->judul_hasil[$key];
-                        $complete->value = $request->result[$key];
-                        $complete->save();
-                    } else {
-                        CompleteChecking::create([
-                            'master_checking_id' => $value,
-                            'checking_id' => $checking->id,
-                            'type' => 'post',
-                            'status' => 'active',
-                            'value_title' => $request->judul_hasil[$key],
-                            'value' => $request->result[$key]
-                        ]);
+        DB::beginTransaction();
+        try {
+            $checking->saran_post = $request->saran;
+            $checking->note_post = $request->catatan;
+            $checking->has_post = true;
 
+            if ($checking->save()) {
+                if (count($request->id) > 0) {
+                    foreach ($request->id as $key => $value) {
+                        $complete = CompleteChecking::where('checking_id', $checking->id)->where('id', $value)->first();
+                        $complete->value_post = $request->result[$key];
+                        $complete->val_check_post = $request->hasil[$key];
+                        $complete->pass_post = $request->hasil_check[$key];
+                        $complete->save();
                     }
                 }
+                DB::commit();
+                return json_encode(['status' => true, 'message' => 'Success']);
+            } else {
+                return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
             }
-            return json_encode(['status' => true, 'message' => 'Success']);
-        } else {
+        } catch (\Throwable $th) {
+            DB::rollBack();
             return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
         }
     }
@@ -297,7 +296,7 @@ class CompleteController extends Controller
     {
         $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
         $images = CompleteImage::where('checking_id', $checking->id)->where('status', 'active')->get();
-        
+
         $firstBatch = $images->slice(0, 3); // 3 data pertama
         $secondBatch = $images->slice(3, 3);
         $thirdBatch = $images->slice(6, 3);
@@ -313,7 +312,33 @@ class CompleteController extends Controller
         ];
 
         $pdf = PDF::loadView('pdf.precheck-complete', $data);
-        $pdf_name = $checking->client->title.'-'.'Complete-Pre-Check'.$checking->wo.'-'.now()->format('d-m-Y').'.pdf';
+        $pdf_name = $checking->client->title . '-' . 'Complete-Pre-Check' . $checking->wo . '-' . now()->format('d-m-Y') . '.pdf';
+        $pdf->setPaper('A4');
+        return $pdf->stream($pdf_name);
+        // return $pdf->download($pdf_name);
+    }
+
+    public function pdf_pro($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
+        $images = CompleteImage::where('checking_id', $checking->id)->where('status', 'active')->get();
+
+        $firstBatch = $images->slice(0, 3); // 3 data pertama
+        $secondBatch = $images->slice(3, 3);
+        $thirdBatch = $images->slice(6, 3);
+        $fourthBatch = $images->slice(9, 3);
+        // return view('pdf.precheck-complete', compact('checking', 'first_batch', 'second_batch', 'third_batch', 'fourth_batch'));
+
+        $data = [
+            'checking' => $checking,
+            'first_batch' => $firstBatch,
+            'second_batch' => $secondBatch,
+            'third_batch' => $thirdBatch,
+            'fourth_batch' => $fourthBatch
+        ];
+
+        $pdf = PDF::loadView('pdf.precheck-complete', $data);
+        $pdf_name = $checking->client->title . '-' . 'Complete-Pre-Check' . $checking->wo . '-' . now()->format('d-m-Y') . '.pdf';
         $pdf->setPaper('A4');
         return $pdf->stream($pdf_name);
         // return $pdf->download($pdf_name);

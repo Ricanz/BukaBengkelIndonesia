@@ -22,6 +22,9 @@ return new class extends Migration
             $table->boolean('pass');
             $table->string('value');
             $table->string('value_title');
+            $table->string('val_check_post')->nullable();
+            $table->boolean('pass_post')->default(0);
+            $table->string('value_post')->nullable();
             $table->string('type');
             $table->string('status')->default('active');
             $table->timestamps();

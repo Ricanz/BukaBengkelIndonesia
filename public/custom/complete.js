@@ -67,13 +67,13 @@ var KTDatatablesDataSourceAjaxClient = function() {
 					orderable: false,
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
-                        if (full.complete_post !== null) {
+                        if (full.has_post) {
                             return `
                                 <a href="/complete/pro/view/post/${full.id}" class="btn btn-success font-weight-bolder">Lihat</a>
                             `;
                         } else {
                             return `
-                                <a href="/complete/pro/create/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
+                                <a href="/complete/pro/view/post/${full.id}" class="btn btn-warning font-weight-bolder">Tambah</a>
                             `;
                         }
 					},

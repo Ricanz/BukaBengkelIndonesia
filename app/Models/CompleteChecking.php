@@ -17,7 +17,10 @@ class CompleteChecking extends Model
         'type',
         'status',
         'val_check',
-        'pass'
+        'pass',
+        'val_check_post',
+        'pass_post',
+        'value_post',
     ];
 
     public function master(): BelongsTo

@@ -12,7 +12,7 @@
                 @if (Auth::user()->role === 'employee')
                     <div class="card-toolbar">
                         <!--begin::Button-->
-                        <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank"
+                        <a href="{{ route('download.complete_post', request()->segment(count(request()->segments()))) }}" target="blank"
                             class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
                         <!--end::Button-->
 
@@ -204,51 +204,40 @@
                     <div class="separator separator-dashed my-10"></div>
                     <h2>Hasil Post Check</h2>
                     <div id="form-container">
-                        @if (count($checking->complete_posts) > 0)
-                            @for ($i = 0; $i < count($checking->complete_posts); $i++)
-                            <div class="form-group row check-group">
-                                <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <select name="master[]" id="master[]" class="form-control">
-                                        <option value="{{ $checking->complete_posts[$i]->master_checking_id }}" selected>{{ $checking->complete_posts[$i]->master->name }}</option>
-                                        @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                    <input type="text" class="form-control" name="judul_hasil[]"
-                                        placeholder="Cth: Kompresor" value="{{ $checking->complete_posts[$i]->value_title }}" />
-                                </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                        <input type="text" class="form-control" name="result[]"
-                                            placeholder="Cth: Berfungsi Normal" value="{{ $checking->complete_posts[$i]->value }}" />
-                                    </div>
-                                </div>
-                            @endfor
-                        @else
-                            <div class="form-group row check-group">
-                                <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <select name="master[]" id="master[]" class="form-control">
-                                        <option value="" selected>Pilih Check</option>
-                                        @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
-                                            <option value="{{ $type->id }}">{{ $type->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                    <input type="text" class="form-control" name="judul_hasil[]"
-                                        placeholder="Cth: Kompresor" />
-                                </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                        @for ($i = 0; $i < count($checking->complete); $i++)
+                        <div class="form-group row check-group">
+                            <input type="hidden" name="id[]" value="{{ $checking->complete[$i]->id }}">
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <select name="master[]" id="master[]" class="form-control" disabled>
+                                    <option value="{{ $checking->complete[$i]->master_checking_id }}" selected>{{ $checking->complete[$i]->master->name }}</option>
+                                    {{-- @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
+                                        <option value="{{ $type->id }}">{{ $type->name }}
+                                        </option>
+                                    @endforeach --}}
+                                </select>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
+                                <input type="text" class="form-control" name="hasil[]"
+                                    placeholder="Cth: 261 Psi" value="{{ $checking->complete[$i]->val_check_post }}" />
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
+                                <select name="hasil_check[]" id="hasil_check[]" class="form-control">
+                                    <option value="{{ $checking->complete[$i]->pass_post ? 1 : 0 }}">{{ $checking->complete[$i]->pass_post ? "Lolos" : "Tidak Lolos" }}</option>
+                                    <option value="1">Lolos</option>
+                                    <option value="0" >Tidak Lolos</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                                <input type="text" class="form-control" name="judul_hasil[]"
+                                    placeholder="Cth: Kompresor" value="{{ $checking->complete[$i]->value_title }}" disabled />
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                                     <input type="text" class="form-control" name="result[]"
-                                        placeholder="Cth: Berfungsi Normal" />
+                                        placeholder="Cth: Berfungsi Normal" value="{{ $checking->complete[$i]->value_post }}" />
                                 </div>
                             </div>
-                        @endif
+                        @endfor
                     </div>
-                    <a href="#" id="addCheckButton">Tambah Check</a>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
