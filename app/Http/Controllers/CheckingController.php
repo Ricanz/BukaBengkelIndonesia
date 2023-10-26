@@ -357,9 +357,17 @@ class  CheckingController extends Controller
     public function view_pdf($id)
     {
         $checking = Checking::with('advisor', 'client', 'standart', 'types', 'employee')->find($id);
-        // dd($checking->standart->images[0]->types);
+        
         $images = $checking->standart->images;
         return view('pdf.view.precheck-standart', compact('checking', 'images'));
+    }
+
+    public function view_pdf_post($id)
+    {
+        $checking = Checking::with('advisor', 'client', 'standart', 'types', 'employee')->find($id);
+        
+        $images = $checking->post->images_post;
+        return view('pdf.view.postcheck-standart', compact('checking', 'images'));
     }
 
     public function download(){

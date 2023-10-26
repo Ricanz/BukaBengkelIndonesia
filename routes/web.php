@@ -41,6 +41,7 @@ Route::get('/complete-pre/pdf/{id}', [CompleteController::class, 'pdf'])->name('
 Route::get('/complete-post/pdf/{id}', [CompleteController::class, 'pdf_post'])->name('download.complete_post');
 
 Route::get('/view/standart-pdf/{id}', [CheckingController::class, 'view_pdf'])->name('pdf.standart_pre');
+Route::get('/view/standart-post-pdf/{id}', [CheckingController::class, 'view_pdf_post'])->name('pdf.standart_post');
 
 
 Route::middleware('auth')->group(function () {
