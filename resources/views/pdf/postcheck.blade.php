@@ -550,12 +550,12 @@
             </table>
         </div>
 
-        <div id="footer" style="padding: 20px 0 20px 0;position:absolute;bottom:0; width:100%">
+        <div id="footer" style="position:absolute;bottom:0; width:100%">
             <table cellspacing="0" style="width:100%;" class="container">
                 <tr>
                     <td>
-                        <p style="text-align: center; color: white;">
-                            Jl. Dr. Satrio No. C2, Simpangan, Kec. Cikarang Utara, Kabupaten Bekasi, Jawa Barat 17530.
+                        <p style="text-align: center; color: white; font-size: 13px;">
+                            {{ $checking->client->address }}
                         </p>
                     </td>
                 </tr>

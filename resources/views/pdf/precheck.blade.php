@@ -435,7 +435,7 @@
                 </tr>
             </table>
         </div>
-        <div id="condition" style="margin-top: 10px;">
+        <div id="condition">
             <table cellspacing="0" style="width:100%;">
                 <tr id="ic-two-two" style=" padding-left: 20px;">
                     <td class="ic-three" style="width: 200px;">
@@ -474,7 +474,7 @@
                 </center>
             </div>
     
-            <div id="image-check-two" style="padding: 0 85px 0 85px">
+            <div id="image-check-two" style="padding: 0 85px 0 85px; margin-bottom: -1%">
                 <center>
                     <table cellspacing="0" style="width:100%;">
                         <tr id="ic-two-two">
@@ -505,7 +505,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <p>
+                        <p style="font-size: 12px;">
                             {{ $checking->note }}
                         </p>
                     </td>
@@ -513,11 +513,11 @@
             </table>
         </div>
 
-        <div id="footer" style="padding: 8px 0 8px 0;position:absolute;bottom:0; width:100%">
+        <div id="footer" style="position:absolute;bottom:0; width:100%">
             <table cellspacing="0" style="width:100%;" class="container">
                 <tr>
                     <td>
-                        <p style="text-align: center; color: white;">
+                        <p style="text-align: center; color: white; font-size: 13px;">
                             {{ $checking->client->address }}
                         </p>
                     </td>

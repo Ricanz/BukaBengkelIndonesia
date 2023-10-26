@@ -537,11 +537,11 @@
             </table>
         </div>
 
-        <div id="footer" style="padding: 8px 0 8px 0;position:absolute;bottom:0; width:100%">
+        <div id="footer" style="position:absolute;bottom:0; width:100%">
             <table cellspacing="0" style="width:100%;" class="container">
                 <tr>
                     <td>
-                        <p style="text-align: center; color: white;">
+                        <p style="text-align: center; color: white; font-size: 13px;">
                             {{ $checking->client->address }}
                         </p>
                     </td>
