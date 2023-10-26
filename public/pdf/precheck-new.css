@@ -287,9 +287,9 @@ tr.nobod-rc td {
     text-align: center;
 }
 
-/* #background-table {
-    background-color: #1f2690;
-    height: 250px;
+#background-table {
+    background-color: #e7eef8;
+    height: 320px;
     border-radius: 30px;
     position: absolute;
     z-index: 2;
@@ -298,7 +298,8 @@ tr.nobod-rc td {
     left: 50%;
     width: 90%;
     z-index: -1;
-} */
+    margin-top: 10px;
+}
 
 #parent {
     position: relative;
@@ -321,4 +322,10 @@ tr.nobod-rc td {
 .flex-item {
     flex: 0 0 calc(33.33% - 10px); 
     margin-right: 10px;
+}
+
+.color-container {
+    background-color: #23a5ea; /* Ganti dengan warna latar belakang yang Anda inginkan */
+    width: 100%; /* Atur lebar sesuai kebutuhan Anda */
+    height: 200px; /* Atur tinggi sesuai kebutuhan Anda */
 }

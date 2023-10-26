@@ -19,11 +19,11 @@ class StandartChecking extends Model
     
     public function images()
     {
-        return $this->hasMany(CheckingImage::class, 'checking_id');
+        return $this->hasMany(CheckingImage::class, 'checking_id')->where('type', 'pre')->where('status', 'active');
     }
 
     public function images_post()
     {
-        return $this->hasMany(CheckingImage::class, 'checking_id')->where('type', 'post');
+        return $this->hasMany(CheckingImage::class, 'checking_id')->where('type', 'post')->where('status', 'active');
     }
 }

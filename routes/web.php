@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/pre-check', function () {
-    return view('pdf.precheck');
+    return view('pdf.pre-check');
 });
 
 Route::get('/check-pdf/{id}', [CheckingController::class, 'pdf'])->name('download');
