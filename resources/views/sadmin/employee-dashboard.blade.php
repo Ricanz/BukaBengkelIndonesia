@@ -100,9 +100,9 @@
                                 <!--begin::Item-->
                                 <div class="col">
                                     <div class="d-flex align-items-center mr-2">
-                                        <span class="symbol-label">
+                                        <span class="symbol-label" style="height: 90px;">
                                             <img src="{{ asset($employee->client->image) }}"
-                                                class="align-self-center" alt="" style="height: 200px; width: auto"/>
+                                                class="align-self-center" alt="" style="width: auto"/>
                                         </span>
                                     </div>
                                 </div>
