@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;900&family=Sometype+Mono&display=swap" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito&family=Poppins:wght@400;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset("pdf/precheck-new.css") }}">
+    <link rel="stylesheet" href="{{ asset("pdf/complete.css") }}">
 
 </head>
 
@@ -104,7 +104,7 @@
                                         <div class="ic-mt">
                                             <div id="bg-image">
                                                 <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
                                             </div>
                                         </div>
                                     </center>
