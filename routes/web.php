@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\CompleteController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\MasterTypeController;
 use App\Http\Controllers\ProfileController;
@@ -48,9 +49,10 @@ Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('sadmin.index');
-    });
+    // Route::get('/', function () {
+    //     return view('sadmin.index');
+    // });
+    Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
