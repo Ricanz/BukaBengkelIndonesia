@@ -10,10 +10,14 @@
                     <h3 class="card-label">Detail Checking (Pre)</h3>
                 </div>
                 <div class="card-toolbar">
+                    @if (count($checking->standart->images) < 6)
+                        <a href="javascript:void()}" class="btn btn-danger font-weight-bolder mr-2">Foto minimal 6 untuk lihat dan download hasil check</a>
+                    @else
                     <!--begin::Button-->
                     <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
                     <a href="{{ route('pdf.standart_pre', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-warning font-weight-bolder mr-2 mb-2">Lihat Hasil</a>
                     <!--end::Button-->
+                    @endif
 
                     @if (Auth::user()->role === 'employee')
                         <!--begin::Button-->

@@ -10,13 +10,16 @@
                     <h3 class="card-label">Detail Complete Checking (Post)</h3>
                 </div>
                 <div class="card-toolbar">
+                    @if ($images< 12)
+                        <a href="javascript:void()}" class="btn btn-danger font-weight-bolder mr-2">Foto minimal 12 untuk lihat dan download hasil check</a>
+                    @else
                     <!--begin::Button-->
                         <a href="{{ route('download.complete_post', request()->segment(count(request()->segments()))) }}" target="blank"
                         class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
                         <a href="{{ route('pdf.complete_post', request()->segment(count(request()->segments()))) }}"
                             target="blank" class="btn btn-warning font-weight-bolder mr-2 mb-2">Lihat Hasil</a>
-                            <!--end::Button-->
-                            
+                    <!--end::Button-->
+                    @endif
                         @if (Auth::user()->role === 'employee')
                         <!--begin::Button-->
                         <button type="button" class="btn btn-primary font-weight-bolder" data-toggle="modal"

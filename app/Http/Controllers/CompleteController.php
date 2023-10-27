@@ -113,7 +113,8 @@ class CompleteController extends Controller
     public function show($id)
     {
         $checking = Checking::with('complete')->where('id', $id)->where('checking_type', 'complete')->first();
-        return view('sadmin.complete.show', compact('checking'));
+        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'pre')->count();
+        return view('sadmin.complete.show', compact('checking', 'images'));
     }
 
     /**
@@ -208,13 +209,13 @@ class CompleteController extends Controller
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
-        $complete = CompleteChecking::where('checking_id', $request->checking_id)->where('type', $request->type)->first();
-
+        $complete = CompleteChecking::where('checking_id', $request->checking_id)->first();
+        
         $submit = CompleteImage::create([
             'image' => Utils::uploadImage($request->file, 300),
             'checking_id' => $complete->checking_id,
             'desc_id' => $request->description,
-            'type' => $complete->type
+            'type' => $request->type
         ]);
         if ($submit) {
             return json_encode(['status' => true, 'message' => 'Success']);
@@ -289,8 +290,9 @@ class CompleteController extends Controller
     public function show_post($id)
     {
         $checking = Checking::with('employee', 'client', 'types', 'advisor', 'complete_posts')->findOrFail($id);
-        // dd($checking->complete_posts[0]);
-        return view('sadmin.complete.show-post', compact('checking'));
+        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'post')->count();
+        
+        return view('sadmin.complete.show-post', compact('checking', 'images'));
     }
 
     public function pdf($id)

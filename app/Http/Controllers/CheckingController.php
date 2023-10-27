@@ -308,7 +308,9 @@ class  CheckingController extends Controller
     public function show_post($id)
     {
         $checking = Checking::with('employee', 'client', 'types', 'post', 'advisor')->findOrFail($id);
-        return view('sadmin.checking.show-post', compact('checking'));
+        $images = CheckingImage::where('checking_id', $checking->id)->where('type', 'post')->count();
+        
+        return view('sadmin.checking.show-post', compact('checking', 'images'));
     }
 
     public function pdf($id)

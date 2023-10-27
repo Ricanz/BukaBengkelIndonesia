@@ -10,11 +10,14 @@
                     <h3 class="card-label">Detail Checking (Post)</h3>
                 </div>
                 <div class="card-toolbar">
+                    @if ($images< 6)
+                        <a href="javascript:void()}" class="btn btn-danger font-weight-bolder mr-2">Foto minimal 6 untuk lihat dan download hasil check</a>
+                    @else
                     <!--begin::Button-->
                     <a href="{{ route('download.standart_post', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
                     <a href="{{ route('pdf.standart_post', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-warning font-weight-bolder mr-2 mb-2">Lihat Hasil</a>
                     <!--end::Button-->
-
+                    @endif
                     <!--begin::Button-->
                     <button type="button" class="btn btn-primary font-weight-bolder" data-toggle="modal"
                         data-target="#exampleModalCenter">
