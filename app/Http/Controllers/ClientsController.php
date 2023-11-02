@@ -75,8 +75,8 @@ class ClientsController extends Controller
                 $user = $usr;
                 $employee = Employee::where('is_kabeng', true)->where('user_id', $usr->id)->first();
                 $total = Client::where('kabeng_id', $user->id)->count();
-                // dd($total === $employee->quota);
-                if (floatval($user->quota) === floatval($total)) {
+                // dd($total , $employee->quota);
+                if (floatval($user->quota) <= floatval($total)) {
                     return json_encode(['status'=> false, 'message'=> ['Kuota Bengkel Habis']]);
                 }
             }
