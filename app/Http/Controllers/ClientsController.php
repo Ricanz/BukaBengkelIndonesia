@@ -62,13 +62,25 @@ class ClientsController extends Controller
         $img = Utils::uploadImage($request->file, 300);
         
         if ($request->kabeng) {
-            $email = Utils::generateEmail($request->kabeng);
-            $user = User::create([
-                'name' => $request->kabeng,
-                'email' => $email,
-                'password' => Hash::make('pass.123'),
-                'role' => 'client'
-            ]);
+            $usr = User::where('email', strtolower($request->kabeng))->first();
+            if (!$usr) {
+                $email = Utils::generateEmail($request->kabeng);
+                $user = User::create([
+                    'name' => $request->kabeng,
+                    'email' => $email,
+                    'password' => Hash::make('pass.123'),
+                    'role' => 'client'
+                ]);
+            } else {
+                $user = $usr;
+                $employee = Employee::where('is_kabeng', true)->where('user_id', $usr->id)->first();
+                $total = Client::where('kabeng_id', $user->id)->count();
+                // dd($total === $employee->quota);
+                if (floatval($user->quota) === floatval($total)) {
+                    return json_encode(['status'=> false, 'message'=> ['Kuota Bengkel Habis']]);
+                }
+            }
+
             $submit = Client::create([
                 'title' => $request->name,
                 'description' => $request->description,
@@ -79,13 +91,15 @@ class ClientsController extends Controller
                 'status' => 'active',
                 'kabeng_id' => $user->id
             ]);
-            Employee::create([
-                'user_id' => $user->id,
-                'client_id' => $submit->id,
-                'fullname' => $request->kabeng, 
-                'is_kabeng' => true,
-                'quota' => $request->kuota
-            ]);
+            if (!$user) {
+                Employee::create([
+                    'user_id' => $user->id,
+                    'client_id' => $submit->id,
+                    'fullname' => $request->kabeng, 
+                    'is_kabeng' => true,
+                    'quota' => $request->kuota
+                ]);
+            }
             if ($submit) {
                 return json_encode(['status'=> true, 'message'=> 'Success']);
             }
@@ -104,7 +118,7 @@ class ClientsController extends Controller
                 return json_encode(['status'=> true, 'message'=> 'Success']);
             }
         }
-        return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+        return json_encode(['status'=> false, 'message'=> ['Something went wrong.']]);
     }
 
     /**
