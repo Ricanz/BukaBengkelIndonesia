@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
@@ -56,69 +57,77 @@ class ClientsController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
-        $img = Utils::uploadImage($request->file, 300);
-        
-        if ($request->kabeng) {
-            $usr = User::where('email', strtolower($request->kabeng))->first();
-            if (!$usr) {
-                $email = Utils::generateEmail($request->kabeng);
-                $user = User::create([
-                    'name' => $request->kabeng,
-                    'email' => $email,
-                    'password' => Hash::make('pass.123'),
-                    'role' => 'client'
-                ]);
-            } else {
-                $user = $usr;
-                $employee = Employee::where('is_kabeng', true)->where('user_id', $usr->id)->first();
-                $total = Client::where('kabeng_id', $user->id)->count();
-                // dd($total , $employee->quota);
-                if (floatval($user->quota) <= floatval($total)) {
-                    return json_encode(['status'=> false, 'message'=> ['Kuota Bengkel Habis']]);
+        DB::beginTransaction();
+        try {
+
+            $img = Utils::uploadImage($request->file, 300);
+
+            if ($request->kabeng) {
+                $usr = User::where('email', strtolower($request->kabeng))->first();
+                if (!$usr) {
+                    $email = Utils::generateEmail($request->kabeng);
+                    $user = User::create([
+                        'name' => $request->kabeng,
+                        'email' => $email,
+                        'password' => Hash::make('pass.123'),
+                        'role' => 'client'
+                    ]);
+                    $submit = Client::create([
+                        'title' => $request->name,
+                        'description' => $request->description,
+                        'code' => $request->id,
+                        'image' => $img,
+                        'address' => $request->address,
+                        'city' => $request->city,
+                        'status' => 'active',
+                        'kabeng_id' => $user->id
+                    ]);
+                    Employee::create([
+                        'user_id' => $user->id,
+                        'client_id' => $submit->id,
+                        'fullname' => $request->kabeng,
+                        'is_kabeng' => true,
+                        'quota' => $request->kuota
+                    ]);
+                } else {
+                    $user = $usr;
+                    $employee = Employee::where('is_kabeng', true)->where('user_id', $usr->id)->first();
+                    $total = Client::where('kabeng_id', $user->id)->count();
+
+                    if (floatval($employee->quota) <= floatval($total)) {
+                        DB::rollBack();
+                        return json_encode(['status' => false, 'message' => ['Kuota Bengkel Habis']]);
+                    }
+
+                    $submit = Client::create([
+                        'title' => $request->name,
+                        'description' => $request->description,
+                        'code' => $request->id,
+                        'image' => $img,
+                        'address' => $request->address,
+                        'city' => $request->city,
+                        'status' => 'active',
+                        'kabeng_id' => $user->id
+                    ]);
+                }
+
+                if ($submit) {
+                    DB::commit();
+                    return json_encode(['status' => true, 'message' => 'Success']);
                 }
             }
 
-            $submit = Client::create([
-                'title' => $request->name,
-                'description' => $request->description,
-                'code' => $request->id,
-                'image' => $img,
-                'address' => $request->address,
-                'city' => $request->city,
-                'status' => 'active',
-                'kabeng_id' => $user->id
-            ]);
-            if (!$user) {
-                Employee::create([
-                    'user_id' => $user->id,
-                    'client_id' => $submit->id,
-                    'fullname' => $request->kabeng, 
-                    'is_kabeng' => true,
-                    'quota' => $request->kuota
-                ]);
-            }
-            if ($submit) {
-                return json_encode(['status'=> true, 'message'=> 'Success']);
-            }
-        } else {
-            $submit = Client::create([
-                'title' => $request->name,
-                'description' => $request->description,
-                'code' => $request->id,
-                'image' => $img,
-                'address' => $request->address,
-                'city' => $request->city,
-                'status' => 'active',
-                'kabeng_id' => Auth::user()->id
-            ]);
-            if ($submit) {
-                return json_encode(['status'=> true, 'message'=> 'Success']);
-            }
+            DB::rollBack();
+            return json_encode(['status' => false, 'message' => ['Terjadi kesalahan, periksa data. Pastikan data Kabeng terisi.']]);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return json_encode(['status' => false, 'message' => ['Terjadi kesalahan, periksa data. Pastikan data Kabeng terisi.']]);
         }
-        return json_encode(['status'=> false, 'message'=> ['Something went wrong.']]);
+
     }
 
     /**
@@ -165,7 +174,7 @@ class ClientsController extends Controller
         ]);
 
         if ($validation->fails()) {
-            return json_encode(['status'=> false, 'message'=> $validation->messages()]);
+            return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
         if ($request->has('file')) {
             $img = Utils::uploadImage($request->file, 300);
@@ -175,7 +184,7 @@ class ClientsController extends Controller
 
         if (isset($request->quota)) {
             $kabeng = Employee::where('user_id', $client->kabeng_id)->where('is_kabeng', true)->first();
-            
+
             $kabeng->quota = $request->quota;
             $kabeng->save();
         }
@@ -194,9 +203,9 @@ class ClientsController extends Controller
         $client->image = $request->has('file') ? $img : $client->image;
         $client->description = $request->description ? $request->description : $client->description;
         if ($client->save()) {
-            return json_encode(['status'=> true, 'message'=> 'Success']);
+            return json_encode(['status' => true, 'message' => 'Success']);
         } else {
-            return json_encode(['status'=> false, 'message'=> 'Something went wrong.']);
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }
 
@@ -241,21 +250,22 @@ class ClientsController extends Controller
     {
         $auth = Auth::user();
         if ($auth->role === 'admin') {
-            return json_encode(['status'=> true, 'message'=> 'Success']);
-        } else if($auth->role === 'client'){
+            return json_encode(['status' => true, 'message' => 'Success']);
+        } else if ($auth->role === 'client') {
             $kuota = Employee::where('user_id', $auth->id)
-            ->pluck('quota')
-            ->first();
+                ->pluck('quota')
+                ->first();
 
             $total_bengkel = Client::where('status', 'active')
-            ->where('kabeng_id', $auth->id)
-            ->count();
-            
-            return json_encode(['status'=> true, 'message'=> 'Success', 'total' => $total_bengkel, 'kuota' => floatval($kuota)]);
+                ->where('kabeng_id', $auth->id)
+                ->count();
+
+            return json_encode(['status' => true, 'message' => 'Success', 'total' => $total_bengkel, 'kuota' => floatval($kuota)]);
         }
     }
 
-    public function download_bengkel(){
-        return Excel::download(new BengkelExport, 'bengkel-'.date('y-m-d').'.xlsx');
+    public function download_bengkel()
+    {
+        return Excel::download(new BengkelExport, 'bengkel-' . date('y-m-d') . '.xlsx');
     }
 }
