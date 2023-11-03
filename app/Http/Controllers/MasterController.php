@@ -104,6 +104,12 @@ class MasterController extends Controller
         if (!$data) {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
+        $img = null;
+        if ($request->has('file')) {
+            $img = $request->has('file') ? Utils::uploadImage($request->file, 300) : null;
+        }
+
+        $data->icon = $request->has('file') ? $img : $data->icon;
         $data->name = $request->label_judul ? $request->label_judul : $data->label_judul;
         $data->description = $request->label_foto ? $request->label_foto : $data->label_foto;
         $data->status = $request->status ? $request->status : $data->status;
