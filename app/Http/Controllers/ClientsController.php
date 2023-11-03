@@ -153,7 +153,8 @@ class ClientsController extends Controller
         $count = Client::where('kabeng_id', $client->kabeng_id)->where('status', 'active')->count();
         $quota = Employee::where('user_id', $client->kabeng_id)->pluck('quota')->first();
         $expired_at = Carbon::parse($client->expired_at)->format('d M Y');
-        return view('sadmin.clients.edit', compact('client', 'count', 'quota', 'expired_at'));
+        $kabeng = Employee::where('user_id', $client->kabeng_id)->first();
+        return view('sadmin.clients.edit', compact('client', 'count', 'quota', 'expired_at', 'kabeng'));
     }
 
     /**

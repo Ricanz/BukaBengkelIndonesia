@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Kabeng</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <a href="{{ route('employee.show', $client->kabeng->id) }}" class="form-control">{{ $client->kabeng->fullname }}</a>
+                            <a href="{{ route('employee.show', $kabeng->id) }}" class="form-control">{{ $kabeng->fullname }}</a>
                         </div>
                     </div>
                     <div class="form-group row">
