@@ -53,12 +53,13 @@
                             <div class="form-group mb-5">
                                 <x-text-input id="email" class="form-control h-auto form-control-solid py-4 px-8" type="email" name="email"
                                     :value="old('email')" placeholder="Email" name="email" required autofocus autocomplete="email" />
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                {{-- <x-input-error :messages="$errors->get('email')" class="mt-2" /> --}}
                             </div>
                             <div class="form-group mb-5">
                                 <x-text-input id="password" class="form-control h-auto form-control-solid py-4 px-8" type="password" name="password"
                                 :value="old('password')" placeholder="Password" name="password" required autofocus autocomplete="password" />
-                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                {{-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> --}}
+                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
                             <x-primary-button class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
                                 {{ __('Masuk') }}
