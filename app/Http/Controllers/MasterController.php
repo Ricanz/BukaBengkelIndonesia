@@ -40,7 +40,7 @@ class MasterController extends Controller
     {
 
         $validation = Validator::make($request->all(), [
-            'file' => 'required',
+            // 'file' => 'required',
             'label_judul' => 'required',
             'label_foto' => 'required',
         ]);
