@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Utils;
 use App\Models\Checking;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\StandartChecking;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class GeneralController extends Controller
 {
@@ -46,5 +49,30 @@ class GeneralController extends Controller
                 return view('sadmin.employee-dashboard', compact('employee', 'standart_checking', 'complete_checking', 'total', 'checking'));
                 break;
         }
+    }
+
+    public function user_profile()
+    {
+        $user = Auth::user();
+        $employee = Employee::with('user')->where('user_id', $user->id)->first();
+        return view('sadmin.profile.show', compact('employee'));
+    }
+
+    public function post_user_profile(Request $request)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        $employee = Employee::where('user_id', $user->id)->first();
+        
+        $user->email = $request->email ? $request->email : $user->email;
+        $user->name = $request->fullname ? $request->fullname : $employee->fullname;
+        $user->password = $request->password ? Hash::make($request->password) : $user->password;
+        $user->save();
+
+        $employee->image = $request->has('file') ? Utils::uploadImage($request->file, 300) : $employee->image;
+        $employee->fullname = $request->fullname ? $request->fullname : $employee->fullname;
+        $employee->save();
+        
+        return json_encode(['status' => true, 'message' => ['Success']]);
+
     }
 }

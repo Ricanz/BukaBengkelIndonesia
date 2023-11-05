@@ -53,6 +53,8 @@ Route::middleware('auth')->group(function () {
     //     return view('sadmin.index');
     // });
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
+    Route::get('/user-profile', [GeneralController::class, 'user_profile'])->name('user_profile');
+    Route::post('/user-profile', [GeneralController::class, 'post_user_profile'])->name('update_user_profile');
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
