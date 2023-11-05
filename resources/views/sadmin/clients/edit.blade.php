@@ -77,13 +77,23 @@
                             value="{{ $count }}" disabled />
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Kuota</label>
-                        <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="quota"
-                            value="{{ $quota }}" />
+                    @if (Auth::user()->role === 'admin')
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kuota</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="quota"
+                                value="{{ $quota }}" />
+                            </div>
                         </div>
-                    </div>
+                    @elseif (Auth::user()->role === 'client')
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Kuota</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="quota"
+                                value="{{ $quota }}" disabled/>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Tanggal Kadaluwarsa {{ $expired_at }}</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
