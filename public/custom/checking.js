@@ -5,9 +5,9 @@ var KTDatatablesDataSourceAjaxClient = function() {
 
 	var initTable1 = function() {
 		var table = $('#kt_datatable');
-
 		// begin first table
 		table.DataTable({
+            order:[9,'desc'],
 			responsive: true,
 			ajax: {
 				url: '/checking/data',
