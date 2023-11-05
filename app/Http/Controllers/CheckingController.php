@@ -99,7 +99,7 @@ class  CheckingController extends Controller
                 'blower' => $request->blower,
                 'fan' => $request->fan,
                 'status' => 'active',
-                'type' => $request->type ? $request->type : 'pre'
+                'type' => 'pre'
             ]);
             return json_encode(['status' => true, 'message' => 'Success']);
         } else {
@@ -207,13 +207,13 @@ class  CheckingController extends Controller
         $extension = $file->getClientOriginalExtension();
 
         if ($extension == 'heic' || $extension == 'heif') {
-            return json_encode(['status' => false, ['message' => 'Tidak bisa upload dengan format .HEIC dan .HEIF']]);
+            return json_encode(['status' => false, 'message' => ['Tidak bisa upload dengan format .HEIC dan .HEIF']]);
         }
 
         $checking = StandartChecking::find($request->checking_id);
 
         if (!$checking) {
-            return json_encode(['status' => false, ['message' => 'Something went wrong.']]);
+            return json_encode(['status' => false, 'message' => ['Something went wrong.']]);
         }
         $submit = CheckingImage::create([
             'image' => Utils::uploadImage($request->file, 300),
