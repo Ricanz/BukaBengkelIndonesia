@@ -120,6 +120,23 @@ class ClientsController extends Controller
                 }
             }
 
+            $user = Auth::user();
+            $submit = Client::create([
+                'title' => $request->name,
+                'description' => $request->description,
+                'code' => $request->id,
+                'image' => $img,
+                'address' => $request->address,
+                'city' => $request->city,
+                'status' => 'active',
+                'kabeng_id' => $user->id
+            ]);
+            
+            if ($submit) {
+                DB::commit();
+                return json_encode(['status' => true, 'message' => 'Success']);
+            }
+
             DB::rollBack();
             return json_encode(['status' => false, 'message' => ['Terjadi kesalahan, periksa data. Pastikan data Kabeng terisi.']]);
 
