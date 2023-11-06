@@ -92,33 +92,34 @@
                                             <h2>Hasil Pre Check</h2>
                                             <div id="form-container">
                                                 <div class="form-group row check-group">
-                                                        <div class="col-lg-9 col-md-9 col-sm-12">
-                                                            <select name="master[]" id="master[]" class="form-control">
-                                                                <option value="" selected>Pilih Check</option>
-                                                                @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
-                                                                    <option value="{{ $type->id }}">{{ $type->name }}
-                                                                    </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
-                                                            <input type="text" class="form-control" name="hasil[]"
-                                                                placeholder="Cth: 261 Psi" />
-                                                        </div>
-                                                        <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
-                                                            <select name="hasil_check[]" id="hasil_check[]" class="form-control">
-                                                                <option value="1" selected>Lolos</option>
-                                                                <option value="0" >Tidak Lolos</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                                            <input type="text" class="form-control" name="judul_hasil[]"
-                                                                placeholder="Cth: Kompresor" />
-                                                        </div>
-                                                        <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                                            <input type="text" class="form-control" name="result[]"
-                                                                placeholder="Cth: Berfungsi Normal" />
-                                                        </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                                        <select name="master[]" id="master[]" class="form-control">
+                                                            <option value="" selected>Pilih Check</option>
+                                                            @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
+                                                                <option value="{{ $type->id }}">{{ $type->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
+                                                        <input type="text" class="form-control" name="hasil[]"
+                                                            placeholder="Cth: 261 Psi" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
+                                                        <select name="hasil_check[]" id="hasil_check[]" class="form-control">
+                                                            <option value="1" selected>Lolos</option>
+                                                            <option value="0" >Tidak Lolos</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                                                        <input type="text" class="form-control" name="judul_hasil[]"
+                                                            placeholder="Cth: Kompresor" />
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                                                        <input type="text" class="form-control" name="result[]"
+                                                            placeholder="Cth: Berfungsi Normal" />
+                                                    </div>
+                                                    <div class="cursor-pointer btn btn-danger"  id="deleteButton">Hapus</div>
                                                 </div>
                                             </div>
                                             <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>

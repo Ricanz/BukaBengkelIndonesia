@@ -12,6 +12,13 @@ $(document).ready(function() {
         // Kosongkan nilai input yang telah diclone
         clonedFormGroup.find("input[type='text']").val("");
     });
+
+    $("#deleteButton").click(function(e) {
+        alert("halo")
+        console.log(e);
+        e.preventDefault();
+        $(this).parent().remove();
+    });
 });
 var KTDatatablesDataSourceAjaxClient = function() {
 

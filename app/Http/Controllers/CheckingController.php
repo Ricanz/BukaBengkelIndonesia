@@ -83,7 +83,9 @@ class  CheckingController extends Controller
             'type_id' => $request->type,
             'status' => 'active',
             'checking_type' => 'standart',
-            'number' => $formattedNextNumber
+            'number' => $formattedNextNumber,
+            'saran' => $request->saran,
+            'note' => $request->catatan
         ]);
         if ($checking) {
             StandartChecking::create([
