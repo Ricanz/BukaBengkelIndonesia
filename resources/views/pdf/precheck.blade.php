@@ -441,7 +441,7 @@
                     <td class="ic-three" style="width: 200px;">
                         *Sumber Refrensi
                         <div id="image-head" style="width: auto; height:50px;">
-                            <img src="{{ env('APP_URL').'/storage/1696161843_6519603377c87.jpg' }}"
+                            <img src="{{ env('APP_URL').'/tadmin/images/denso-sumber.jpg' }}"
                                 alt="Logo" style="height:25px;object-fit:contain">
                         </div>
                     </td>
