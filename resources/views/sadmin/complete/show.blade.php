@@ -242,6 +242,7 @@
                                         placeholder="Cth: Berfungsi Normal"
                                         value="{{ $checking->complete[$i]->value }}" />
                                 </div>
+                                <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
                             </div>
                         @endfor
                     </div>

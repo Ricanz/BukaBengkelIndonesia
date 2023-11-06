@@ -35,7 +35,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" name="result[]"
                     placeholder="Cth: Berfungsi Normal" />
             </div>
-            <div class="cursor-pointer btn btn-danger"  onclick="hapusCheck(event)">Hapus</div>
+            <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
         </div>`;
         $("#form-container").append(cloned);
 

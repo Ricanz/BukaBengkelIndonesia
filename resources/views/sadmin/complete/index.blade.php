@@ -119,7 +119,7 @@
                                                         <input type="text" class="form-control" name="result[]"
                                                             placeholder="Cth: Berfungsi Normal" />
                                                     </div>
-                                                    <div class="cursor-pointer btn btn-danger"  onclick="hapusCheck(event)">Hapus</div>
+                                                    <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
                                                 </div>
                                             </div>
                                             <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>
