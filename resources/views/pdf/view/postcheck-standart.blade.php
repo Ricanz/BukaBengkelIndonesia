@@ -16,10 +16,10 @@
 
     <div id="content">
         <div id="background">
-            <img src="https://development.bukabengkelindonesia.com/tadmin/media/images/logo-192x192.png" id="bg-wt">
+            <img src="{{ env('APP_URL').'/tadmin/media/images/logo-192x192.png' }}" id="bg-wt">
         </div>
         <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
-            <img src="{{ 'https://development.bukabengkelindonesia.com'.$checking->client->image }}"
+            <img src="{{  env('APP_URL').'/'.$checking->client->image }}"
                 alt="Logo" style="height:75px;object-fit:contain">
         </div>
         <div id="head-content">
@@ -54,7 +54,7 @@
                 </tr>
                 <tr>
                     <td class="bodr-rc" style="padding: 10px;">
-                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_high_pressure.png"
+                        <img src="{{ env('APP_URL').'/tadmin/images/icon_high_pressure.png' }}"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">
@@ -84,7 +84,7 @@
                 </tr>
                 <tr style="background-color: #f6f8fd;">
                     <td class="bodr-rc"  style="padding: 10px;">
-                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_low_pressure.png"
+                        <img src="{{ env('APP_URL').'/tadmin/images/icon_low_pressure.png' }}"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
@@ -112,7 +112,7 @@
                 </tr>
                 <tr>
                     <td class="bodr-rc"  style="padding: 10px;">
-                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_temperature.png"
+                        <img src="{{ env('APP_URL').'/tadmin/images/icon_temperature.png' }}"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 7 °C</b></td>
@@ -140,7 +140,7 @@
                 </tr>
                 <tr style="background-color: #f6f8fd;">
                     <td class="bodr-rc"  style="padding: 10px;">
-                        <img src="https://development.bukabengkelindonesia.com/tadmin/images/icon_windspeed.png"
+                        <img src="{{ env('APP_URL').'/tadmin/images/icon_windspeed.png' }}"
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
@@ -174,7 +174,7 @@
                     <td class="ic-three" style="width: 200px;">
                         *Sumber Refrensi
                         <div id="image-head" style="width: auto; height:50px;">
-                            <img src="https://development.bukabengkelindonesia.com/storage/1696161843_6519603377c87.jpg"
+                            <img src="{{ env('APP_URL').'/tadmin/images/denso-sumber.jpg' }}"
                                 alt="Logo" style="height:25px;object-fit:contain">
                         </div>
                     </td>
@@ -195,7 +195,7 @@
                                     <center>
                                         <div class="ic-mt">
                                             <div id="bg-image">
-                                                <img src="{{'https://development.bukabengkelindonesia.com'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
                                                 <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
                                             </div>
                                         </div>
