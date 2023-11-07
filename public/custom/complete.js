@@ -33,7 +33,7 @@ function hapusCheck(e){
     // var idx = countCheckGroups - 1;
     // $(".check-group").eq(idx).remove();
 
-    const clickedButton = event.target;
+    const clickedButton = e.target;
 
     // Get the parent container of the button
     const parentContainer = clickedButton.closest('.check-group');
