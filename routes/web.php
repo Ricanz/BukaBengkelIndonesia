@@ -7,6 +7,7 @@ use App\Http\Controllers\CompleteController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\MasterController;
+use App\Http\Controllers\MasterItemController;
 use App\Http\Controllers\MasterTypeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceAdvisorController;
@@ -130,6 +131,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/master/update', [MasterController::class, 'update'])->name('advisor.update');
 
     Route::get('/master/complete', [MasterController::class, 'index'])->name('master.index');
+
+    // Master Item
+    Route::get('/master/item', [MasterItemController::class, 'index'])->name('master_item');
+    Route::post('/master/item/store', [MasterItemController::class, 'store'])->name('master_item.store');
+    Route::get('/master/item/data', [MasterItemController::class, 'data'])->name('master_item.data');
+    Route::get('/master/item/destroy/{id}', [MasterItemController::class, 'destroy'])->name('master_item.destroy');
+    Route::get('/master/item/edit/{id}', [MasterItemController::class, 'edit'])->name('master_item.edit');
+    Route::post('/master/item/update', [MasterItemController::class, 'update'])->name('master_item.update');
 
     // Complete Checking
     Route::get('/checking/complete', [CompleteController::class, 'index'])->name('complete.index');

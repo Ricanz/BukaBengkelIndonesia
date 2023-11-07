@@ -38,7 +38,6 @@ class MasterController extends Controller
      */
     public function store(Request $request)
     {
-
         $validation = Validator::make($request->all(), [
             // 'file' => 'required',
             'label_judul' => 'required',
