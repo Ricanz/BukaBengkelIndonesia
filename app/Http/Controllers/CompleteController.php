@@ -150,16 +150,19 @@ class CompleteController extends Controller
 
         if ($checking->save()) {
             if (count($request->master) > 0) {
-                $total_record = CompleteChecking::where('checking_id', $checking->id)->where('type', 'pre')->count();
+                // $total_record = CompleteChecking::where('checking_id', $checking->id)->where('type', 'pre')->count(); 
+                CompleteChecking::where('checking_id', $checking->id)->update([
+                    'status' => 'inactive'
+                ]);
                 foreach ($request->master as $key => $value) {
-                    if ($key < $total_record) {
-                        $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
-                        $complete->value_title = $request->judul_hasil[$key];
-                        $complete->value = $request->result[$key];
-                        $complete->val_check = $request->hasil[$key];
-                        $complete->pass = $request->hasil_check[$key];
-                        $complete->save();
-                    } else {
+                    // if ($key < $total_record) {
+                    //     $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
+                    //     $complete->value_title = $request->judul_hasil[$key];
+                    //     $complete->value = $request->result[$key];
+                    //     $complete->val_check = $request->hasil[$key];
+                    //     $complete->pass = $request->hasil_check[$key];
+                    //     $complete->save();
+                    // } else {
                         CompleteChecking::create([
                             'master_checking_id' => $value,
                             'checking_id' => $checking->id,
@@ -170,7 +173,7 @@ class CompleteController extends Controller
                             'val_check' => $request->hasil[$key],
                             'pass' => $request->hasil_check[$key]
                         ]);
-                    }
+                    // }
                 }
             }
             return json_encode(['status' => true, 'message' => 'Success']);

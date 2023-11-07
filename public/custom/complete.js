@@ -6,38 +6,9 @@ $(document).ready(function() {
     // Menggunakan event click pada tombol "Tambah Check"
     $("#addCheckButton").click(function() {
         // Clone elemen form-group dan tambahkan ke dalam form-container
-        // var clonedFormGroup = $(".check-group").first().clone();
-        var cloned = `<div class="form-group row check-group">
-            <div class="col-lg-9 col-md-9 col-sm-12">
-                <select name="master[]" id="master[]" class="form-control">
-                    <option value="" selected>Pilih Check</option>
-                    @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
-                        <option value="{{ $type->id }}">{{ $type->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
-                <input type="text" class="form-control" name="hasil[]"
-                    placeholder="Cth: 261 Psi" />
-            </div>
-            <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
-                <select name="hasil_check[]" id="hasil_check[]" class="form-control">
-                    <option value="1" selected>Lolos</option>
-                    <option value="0" >Tidak Lolos</option>
-                </select>
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                <input type="text" class="form-control" name="judul_hasil[]"
-                    placeholder="Cth: Kompresor" />
-            </div>
-            <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                <input type="text" class="form-control" name="result[]"
-                    placeholder="Cth: Berfungsi Normal" />
-            </div>
-            <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
-        </div>`;
-        $("#form-container").append(cloned);
+        var clonedFormGroup = $(".check-group").first().clone();
+        
+        $("#form-container").append(clonedFormGroup);
 
         // Kosongkan nilai input yang telah diclone
         clonedFormGroup.find("input[type='text']").val("");
@@ -45,10 +16,38 @@ $(document).ready(function() {
 });
 
 function hapusCheck(e){
-    console.log(e);
     var countCheckGroups = $(".check-group").length;
-    var idx = countCheckGroups - 2;
-    $(".check-group").eq(idx).remove();
+    if (countCheckGroups <=1 ) {
+        return swal.fire({
+            text: "Gagal hapus! Minimal harus ada 1 data",
+            icon: "error",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn font-weight-bold btn-light-primary"
+            }
+        }).then(function() {
+             
+        });
+    }
+    // var idx = countCheckGroups - 1;
+    // $(".check-group").eq(idx).remove();
+
+    const clickedButton = event.target;
+
+    // Get the parent container of the button
+    const parentContainer = clickedButton.closest('.check-group');
+
+    if (parentContainer) {
+        // Find the index of the parent container among its siblings
+        const index = Array.from(parentContainer.parentElement.children).indexOf(parentContainer);
+        
+        // Output the index (you can use it as needed)
+        console.log('Clicked button index:', index);
+
+        // Remove the parent container if needed
+        parentContainer.remove();
+    }
 }
 var KTDatatablesDataSourceAjaxClient = function() {
 
@@ -57,6 +56,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
 
 		// begin first table
 		table.DataTable({
+            order: [9, 'desc'],
 			responsive: true,
 			ajax: {
 				url: '/complete/data',

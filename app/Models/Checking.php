@@ -51,16 +51,16 @@ class Checking extends Model
 
     public function complete(): HasMany
     {
-        return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'pre');
+        return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'pre')->where('status', 'active');
     }
 
     public function complete_post(): HasOne
     {
-        return $this->hasOne(CompleteChecking::class, 'checking_id', 'id')->where('type', 'post');
+        return $this->hasOne(CompleteChecking::class, 'checking_id', 'id')->where('type', 'post')->where('status', 'active');
     }
 
     public function complete_posts(): HasMany
     {
-        return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'post');
+        return $this->hasMany(CompleteChecking::class, 'checking_id', 'id')->where('type', 'post')->where('status', 'active');
     }
 }
