@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower (4 °C - 7 °C)</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower (4 °C - 8 °C)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="suhu"
                                 placeholder="Masukkan Suhu Blower Kendaraan" />

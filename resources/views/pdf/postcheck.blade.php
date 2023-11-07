@@ -419,21 +419,21 @@
                         <img src="{{ env('APP_URL').'/tadmin/images/icon_temperature.png' }}"
                             width="30" height="30" />
                     </td>
-                    <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 7 °C</b></td>
-                    @if ((int)$checking->standart->suhu >= 4 && (int)$checking->standart->suhu <= 7)
+                    <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 8 °C</b></td>
+                    @if ((int)$checking->standart->suhu >= 4 && (int)$checking->standart->suhu <= 8)
                         <td class="bodl-rc text-center pass-check">
                             <strong>{{ $checking->standart->suhu }}</strong> Psi
                         </td>
-                    @elseif((int)$checking->standart->suhu < 4 || (int)$checking->standart->suhu > 7)
+                    @elseif((int)$checking->standart->suhu < 4 || (int)$checking->standart->suhu > 8)
                         <td class="bodl-rc text-center not-pass-check">
                             <strong>{{ $checking->standart->suhu }}</strong> Psi
                         </td>
                     @endif
-                    @if ((int)$checking->post->suhu >= 4 && (int)$checking->post->suhu <= 7)
+                    @if ((int)$checking->post->suhu >= 4 && (int)$checking->post->suhu <= 8)
                         <td class="bodl-rc text-center pass-check">
                             <strong>{{ $checking->post->suhu }}</strong> Psi
                         </td>
-                    @elseif((int)$checking->post->suhu < 4 || (int)$checking->post->suhu > 7)
+                    @elseif((int)$checking->post->suhu < 4 || (int)$checking->post->suhu > 8)
                         <td class="bodl-rc text-center not-pass-check">
                             <strong>{{ $checking->post->suhu }}</strong> Psi
                         </td>
