@@ -34,7 +34,7 @@
                             <select name="advisor" id="advisor" class="form-control">
                                 <option value="{{ $check->sa_id }}" selected>{{ $check->advisor->name }}
                                     @if (Auth::user()->role !== 'admin')
-                                        @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                        @foreach(App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->orderBy('name')->get() as $advisor)
                                             <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
                                         @endforeach
                                     @endif

@@ -68,7 +68,7 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="advisor" id="advisor" class="form-control">
                                                         <option value="" selected>Pilih Service Advisor</option>
-                                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->orderBy('name')->get() as $advisor)
                                                             <option value="{{ $advisor->id }}">{{ $advisor->name }}
                                                             </option>
                                                         @endforeach
