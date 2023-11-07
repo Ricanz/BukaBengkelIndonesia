@@ -132,29 +132,38 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Kompressor:
-                                                </label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Kompresor:</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
-                                                    <input type="text" class="form-control" name="compressor"
-                                                        placeholder="Masukkan Kompresor" max="30" />
+                                                    <select name="compressor" id="compressor" class="form-control">
+                                                        @foreach(explode(', ', App\Models\MasterItem::where('item', 'Kompresor')->pluck('checklist')->first()) as $client)
+                                                            <option value="{{ $client }}">{{ $client }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air
-                                                    Filter: </label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter:</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
-                                                    <input type="text" class="form-control" name="cabin"
-                                                        placeholder="Masukkan Cabin Air Filter" max="30" />
+                                                    <select name="cabin" id="cabin" class="form-control">
+                                                        @foreach(explode(', ', App\Models\MasterItem::where('item', 'Cabin Air Filter')->pluck('checklist')->first()) as $client)
+                                                            <option value="{{ $client }}">{{ $client }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Blower:
-                                                </label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Blower:</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
-                                                    <input type="text" class="form-control" name="blower"
-                                                        placeholder="Masukkan Blower" max="30" />
+                                                    <select name="blower" id="blower" class="form-control">
+                                                        @foreach(explode(', ', App\Models\MasterItem::where('item', 'Blower')->pluck('checklist')->first()) as $client)
+                                                            <option value="{{ $client }}">{{ $client }}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group row">
                                                 <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan:
                                                 </label>
