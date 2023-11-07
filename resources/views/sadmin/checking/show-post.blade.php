@@ -246,22 +246,34 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Kompresor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="compressor"
-                                value="{{ $checking->post->compressor }}" />
+                            <select name="compressor" id="compressor" class="form-control">
+                                <option value="{{ $checking->post->compressor }}">{{ $checking->post->compressor }}</option>
+                                @foreach(explode(', ', App\Models\MasterItem::where('item', 'Kompresor')->pluck('checklist')->first()) as $client)
+                                    <option value="{{ $client }}">{{ $client }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="cabin"
-                                value="{{ $checking->post->cabin }}" />
+                            <select name="cabin" id="cabin" class="form-control">
+                                <option value="{{ $checking->post->cabin }}">{{ $checking->post->cabin }}</option>
+                                @foreach(explode(', ', App\Models\MasterItem::where('item', 'Cabin Air Filter')->pluck('checklist')->first()) as $client)
+                                    <option value="{{ $client }}">{{ $client }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Blower</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="blower"
-                                value="{{ $checking->post->blower }}" />
+                            <select name="blower" id="blower" class="form-control">
+                                <option value="{{ $checking->post->blower }}">{{ $checking->post->blower }}</option>
+                                @foreach(explode(', ', App\Models\MasterItem::where('item', 'Blower')->pluck('checklist')->first()) as $client)
+                                    <option value="{{ $client }}">{{ $client }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -270,20 +270,21 @@ class  CheckingController extends Controller
         if (!$checking) {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
+        
         $checking->saran_post = $request->saran;
         $checking->note_post = $request->catatan;
         if ($checking->save()) {
             $post = StandartChecking::where('checking_id', $checking->id)->where('status', 'active')->where('type', 'post')->first();
-            if (!$post) {
-                $post->km = $request->km;
-                $post->high = $request->high;
-                $post->low = $request->low;
-                $post->suhu = $request->suhu;
-                $post->wind = $request->wind;
-                $post->compressor = $request->compressor;
-                $post->cabin = $request->cabin;
-                $post->blower = $request->blower;
-                $post->fan = $request->fan;
+            if ($post) {
+                $post->km = $request->km ? $request->km : $post->km;
+                $post->high = $request->high ? $request->high : $post->high;
+                $post->low = $request->low ? $request->low : $post->low;
+                $post->suhu = $request->suhu ? $request->suhu : $post->suhu;
+                $post->wind = $request->wind ? $request->wind : $post->wind;
+                $post->compressor = $request->compressor ? $request->compressor : $post->compressor;
+                $post->cabin = $request->cabin ? $request->cabin : $post->cabin;
+                $post->blower = $request->blower ? $request->blower : $post->blower;
+                $post->fan = $request->fan ? $request->fan : $post->fan;
                 $post->save();
             } else {
                 StandartChecking::create([
