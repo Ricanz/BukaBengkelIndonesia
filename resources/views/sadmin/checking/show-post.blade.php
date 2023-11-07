@@ -82,7 +82,7 @@
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <select name="description" id="description" class="form-control">
                                                     <option value="" selected>Pilih Deskripsi</option>
-                                                    @foreach (App\Models\MasterChecking::where('status', 'active')->where('type', 'standart')->get() as $check)
+                                                    @foreach (App\Models\MasterChecking::where('status', 'active')->where('type', 'standart')->orderBy('description')->get() as $check)
                                                         <option value="{{ $check->id }}">
                                                             {{ $check->description }}
                                                         </option>
