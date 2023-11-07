@@ -43,7 +43,7 @@
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="type" id="type" class="form-control">
                                 <option value="" selected>Pilih Tipe</option>
-                                @foreach(App\Models\MasterType::where('status', 'active')->get() as $type)
+                                @foreach(App\Models\MasterType::where('status', 'active')->orderBy('name')->get() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>

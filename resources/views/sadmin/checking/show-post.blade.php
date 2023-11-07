@@ -198,7 +198,7 @@
                             <select name="type" id="type" class="form-control" disabled>
                                 <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
                                 </option>
-                                @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
+                                @foreach (App\Models\MasterType::where('status', 'active')->orderBy('name')->get() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>
