@@ -38,7 +38,7 @@ Route::get('/pre-check', function () {
 });
 
 Route::get('/success-backup', function () {
-    return view('pdf.pre-check');
+    return view('sadmin.backup.success');
 });
 
 Route::get('/check-pdf/{id}', [CheckingController::class, 'pdf'])->name('download');
