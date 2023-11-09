@@ -4,12 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Utils;
 use App\Models\Checking;
+use App\Models\CheckingImage;
 use App\Models\Client;
 use App\Models\Employee;
+use App\Models\MasterChecking;
+use App\Models\MasterType;
+use App\Models\ServiceAdvisor;
 use App\Models\StandartChecking;
+use App\Models\StandartChecking2;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class GeneralController extends Controller
@@ -74,5 +81,123 @@ class GeneralController extends Controller
         
         return json_encode(['status' => true, 'message' => ['Success']]);
 
+    }
+
+    public function backup()
+    {
+        return view('sadmin.backup.index');
+    }
+
+    public function backup_store(Request $request)
+    {
+        $standart = StandartChecking2::where('no_wo', $request->wo)->first();
+        $client_id = Client::whereRaw('LOWER(title) = ?', [strtolower($request->client)])->pluck('id')->first();
+        $sa_id = ServiceAdvisor::whereRaw('LOWER(name) = ?', [strtolower($request->sa)])->pluck('id')->first();
+        $type_id = MasterType::whereRaw('LOWER(name) = ?', [strtolower($request->type)])->pluck('id')->first();
+
+        $lastNumber = Checking::where('client_id', $client_id)->orderByDesc('number')->pluck('number')->first();
+        $nextNumber = (int)$lastNumber + 1;
+        $formattedNextNumber = sprintf('%06d', $nextNumber);
+
+        $wo = Utils::generateStaticWo();
+
+        // DB::beginTransaction();
+        // try {
+            $checking = Checking::create([
+                'user_id' => 32,
+                'employee_id' => 9,
+                'client_id' => $client_id,
+                'sa_id' => $sa_id,
+                'wo' => $wo,
+                'plat_number' => $standart->nopol,
+                'type_id' => $type_id,
+                'status' => 'active',
+                'checking_type' => 'standart',
+                'number' => $formattedNextNumber,
+                'saran' => $standart->saran_perbaikan,
+                'note' => null
+            ]);
+    
+            if ($checking) {
+                StandartChecking::create([
+                    'checking_id' => $checking->id,
+                    'km' => $standart->kilometer,
+                    'high' => Utils::check_text($standart->high_pressure),
+                    'low' => Utils::check_text($standart->low_pressure),
+                    'suhu' => Utils::check_text($standart->suhu_blower),
+                    'wind' => Utils::check_text($standart->wind_speed),
+                    'saran' => $standart->saran_perbaikan,
+                    'compressor' => 'Berfungsi Normal',
+                    'cabin' => 'Bersih',
+                    'blower' => 'Berfungsi',
+                    'fan' => '',
+                    'status' => 'active',
+                    'type' => 'pre'
+                ]);
+
+                CheckingImage::create([
+                    'checking_id' => $checking->id,
+                    'checking_type' => 'standart',
+                    'image' => Utils::uploadImageByLink($standart->img_tampak_depan),
+                    'desc_id' => 18,
+                    'type' => 'pre',
+                    'status' => 'active',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+                CheckingImage::create([
+                    'checking_id' => $checking->id,
+                    'checking_type' => 'standart',
+                    'image' => Utils::uploadImageByLink($standart->img_km),
+                    'desc_id' => 22,
+                    'type' => 'pre',
+                    'status' => 'active',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+                CheckingImage::create([
+                    'checking_id' => $checking->id,
+                    'checking_type' => 'standart',
+                    'image' => Utils::uploadImageByLink($standart->img_suhu),
+                    'desc_id' => 19,
+                    'type' => 'pre',
+                    'status' => 'active',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+                CheckingImage::create([
+                    'checking_id' => $checking->id,
+                    'checking_type' => 'standart',
+                    'image' => Utils::uploadImageByLink($standart->img_blower),
+                    'desc_id' => 20,
+                    'type' => 'pre',
+                    'status' => 'active',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+                CheckingImage::create([
+                    'checking_id' => $checking->id,
+                    'checking_type' => 'standart',
+                    'image' => Utils::uploadImageByLink($standart->img_evaporator),
+                    'desc_id' => 24,
+                    'type' => 'pre',
+                    'status' => 'active',
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+                DB::commit();
+                return json_encode(['status' => true, 'message' => 'Success']);
+        //     } else {
+        //         DB::rollBack();
+        //         return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+        //     }
+        // } catch (\Throwable $th) {
+        //     DB::rollBack();
+        //     return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+        }
     }
 }

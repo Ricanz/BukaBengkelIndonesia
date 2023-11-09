@@ -101,7 +101,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter:</label>
+                        <label class="col-form-labe l text-left col-lg-3 col-sm-12">Cabin Air Filter:</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="cabin" id="cabin" class="form-control">
                                 @foreach(explode(', ', App\Models\MasterItem::where('item', 'Cabin Air Filter')->pluck('checklist')->first()) as $client)
@@ -120,7 +120,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div> 
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan: </label>
                         <div class="col-lg-9 col-md-9 col-sm-12">

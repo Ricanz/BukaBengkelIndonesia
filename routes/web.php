@@ -47,6 +47,8 @@ Route::get('/view/standart-post-pdf/{id}', [CheckingController::class, 'view_pdf
 Route::get('/view/complete-pdf/{id}', [CompleteController::class, 'view_pdf'])->name('pdf.complete_pre');
 Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf_post'])->name('pdf.complete_post');
 
+Route::get('/backup', [GeneralController::class, 'backup']);
+Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
 
 
 Route::middleware('auth')->group(function () {
