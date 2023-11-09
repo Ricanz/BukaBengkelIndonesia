@@ -61,6 +61,9 @@
                                 {{-- <x-input-error :messages="$errors->get('password')" class="mt-2" /> --}}
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
+                            @if(request('status') == 'expired')
+                                <x-input-error :messages="'Akun Anda Expired! Hubungi Kepala Bengkel Untuk Info Lebih Lanjut'" class="mt-2" />
+                            @endif
                             <x-primary-button class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-4">
                                 {{ __('Masuk') }}
                             </x-primary-button>

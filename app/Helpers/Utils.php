@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Checking;
+use App\Models\Client;
 use App\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -112,5 +113,11 @@ class Utils
     {
         $string_with_dots = str_replace(',', '.', $text);
         return $string_with_dots;
+    }
+    
+    public static function get_expired($client_id)
+    {
+        $client = Client::with('kabeng')->where('id', $client_id)->first();
+        return $client->expired_at;
     }
 }

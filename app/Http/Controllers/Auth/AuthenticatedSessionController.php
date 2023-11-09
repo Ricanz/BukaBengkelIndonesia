@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Utils;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Employee;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,6 +31,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
+        if ($user) {   
+            if ($user->role !== 'admin') {
+                $employee = Employee::where('user_id', $user->id)->first();
+                $expired_time = Utils::get_expired($employee->client_id);
+                if ($expired_time && now() > $expired_time) {
+                    Auth::logout();
+                    return redirect('/login?status=expired');
+                }
+            }
+        }
+        
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
