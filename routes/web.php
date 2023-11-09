@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/backup', [GeneralController::class, 'backup']);
     Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
     Route::get('/backup/post', [GeneralController::class, 'backup_post']);
+    Route::post('/backup/post', [GeneralController::class, 'backup_post_store'])->name('backup.post');
 
 
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');

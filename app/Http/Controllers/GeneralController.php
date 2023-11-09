@@ -12,6 +12,7 @@ use App\Models\MasterType;
 use App\Models\ServiceAdvisor;
 use App\Models\StandartChecking;
 use App\Models\StandartChecking2;
+use App\Models\StandartCheckingPost;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -218,5 +219,110 @@ class GeneralController extends Controller
     public function backup_post()
     {
         return view('sadmin.backup.post');
+    }
+
+    public function backup_post_store(Request $request)
+    {
+        $pre = StandartChecking2::where('no_wo', $request->wo)->first();
+
+        $standart = StandartCheckingPost::where('id_pcs', $pre->id_pcs)->first();
+
+        DB::beginTransaction();
+        try {
+            $checking = Checking::where('wo', $request->new_wo)->first();
+            $checking->saran_post = $standart->saran_perbaikan;
+            if ($checking->save()) {
+                $s_checking = StandartChecking::create([
+                    'checking_id' => $checking->id,
+                    'km' => $standart->kilometer,
+                    'high' => Utils::check_text($standart->high_pressure),
+                    'low' => Utils::check_text($standart->low_pressure),
+                    'suhu' => Utils::check_text($standart->suhu_blower),
+                    'wind' => Utils::check_text($standart->wind_speed),
+                    'saran' => $standart->saran_perbaikan,
+                    'compressor' => 'Berfungsi Normal',
+                    'cabin' => 'Bersih',
+                    'blower' => 'Berfungsi',
+                    'fan' => '',
+                    'status' => 'active',
+                    'type' => 'post'
+                ]);
+
+                if ($standart->img_tampak_depan) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_tampak_depan),
+                        'desc_id' => 18,
+                        'type' => 'post',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+
+                if ($standart->img_km) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_km),
+                        'desc_id' => 22,
+                        'type' => 'post',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+
+                if ($standart->img_suhu) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_suhu),
+                        'desc_id' => 19,
+                        'type' => 'post',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+
+                if ($standart->img_blower) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_blower),
+                        'desc_id' => 20,
+                        'type' => 'post',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+
+                if ($standart->img_evaporator) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_evaporator),
+                        'desc_id' => 24,
+                        'type' => 'post',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
+                DB::commit();
+                // return json_encode(['status' => true, 'message' => 'Success']);
+                return redirect('/success-backup');
+            } else {
+                DB::rollBack();
+                return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+            }
+        } catch (\Throwable $th) {
+            dd($th);
+            DB::rollBack();
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+        }
     }
 }
