@@ -121,7 +121,7 @@ class GeneralController extends Controller
             ]);
     
             if ($checking) {
-                StandartChecking::create([
+                $s_checking = StandartChecking::create([
                     'checking_id' => $checking->id,
                     'km' => $standart->kilometer,
                     'high' => Utils::check_text($standart->high_pressure),
@@ -138,7 +138,7 @@ class GeneralController extends Controller
                 ]);
 
                 CheckingImage::create([
-                    'checking_id' => $checking->id,
+                    'checking_id' => $s_checking->id,
                     'checking_type' => 'standart',
                     'image' => Utils::uploadImageByLink($standart->img_tampak_depan),
                     'desc_id' => 18,
@@ -149,7 +149,7 @@ class GeneralController extends Controller
                 ]);
 
                 CheckingImage::create([
-                    'checking_id' => $checking->id,
+                    'checking_id' => $s_checking->id,
                     'checking_type' => 'standart',
                     'image' => Utils::uploadImageByLink($standart->img_km),
                     'desc_id' => 22,
@@ -160,7 +160,7 @@ class GeneralController extends Controller
                 ]);
 
                 CheckingImage::create([
-                    'checking_id' => $checking->id,
+                    'checking_id' => $s_checking->id,
                     'checking_type' => 'standart',
                     'image' => Utils::uploadImageByLink($standart->img_suhu),
                     'desc_id' => 19,
@@ -171,7 +171,7 @@ class GeneralController extends Controller
                 ]);
 
                 CheckingImage::create([
-                    'checking_id' => $checking->id,
+                    'checking_id' => $s_checking->id,
                     'checking_type' => 'standart',
                     'image' => Utils::uploadImageByLink($standart->img_blower),
                     'desc_id' => 20,
@@ -182,7 +182,7 @@ class GeneralController extends Controller
                 ]);
 
                 CheckingImage::create([
-                    'checking_id' => $checking->id,
+                    'checking_id' => $s_checking->id,
                     'checking_type' => 'standart',
                     'image' => Utils::uploadImageByLink($standart->img_evaporator),
                     'desc_id' => 24,
