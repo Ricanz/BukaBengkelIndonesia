@@ -192,7 +192,8 @@ class GeneralController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
                 DB::commit();
-                return json_encode(['status' => true, 'message' => 'Success']);
+                // return json_encode(['status' => true, 'message' => 'Success']);
+                return redirect('/success-backup');
             } else {
                 DB::rollBack();
                 return json_encode(['status' => false, 'message' => 'Something went wrong.']);
