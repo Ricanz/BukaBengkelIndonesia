@@ -95,7 +95,7 @@ class GeneralController extends Controller
         $sa_id = ServiceAdvisor::whereRaw('LOWER(name) = ?', [strtolower($request->sa)])->pluck('id')->first();
         $type_id = MasterType::whereRaw('LOWER(name) = ?', [strtolower($request->type)])->pluck('id')->first();
         $user = Auth::user();
-        $employee_id = Employee::where('user_id', $user->id)->first();
+        $employee_id = Employee::where('user_id', $user->id)->pluck('id')->first();
 
         $lastNumber = Checking::where('client_id', $client_id)->orderByDesc('number')->pluck('number')->first();
         $nextNumber = (int)$lastNumber + 1;
