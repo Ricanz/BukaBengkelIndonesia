@@ -198,6 +198,7 @@ class GeneralController extends Controller
                 return json_encode(['status' => false, 'message' => 'Something went wrong.']);
             }
         } catch (\Throwable $th) {
+            dd($th);
             DB::rollBack();
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
