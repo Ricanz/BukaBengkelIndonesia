@@ -103,8 +103,8 @@ class GeneralController extends Controller
 
         $wo = Utils::generateStaticWo();
 
-        // DB::beginTransaction();
-        // try {
+        DB::beginTransaction();
+        try {
             $checking = Checking::create([
                 'user_id' => $user->id,
                 'employee_id' => $employee_id,
@@ -197,9 +197,9 @@ class GeneralController extends Controller
                 DB::rollBack();
                 return json_encode(['status' => false, 'message' => 'Something went wrong.']);
             }
-    //     } catch (\Throwable $th) {
-    //         DB::rollBack();
-    //         return json_encode(['status' => false, 'message' => 'Something went wrong.']);
-    //     }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+        }
     }
 }
