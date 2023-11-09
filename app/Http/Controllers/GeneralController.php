@@ -230,25 +230,26 @@ class GeneralController extends Controller
         DB::beginTransaction();
         try {
             $checking = Checking::where('wo', $request->new_wo)->first();
-            $checking->saran_post = $standart->saran_perbaikan;
+            $checking->saran_post = substr($standart->po_hasil_pekerjaan, 0, 75);
+            $checking->saran_post = $standart->po_catatan_perbaikan;
             if ($checking->save()) {
                 $s_checking = StandartChecking::create([
                     'checking_id' => $checking->id,
-                    'km' => $standart->kilometer,
-                    'high' => Utils::check_text($standart->high_pressure),
-                    'low' => Utils::check_text($standart->low_pressure),
-                    'suhu' => Utils::check_text($standart->suhu_blower),
-                    'wind' => Utils::check_text($standart->wind_speed),
-                    'saran' => $standart->saran_perbaikan,
-                    'compressor' => 'Berfungsi Normal',
-                    'cabin' => 'Bersih',
-                    'blower' => 'Berfungsi',
+                    'km' => $standart->po_kilometer,
+                    'high' => Utils::check_text($standart->po_high_pressure),
+                    'low' => Utils::check_text($standart->po_low_pressure),
+                    'suhu' => Utils::check_text($standart->po_suhu_blower),
+                    'wind' => Utils::check_text($standart->po_wind_speed),
+                    'saran' => substr($standart->po_hasil_pekerjaan, 0, 75),
+                    'compressor' => $standart->po_kompressor,
+                    'cabin' => $standart->po_cabin_air_filter,
+                    'blower' => $standart->po_blower,
                     'fan' => '',
                     'status' => 'active',
                     'type' => 'post'
                 ]);
 
-                if ($standart->img_tampak_depan) {
+                if ($standart->po_img_tampak_depan) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -261,7 +262,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->img_km) {
+                if ($standart->po_img_km) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -274,7 +275,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->img_suhu) {
+                if ($standart->po_img_suhu) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -287,7 +288,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->img_blower) {
+                if ($standart->po_img_blower) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -300,7 +301,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->img_evaporator) {
+                if ($standart->po_img_evaporator) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
