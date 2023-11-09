@@ -94,6 +94,8 @@ class GeneralController extends Controller
         $client_id = Client::whereRaw('LOWER(title) = ?', [strtolower($request->client)])->pluck('id')->first();
         $sa_id = ServiceAdvisor::whereRaw('LOWER(name) = ?', [strtolower($request->sa)])->pluck('id')->first();
         $type_id = MasterType::whereRaw('LOWER(name) = ?', [strtolower($request->type)])->pluck('id')->first();
+        $user = Auth::user();
+        $employee_id = Employee::where('user_id', $user->id)->first();
 
         $lastNumber = Checking::where('client_id', $client_id)->orderByDesc('number')->pluck('number')->first();
         $nextNumber = (int)$lastNumber + 1;
@@ -101,11 +103,11 @@ class GeneralController extends Controller
 
         $wo = Utils::generateStaticWo();
 
-        // DB::beginTransaction();
-        // try {
+        DB::beginTransaction();
+        try {
             $checking = Checking::create([
-                'user_id' => 32,
-                'employee_id' => 9,
+                'user_id' => $user->id,
+                'employee_id' => $employee_id,
                 'client_id' => $client_id,
                 'sa_id' => $sa_id,
                 'wo' => $wo,
@@ -191,13 +193,13 @@ class GeneralController extends Controller
                 ]);
                 DB::commit();
                 return json_encode(['status' => true, 'message' => 'Success']);
-        //     } else {
-        //         DB::rollBack();
-        //         return json_encode(['status' => false, 'message' => 'Something went wrong.']);
-        //     }
-        // } catch (\Throwable $th) {
-        //     DB::rollBack();
-        //     return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+            } else {
+                DB::rollBack();
+                return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }
 }

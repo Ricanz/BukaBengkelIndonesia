@@ -92,9 +92,9 @@ class Utils
 
     public static function generateStaticWo()
     {
-        $user = 32;
+        $user = Auth::user();
         $now = Carbon::now();
-        $employee = Employee::with('client')->where('user_id', $user)->first();
+        $employee = Employee::with('client')->where('user_id', $user->id)->first();
         $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
 
         $nextNumber = (int)$lastNumber + 1;

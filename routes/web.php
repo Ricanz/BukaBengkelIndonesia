@@ -47,14 +47,16 @@ Route::get('/view/standart-post-pdf/{id}', [CheckingController::class, 'view_pdf
 Route::get('/view/complete-pdf/{id}', [CompleteController::class, 'view_pdf'])->name('pdf.complete_pre');
 Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf_post'])->name('pdf.complete_post');
 
-Route::get('/backup', [GeneralController::class, 'backup']);
-Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
-
 
 Route::middleware('auth')->group(function () {
     // Route::get('/', function () {
     //     return view('sadmin.index');
     // });
+        // Backup
+    Route::get('/backup', [GeneralController::class, 'backup']);
+    Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
+
+
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
     Route::get('/user-profile', [GeneralController::class, 'user_profile'])->name('user_profile');
     Route::post('/user-profile', [GeneralController::class, 'post_user_profile'])->name('update_user_profile');
