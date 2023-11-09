@@ -116,7 +116,7 @@ class GeneralController extends Controller
                 'status' => 'active',
                 'checking_type' => 'standart',
                 'number' => $formattedNextNumber,
-                'saran' => $standart->saran_perbaikan,
+                'saran' => substr($standart->saran_perbaikan, 0, 75),
                 'note' => null
             ]);
     
