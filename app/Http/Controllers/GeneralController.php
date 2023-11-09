@@ -137,60 +137,70 @@ class GeneralController extends Controller
                     'type' => 'pre'
                 ]);
 
-                CheckingImage::create([
-                    'checking_id' => $s_checking->id,
-                    'checking_type' => 'standart',
-                    'image' => Utils::uploadImageByLink($standart->img_tampak_depan),
-                    'desc_id' => 18,
-                    'type' => 'pre',
-                    'status' => 'active',
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+                if ($standart->img_tampak_depan) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_tampak_depan),
+                        'desc_id' => 18,
+                        'type' => 'pre',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
 
-                CheckingImage::create([
-                    'checking_id' => $s_checking->id,
-                    'checking_type' => 'standart',
-                    'image' => Utils::uploadImageByLink($standart->img_km),
-                    'desc_id' => 22,
-                    'type' => 'pre',
-                    'status' => 'active',
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+                if ($standart->img_km) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_km),
+                        'desc_id' => 22,
+                        'type' => 'pre',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
 
-                CheckingImage::create([
-                    'checking_id' => $s_checking->id,
-                    'checking_type' => 'standart',
-                    'image' => Utils::uploadImageByLink($standart->img_suhu),
-                    'desc_id' => 19,
-                    'type' => 'pre',
-                    'status' => 'active',
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+                if ($standart->img_suhu) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_suhu),
+                        'desc_id' => 19,
+                        'type' => 'pre',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
 
-                CheckingImage::create([
-                    'checking_id' => $s_checking->id,
-                    'checking_type' => 'standart',
-                    'image' => Utils::uploadImageByLink($standart->img_blower),
-                    'desc_id' => 20,
-                    'type' => 'pre',
-                    'status' => 'active',
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+                if ($standart->img_blower) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_blower),
+                        'desc_id' => 20,
+                        'type' => 'pre',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
 
-                CheckingImage::create([
-                    'checking_id' => $s_checking->id,
-                    'checking_type' => 'standart',
-                    'image' => Utils::uploadImageByLink($standart->img_evaporator),
-                    'desc_id' => 24,
-                    'type' => 'pre',
-                    'status' => 'active',
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+                if ($standart->img_evaporator) {
+                    CheckingImage::create([
+                        'checking_id' => $s_checking->id,
+                        'checking_type' => 'standart',
+                        'image' => Utils::uploadImageByLink($standart->img_evaporator),
+                        'desc_id' => 24,
+                        'type' => 'pre',
+                        'status' => 'active',
+                        'created_at' => Carbon::now(),
+                        'updated_at' => Carbon::now()
+                    ]);
+                }
                 DB::commit();
                 // return json_encode(['status' => true, 'message' => 'Success']);
                 return redirect('/success-backup');
@@ -203,5 +213,10 @@ class GeneralController extends Controller
             DB::rollBack();
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
+    }
+
+    public function backup_post()
+    {
+        return view('sadmin.backup.post');
     }
 }

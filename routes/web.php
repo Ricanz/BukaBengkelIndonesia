@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
         // Backup
     Route::get('/backup', [GeneralController::class, 'backup']);
     Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
+    Route::get('/backup/post', [GeneralController::class, 'backup_post']);
 
 
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
