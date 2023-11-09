@@ -24,8 +24,8 @@
         <div class="card-body">
             <div class="modal-footer">
                 <a href="{{ url('/backup') }}" class="btn btn-light-primary font-weight-bold">Kembali</a>
-                <a class="btn btn-primary  font-weight-bold" href="{{ url('standar/checking') }}">Standart</a>
-                <a class="btn btn-warning  font-weight-bold" href="{{ url('standar/comprlete') }}">Complete</a>
+                <a class="btn btn-primary  font-weight-bold" href="{{ url('checking/standart') }}">Standart</a>
+                <a class="btn btn-warning  font-weight-bold" href="{{ url('checking/complete') }}">Complete</a>
             </div>
         </div>
     </div>
