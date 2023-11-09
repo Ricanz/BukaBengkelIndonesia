@@ -68,7 +68,7 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="advisor" id="advisor" class="form-control">
                                                         <option value="" selected>Pilih Service Advisor</option>
-                                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                                        @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->orderBy('name')->get() as $advisor)
                                                             <option value="{{ $advisor->id }}">{{ $advisor->name }}
                                                             </option>
                                                         @endforeach
@@ -81,7 +81,7 @@
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="type" id="type" class="form-control">
                                                         <option value="" selected>Pilih Tipe</option>
-                                                        @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
+                                                        @foreach (App\Models\MasterType::where('status', 'active')->orderBy('name')->get() as $type)
                                                             <option value="{{ $type->id }}">{{ $type->name }}
                                                             </option>
                                                         @endforeach
@@ -116,7 +116,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower
-                                                    (4 °C - 7 °C)</label>
+                                                    (4 °C - 8 °C)</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <input type="text" class="form-control" name="suhu"
                                                         placeholder="Masukkan Suhu Blower Kendaraan" />

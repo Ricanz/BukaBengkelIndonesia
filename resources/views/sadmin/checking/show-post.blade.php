@@ -82,7 +82,7 @@
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <select name="description" id="description" class="form-control">
                                                     <option value="" selected>Pilih Deskripsi</option>
-                                                    @foreach (App\Models\MasterChecking::where('status', 'active')->where('type', 'standart')->get() as $check)
+                                                    @foreach (App\Models\MasterChecking::where('status', 'active')->where('type', 'standart')->orderBy('description')->get() as $check)
                                                         <option value="{{ $check->id }}">
                                                             {{ $check->description }}
                                                         </option>
@@ -185,7 +185,7 @@
                                 <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
                                 </option>
                                 @if (Auth::user()->role === 'employee')
-                                    @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                    @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->orderBy('name')->get() as $advisor)
                                         <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
                                     @endforeach
                                 @endif
@@ -198,7 +198,7 @@
                             <select name="type" id="type" class="form-control" disabled>
                                 <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
                                 </option>
-                                @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
+                                @foreach (App\Models\MasterType::where('status', 'active')->orderBy('name')->get() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>
@@ -230,7 +230,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower (4 °C - 7 °C)</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Suhu Blower (4 °C - 8 °C)</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="suhu"
                                 value="{{ $checking->post->suhu }}" />

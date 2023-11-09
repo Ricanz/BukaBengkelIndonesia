@@ -35,7 +35,7 @@
                                 <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
                                 </option>
                                 @if (Auth::user()->role === 'employee')
-                                    @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->get() as $advisor)
+                                    @foreach (App\Models\ServiceAdvisor::where('status', 'active')->where('client_id', Auth::user()->employee->client_id)->orderBy('name')->get() as $advisor)
                                         <option value="{{ $advisor->id }}">{{ $advisor->name }}</option>
                                     @endforeach
                                 @endif
@@ -48,7 +48,7 @@
                             <select name="type" id="type" class="form-control" disabled>
                                 <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
                                 </option>
-                                @foreach (App\Models\MasterType::where('status', 'active')->get() as $type)
+                                @foreach (App\Models\MasterType::where('status', 'active')->orderBy('name')->get() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>
