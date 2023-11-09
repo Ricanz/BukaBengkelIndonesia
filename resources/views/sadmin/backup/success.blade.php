@@ -23,7 +23,7 @@
         </div>
         <div class="card-body">
             <div class="modal-footer">
-                <a href="{{ url('/backup') }}" class="btn btn-light-primary font-weight-bold">Kembali</a>
+                <a href="javascript:history.back()" class="btn btn-light-primary font-weight-bold">Kembali</a>
                 <a class="btn btn-primary  font-weight-bold" href="{{ url('checking/standart') }}">Standart</a>
                 <a class="btn btn-warning  font-weight-bold" href="{{ url('checking/complete') }}">Complete</a>
             </div>
