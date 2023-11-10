@@ -150,24 +150,22 @@
         <div id="parent">
             <div id="background-table"></div>
             <div id="image-check-two" style="padding: 0 85px 0 85px">
-                <center>
-                    <div style="width:100%;">
-                        <div class="flex-container">
-                            @foreach ($images as $key => $item)
-                                <div class="flex-item">
-                                    <center>
-                                        <div class="ic-mt">
-                                            <div id="bg-image">
-                                                <img src="{{env('APP_URL').'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                            </div>
+                <div style="width:100%; margin: auto;">
+                    <div class="flex-container" style="margin: auto;">
+                        @foreach ($images as $key => $item)
+                            <div class="flex-item">
+                                <center>
+                                    <div class="ic-mt">
+                                        <div id="bg-image">
+                                            <img src="{{env('APP_URL').'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                            <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
                                         </div>
-                                    </center>
-                                </div>
-                            @endforeach
-                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                        @endforeach
                     </div>
-                </center>
+                </div>
             </div>
         </div>
 

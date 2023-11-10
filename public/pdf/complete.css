@@ -334,6 +334,7 @@ tr.nobod-rc td {
 .flex-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .flex-item {
