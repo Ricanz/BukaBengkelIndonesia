@@ -227,7 +227,7 @@ class GeneralController extends Controller
 
         $standart = StandartCheckingPost::where('id_pcs', $pre->id_pcs)->first();
         if (!$standart) {
-            dd("Boong data lamanya ini, NGESELIN -_-");
+            dd("Boong data lamanya ini, NGESELIN -_-", "Ulang data lain aja yah sayang, love you :*");
         }
         DB::beginTransaction();
         try {
