@@ -234,7 +234,7 @@ class GeneralController extends Controller
             }
             $checking = Checking::where('id', $std->checking_id)->first();
             $checking->saran_post = substr($standart->po_hasil_pekerjaan, 0, 75);
-            $checking->catatan_post = $standart->po_catatan_perbaikan;
+            $checking->note_post = $standart->po_catatan_perbaikan;
             $checking->has_post = true;
             if ($checking->save()) {
                 $s_checking = StandartChecking::create([
