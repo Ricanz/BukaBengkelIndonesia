@@ -25,9 +25,16 @@
                 <form class="form" action="{{ route('backup.post') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Nomor WO</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Nomor WO Lama</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="wo"
+                                />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Nomor WO Baru</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <input type="text" class="form-control" name="new_wo"
                                 />
                         </div>
                     </div>

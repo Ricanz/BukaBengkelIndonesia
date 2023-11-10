@@ -57,6 +57,28 @@ class Utils
         }
     }
 
+    public static function uploadImageByLinkPost($image)
+    {
+        $response = Http::get('https://bukabengkelindonesia.com/assets/theme/images/bbi-ul/images/postcheck-standar/'.$image);
+        if ($response->successful()) {
+            $img = Image::make($response->body());
+            $img->resize(300, null, function ($constraint) {
+                $constraint->aspectRatio(); // Maintain aspect ratio
+            });
+            $img->encode('jpg', 80); // Compress the image (quality: 80%)
+    
+            // Generate a unique filename for the processed image
+            $processedImageName = time() . '_' . uniqid() . '.jpg';
+            
+            $processedImagePath = 'public/' . $processedImageName;
+            Storage::put($processedImagePath, $img->stream());
+    
+            // Generate the storage link for the processed image
+            $storageLink = Storage::url($processedImagePath);
+            return $storageLink;
+        }
+    }
+
     public static function generateEmail($name)
     {
         // Menghilangkan spasi dan mengubah huruf menjadi lowercase

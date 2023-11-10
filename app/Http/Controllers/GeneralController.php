@@ -226,12 +226,17 @@ class GeneralController extends Controller
         $pre = StandartChecking2::where('no_wo', $request->wo)->first();
 
         $standart = StandartCheckingPost::where('id_pcs', $pre->id_pcs)->first();
-
         DB::beginTransaction();
         try {
-            $checking = Checking::where('wo', $request->new_wo)->first();
+            $std = StandartChecking::where('km', $pre->kilometer)->first();
+            if (!$std) {
+                dd("Wo tidak ditemukan, masukkan wo baru lainnya!");
+            }
+            $checking = Checking::where('id', $std->checking_id)->first();
+            
             $checking->saran_post = substr($standart->po_hasil_pekerjaan, 0, 75);
             $checking->saran_post = $standart->po_catatan_perbaikan;
+            $checking->has_post = true;
             if ($checking->save()) {
                 $s_checking = StandartChecking::create([
                     'checking_id' => $checking->id,
@@ -249,11 +254,11 @@ class GeneralController extends Controller
                     'type' => 'post'
                 ]);
 
-                if ($standart->po_img_tampak_depan) {
+                if ($standart->po_img_tampak_depan !== null) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
-                        'image' => Utils::uploadImageByLink($standart->img_tampak_depan),
+                        'image' => Utils::uploadImageByLinkPost($standart->po_img_tampak_depan),
                         'desc_id' => 18,
                         'type' => 'post',
                         'status' => 'active',
@@ -266,7 +271,7 @@ class GeneralController extends Controller
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
-                        'image' => Utils::uploadImageByLink($standart->img_km),
+                        'image' => Utils::uploadImageByLinkPost($standart->po_img_km),
                         'desc_id' => 22,
                         'type' => 'post',
                         'status' => 'active',
@@ -279,7 +284,7 @@ class GeneralController extends Controller
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
-                        'image' => Utils::uploadImageByLink($standart->img_suhu),
+                        'image' => Utils::uploadImageByLinkPost($standart->po_img_suhu),
                         'desc_id' => 19,
                         'type' => 'post',
                         'status' => 'active',
@@ -292,7 +297,7 @@ class GeneralController extends Controller
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
-                        'image' => Utils::uploadImageByLink($standart->img_blower),
+                        'image' => Utils::uploadImageByLinkPost($standart->po_img_blower),
                         'desc_id' => 20,
                         'type' => 'post',
                         'status' => 'active',
@@ -305,7 +310,7 @@ class GeneralController extends Controller
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
-                        'image' => Utils::uploadImageByLink($standart->img_evaporator),
+                        'image' => Utils::uploadImageByLinkPost($standart->po_img_evaporator),
                         'desc_id' => 24,
                         'type' => 'post',
                         'status' => 'active',
