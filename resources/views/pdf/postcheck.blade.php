@@ -526,7 +526,7 @@
                                     </div>
                             </td>
                         @else
-                        <td></td>
+                        <td>halo</td>
                         @endif
                         @endforeach
                         </tr>
