@@ -495,7 +495,7 @@
                     <table cellspacing="0" style="width:100%;">
                         <tr id="ic-two-two">
                         @foreach ($first_batch as $key => $item)
-                            <td class="ic-three">
+                            <td>
                                 <center>
                                     <div class="ic-mt">
                                         <div id="bg-image">
