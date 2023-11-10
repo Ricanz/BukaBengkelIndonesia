@@ -511,9 +511,9 @@
                 </center>
             </div>
     
-            <div id="image-check-two" align="center">
+            <div id="image-check-two" style="padding: 0 85px 0 85px">
                 <center>
-                    <table cellspacing="0" style="width:100%;">
+                    <table cellspacing="0" style="width:100%; margin: auto;">
                         <tr style=" background-color: green;" align="center">
                         @foreach ($second_batch as $key => $item)
                             <td style="text-align: center;">
