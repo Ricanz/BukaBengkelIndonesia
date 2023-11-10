@@ -226,6 +226,9 @@ class GeneralController extends Controller
         $pre = StandartChecking2::where('no_wo', $request->wo)->first();
 
         $standart = StandartCheckingPost::where('id_pcs', $pre->id_pcs)->first();
+        if (!$standart) {
+            dd("Boong data lamanya ini, NGESELIN -_-");
+        }
         DB::beginTransaction();
         try {
             $std = StandartChecking::where('km', $pre->kilometer)->first();
