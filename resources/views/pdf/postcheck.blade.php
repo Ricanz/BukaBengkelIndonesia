@@ -513,19 +513,17 @@
     
             <div id="image-check-two" style="padding: 0 85px 0 85px">
                 <center>
-                    <table cellspacing="0" style="width:100%;" align="center">
+                    <table cellspacing="0" style="width:100%;">
                         <tr id="ic-two-two">
                         @foreach ($second_batch as $key => $item)
                             <td class="ic-three" style="text-align: center;">
                                 @if ($item)
-                                    <center>
-                                        <div class="ic-mt">
-                                                <div id="bg-image">
-                                                    <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                    <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                                </div>
-                                        </div>
-                                    </center>
+                                    <div class="ic-mt">
+                                            <div id="bg-image">
+                                                <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                            </div>
+                                    </div>
                                 @endif
                             </td>
                         @endforeach
