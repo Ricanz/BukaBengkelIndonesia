@@ -10,7 +10,7 @@
                     <h3 class="card-label">Detail Checking (Post)</h3>
                 </div>
                 <div class="card-toolbar">
-                    @if ($images <= 5)
+                    @if ($images < 5)
                         <a href="javascript:void()}" class="btn btn-danger font-weight-bolder mr-2">Foto minimal 6 untuk lihat dan download hasil check</a>
                     @else
                     <!--begin::Button-->
