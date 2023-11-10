@@ -480,14 +480,16 @@
                         <tr id="ic-two-two">
                         @foreach ($second_batch as $key => $item)
                             <td class="ic-three" style="text-align: center;">
-                                <center>
-                                    <div class="ic-mt">
-                                            <div id="bg-image">
-                                                <img src="{{env('APP_URL').'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                            </div>
-                                    </div>
-                                </center>
+                                @if ($item)
+                                    <center>
+                                        <div class="ic-mt">
+                                                <div id="bg-image">
+                                                    <img src="{{env('APP_URL').'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                                    <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                                </div>
+                                        </div>
+                                    </center>
+                                @endif
                             </td>
                         @endforeach
                         </tr>
