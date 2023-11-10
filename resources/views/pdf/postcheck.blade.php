@@ -516,8 +516,7 @@
                     <table cellspacing="0" style="width:100%;">
                         <tr id="ic-two-two">
                         @foreach ($second_batch as $key => $item)
-                        @if ($item)
-                            <td style="text-align: center;">
+                            <td style="text-align: center; background-color: red;">
                                 <div class="ic-mt">
                                         <div id="bg-image">
                                             <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
@@ -525,9 +524,6 @@
                                         </div>
                                 </div>
                             </td>
-                        @else
-                        <td>halo</td>
-                        @endif
                         @endforeach
                         </tr>
                     </table>
