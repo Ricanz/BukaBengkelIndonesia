@@ -269,7 +269,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->po_img_km) {
+                if ($standart->po_img_km !== null) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -282,7 +282,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->po_img_suhu) {
+                if ($standart->po_img_suhu !== null) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -295,7 +295,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->po_img_blower) {
+                if ($standart->po_img_blower !== null) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
@@ -308,7 +308,7 @@ class GeneralController extends Controller
                     ]);
                 }
 
-                if ($standart->po_img_evaporator) {
+                if ($standart->po_img_evaporator !== null) {
                     CheckingImage::create([
                         'checking_id' => $s_checking->id,
                         'checking_type' => 'standart',
