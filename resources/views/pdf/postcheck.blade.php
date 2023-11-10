@@ -514,7 +514,7 @@
             <div id="image-check-two" style="padding: 0 85px 0 85px">
                 <center>
                     <table cellspacing="0" style="width:100%;">
-                        <tr id="ic-two-two">
+                        <tr>
                         @foreach ($second_batch as $key => $item)
                             <td style="text-align: center; background-color: red;">
                                 <div class="ic-mt">
