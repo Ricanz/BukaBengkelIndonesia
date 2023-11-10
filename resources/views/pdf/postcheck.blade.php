@@ -511,7 +511,7 @@
                 </center>
             </div>
     
-            <div id="image-check-two" style="padding: 0 85px 0 85px">
+            <div id="image-check-two" align="center">
                 <center>
                     <table cellspacing="0" style="width:100%;">
                         <tr style=" background-color: green;" align="center">
