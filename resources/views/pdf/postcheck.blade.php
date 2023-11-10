@@ -516,7 +516,7 @@
                     <table cellspacing="0" style="margin: auto;">
                         <tr style=" background-color: green;" align="center">
                         @foreach ($second_batch as $key => $item)
-                            <td >
+                            <td style="margin-right: 10px;">
                                 <div class="ic-mt">
                                     <div id="bg-image">
                                         <img src="{{ env('APP_URL') .'/'.$item->image}}"width="100%" height="100%" />
