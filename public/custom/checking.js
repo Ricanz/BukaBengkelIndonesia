@@ -42,6 +42,7 @@ var KTDatatablesDataSourceAjaxClient = function() {
                     targets: 4,
                     class: 'text-left',
                     render: function (data, type, full, meta) {
+                        console.log(full.advisor);
                         if (full.advisor === null) {
                             console.log(full.advisor);
                         }
