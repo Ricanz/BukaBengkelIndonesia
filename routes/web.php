@@ -37,9 +37,9 @@ Route::get('/pre-check', function () {
     return view('pdf.pre-check');
 });
 
-Route::get('/success-backup', function () {
-    return view('sadmin.backup.success');
-});
+// Route::get('/success-backup', function () {
+//     return view('sadmin.backup.success');
+// });
 
 Route::get('/check-pdf/{id}', [CheckingController::class, 'pdf'])->name('download');
 Route::get('/check-pdf/post/{id}', [CheckingController::class, 'pdf_post'])->name('download.standart_post');
@@ -57,10 +57,10 @@ Route::middleware('auth')->group(function () {
     //     return view('sadmin.index');
     // });
         // Backup
-    Route::get('/backup', [GeneralController::class, 'backup']);
-    Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
-    Route::get('/backup/post', [GeneralController::class, 'backup_post']);
-    Route::post('/backup/post', [GeneralController::class, 'backup_post_store'])->name('backup.post');
+    // Route::get('/backup', [GeneralController::class, 'backup']);
+    // Route::post('/backup', [GeneralController::class, 'backup_store'])->name('backup');
+    // Route::get('/backup/post', [GeneralController::class, 'backup_post']);
+    // Route::post('/backup/post', [GeneralController::class, 'backup_post_store'])->name('backup.post');
 
 
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
