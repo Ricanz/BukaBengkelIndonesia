@@ -231,7 +231,7 @@ var KTDatatablesDataClientAdmin = function() {
                     targets: 1,
                     class: 'text-left',
                     render: function (data, type, full, meta) {
-                        return '<a href="/employee/show/'+full.id+'">'+data+'</a>'
+                        return '<a href="/user-profile">'+data+'</a>'
                     }
 				},
 				{
