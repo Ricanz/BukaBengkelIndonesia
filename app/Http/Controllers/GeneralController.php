@@ -8,6 +8,7 @@ use App\Models\CheckingImage;
 use App\Models\Client;
 use App\Models\Employee;
 use App\Models\MasterChecking;
+use App\Models\MasterItem;
 use App\Models\MasterType;
 use App\Models\ServiceAdvisor;
 use App\Models\StandartChecking;
@@ -332,5 +333,12 @@ class GeneralController extends Controller
             dd($th);
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
+    }
+
+    public function getResults($judul)
+    {
+        $results = MasterItem::where('id', $judul)->where('status', 'active')->pluck('checklist')->first();
+
+        return response()->json(explode(',', $results));
     }
 }
