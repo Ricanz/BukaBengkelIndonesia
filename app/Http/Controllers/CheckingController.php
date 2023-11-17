@@ -103,7 +103,7 @@ class  CheckingController extends Controller
                 'status' => 'active',
                 'type' => 'pre'
             ]);
-            return json_encode(['status' => true, 'message' => 'Success']);
+            return json_encode(['status' => true, 'message' => 'Success', 'id' => $checking->id]);
         } else {
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }

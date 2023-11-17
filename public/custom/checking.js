@@ -235,7 +235,7 @@ $("#create_checking_form").on("submit", function (event) {
                         confirmButton: "btn font-weight-bold btn-light-primary"
                     }
                 }).then(function() {
-                    window.location.href = '/checking/standart' 
+                    window.location.href = `/checking/edit/${data.id}`
                 });
             }else {
                 var values = '';
@@ -485,7 +485,7 @@ $("#create_checking_post_form").on("submit", function (event) {
                         confirmButton: "btn font-weight-bold btn-light-primary"
                     }
                 }).then(function() {
-                    window.location.href = '/checking/standart' 
+                    window.location.href = '/checking/edit' 
                 });
             }else {
                 var values = '';
