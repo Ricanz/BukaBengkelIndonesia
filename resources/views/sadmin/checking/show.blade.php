@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-toolbar">
                     @if (count($checking->standart->images) < 5)
-                        <a href="javascript:void()}" class="btn btn-danger font-weight-bolder mr-2">Foto minimal 5 untuk lihat dan download hasil check</a>
+                        <a href="javascript:void()}" class="btn btn-danger font-weight-bolder mr-2 mb-2">Foto minimal 5 untuk lihat dan download hasil check</a>
                     @else
                     <!--begin::Button-->
                     <a href="{{ route('download', request()->segment(count(request()->segments()))) }}" target="blank" class="btn btn-success font-weight-bolder mr-2">Download PDF</a>
