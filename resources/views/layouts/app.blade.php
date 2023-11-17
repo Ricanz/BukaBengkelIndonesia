@@ -9,10 +9,10 @@
 		<body id="kt_body" class="header-fixed header-mobile-fixed page-loading">
 			<!--begin::Main-->
 			<!--begin::Header Mobile-->
-			<div id="kt_header_mobile" class="header-mobile bg-success header-mobile-fixed">
+			<div id="kt_header_mobile" class="header-mobile bg-primary header-mobile-fixed">
 				<!--begin::Logo-->
 				<a href="{{ url('/') }}">
-					<img alt="Logo" src="{{asset('tadmin/media/images/logo-192x192.png')}}" class="max-h-30px" />
+					<img alt="Logo" src="{{asset('tadmin/media/images/logo-192x192.png')}}" class="max-h-30px" style="filter: brightness(0) invert(1);" />
 				</a>
 				<!--end::Logo-->
 				<!--begin::Toolbar-->
