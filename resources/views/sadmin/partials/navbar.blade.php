@@ -467,7 +467,6 @@
                             <a href="{{ url('checking/complete') }}" class="menu-link">
                                 <span class="menu-text">Complete Checking</span>
                                 <span class="menu-desc">Laporan Complete Checking</span>
-                                <i class="menu-arrow"></i>
                             </a>
                         </li>
                     </ul>
