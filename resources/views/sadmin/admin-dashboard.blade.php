@@ -260,7 +260,7 @@
                                                             class="text-muted font-weight-bold">{{ $item->client->title }}</span>
                                                     </td>
                                                     <td class="text-start pr-0">
-                                                        <a href="{{ $item->checking_type === 'Standart' ? route('checking.show', $item->id) : route('complete.show', $item->id) }}"
+                                                        <a href="{{ strtolower($item->checking_type) === 'standart' ? route('checking.show', $item->id) : route('complete.show', $item->id) }}"
                                                             class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                                             <span class="svg-icon svg-icon-md svg-icon-primary">
                                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
