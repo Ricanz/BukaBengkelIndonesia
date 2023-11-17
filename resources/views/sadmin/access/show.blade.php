@@ -13,16 +13,6 @@
             <div class="card-body">
                 <form class="form" id="update_access_form" enctype="multipart/form-data">
                     @csrf
-                    <div class="image-input image-input-outline" id="kt_image_1">
-                        <input type="hidden" name="employee_id" value="{{ $employee->id }}" >
-                        <div class="image-input-wrapper"
-                            style="background-image: url({{$employee->image}})"></div>
-
-                        <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
-                            data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-                            <i class="ki ki-bold-close icon-xs text-muted"></i>
-                        </span>
-                    </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Nama Lengkap</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
