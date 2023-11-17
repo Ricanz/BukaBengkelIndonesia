@@ -66,14 +66,14 @@
                                             <label class="col-form-label text-left col-lg-3 col-sm-12">Label Judul</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="label_judul"
-                                                    placeholder="Masukkan Label Judul" />
+                                                    placeholder="Masukkan Label Judul" maxlength="16"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-form-label text-left col-lg-3 col-sm-12">Label Foto</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="label_foto"
-                                                    placeholder="Masukkan Label Foto" />
+                                                    placeholder="Masukkan Label Foto" maxlength="16"/>
                                             </div>
                                         </div>
                                         <div class="separator separator-dashed my-10"></div>
