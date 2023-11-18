@@ -233,14 +233,19 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                    <input type="text" class="form-control" name="judul_hasil[]"
-                                        placeholder="Cth: Kompresor"
-                                        value="{{ $checking->complete[$i]->value_title }}" />
-                                </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                    <input type="text" class="form-control" name="result[]"
-                                        placeholder="Cth: Berfungsi Normal"
-                                        value="{{ $checking->complete[$i]->value }}" />
+                                    <select name="judul_hasil[]" id="judul_hasil" class="form-control" onchange="getItem(event)">
+                                        <option value="{{ $checking->complete[$i]->value_title }}" selected>{{ $checking->complete[$i]->value_title }}</option>
+                                        @foreach (App\Models\MasterItem::where('status', 'active')->get() as $item)
+                                            <option value="{{ $item->item }}">{{ $item->item }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <select name="result[]" id="result" class="form-control mt-2">
+                                        <option value="{{ $checking->complete[$i]->value }}" selected>{{ $checking->complete[$i]->value }}</option>
+                                        @foreach (explode(',', App\Models\MasterItem::whereRaw('LOWER(item) = ?', [strtolower($checking->complete[$i]->value_title)])->where('status', 'active')->pluck('checklist')->first()) as $item)
+                                            <option value="{{ $item }}">{{ $item }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
                             </div>
@@ -291,5 +296,32 @@
     @section('scripts')
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
+        <script>
+            function getItem(e) {
+                var judulId = e.target.value;
+
+                // Temukan elemen terdekat dengan id 'result'
+                var closestResult = $(e.target).closest('div').find('#result');
+                console.log(closestResult);
+                // Ajax request untuk mengambil opsi hasil yang sesuai dengan judul yang dipilih
+                $.ajax({
+                    url: '/get-results/' + judulId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Mengosongkan dropdown result
+                        closestResult.empty();
+
+                        // Menambahkan opsi-opsi baru ke dropdown result
+                        $.each(data, function (key, value) {
+                            closestResult.append('<option value="' + value + '">' + value + '</option>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+        </script>
     @endsection
 </x-app-layout>

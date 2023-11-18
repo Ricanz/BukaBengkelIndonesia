@@ -233,14 +233,18 @@
                                 </select>
                             </div>
                             <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                <input type="text" class="form-control" name="judul_hasil[]"
-                                    placeholder="Cth: Kompresor" value="{{ $checking->complete[$i]->value_title }}" disabled />
+                                <select name="judul_hasil[]" id="judul_hasil" class="form-control" disabled onchange="getItem(event)">
+                                    <option value="{{ $checking->complete[$i]->value_title }}" selected >{{ $checking->complete[$i]->value_title }}</option>
+                                </select>
+
+                                <select name="result[]" id="result" class="form-control mt-2">
+                                    <option value="{{ $checking->complete[$i]->value_post === null ? "" : $checking->complete[$i]->value_post }}" selected>{{ $checking->complete[$i]->value_post === null ? "Pilih Item Checking" : $checking->complete[$i]->value_post }}</option>
+                                    @foreach (explode(',', App\Models\MasterItem::whereRaw('LOWER(item) = ?', [strtolower($checking->complete[$i]->value_title)])->where('status', 'active')->pluck('checklist')->first()) as $item)
+                                        <option value="{{ $item }}">{{ $item }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                            <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                    <input type="text" class="form-control" name="result[]"
-                                        placeholder="Cth: Berfungsi Normal" value="{{ $checking->complete[$i]->value_post }}" />
-                                </div>
-                            </div>
+                        </div>
                         @endfor
                     </div>
                     <div class="form-group row">

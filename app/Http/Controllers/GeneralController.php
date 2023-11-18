@@ -337,8 +337,10 @@ class GeneralController extends Controller
 
     public function getResults($judul)
     {
-        $results = MasterItem::where('id', $judul)->where('status', 'active')->pluck('checklist')->first();
-
+        $results = MasterItem::whereRaw('LOWER(item) = ?', [strtolower($judul)])
+                ->where('status', 'active')
+                ->pluck('checklist')
+                ->first();
         return response()->json(explode(',', $results));
     }
 }

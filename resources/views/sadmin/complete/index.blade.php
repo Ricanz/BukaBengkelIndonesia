@@ -115,19 +115,13 @@
                                                         <select name="judul_hasil[]" id="judul_hasil" class="form-control" onchange="getItem(event)">
                                                             <option value="" selected>Pilih Checking</option>
                                                             @foreach (App\Models\MasterItem::where('status', 'active')->get() as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->item }}</option>
+                                                                <option value="{{ $item->item }}">{{ $item->item }}</option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
-                                                    <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                                        <select name="result[]" id="result" class="form-control">
+
+                                                        <select name="result[]" id="result" class="form-control mt-2">
                                                             <option value="" selected>Pilih Item Checking</option>
                                                         </select>
-                                                    </div>
-
-                                                    <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                                        <input type="text" class="form-control" name="result[]"
-                                                            placeholder="Cth: Berfungsi Normal" />
                                                     </div>
                                                     <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
                                                 </div>
@@ -189,9 +183,12 @@
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
         <script>
-            function getItem(e){
+            function getItem(e) {
                 var judulId = e.target.value;
 
+                // Temukan elemen terdekat dengan id 'result'
+                var closestResult = $(e.target).closest('div').find('#result');
+                console.log(closestResult);
                 // Ajax request untuk mengambil opsi hasil yang sesuai dengan judul yang dipilih
                 $.ajax({
                     url: '/get-results/' + judulId,
@@ -199,11 +196,11 @@
                     dataType: 'json',
                     success: function (data) {
                         // Mengosongkan dropdown result
-                        $('#result').empty();
-    
+                        closestResult.empty();
+
                         // Menambahkan opsi-opsi baru ke dropdown result
                         $.each(data, function (key, value) {
-                            $('#result').append('<option value="' + key + '">' + value + '</option>');
+                            closestResult.append('<option value="' + value + '">' + value + '</option>');
                         });
                     },
                     error: function (xhr, status, error) {
