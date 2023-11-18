@@ -112,23 +112,19 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                                        <select name="judul_hasil[]" id="judul_hasil" class="form-control">
+                                                        <select name="judul_hasil[]" id="judul_hasil" class="form-control" onchange="getItem(event)">
                                                             <option value="" selected>Pilih Checking</option>
                                                             @foreach (App\Models\MasterItem::where('status', 'active')->get() as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->item }}
-                                                                </option>
+                                                                <option value="{{ $item->id }}">{{ $item->item }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                                                         <select name="result[]" id="result" class="form-control">
-                                                            <option value="" selected>Pilih Checking</option>
-                                                            @foreach (App\Models\MasterItem::where('item', ' Judul Hasil')->where('status', 'active')->get() as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->item }} Yang Sudah Dipilih
-                                                                </option>
-                                                            @endforeach
+                                                            <option value="" selected>Pilih Item Checking</option>
                                                         </select>
                                                     </div>
+
                                                     <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                                                         <input type="text" class="form-control" name="result[]"
                                                             placeholder="Cth: Berfungsi Normal" />
@@ -193,33 +189,28 @@
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
         <script>
-            
-            $(document).ready(function () {
-                // Memberikan event listener pada dropdown judul_hasil
-                $('#judul_hasil').on('change', function () {
-                    alert("hi")
-                    var judulId = $(this).val(); // Mengambil nilai dari dropdown judul_hasil
-        
-                    // Ajax request untuk mengambil opsi hasil yang sesuai dengan judul yang dipilih
-                    $.ajax({
-                        url: '/get-results/' + judulId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
-                            // Mengosongkan dropdown result
-                            $('#result').empty();
-        
-                            // Menambahkan opsi-opsi baru ke dropdown result
-                            $.each(data, function (key, value) {
-                                $('#result').append('<option value="' + key + '">' + value + '</option>');
-                            });
-                        },
-                        error: function (xhr, status, error) {
-                            console.error(xhr.responseText);
-                        }
-                    });
+            function getItem(e){
+                var judulId = e.target.value;
+
+                // Ajax request untuk mengambil opsi hasil yang sesuai dengan judul yang dipilih
+                $.ajax({
+                    url: '/get-results/' + judulId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Mengosongkan dropdown result
+                        $('#result').empty();
+    
+                        // Menambahkan opsi-opsi baru ke dropdown result
+                        $.each(data, function (key, value) {
+                            $('#result').append('<option value="' + key + '">' + value + '</option>');
+                        });
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
                 });
-            });
+            }
         </script>
     @endsection
 </x-app-layout>
