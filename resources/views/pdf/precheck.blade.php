@@ -463,7 +463,11 @@
                                     <div class="ic-mt">
                                         <div id="bg-image">
                                             <img src="{{env('APP_URL').'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
+                                            @if (strtolower($item->types->description) === 'km')
+                                            <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}} <b>{{$checking->standart->km}}</b></p>
+                                            @else
                                             <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </center>
