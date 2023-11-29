@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Utils;
 use App\Models\MasterItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,10 +26,12 @@ class MasterItemController extends Controller
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
+        $slug = Utils::slugify($request->item);
         $submit = MasterItem::create([
             'item' => $request->item,
             'checklist' => $request->checklist,
             'status' => 'active',
+            'slug' => $slug
         ]);
 
         if ($submit) {

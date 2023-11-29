@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MasterItem extends Model
 {
     protected $fillable = [
-        'item', 'checklist', 'status'
+        'item', 'checklist', 'status', 'slug'
     ];
 }

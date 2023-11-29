@@ -142,4 +142,12 @@ class Utils
         $client = Client::with('kabeng')->where('id', $client_id)->first();
         return $client->expired_at;
     }
+
+    public static function slugify($text)
+    {
+        $lower = strtolower($text);
+        $slug = str_replace(' ', '-', $lower);
+
+        return $slug;
+    }
 }

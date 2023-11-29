@@ -105,7 +105,7 @@
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter:</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="cabin" id="cabin" class="form-control">
-                                @foreach(explode(', ', App\Models\MasterItem::where('item', 'Cabin Air Filter')->pluck->first()) as $client)
+                                @foreach(explode(', ', App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck->first()) as $client)
                                     <option value="{{ $client->item }}">{{ $client->title }}</option>
                                 @endforeach
                             </select>
