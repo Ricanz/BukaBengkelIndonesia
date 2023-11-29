@@ -132,7 +132,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Kompresor:</label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'compressor')->pluck('item')->first())}}:</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="compressor" id="compressor" class="form-control">
                                                         @foreach(explode(',', App\Models\MasterItem::where('slug', 'compressor')->pluck('checklist')->first()) as $client)
@@ -143,7 +143,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Cabin Air Filter:</label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck('item')->first())}}:</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="cabin" id="cabin" class="form-control">
                                                         @foreach(explode(',', App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck('checklist')->first()) as $client)
@@ -154,7 +154,7 @@
                                             </div>
 
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Blower:</label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'blower')->pluck('item')->first())}}:</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <select name="blower" id="blower" class="form-control">
                                                         @foreach(explode(',', App\Models\MasterItem::where('slug', 'blower')->pluck('checklist')->first()) as $client)
