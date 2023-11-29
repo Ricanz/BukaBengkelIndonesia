@@ -422,20 +422,20 @@
                     <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 8 °C</b></td>
                     @if ((int)$checking->standart->suhu >= 4 && (int)$checking->standart->suhu <= 8)
                         <td class="bodl-rc text-center pass-check">
-                            <strong>{{ $checking->standart->suhu }}</strong> Psi
+                            <strong>{{ $checking->standart->suhu }}</strong> °C
                         </td>
                     @elseif((int)$checking->standart->suhu < 4 || (int)$checking->standart->suhu > 8)
                         <td class="bodl-rc text-center not-pass-check">
-                            <strong>{{ $checking->standart->suhu }}</strong> Psi
+                            <strong>{{ $checking->standart->suhu }}</strong> °C
                         </td>
                     @endif
                     @if ((int)$checking->post->suhu >= 4 && (int)$checking->post->suhu <= 8)
                         <td class="bodl-rc text-center pass-check">
-                            <strong>{{ $checking->post->suhu }}</strong> Psi
+                            <strong>{{ $checking->post->suhu }}</strong> °C
                         </td>
                     @elseif((int)$checking->post->suhu < 4 || (int)$checking->post->suhu > 8)
                         <td class="bodl-rc text-center not-pass-check">
-                            <strong>{{ $checking->post->suhu }}</strong> Psi
+                            <strong>{{ $checking->post->suhu }}</strong> °C
                         </td>
                     @endif
                     <td class="bodl-rc">
@@ -448,22 +448,22 @@
                             width="30" height="30" />
                     </td>
                     <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
-                    @if ((int)$checking->standart->wind >= 2.5 && (int)$checking->standart->wind <= 4)
+                    @if (floatval($checking->standart->wind) >= 2.5 && floatval($checking->standart->wind) <= 4)
                         <td class="bodl-rc text-center pass-check">
-                            <strong>{{ $checking->standart->wind }}</strong> Psi
+                            <strong>{{ $checking->standart->wind }}</strong> m/s
                         </td>
-                    @elseif((int)$checking->standart->wind < 2.5 || (int)$checking->standart->wind > 4)
+                    @elseif(floatval($checking->standart->wind) > 4 || floatval($checking->standart->wind) < 2.5)
                         <td class="bodl-rc text-center not-pass-check">
-                            <strong>{{ $checking->standart->wind }}</strong> Psi
+                            <strong>{{ $checking->standart->wind }}</strong> m/s
                         </td>
                     @endif
-                    @if ((int)$checking->post->wind >= 2.5 && (int)$checking->post->wind <= 4)
+                    @if (floatval($checking->post->wind) >= 2.5 && floatval($checking->post->wind) <= 4)
                         <td class="bodl-rc text-center pass-check">
-                            <strong>{{ $checking->post->wind }}</strong> Psi
+                            <strong>{{ $checking->post->wind }}</strong> m/s
                         </td>
-                    @elseif((int)$checking->post->wind < 2.5 || (int)$checking->post->wind > 4)
+                    @elseif(floatval($checking->post->wind) > 4 || floatval($checking->post->wind) < 2.5)
                         <td class="bodl-rc text-center not-pass-check">
-                            <strong>{{ $checking->post->wind }}</strong> Psi
+                            <strong>{{ $checking->post->wind }}</strong> m/s
                         </td>
                     @endif
                     <td class="bodl-rc">
