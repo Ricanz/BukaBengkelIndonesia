@@ -75,7 +75,7 @@
                         </td>
                     @endif
                     <td class="bodl-rc">
-                        Kompressor: <br><b>{{ $checking->standart->compressor }}</b>
+                        {{ ucwords(App\Models\MasterItem::where('slug', 'compressor')->pluck('item')->first())}}: <br><b>{{ $checking->standart->compressor }}</b>
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +94,7 @@
                         </td>
                     @endif
                     <td class="bodl-rc">
-                        Cabin Air Filter: <br><b>{{ $checking->standart->cabin }}</b>
+                        {{ ucwords(App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck('item')->first())}}: <br><b>{{ $checking->standart->cabin }}</b>
                     </td>
                 </tr>
                 <tr>
@@ -113,7 +113,7 @@
                         </td>
                     @endif
                     <td class="bodl-rc">
-                        Blower: <br><b>{{ $checking->standart->blower }}</b>
+                        {{ ucwords(App\Models\MasterItem::where('slug', 'blower')->pluck('item')->first())}}: <br><b>{{ $checking->standart->blower }}</b>
                     </td>
                 </tr>
                 <tr>
