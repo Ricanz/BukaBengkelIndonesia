@@ -182,13 +182,11 @@ table.tb-rc {
 .bodr-rc {
     width: 20px;
     padding: 0px 0px 0px 15px;
-    border: 1px #d0d2d8 solid;
 }
 
 .bodl-rc {
     padding: 0px 0px 0px 15px;
     border-left: none;
-    border: 1px #d0d2d8 solid;
 }
 
 .nobodl-rc {
@@ -347,4 +345,8 @@ tr.nobod-rc td {
     background-color: #23a5ea; /* Ganti dengan warna latar belakang yang Anda inginkan */
     width: 100%; /* Atur lebar sesuai kebutuhan Anda */
     height: 200px; /* Atur tinggi sesuai kebutuhan Anda */
+}
+
+.bg-table {
+    background-color: #f6f8fd;
 }

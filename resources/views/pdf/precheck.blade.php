@@ -11,7 +11,7 @@
         }
 
         body {
-            font-family: Dejavu Sans; 
+            font-family: Dejavu Sans;
         }
 
         .container {
@@ -225,7 +225,7 @@
             font-weight: bold;
             font-size: 28px;
             text-align: left;
-            font-family: Dejavu Sans !important; 
+            font-family: Dejavu Sans !important;
         }
 
         #ch-two {
@@ -283,7 +283,7 @@
             border-radius: 20px;
         }
 
-        #footer{
+        #footer {
             background-color: #1f2690;
             text-align: center;
         }
@@ -314,18 +314,21 @@
             color: #e95e5e !important;
         }
 
+        .bg-table {
+            background-color: #f6f8fd;
+        }
     </style>
 </head>
 
 <body>
     <div id="background">
-        <img src="{{ env('APP_URL').'/tadmin/media/images/logo-192x192.png' }}" id="bg-wt">
+        <img src="{{ env('APP_URL') . '/tadmin/media/images/logo-192x192.png' }}" id="bg-wt">
     </div>
 
     <div id="content" style="width: 800px;">
         <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
-            <img src="{{ env('APP_URL').$checking->client->image }}"
-                alt="Logo" style="height:75px;object-fit:contain">
+            <img src="{{ env('APP_URL') . $checking->client->image }}" alt="Logo"
+                style="height:75px;object-fit:contain">
         </div>
         <div id="head-content">
             <table cellspacing="0" style="width:100%;" class="container">
@@ -342,7 +345,8 @@
                             <p id="rh-two">{{ $checking->created_at->format('D, d-m-Y | H:i') }}</p>
                             <p id="rh-three">No. WO : {{ $checking->wo }}</b></p>
                             <p id="rh-four">*Lakukan Service Mobil Anda</p>
-                            <p id="rh-five">Teknisi: <b><label id="rh-five">{{ $checking->employee->fullname }}</label></b>
+                            <p id="rh-five">Teknisi: <b><label
+                                        id="rh-five">{{ $checking->employee->fullname }}</label></b>
                             </p>
                         </td>
                     </tr>
@@ -352,23 +356,26 @@
         <div id="result-check" style="margin-top: 10px;">
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
-                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
-                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
-                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">TAMBAHAN PEMERIKSAAN</th>
+                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one"
+                        colspan="2">STANDAR NORMAL</th>
+                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">
+                        PRE-CHECK</th>
+                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">
+                        TAMBAHAN PEMERIKSAAN</th>
                 </tr>
                 <tr>
                     <td class="bodr-rc" style="padding: 10px;">
-                        <img src="{{ env('APP_URL').'/tadmin/images/icon_high_pressure.png' }}"
-                            width="30" height="30" />
+                        <img src="{{ env('APP_URL') . '/tadmin/images/icon_high_pressure.png' }}" width="30"
+                            height="30" />
                     </td>
                     <td class="bodl-rc">
                         High Pressure: <br><b>199.1 Psi - 227.5 Psi</b>
                     </td>
-                    @if ((int)$checking->standart->high >= 199.1 && (int)$checking->standart->high <= 227.5)
+                    @if ((int) $checking->standart->high >= 199.1 && (int) $checking->standart->high <= 227.5)
                         <td class="bodl-rc text-center pass-check">
                             <strong>{{ $checking->standart->high }}</strong> Psi
                         </td>
-                    @elseif((int)$checking->standart->high < 199.1 || (int)$checking->standart->high > 227.5)
+                    @elseif((int) $checking->standart->high < 199.1 || (int) $checking->standart->high > 227.5)
                         <td class="bodl-rc text-center not-pass-check">
                             <strong>{{ $checking->standart->high }}</strong> Psi
                         </td>
@@ -377,18 +384,18 @@
                         Kompressor: <br><b>{{ $checking->standart->compressor }}</b>
                     </td>
                 </tr>
-                <tr style="background-color: #f6f8fd;">
-                    <td class="bodr-rc"  style="padding: 10px;">
-                        <img src="{{ env('APP_URL').'/tadmin/images/icon_low_pressure.png' }}"
-                            width="30" height="30" />
+                <tr>
+                    <td class="bodr-rc bg-table" style="padding: 10px;">
+                        <img src="{{ env('APP_URL') . '/tadmin/images/icon_low_pressure.png' }}" width="30"
+                            height="30" />
                     </td>
-                    <td class="bodl-rc">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
-                    @if ((int)$checking->standart->low >= 21.3 && (int)$checking->standart->low <= 35.5)
-                        <td class="bodl-rc text-center pass-check">
+                    <td class="bodl-rc bg-table">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
+                    @if ((int) $checking->standart->low >= 21.3 && (int) $checking->standart->low <= 35.5)
+                        <td class="bodl-rc text-center pass-check bg-table">
                             <strong>{{ $checking->standart->low }}</strong> Psi
                         </td>
-                    @elseif((int)$checking->standart->low < 21.3)
-                        <td class="bodl-rc text-center not-pass-check">
+                    @elseif((int) $checking->standart->low < 21.3)
+                        <td class="bodl-rc text-center not-pass-check bg-table">
                             <strong>{{ $checking->standart->low }}</strong> Psi
                         </td>
                     @endif
@@ -397,16 +404,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="bodr-rc"  style="padding: 10px;">
-                        <img src="{{ env('APP_URL').'/tadmin/images/icon_temperature.png' }}"
-                            width="30" height="30" />
+                    <td class="bodr-rc" style="padding: 10px;">
+                        <img src="{{ env('APP_URL') . '/tadmin/images/icon_temperature.png' }}" width="30"
+                            height="30" />
                     </td>
                     <td class="bodl-rc">Suhu Blower: <br><b>4 °C - 8 °C</b></td>
-                    @if ((int)$checking->standart->suhu >= 4 && (int)$checking->standart->suhu <= 8)
+                    @if ((int) $checking->standart->suhu >= 4 && (int) $checking->standart->suhu <= 8)
                         <td class="bodl-rc text-center pass-check">
                             <strong>{{ $checking->standart->suhu }}</strong> °C
                         </td>
-                    @elseif((int)$checking->standart->suhu < 4 || (int)$checking->standart->suhu > 8)
+                    @elseif((int) $checking->standart->suhu < 4 || (int) $checking->standart->suhu > 8)
                         <td class="bodl-rc text-center not-pass-check">
                             <strong>{{ $checking->standart->suhu }}</strong> °C
                         </td>
@@ -415,18 +422,18 @@
                         Blower: <br><b>{{ $checking->standart->blower }}</b>
                     </td>
                 </tr>
-                <tr style="background-color: #f6f8fd;">
-                    <td class="bodr-rc"  style="padding: 10px;">
-                        <img src="{{ env('APP_URL').'/tadmin/images/icon_windspeed.png' }}"
-                            width="30" height="30" />
+                <tr>
+                    <td class="bodr-rc bg-table" style="padding: 10px;">
+                        <img src="{{ env('APP_URL') . '/tadmin/images/icon_windspeed.png' }}" width="30"
+                            height="30" />
                     </td>
                     <td class="bodl-rc">Wind Speed: <br><b>2.5 m/s - 4 m/s</b></td>
-                    @if ((int)$checking->standart->wind >= 2.5 && (int)$checking->standart->wind <= 4)
-                        <td class="bodl-rc text-center pass-check">
+                    @if (floatval($checking->standart->wind) >= 2.5 && floatval($checking->standart->wind) <= 4)
+                        <td class="bodl-rc text-center pass-check bg-table">
                             <strong>{{ $checking->standart->wind }}</strong> m/s
                         </td>
-                    @elseif((int)$checking->standart->wind < 2.5 || (int)$checking->standart->wind > 4)
-                        <td class="bodl-rc text-center not-pass-check">
+                    @elseif(floatval($checking->standart->wind) > 4 || floatval($checking->standart->wind) < 2.5)
+                        <td class="bodl-rc text-center not-pass-check bg-table">
                             <strong>{{ $checking->standart->wind }}</strong> m/s
                         </td>
                     @endif
@@ -442,8 +449,8 @@
                     <td class="ic-three" style="width: 200px;">
                         *Sumber Refrensi
                         <div id="image-head" style="width: auto; height:50px;">
-                            <img src="{{ env('APP_URL').'/tadmin/images/denso-sumber.jpg' }}"
-                                alt="Logo" style="height:25px;object-fit:contain">
+                            <img src="{{ env('APP_URL') . '/tadmin/images/denso-sumber.jpg' }}" alt="Logo"
+                                style="height:25px;object-fit:contain">
                         </div>
                     </td>
                     <td class="ic-three">
@@ -458,45 +465,55 @@
                 <center>
                     <table cellspacing="0" style="width:100%;">
                         <tr id="ic-two-two">
-                        @foreach ($first_batch as $key => $item)
-                            <td class="ic-three">
-                                <center>
-                                    <div class="ic-mt">
-                                        <div id="bg-image">
-                                            <img src="{{env('APP_URL').'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                            @if (strtolower($item->types->description) === 'km')
-                                            <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}} <b>{{$checking->standart->km}}</b></p>
-                                            @else
-                                            <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                            @endif
+                            @foreach ($first_batch as $key => $item)
+                                <td class="ic-three">
+                                    <center>
+                                        <div class="ic-mt">
+                                            <div id="bg-image">
+                                                <img src="{{ env('APP_URL') . '/' . $item->image }}" class="ic-b"
+                                                    width="100%" height="100%" />
+                                                @if (strtolower($item->types->description) === 'km')
+                                                    <p class="text-center"
+                                                        style="padding: 5px 5px 0 5px; color: white;">
+                                                        {{ $item->types->description }}
+                                                        <b>{{ $checking->standart->km }}</b></p>
+                                                @else
+                                                    <p class="text-center"
+                                                        style="padding: 5px 5px 0 5px; color: white;">
+                                                        {{ $item->types->description }}</p>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                </center>
-                            </td>
-                        @endforeach
+                                    </center>
+                                </td>
+                            @endforeach
                         </tr>
                     </table>
                 </center>
             </div>
-            
+
             <div id="image-check-two" style="padding: 0 85px 0 85px">
                 <center>
                     <table cellspacing="0" style="margin: auto;">
                         <tr align="center">
-                        @foreach ($second_batch as $key => $item)
-                            <td style="padding-right: 10px;">
-                                <div class="ic-mt">
-                                    <div id="bg-image">
-                                        <img src="{{ env('APP_URL') .'/'.$item->image}}"width="100%" height="100%" />
-                                        @if (strtolower($item->types->description) === 'km')
-                                        <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}} <b>{{$checking->standart->km}}</b></p>
-                                        @else
-                                        <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
-                                        @endif
+                            @foreach ($second_batch as $key => $item)
+                                <td style="padding-right: 10px;">
+                                    <div class="ic-mt">
+                                        <div id="bg-image">
+                                            <img src="{{ env('APP_URL') . '/' . $item->image }}"width="100%"
+                                                height="100%" />
+                                            @if (strtolower($item->types->description) === 'km')
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">
+                                                    {{ $item->types->description }}
+                                                    <b>{{ $checking->standart->km }}</b></p>
+                                            @else
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">
+                                                    {{ $item->types->description }}</p>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        @endforeach
+                                </td>
+                            @endforeach
                         </tr>
                     </table>
                 </center>
