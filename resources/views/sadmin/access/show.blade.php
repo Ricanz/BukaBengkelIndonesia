@@ -14,6 +14,7 @@
                 <form class="form" id="update_access_form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
+                        <input type="hidden" value="{{ $employee->id }}" name="employee_id">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Nama Lengkap</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="fullname"

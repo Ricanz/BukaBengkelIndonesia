@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -49,11 +50,19 @@ class AccessController extends Controller
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
 
-        $employee = Employee::findOrFail($request->employee_id);
-        $employee->client_id = $request->client_id;
-        
-        if ($employee->save()) {
-            return json_encode(['status' => true, 'message' => 'Success']);
+
+        DB::beginTransaction();
+        try {
+            $employee = Employee::findOrFail($request->employee_id);
+            $employee->client_id = $request->client_id;
+            
+            if ($employee->save()) {
+                DB::commit();
+                return json_encode(['status' => true, 'message' => ['Success']]);
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return json_encode(['status' => false, 'message' => ['Gagal ubah akses']]);
         }
 
     }
