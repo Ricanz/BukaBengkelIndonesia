@@ -31,7 +31,7 @@
                             <p id="ch-two">{{ $checking->plat_number }}</p>
                             <p id="ch-three">{{ $checking->types->name }}</p>
                             <p id="ch-four" style="margin-bottom: 20px;">Saran Perbaikan : <strong>{{ $checking->saran }}</strong></p>
-                            <a target="_BLANK" href="{{ route('download.complete_pre', $checking->id) }}" class="btn"><i class="fa fa-download"></i> Download</a>
+                            <a target="_BLANK" href="{{ route('download.complete_post', $checking->id) }}" class="btn"><i class="fa fa-download"></i> Download</a>
                         </td>
                         <td id="right-head">
                             <p id="rh-one">S.A : {{ $checking->advisor->name }}</p>
