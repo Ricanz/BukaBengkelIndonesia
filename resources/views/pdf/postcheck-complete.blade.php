@@ -367,19 +367,21 @@
                     <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
                     <th style="width: 15%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
                     <th style="width: 17%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">POST-CHECK</th>
-                    <th style="width: 30%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">Hasil Diagnosa</th>
+                    <th style="width: 30%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">HASIL DIAGNOSA</th>
                 </tr>
                 @foreach ($checking->complete as $key => $item)
                     <?php 
                     $bg = "";
-                    if ($key% 2 == 1) {
+                    if ($key % 2 == 1) {
                         $bg = "bg-table";
                     }
                     ?>
                     <tr>
                         <td class="bodr-rc {{ $bg }}" style="padding: 10px;">
+                            @if ($item->master->icon)
                             <img src="{{ $item->master->icon }}"
                                 width="30" height="30" />
+                            @endif
                         </td>
                         <td class="bodl-rc {{ $bg }}">
                             {{ $item->master->description }}: <br><b>{{ $item->master->name }}</b>
