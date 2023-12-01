@@ -67,7 +67,11 @@
                     </div>
                     <div class="separator separator-dashed my-10"></div>
                     <div class="modal-footer">
+                        @if ($data->type === 'complete')
+                        <a href="{{ url('/master/complete') }}" class="btn btn-light-primary font-weight-bold">Back</a>
+                        @else
                         <a href="{{ url('/master/standart') }}" class="btn btn-light-primary font-weight-bold">Back</a>
+                        @endif
                         <button type="submit" class="btn btn-primary font-weight-bold">Save
                             changes</button>
                     </div>
