@@ -47,9 +47,9 @@
         <div id="result-check" style="margin-top: 10px;">
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
-                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
-                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
-                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">POST-CHECK</th>
+                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
+                    <th style="width: 20%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
+                    <th style="width: 20%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">POST-CHECK</th>
                     <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">HASIL DIAGNOSA</th>
                 </tr>
                 @foreach ($checking->complete as $key => $item)
@@ -108,7 +108,7 @@
                                         <div class="ic-mt">
                                             <div id="bg-image">
                                                 <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->types->description}}</p>
+                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
                                             </div>
                                         </div>
                                     </center>

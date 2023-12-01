@@ -368,7 +368,7 @@ class CompleteController extends Controller
     public function view_pdf($id)
     {
         $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
-        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'pre')->where('status', 'active')->get();
+        $images = CompleteImage::with('master')->where('checking_id', $checking->id)->where('type', 'pre')->where('status', 'active')->get();
 
         return view('pdf.view.precheck-complete', compact('checking', 'images'));
     }
@@ -376,8 +376,8 @@ class CompleteController extends Controller
     public function view_pdf_post($id)
     {
         $checking = Checking::with('advisor', 'client', 'complete', 'types', 'employee')->find($id);
-        $images = CompleteImage::where('checking_id', $checking->id)->where('type', 'post')->where('status', 'active')->get();
+        $images = CompleteImage::with('master')->where('checking_id', $checking->id)->where('type', 'post')->where('status', 'active')->get();
 
-        return view('pdf.view.precheck-complete', compact('checking', 'images'));
+        return view('pdf.view.postcheck-complete', compact('checking', 'images'));
     }
 }

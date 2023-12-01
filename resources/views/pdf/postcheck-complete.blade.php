@@ -322,6 +322,10 @@
             color: #e95e5e !important;
         }
 
+        .bg-table {
+            background-color: #f6f8fd;
+        }
+
     </style>
 </head>
 
@@ -360,33 +364,33 @@
         <div id="result-check" style="margin-top: 10px;">
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
-                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
+                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
                     <th style="width: 15%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
                     <th style="width: 17%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">POST-CHECK</th>
-                    <th style="width: 28%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">TAMBAHAN PEMERIKSAAN</th>
+                    <th style="width: 30%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">Hasil Diagnosa</th>
                 </tr>
                 @foreach ($checking->complete as $key => $item)
                     <?php 
                     $bg = "";
                     if ($key% 2 == 1) {
-                        $bg = "background-color: #f6f8fd;";
+                        $bg = "bg-table";
                     }
                     ?>
-                    <tr style="{{ $bg }}">
-                        <td class="bodr-rc" style="padding: 10px;">
+                    <tr>
+                        <td class="bodr-rc {{ $bg }}" style="padding: 10px;">
                             <img src="{{ $item->master->icon }}"
                                 width="30" height="30" />
                         </td>
-                        <td class="bodl-rc">
+                        <td class="bodl-rc {{ $bg }}">
                             {{ $item->master->description }}: <br><b>{{ $item->master->name }}</b>
                         </td>
-                        <td class="bodl-rc text-center {{ !$item->pass ? "not-pass-check" : "pass-check" }}">
+                        <td class="bodl-rc text-center {{ $bg }} {{ !$item->pass ? "not-pass-check" : "pass-check" }}">
                             <strong>{{$item->val_check}}</strong>
                         </td>
-                        <td class="bodl-rc text-center {{ !$item->pass_post ? "not-pass-check" : "pass-check" }}">
+                        <td class="bodl-rc text-center {{ $bg }} {{ !$item->pass_post ? "not-pass-check" : "pass-check" }}">
                             <strong>{{$item->val_check_post}}</strong>
                         </td>
-                        <td class="bodl-rc">
+                        <td class="bodl-rc {{ $bg }}">
                             {{ $item->value_title }}: <br><b>{{ $item->value }}</b>
                         </td>
                     </tr>
