@@ -9,7 +9,7 @@
     {{-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;900&family=Sometype+Mono&display=swap" rel="stylesheet"> --}}
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito&family=Poppins:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset("pdf/precheck-new.css") }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -30,7 +30,8 @@
                             <p id="ch-one" style="font-family: 'Poppins', sans-serif;">POST-CHECK STANDAR</p>
                             <p id="ch-two">{{ $checking->plat_number }}</p>
                             <p id="ch-three">{{ $checking->types->name }}</p>
-                            <p id="ch-four">Saran Perbaikan : <strong>{{ $checking->saran_post }}</strong></p>
+                            <p id="ch-four" style="margin-bottom: 20px;">Saran Perbaikan : <strong>{{ $checking->saran_post }}</strong></p>
+                            <a target="_BLANK" href="{{ route('download.standart_post', $checking->id) }}" class="btn"><i class="fa fa-download"></i> Download</a>
                         </td>
                         <td id="right-head">
                             <p id="rh-one">S.A : {{ $checking->advisor->name }}</p>

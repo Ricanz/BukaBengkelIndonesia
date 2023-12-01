@@ -97,6 +97,7 @@ td{
 #left-head {
     width: 60%;
     text-align: left !important;
+    position: relative;
 }
 
 #rh-one {
@@ -350,3 +351,22 @@ tr.nobod-rc td {
 .bg-table {
     background-color: #f6f8fd;
 }
+
+.btn {
+    background-color: #23a5ea;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: Dejavu Sans;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  
+  /* Darker background on mouse-over */
+  a.btn:hover {
+    background-color: #187cb3;
+  }
