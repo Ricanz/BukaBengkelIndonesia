@@ -55,22 +55,22 @@
                 @foreach ($checking->complete as $key => $item)
                     <?php 
                     $bg = "";
-                    if ($key% 2 == 1) {
-                        $bg = "background-color: #f6f8fd;";
+                    if ($key % 2 == 1) {
+                        $bg = "bg-table";
                     }
                     ?>
-                    <tr style="{{ $bg }}">
-                        <td class="bodr-rc" style="padding: 10px;">
+                    <tr>
+                        <td class="bodr-rc {{ $bg }}" style="padding: 10px;">
                             <img src="{{ $item->master->icon }}"
                                 width="30" height="30" />
                         </td>
-                        <td class="bodl-rc">
+                        <td class="bodl-rc {{ $bg }}">
                             {{ $item->master->description }}: <br><b>{{ $item->master->name }}</b>
                         </td>
-                        <td class="bodl-rc text-center {{ !$item->pass ? "not-pass-check" : "pass-check" }}">
+                        <td class="bodl-rc text-center {{ $bg }} {{ !$item->pass ? "not-pass-check" : "pass-check" }}">
                             <strong>{{$item->val_check}}</strong>
                         </td>
-                        <td class="bodl-rc text-center {{ !$item->pass_post ? "not-pass-check" : "pass-check" }}">
+                        <td class="bodl-rc text-center {{ $bg }} {{ !$item->pass_post ? "not-pass-check" : "pass-check" }}">
                             <strong>{{$item->val_check_post}}</strong>
                         </td>
                         <td class="bodl-rc">
