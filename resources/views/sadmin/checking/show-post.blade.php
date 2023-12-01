@@ -244,43 +244,47 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'compressor')->pluck('item')->first())}}:</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'compressor')->where('type', 'standart')->pluck('item')->first())}}:</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="compressor" id="compressor" class="form-control">
                                 <option value="{{ $checking->post->compressor }}">{{ $checking->post->compressor }}</option>
-                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'compressor')->pluck('checklist')->first()) as $client)
+                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'compressor')->where('type', 'standart')->pluck('checklist')->first()) as $client)
                                     <option value="{{ $client }}">{{ $client }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck('item')->first())}}:</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'cabin-air-filter')->where('type', 'standart')->pluck('item')->first())}}:</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="cabin" id="cabin" class="form-control">
                                 <option value="{{ $checking->post->cabin }}">{{ $checking->post->cabin }}</option>
-                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck('checklist')->first()) as $client)
+                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'cabin-air-filter')->where('type', 'standart')->pluck('checklist')->first()) as $client)
                                     <option value="{{ $client }}">{{ $client }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'blower')->pluck('item')->first())}}:</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'blower')->where('type', 'standart')->pluck('item')->first())}}:</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="blower" id="blower" class="form-control">
                                 <option value="{{ $checking->post->blower }}">{{ $checking->post->blower }}</option>
-                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'blower')->pluck('checklist')->first()) as $client)
+                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'blower')->where('type', 'standart')->pluck('checklist')->first()) as $client)
                                     <option value="{{ $client }}">{{ $client }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label text-left col-lg-3 col-sm-12">Motor Fan</label>
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{ ucwords(App\Models\MasterItem::where('slug', 'motor-fan')->where('type', 'standart')->pluck('item')->first())}}</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="fan"
-                                value="{{ $checking->post->fan }}" />
+                            <select name="fan" id="fan" class="form-control">
+                                <option value="{{ $checking->post->fan }}">{{ $checking->post->fan }}</option>
+                                @foreach(explode(',', App\Models\MasterItem::where('slug', 'motor-fan')->where('type', 'standart')->pluck('checklist')->first()) as $client)
+                                    <option value="{{ $client }}">{{ $client }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -59,6 +59,16 @@
                                                     <span class="form-text text-muted">pisahkan dengan koma ( , )</span>
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Tipe Checking</label>
+                                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                                <select name="type" id="type" class="form-control">
+                                                    <option value="" selected>Pilih Tipe</option>
+                                                    <option value="complete">Complete</option>
+                                                    <option value="standart">Standart</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                         <div class="separator separator-dashed my-10"></div>
                                 </div>
                                 <div class="modal-footer">
@@ -81,6 +91,7 @@
                             <th></th>
                             <th>Item</th>
                             <th>Checklist</th>
+                            <th>Tipe</th>
                             <th>Created At</th>
                             <th>Actions</th>
                         </tr>

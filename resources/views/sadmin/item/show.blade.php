@@ -31,6 +31,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">Tipe</label>
+                        <div class="col-lg-9 col-md-9 col-sm-12">
+                            <select name="type" id="type" class="form-control">
+                                <option value="{{ $data->type }}">{{ ucwords($data->type) }}</option>
+                                <option value="complete">Complete</option>
+                                <option value="standart">Standart</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Status</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <select name="status" id="status" class="form-control">

@@ -123,6 +123,7 @@ var KTDatatablesDataSourceAjaxType = function() {
 				{data: 'id'},
 				{data: 'item'},
 				{data: 'checklist'},
+				{data: 'type'},
 				{data: 'created_at'},
 				{data: 'id', responsivePriority: -1},
 			],
@@ -153,7 +154,7 @@ var KTDatatablesDataSourceAjaxType = function() {
 					},
 				},
 				{
-					width: '100px',
+					width: '200px',
 					targets: -2,
 					render: function(data, type, full, meta) {
                         return to_date_time(data)

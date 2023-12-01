@@ -20,6 +20,7 @@ class MasterItemController extends Controller
         $validation = Validator::make($request->all(), [
             'item' => 'required',
             'checklist' => 'required',
+            'type' => 'required',
         ]);
 
         if ($validation->fails()) {
@@ -31,6 +32,7 @@ class MasterItemController extends Controller
             'item' => $request->item,
             'checklist' => $request->checklist,
             'status' => 'active',
+            'type' => $request->type,
             'slug' => $slug
         ]);
 
@@ -53,6 +55,7 @@ class MasterItemController extends Controller
         if ($item) {
             $item->item = $request->item;
             $item->checklist = $request->checklist;
+            $item->type = $request->type;
             $item->status = $request->status;
             if ($item->save()) {
                 return json_encode(['status' => true, 'message' => 'Success']);

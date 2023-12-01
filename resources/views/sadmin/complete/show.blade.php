@@ -235,7 +235,7 @@
                                 <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
                                     <select name="judul_hasil[]" id="judul_hasil" class="form-control" onchange="getItem(event)">
                                         <option value="{{ $checking->complete[$i]->value_title }}" selected>{{ $checking->complete[$i]->value_title }}</option>
-                                        @foreach (App\Models\MasterItem::where('status', 'active')->get() as $item)
+                                        @foreach (App\Models\MasterItem::where('status', 'active')->where('type', 'complete')->get() as $item)
                                             <option value="{{ $item->item }}">{{ $item->item }}</option>
                                         @endforeach
                                     </select>
