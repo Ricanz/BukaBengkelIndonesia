@@ -38,6 +38,15 @@
                                 value="{{ $data->name }}" maxlength="20"/>
                         </div>
                     </div>
+                    @if ($data->type === 'complete')
+                        <div class="form-group row">
+                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label Deskripsi</label>
+                            <div class="col-lg-9 col-md-9 col-sm-12">
+                                <input type="text" class="form-control" name="label_description"
+                                    value="{{ $data->label_desc }}" maxlength="20"/>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Label Foto</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">

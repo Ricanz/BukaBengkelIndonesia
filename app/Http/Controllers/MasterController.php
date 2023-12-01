@@ -56,6 +56,7 @@ class MasterController extends Controller
             'icon' => $request->has('file') ? env('APP_URL').$img : null,
             'name' => $request->label_judul,
             'description' => $request->label_foto,
+            'label_desc' => $request->label_description,
             'status' => 'active',
             'type' => $request->type,
         ]);
@@ -111,6 +112,7 @@ class MasterController extends Controller
         $data->icon = $request->has('file') ? $img : $data->icon;
         $data->name = $request->label_judul ? $request->label_judul : $data->label_judul;
         $data->description = $request->label_foto ? $request->label_foto : $data->label_foto;
+        $data->label_desc = $request->label_description ? $request->label_description : $data->label_description;
         $data->status = $request->status ? $request->status : $data->status;
         if ($data->save()) {
             return json_encode(['status' => true, 'message' => 'Success']);
