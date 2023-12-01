@@ -61,9 +61,9 @@
                     ?>
                     <tr>
                         <td class="bodr-rc {{ $bg }}" style="padding: 10px;">
-                            @if ($item->master->icon)
-                            <img src="{{ env('APP_URL').$item->master->icon }}"
-                                width="30" height="30" />
+                            @if ($item->master->icon !== null || $item->master->icon !== '')
+                                <img src="{{ env('APP_URL').$item->master->icon }}"
+                                    width="30" height="30" />
                             @endif
                         </td>
                         <td class="bodl-rc {{ $bg }}">
