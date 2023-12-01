@@ -54,7 +54,7 @@
                 @foreach ($checking->complete as $key => $item)
                     <?php 
                     $bg = "";
-                    if ($key% 2 == 1) {
+                    if ($key % 2 == 1) {
                         $bg = "bg-table";
                     }
                     ?>
