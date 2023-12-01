@@ -345,3 +345,7 @@ tr.nobod-rc td {
     width: 100%; /* Atur lebar sesuai kebutuhan Anda */
     height: 200px; /* Atur tinggi sesuai kebutuhan Anda */
 }
+
+.bg-table {
+    background-color: #f6f8fd;
+}
