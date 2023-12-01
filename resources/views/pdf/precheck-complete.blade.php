@@ -11,7 +11,7 @@
         }
 
         body {
-            font-family: Dejavu Sans; 
+            font-family: Dejavu Sans;
         }
 
         .container {
@@ -183,12 +183,10 @@
         .bodr-rc {
             width: 20px;
             padding: 0px 0px 0px 15px;
-            border: 1px #d0d2d8 solid;
         }
 
         .bodl-rc {
             padding: 0px 0px 0px 15px;
-            border: 1px #d0d2d8 solid;
         }
 
         .nobodl-rc {
@@ -233,7 +231,7 @@
             font-weight: bold;
             font-size: 28px;
             text-align: left;
-            font-family: Dejavu Sans !important; 
+            font-family: Dejavu Sans !important;
         }
 
         #ch-two {
@@ -291,7 +289,7 @@
             border-radius: 20px;
         }
 
-        #footer{
+        #footer {
             background-color: #1f2690;
             text-align: center;
         }
@@ -322,18 +320,21 @@
             color: #e95e5e !important;
         }
 
+        .bg-table {
+            background-color: #f6f8fd;
+        }
     </style>
 </head>
 
 <body>
     <div id="background">
-        <img src="{{ env('APP_URL').'/tadmin/media/images/logo-192x192.png' }}" id="bg-wt">
+        <img src="{{ env('APP_URL') . '/tadmin/media/images/logo-192x192.png' }}" id="bg-wt">
     </div>
 
     <div id="content" style="width: 800px;">
         <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
-            <img src="{{ env('APP_URL') .'/'.$checking->client->image }}"
-                alt="Logo" style="height:75px;object-fit:contain">
+            <img src="{{ env('APP_URL') . '/' . $checking->client->image }}" alt="Logo"
+                style="height:75px;object-fit:contain">
         </div>
         <div id="head-content">
             <table cellspacing="0" style="width:100%;" class="container">
@@ -350,7 +351,8 @@
                             <p id="rh-two">{{ $checking->created_at->format('D, d-m-Y | H:i') }}</p>
                             <p id="rh-three">No. WO : {{ $checking->wo }}</b></p>
                             <p id="rh-four">*Lakukan Service Mobil Anda</p>
-                            <p id="rh-five">Teknisi: <b><label id="rh-five">{{ $checking->employee->fullname }}</label></b>
+                            <p id="rh-five">Teknisi: <b><label
+                                        id="rh-five">{{ $checking->employee->fullname }}</label></b>
                             </p>
                         </td>
                     </tr>
@@ -360,27 +362,29 @@
         <div id="result-check" style="margin-top: 10px;">
             <table cellspacing="0" class="container tb-rc" style="width: 100%;">
                 <tr>
-                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one" colspan="2">STANDAR NORMAL</th>
-                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">PRE-CHECK</th>
-                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">TAMBAHAN PEMERIKSAAN</th>
+                    <th style="width: 40%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one"
+                        colspan="2">STANDAR NORMAL</th>
+                    <th style="width: 25%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">
+                        PRE-CHECK</th>
+                    <th style="width: 35%; padding: 10px; border-radius: 20px 20px 0 0; color: white;" id="check-one">
+                        HASIL DIAGNOSA</th>
                 </tr>
                 @foreach ($checking->complete as $key => $item)
-                    <?php 
-                    $bg = "";
-                    if ($key% 2 == 1) {
-                        $bg = "background-color: #f6f8fd;";
+                    <?php
+                    $bg = '';
+                    if ($key % 2 == 1) {
+                        $bg = 'bg-table';
                     }
                     ?>
-                    <tr style="{{ $bg }}">
-                        <td class="bodr-rc" style="padding: 10px;">
-                            <img src="{{ $item->master->icon }}"
-                                width="30" height="30" />
+                    <tr>
+                        <td class="bodr-rc {{ $bg }}" style="padding: 10px;">
+                            <img src="{{ env('APP_URL') . $item->master->icon }}" width="30" height="30" />
                         </td>
-                        <td class="bodl-rc">
+                        <td class="bodl-rc {{ $bg }}">
                             {{ $item->master->description }}: <br><b>{{ $item->master->name }}</b>
                         </td>
-                        <td class="bodl-rc text-center {{ !$item->pass ? "not-pass-check" : "pass-check" }}">
-                            <strong>{{$item->val_check}}</strong>
+                        <td class="bodl-rc text-center {{ {{ $bg }} !$item->pass ? 'not-pass-check' : 'pass-check' }}">
+                            <strong>{{ $item->val_check }}</strong>
                         </td>
                         <td class="bodl-rc">
                             {{ $item->value_title }}: <br><b>{{ $item->value }}</b>
@@ -395,24 +399,25 @@
                     <td class="ic-three" style="width: 200px;">
                         *Sumber Refrensi
                         <div id="image-head" style="width: auto; height:50px;">
-                            <img src="{{ env('APP_URL').'/tadmin/images/denso-sumber.jpg' }}"
-                                alt="Logo" style="height:25px;object-fit:contain">
+                            <img src="{{ env('APP_URL') . '/tadmin/images/denso-sumber.jpg' }}" alt="Logo"
+                                style="height:25px;object-fit:contain">
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
-        
+
         <div id="condition" style="page-break-before: always;">
             <div id="background">
-                <img src="{{ env('APP_URL').'/tadmin/media/images/logo-192x192.png' }}" id="page-2">
+                <img src="{{ env('APP_URL') . '/tadmin/media/images/logo-192x192.png' }}" id="page-2">
             </div>
             <table cellspacing="0" style="width:100%;">
                 <tr id="ic-two-two" style=" padding-left: 20px;">
                     <td class="ic-three" style="width: 200px;">
-                        <div id="image-head" style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
-                            <img src="{{ env('APP_URL') .'/'.$checking->client->image }}"
-                                alt="Logo" style="height:75px;object-fit:contain">
+                        <div id="image-head"
+                            style="width: auto; height:40px; margin-bottom:15px; padding: 10px; margin-left:10px;">
+                            <img src="{{ env('APP_URL') . '/' . $checking->client->image }}" alt="Logo"
+                                style="height:75px;object-fit:contain">
                         </div>
                     </td>
                     <td class="ic-three"></td>
@@ -433,18 +438,21 @@
                     <center>
                         <table cellspacing="0" style="width:100%;">
                             <tr id="ic-two-two">
-                            @foreach ($first_batch as $key => $item)
-                                <td class="ic-three">
-                                    <center>
-                                        <div class="ic-mt">
-                                            <div id="bg-image">
-                                                <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                @foreach ($first_batch as $key => $item)
+                                    <td class="ic-three">
+                                        <center>
+                                            <div class="ic-mt">
+                                                <div id="bg-image">
+                                                    <img src="{{ env('APP_URL') . '/' . $item->image }}" class="ic-b"
+                                                        width="100%" height="100%" />
+                                                    <p class="text-center"
+                                                        style="padding: 5px 5px 0 5px; color: white;">
+                                                        {{ $item->master->description }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </center>
-                                </td>
-                            @endforeach
+                                        </center>
+                                    </td>
+                                @endforeach
                             </tr>
                         </table>
                     </center>
@@ -456,18 +464,21 @@
                     <center>
                         <table cellspacing="0" style="width:100%;">
                             <tr id="ic-two-two">
-                            @foreach ($second_batch as $key => $item)
-                                <td class="ic-three">
-                                    <center>
-                                        <div class="ic-mt">
-                                            <div id="bg-image">
-                                                <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                @foreach ($second_batch as $key => $item)
+                                    <td class="ic-three">
+                                        <center>
+                                            <div class="ic-mt">
+                                                <div id="bg-image">
+                                                    <img src="{{ env('APP_URL') . '/' . $item->image }}" class="ic-b"
+                                                        width="100%" height="100%" />
+                                                    <p class="text-center"
+                                                        style="padding: 5px 5px 0 5px; color: white;">
+                                                        {{ $item->master->description }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </center>
-                                </td>
-                            @endforeach
+                                        </center>
+                                    </td>
+                                @endforeach
                             </tr>
                         </table>
                     </center>
@@ -479,18 +490,21 @@
                     <center>
                         <table cellspacing="0" style="width:100%;">
                             <tr id="ic-two-two">
-                            @foreach ($third_batch as $key => $item)
-                                <td class="ic-three">
-                                    <center>
-                                        <div class="ic-mt">
-                                            <div id="bg-image">
-                                                <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                @foreach ($third_batch as $key => $item)
+                                    <td class="ic-three">
+                                        <center>
+                                            <div class="ic-mt">
+                                                <div id="bg-image">
+                                                    <img src="{{ env('APP_URL') . '/' . $item->image }}" class="ic-b"
+                                                        width="100%" height="100%" />
+                                                    <p class="text-center"
+                                                        style="padding: 5px 5px 0 5px; color: white;">
+                                                        {{ $item->master->description }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </center>
-                                </td>
-                            @endforeach
+                                        </center>
+                                    </td>
+                                @endforeach
                             </tr>
                         </table>
                     </center>
@@ -501,18 +515,21 @@
                     <center>
                         <table cellspacing="0" style="width:100%;">
                             <tr id="ic-two-two">
-                            @foreach ($fourth_batch as $key => $item)
-                                <td class="ic-three">
-                                    <center>
-                                        <div class="ic-mt">
-                                            <div id="bg-image">
-                                                <img src="{{ env('APP_URL') .'/'.$item->image}}" class="ic-b" width="100%" height="100%" />
-                                                <p class="text-center" style="padding: 5px 5px 0 5px; color: white;">{{$item->master->description}}</p>
+                                @foreach ($fourth_batch as $key => $item)
+                                    <td class="ic-three">
+                                        <center>
+                                            <div class="ic-mt">
+                                                <div id="bg-image">
+                                                    <img src="{{ env('APP_URL') . '/' . $item->image }}" class="ic-b"
+                                                        width="100%" height="100%" />
+                                                    <p class="text-center"
+                                                        style="padding: 5px 5px 0 5px; color: white;">
+                                                        {{ $item->master->description }}</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </center>
-                                </td>
-                            @endforeach
+                                        </center>
+                                    </td>
+                                @endforeach
                             </tr>
                         </table>
                     </center>
