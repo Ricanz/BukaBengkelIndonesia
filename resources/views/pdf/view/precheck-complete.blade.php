@@ -60,8 +60,10 @@
                     ?>
                     <tr>
                         <td class="bodr-rc {{ $bg }}" style="padding: 10px;">
+                            @if ($item->master->icon)
                             <img src="{{ $item->master->icon }}"
                                 width="30" height="30" />
+                            @endif
                         </td>
                         <td class="bodl-rc {{ $bg }}">
                             {{ $item->master->name }}: <br><b>{{ $item->master->label_desc }}</b>
