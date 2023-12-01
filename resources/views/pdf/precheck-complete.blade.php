@@ -383,7 +383,7 @@
                             @endif
                         </td>
                         <td class="bodl-rc {{ $bg }}">
-                            {{ $item->master->description }}: <br><b>{{ $item->master->name }}</b>
+                            {{ $item->master->description }}: <br><b>{{ $item->master->label_desc }}</b>
                         </td>
                         <td class="bodl-rc text-center {{ $bg }} {{ !$item->pass ? 'not-pass-check' : 'pass-check' }}">
                             <strong>{{ $item->val_check }}</strong>
