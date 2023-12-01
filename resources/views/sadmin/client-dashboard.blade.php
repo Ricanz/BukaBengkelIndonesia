@@ -290,7 +290,7 @@
                                                     <span class="text-muted font-weight-bold">{{ $item->checking_type }}</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="text-muted font-weight-bold">{{ $employee->fullname }}</span>
+                                                    <span class="text-muted font-weight-bold">{{ $item->employee->fullname }}</span>
                                                 </td>
                                                 <td class="text-center">
                                                     <span class="text-muted font-weight-bold">{{ $item->advisor->name }}</span>
@@ -363,7 +363,7 @@
                                                     <span class="text-muted font-weight-bold">{{ $item->checking_type }}</span>
                                                 </td>
                                                 <td class="text-center">
-                                                    <span class="text-muted font-weight-bold">{{ $employee->fullname }}</span>
+                                                    <span class="text-muted font-weight-bold">{{ $item->employee->fullname }}</span>
                                                 </td>
                                                 <td class="text-center">
                                                     <span class="text-muted font-weight-bold">{{ $item->advisor->name }}</span>
