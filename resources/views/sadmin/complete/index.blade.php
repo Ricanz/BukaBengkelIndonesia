@@ -89,6 +89,8 @@
                                                 </div>
                                             </div>
                                             <div class="separator separator-dashed my-10"></div>
+                                            <h5>Ini Contoh Yang Sebelumya</h5>
+                                            <div class="separator separator-dashed my-10"></div>
                                             <h2>Hasil Pre Check</h2>
                                             <div id="form-container">
                                                 <div class="form-group row check-group">
@@ -124,6 +126,55 @@
                                                         </select>
                                                     </div>
                                                     <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
+                                                </div>
+                                            </div>
+                                            <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>
+
+                                            <div class="separator separator-dashed my-10"></div>
+                                            <h5>Ini Contoh Request Bang Seto</h5>
+                                            <div class="separator separator-dashed my-10"></div>
+                                            <h2>Hasil Pre Check</h2>
+                                            <div id="form-container">
+                                                <div class="form-group row check-group">
+                                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                                        <select name="master[]" id="master[]" class="form-control">
+                                                            <option value="" selected>Pilih Check</option>
+                                                            @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
+                                                                <option value="{{ $type->id }}">{{ $type->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
+                                                        <input type="text" class="form-control" name="hasil[]"
+                                                            placeholder="Cth: 261 Psi" />
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
+                                                        <select name="hasil_check[]" id="hasil_check[]" class="form-control">
+                                                            <option value="1" selected>Lolos</option>
+                                                            <option value="0" >Tidak Lolos</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
+                                                </div>
+                                            </div>
+                                            <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>
+                                            <h2>Tambahan Pemeriksaan</h2>
+                                            <div id="form-container">
+                                                <div class="form-group row check-group">
+                                                    <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
+                                                        <select name="judul_hasil[]" id="judul_hasil" class="form-control" onchange="getItem(event)">
+                                                            <option value="" selected>Pilih Checking</option>
+                                                            @foreach (App\Models\MasterItem::where('status', 'active')->get() as $item)
+                                                                <option value="{{ $item->item }}">{{ $item->item }}</option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        <select name="result[]" id="result" class="form-control mt-2">
+                                                            <option value="" selected>Pilih Item Checking</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="cursor-pointer btn btn-danger ml-4 mt-2" style="height: 35px;"  onclick="hapusCheck(event)">Hapus</div>
                                                 </div>
                                             </div>
                                             <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>

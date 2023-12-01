@@ -101,7 +101,7 @@
                                 <div class="col">
                                     <div class="d-flex align-items-center mr-2">
                                         <span class="symbol-label">
-                                            <img src="{{ asset($employee->client->image) }}"
+                                            <img src="{{ $employee !== null ? asset($employee->client->image) : '' }}"
                                                 class="align-self-center" alt="" style="height: 90px; width: auto; margin-bottom: 5px;"/>
                                         </span>
                                     </div>
@@ -135,8 +135,8 @@
                                         <!--end::Symbol-->
                                         <!--begin::Title-->
                                         <div>
-                                            <div class="font-size-h4 text-dark-75 font-weight-bolder">{{ $employee->fullname }}</div>
-                                            <div class="font-size-sm text-muted font-weight-bold mt-1">{{ $employee->client->title }}
+                                            <div class="font-size-h4 text-dark-75 font-weight-bolder">{{ $employee !== null ? $employee->fullname : '' }}</div>
+                                            <div class="font-size-sm text-muted font-weight-bold mt-1">{{ $employee !== null ? $employee->client->title : '' }}
                                             </div>
                                         </div>
                                         <!--end::Title-->
