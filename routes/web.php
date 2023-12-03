@@ -64,6 +64,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/', [GeneralController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard/chart', [GeneralController::class, 'chart'])->name('chart');
     Route::get('/user-profile', [GeneralController::class, 'user_profile'])->name('user_profile');
     Route::post('/user-profile', [GeneralController::class, 'post_user_profile'])->name('update_user_profile');
     // Profile

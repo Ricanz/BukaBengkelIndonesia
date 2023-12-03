@@ -16,6 +16,7 @@ use App\Models\StandartChecking2;
 use App\Models\StandartCheckingPost;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -67,6 +68,57 @@ class GeneralController extends Controller
                 return view('sadmin.employee-dashboard', compact('employee', 'standart_checking', 'complete_checking', 'total', 'checking', 'count_complete', 'count_standart'));
                 break;
         }
+    }
+
+    public function chart()
+    {
+        $user = Auth::user();
+        $now = Carbon::now();
+        $today =  $now->toDateString();
+        $date_from = $now->subDays(7)->startOfWeek()->format('Y-m-d');
+        $date_until = $today;
+        $periods = CarbonPeriod::create($date_from, $date_until);
+
+
+        $timestap = [];
+        $value = [];
+        $data = [];
+
+        switch ($user->role) {
+            case 'admin':
+                foreach($periods as $period) {
+                    array_push($timestap,$period->format('Y-m-d'));
+                    $checking = Checking::where('status', 'active')
+                        ->whereDate('created_at',$period->format('Y-m-d'))
+                        ->count();
+                    array_push($value,$checking);
+                }
+                break;
+            case 'client';
+                $clients = Client::where('kabeng_id', $user->id)->pluck('id')->toArray();
+                foreach($periods as $period) {
+                    array_push($timestap,$period->format('Y-m-d'));
+                    $checking = Checking::whereIn('client_id', $clients)->where('status', 'active')
+                        ->whereDate('created_at',$period->format('Y-m-d'))
+                        ->count();
+                    array_push($value,$checking);
+                }
+                break;
+            default:
+                foreach($periods as $period) {
+                    array_push($timestap,$period->format('Y-m-d'));
+                    $checking = Checking::where('user_id', $user->id)->where('status', 'active')
+                        ->whereDate('created_at',$period->format('Y-m-d'))
+                        ->count();
+                    array_push($value,$checking);
+                }
+                break;
+        }
+
+        $data['data'] = $value;
+        $data['timestamp'] = $timestap;
+
+        return response()->json($data);
     }
 
     public function user_profile()
