@@ -168,14 +168,14 @@
                         <input type="hidden" name="checking_id" id="checking_id" value="{{ $checking->id }}">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Wo</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <input type="text" class="form-control" name="wo" value="{{ $checking->wo }}" />
+                            <input type="text" class="form-control" name="wo" value="{{ $checking->wo }}" disabled/>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">No. Polisi</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
                             <input type="text" class="form-control" name="nopol"
-                                value="{{ $checking->plat_number }}" />
+                                value="{{ $checking->plat_number }}" disabled/>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -195,7 +195,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Merek dan Tipe Kendaraan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="type" id="type" class="form-control">
+                            <select name="type" id="type" class="form-control" disabled>
                                 <option value="{{ $checking->type_id }}" selected>{{ $checking->types->name }}
                                 </option>
                                 @foreach (App\Models\MasterType::where('status', 'active')->orderBy('name')->get() as $type)

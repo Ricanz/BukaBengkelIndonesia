@@ -181,7 +181,7 @@
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Service Advisor</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
-                            <select name="advisor" id="advisor" class="form-control" disabled>
+                            <select name="advisor" id="advisor" class="form-control">
                                 <option value="{{ $checking->sa_id }}" selected>{{ $checking->advisor->name }}
                                 </option>
                                 @if (Auth::user()->role === 'employee')
