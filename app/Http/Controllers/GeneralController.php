@@ -32,10 +32,13 @@ class GeneralController extends Controller
                 $standart_checking = Checking::with('advisor')->where('status', 'active')->where('checking_type', 'standart')->orderByDesc('id')->limit(5)->get();
                 $complete_checking = Checking::with('advisor')->where('status', 'active')->where('checking_type', 'complete')->orderByDesc('id')->limit(5)->get();
                 
-                $total = count($standart_checking) + count($complete_checking);
+                $count_standart = Checking::where('status', 'active')->where('checking_type', 'standart')->orderByDesc('id')->count();
+                $count_complete = Checking::where('status', 'active')->where('checking_type', 'complete')->orderByDesc('id')->count();
+                $total = $count_standart + $count_complete;
+
                 $total_bengkel = Client::where('status', 'active')->count();
                 $total_teknisi = Employee::Where('status', 'active')->where('is_kabeng', false)->count();
-                return view('sadmin.admin-dashboard', compact('standart_checking', 'complete_checking', 'total', 'checking', 'total_bengkel', 'total_teknisi'));
+                return view('sadmin.admin-dashboard', compact('standart_checking', 'complete_checking', 'total', 'checking', 'total_bengkel', 'total_teknisi', 'count_standart', 'count_complete'));
                 break;
             case 'client':
                 $clients = Client::where('kabeng_id', $user->id)->pluck('id')->toArray();
@@ -45,8 +48,12 @@ class GeneralController extends Controller
                 $standart_checking = Checking::with('advisor')->whereIn('client_id', $clients)->where('status', 'active')->where('checking_type', 'standart')->orderByDesc('id')->limit(5)->get();
                 $complete_checking = Checking::with('advisor')->whereIn('client_id', $clients)->where('status', 'active')->where('checking_type', 'complete')->orderByDesc('id')->limit(5)->get();
                 
-                $total = count($standart_checking) + count($complete_checking);
-                return view('sadmin.client-dashboard', compact('employee', 'standart_checking', 'complete_checking', 'total', 'checking'));
+                $count_standart = Checking::whereIn('client_id', $clients)->where('status', 'active')->where('checking_type', 'standart')->orderByDesc('id')->count();
+                $count_complete = Checking::whereIn('client_id', $clients)->where('status', 'active')->where('checking_type', 'complete')->orderByDesc('id')->count();
+
+                $total = $count_complete + $count_standart;
+
+                return view('sadmin.client-dashboard', compact('employee', 'standart_checking', 'complete_checking', 'total', 'checking', 'count_complete', 'count_standart'));
                 break;
             default:
                 $employee = Employee::with('client')->where('user_id', $user->id)->first();
@@ -54,8 +61,10 @@ class GeneralController extends Controller
                 $standart_checking = Checking::with('advisor')->where('employee_id', $employee->id)->where('status', 'active')->where('checking_type', 'standart')->orderByDesc('id')->limit(5)->get();
                 $complete_checking = Checking::with('advisor')->where('employee_id', $employee->id)->where('status', 'active')->where('checking_type', 'complete')->orderByDesc('id')->limit(5)->get();
                 
-                $total = count($standart_checking) + count($complete_checking);
-                return view('sadmin.employee-dashboard', compact('employee', 'standart_checking', 'complete_checking', 'total', 'checking'));
+                $count_standart = Checking::where('employee_id', $employee->id)->where('status', 'active')->where('checking_type', 'standart')->orderByDesc('id')->count();
+                $count_complete = Checking::where('employee_id', $employee->id)->where('status', 'active')->where('checking_type', 'complete')->orderByDesc('id')->count();
+                $total = $count_standart + $count_complete;
+                return view('sadmin.employee-dashboard', compact('employee', 'standart_checking', 'complete_checking', 'total', 'checking', 'count_complete', 'count_standart'));
                 break;
         }
     }

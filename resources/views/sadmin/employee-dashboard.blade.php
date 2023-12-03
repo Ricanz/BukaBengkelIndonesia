@@ -49,7 +49,7 @@
                                         <!--end::Symbol-->
                                         <!--begin::Title-->
                                         <div>
-                                            <div class="font-size-h4 text-dark-75 font-weight-bolder">{{ count($standart_checking) }}</div>
+                                            <div class="font-size-h4 text-dark-75 font-weight-bolder">{{ $count_standart }}</div>
                                             <div class="font-size-sm text-muted font-weight-bold mt-1">Standart Checking
                                             </div>
                                         </div>
@@ -87,7 +87,7 @@
                                         <!--end::Symbol-->
                                         <!--begin::Title-->
                                         <div>
-                                            <div class="font-size-h4 text-dark-75 font-weight-bolder">{{ count($complete_checking) }}</div>
+                                            <div class="font-size-h4 text-dark-75 font-weight-bolder">{{ $count_complete }}</div>
                                             <div class="font-size-sm text-muted font-weight-bold mt-1">Complete Checking
                                             </div>
                                         </div>

@@ -9,7 +9,7 @@
                     <!--begin::Header-->
                     <div class="card-header border-0 pt-5">
                         <div class="card-title font-weight-bolder">
-                            <div class="card-label">Informasi Data Teknisi
+                            <div class="card-label">Informasi Buka Bengkel Indonesia
                                 <div class="font-size-sm text-muted mt-2">{{ $total }} Total Checking</div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                         <!--begin::Title-->
                                         <div>
                                             <div class="font-size-h4 text-dark-75 font-weight-bolder">
-                                                {{ count($standart_checking) }}</div>
+                                                {{ $count_standart }}</div>
                                             <div class="font-size-sm text-muted font-weight-bold mt-1">Standart Checking
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@
                                         <!--begin::Title-->
                                         <div>
                                             <div class="font-size-h4 text-dark-75 font-weight-bolder">
-                                                {{ count($complete_checking) }}</div>
+                                                {{ $count_complete }}</div>
                                             <div class="font-size-sm text-muted font-weight-bold mt-1">Complete Checking
                                             </div>
                                         </div>
