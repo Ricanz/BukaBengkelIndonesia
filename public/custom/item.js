@@ -148,9 +148,9 @@ var KTDatatablesDataSourceAjaxType = function() {
 					orderable: false,
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
-						return `
-                            <a class="nav-link" href="/master/item/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
-						`;
+						return `<a class="nav-link delete-btn" onclick="deleteData(${full.id})" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${full.id}">
+                            <i class="nav-icon la la-trash"></i><span class="nav-text"></span>
+                        </a>`;
 					},
 				},
 				{
@@ -174,6 +174,11 @@ var KTDatatablesDataSourceAjaxType = function() {
 	};
 
 }();
+
+function deleteData(id)
+{
+    $('#confirmDelete').attr('href', '/master/item/destroy/' + id);
+}
 
 function to_date_time(date) {
     let tanggal = new Date(date);

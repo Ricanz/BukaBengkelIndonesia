@@ -7,7 +7,8 @@
                     <span class="card-icon">
                         <i class="flaticon2-supermarket text-primary"></i>
                     </span>
-                    <h3 class="card-label">Master Data {{ Str::ucfirst(request()->segment(count(request()->segments())))}} Checking</h3>
+                    <h3 class="card-label">Master Data
+                        {{ Str::ucfirst(request()->segment(count(request()->segments()))) }} Checking</h3>
                 </div>
                 <div class="card-toolbar">
                     <!--begin::Button-->
@@ -35,7 +36,9 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Master {{ Str::ucfirst(request()->segment(count(request()->segments())))}} Checking</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Master
+                                        {{ Str::ucfirst(request()->segment(count(request()->segments()))) }} Checking
+                                    </h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i aria-hidden="true" class="ki ki-close"></i>
                                     </button>
@@ -43,7 +46,8 @@
                                 <div class="modal-body">
                                     <form class="form" id="create_master_form" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="type" value="{{ request()->segment(count(request()->segments())) }}">
+                                        <input type="hidden" name="type"
+                                            value="{{ request()->segment(count(request()->segments())) }}">
                                         <div class="image-input image-input-outline" id="kt_image_1">
                                             <div class="image-input-wrapper" style="background-image: url()"></div>
 
@@ -63,26 +67,29 @@
                                             </span>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label Judul</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label
+                                                Judul</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="label_judul"
-                                                    placeholder="Masukkan Label Judul" maxlength="20"/>
+                                                    placeholder="Masukkan Label Judul" maxlength="20" />
                                             </div>
                                         </div>
                                         @if (request()->segment(count(request()->segments())) === 'complete')
                                             <div class="form-group row">
-                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Label Deskripsi</label>
+                                                <label class="col-form-label text-left col-lg-3 col-sm-12">Label
+                                                    Deskripsi</label>
                                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                                     <input type="text" class="form-control" name="label_description"
-                                                        placeholder="Masukkan Label Deskripsi" maxlength="20"/>
+                                                        placeholder="Masukkan Label Deskripsi" maxlength="20" />
                                                 </div>
                                             </div>
                                         @endif
                                         <div class="form-group row">
-                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label Foto</label>
+                                            <label class="col-form-label text-left col-lg-3 col-sm-12">Label
+                                                Foto</label>
                                             <div class="col-lg-9 col-md-9 col-sm-12">
                                                 <input type="text" class="form-control" name="label_foto"
-                                                    placeholder="Masukkan Label Foto" maxlength="20"/>
+                                                    placeholder="Masukkan Label Foto" maxlength="20" />
                                             </div>
                                         </div>
                                         <div class="separator separator-dashed my-10"></div>
@@ -118,6 +125,26 @@
             </div>
         </div>
         <!--end::Card-->
+    </div>
+    <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Hapus</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menghapus data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                    <a class="btn btn-danger" id="confirmDelete" href="#">Ya, Hapus</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     @section('scripts')
