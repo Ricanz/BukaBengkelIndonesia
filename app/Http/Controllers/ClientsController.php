@@ -260,7 +260,7 @@ class ClientsController extends Controller
 
     public function employee_data($id)
     {
-        $employee = Employee::with('user')->where('client_id', $id)->where('is_kabeng', false)->orderBy('fullname');
+        $employee = Employee::with('user')->where('client_id', $id)->where('is_kabeng', false)->where('status', '!=', 'deleted')->orderBy('fullname');
         return DataTables::of($employee->get())->addIndexColumn()->make(true);
     }
 

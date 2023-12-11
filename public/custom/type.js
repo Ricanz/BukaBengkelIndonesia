@@ -38,9 +38,9 @@ var KTDatatablesDataSourceAjaxType = function() {
 					orderable: false,
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
-						return `
-                            <a class="nav-link" href="type/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
-						`;
+						return `<a class="nav-link delete-btn" onclick="deleteData(${full.id})" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${full.id}">
+                            <i class="nav-icon la la-trash"></i><span class="nav-text"></span>
+                        </a>`;
 					},
 				},
 				{
@@ -91,6 +91,12 @@ function to_date_time(date) {
         + ":" + (tanggal.getUTCMinutes().toString() > 9 ? tanggal.getUTCMinutes().toString() : "0" + tanggal.getUTCMinutes().toString())
         + ":" + (tanggal.getUTCSeconds().toString() > 9 ? tanggal.getUTCSeconds().toString() : "0" + tanggal.getUTCSeconds().toString());
 }
+
+function deleteData(id)
+{
+    $('#confirmDelete').attr('href', '/type/destroy/' + id);
+}
+
 
 jQuery(document).ready(function() {
 	KTDatatablesDataSourceAjaxType.init();
