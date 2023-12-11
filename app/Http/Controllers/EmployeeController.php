@@ -73,7 +73,7 @@ class EmployeeController extends Controller
                 'client_id' => $request->cabang,
                 'code' => $request->id,
                 'status' => $request->status,
-                'is_kabeng' => false
+                'is_kabeng' => strtolower($request->filter) === 'client' ? true : false
             ]);
             if ($submit_employee) {
                 return json_encode(['status' => true, 'message' => 'Success']);

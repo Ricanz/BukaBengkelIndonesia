@@ -51,9 +51,9 @@ var KTDatatablesDataSourceAjaxClient = function() {
 					orderable: false,
                     class: 'remove-client',
 					render: function(data, type, full, meta) {
-						return `
-                            <a class="nav-link" href="/checking/destroy/${full.id}"><i class="nav-icon la la-trash"></i><span class="nav-text"></span></a>
-						`;
+						return `<a class="nav-link delete-btn" onclick="deleteData(${full.id})" href="#" data-toggle="modal" data-target="#deleteModal" data-id="${full.id}">
+                            <i class="nav-icon la la-trash"></i><span class="nav-text"></span>
+                        </a>`;
 					},
 				},
 				{
@@ -192,7 +192,15 @@ function myFunction(data, desc, id) {
 }
 
 function deleteFunction(id){
-    window.location.href = `/checking/image/destroy/${id}`
+    var userConfirmed = confirm("Yakin ingin hapus?");
+    if (userConfirmed) {
+        window.location.href = `/checking/image/destroy/${id}`
+    }
+}
+
+function deleteData(id)
+{
+    $('#confirmDelete').attr('href', '/checking/destroy/' + id);
 }
 
 function to_date_time(date) {
