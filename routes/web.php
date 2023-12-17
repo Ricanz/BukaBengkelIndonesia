@@ -55,6 +55,7 @@ Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf
 // Article
 Route::get('/articles', [ArticleController::class, 'list']);
 Route::get('/article/{slug}', [ArticleController::class, 'detail']);
+Route::get('/article/search', [ArticleController::class, 'search']);
 
 
 Route::middleware('auth')->group(function () {

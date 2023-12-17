@@ -10890,18 +10890,43 @@ var KTLayoutSearch = function() {
 
         setTimeout(function() {
             $.ajax({
-                url: HOST_URL + '/api/quick_search.php',
+                url: '/api/article/search',
                 data: {
                     query: _query
                 },
                 dataType: 'html',
+                // success: function(res) {
+                //     console.log(res.data)
+                //     _hasResult = true;
+                //     _hideProgress();
+                //     KTUtil.addClass(_target, _resultClass);
+                //     KTUtil.setHTML(_resultWrapper, res.data.title);
+                //     _showDropdown();
+                //     KTUtil.scrollUpdate(_resultWrapper);
+                // },
                 success: function(res) {
-                    _hasResult = true;
-                    _hideProgress();
-                    KTUtil.addClass(_target, _resultClass);
-                    KTUtil.setHTML(_resultWrapper, res);
-                    _showDropdown();
-                    KTUtil.scrollUpdate(_resultWrapper);
+                    var responseObject = JSON.parse(res);
+                    if (responseObject.data.length > 0) {
+                        _hasResult = true;
+                        _hideProgress();
+                        KTUtil.addClass(_target, _resultClass);
+                        _resultWrapper.innerHTML = '';
+                        var titlesHtml = responseObject.data.map(function(item) {
+                            return '<a href="/article/'+item.slug+'"><div>' + item.title + '</div></a>';
+                        }).join('');
+                    
+                        _resultWrapper.innerHTML = titlesHtml;
+                    
+                        _showDropdown();
+                        KTUtil.scrollUpdate(_resultWrapper);
+                    } else {
+                        _hasResult = false;
+                        _hideProgress();
+                        KTUtil.addClass(_target, _resultClass);
+                        KTUtil.setHTML(_resultWrapper, '<span class="font-weight-bold text-muted">Ups.. Artikel tidak ditemukan.</div>');
+                        _showDropdown();
+                        KTUtil.scrollUpdate(_resultWrapper);
+                    }
                 },
                 error: function(res) {
                     _hasResult = false;
