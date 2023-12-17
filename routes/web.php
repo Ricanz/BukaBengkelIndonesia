@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccessController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CheckingController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\CompleteController;
@@ -50,6 +51,16 @@ Route::get('/view/standart-pdf/{id}', [CheckingController::class, 'view_pdf'])->
 Route::get('/view/standart-post-pdf/{id}', [CheckingController::class, 'view_pdf_post'])->name('pdf.standart_post');
 Route::get('/view/complete-pdf/{id}', [CompleteController::class, 'view_pdf'])->name('pdf.complete_pre');
 Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf_post'])->name('pdf.complete_post');
+
+// Article
+Route::get('/articles', [ArticleController::class, 'list']);
+Route::get('/master/articles', [ArticleController::class, 'index']);
+Route::get('/master/article/create', [ArticleController::class, 'create']);
+Route::get('/master/article/data', [ArticleController::class, 'data']);
+Route::post('/master/article/store', [ArticleController::class, 'store']);
+Route::get('/master/article/edit/{id}', [ArticleController::class, 'edit']);
+Route::post('/master/article/update', [ArticleController::class, 'update']);
+Route::get('/master/article/destroy/{id}', [ArticleController::class, 'destroy']);
 
 
 Route::middleware('auth')->group(function () {
