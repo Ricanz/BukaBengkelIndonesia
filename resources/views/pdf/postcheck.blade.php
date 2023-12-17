@@ -411,6 +411,10 @@
                         <td class="bodl-rc text-center not-pass-check bg-table">
                             <strong>{{ $checking->post->low }}</strong> Psi
                         </td>
+                    @else
+                        <td class="bodl-rc text-center not-pass-check bg-table">
+                            <strong>{{ $checking->post->low }}</strong> Psi
+                        </td>
                     @endif
                     <td class="bodl-rc">
                         {{ ucwords(App\Models\MasterItem::where('slug', 'cabin-air-filter')->pluck('item')->first())}}: <br><b>{{ $checking->post->cabin }}</b>
