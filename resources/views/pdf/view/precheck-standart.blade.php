@@ -85,12 +85,12 @@
                         <img src="{{ env('APP_URL') . '/tadmin/images/icon_low_pressure.png' }}" width="30"
                             height="30" />
                     </td>
-                    <td class="bodl-rc bg-table">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b>{{ $checking->standart->low }}</td>
-                    @if ((int) $checking->standart->low >= 21.3 && (int) $checking->standart->low <= 35.5)
+                    <td class="bodl-rc bg-table">Low Pressure: <br><b>21.3 Psi - 35.5 Psi</b></td>
+                    @if (floatval($checking->standart->low) >= 21.3 && floatval($checking->standart->low) <= 35.5)
                         <td class="bodl-rc text-center pass-check bg-table">
                             <strong>{{ $checking->standart->low }}</strong> Psi
                         </td>
-                    @elseif((int) $checking->standart->low < 21.3)
+                    @elseif(floatval($checking->standart->low) < 21.3)
                         <td class="bodl-rc text-center not-pass-check bg-table">
                             <strong>{{ $checking->standart->low }}</strong> Psi
                         </td>
