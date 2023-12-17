@@ -54,6 +54,7 @@ Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf
 
 // Article
 Route::get('/articles', [ArticleController::class, 'list']);
+Route::get('/article/{slug}', [ArticleController::class, 'detail']);
 Route::get('/master/articles', [ArticleController::class, 'index']);
 Route::get('/master/article/create', [ArticleController::class, 'create']);
 Route::get('/master/article/data', [ArticleController::class, 'data']);

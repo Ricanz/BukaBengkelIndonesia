@@ -16,6 +16,12 @@ class ArticleController extends Controller
         return view('sadmin.articles.index', compact('data'));
     }
 
+    public function detail($slug)
+    {
+        $data = Article::where('slug', $slug)->first();
+        return view('sadmin.articles.show', compact('data'));
+    }
+
     public function index()
     {
         return view('sadmin.articles.data');
@@ -45,7 +51,7 @@ class ArticleController extends Controller
         }
         
         if ($request->has('file')) {
-            $img = Utils::uploadImage($request->file, 300);
+            $img = Utils::uploadImage($request->file, 720);
         }
 
         $submit = Article::create([
@@ -78,7 +84,7 @@ class ArticleController extends Controller
         }
         $img = null;
         if ($request->has('file')) {
-            $img = $request->has('file') ? Utils::uploadImage($request->file, 300) : null;
+            $img = $request->has('file') ? Utils::uploadImage($request->file, 720) : null;
         }
 
         $data->image = $request->has('file') ? $img : $data->image;

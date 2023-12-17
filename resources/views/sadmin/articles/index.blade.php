@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="container">
-        <h3 class="mb-4">Artikel Buka Bengkel Indonesia</h3>
+        <h2 class="gutter-b">Artikel Buka Bengkel Indonesia</h2>
         <!--begin::Row-->
         <div class="row">
             @foreach ($data as $item)
