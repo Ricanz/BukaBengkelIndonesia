@@ -11,7 +11,7 @@
     <!--begin::Header Mobile-->
     <div id="kt_header_mobile" class="header-mobile bg-primary header-mobile-fixed">
         <!--begin::Logo-->
-        <a href="{{ url('/') }}">
+        <a href="{{ url('/articles') }}">
             <img alt="Logo" src="{{ asset('tadmin/media/images/logo-192x192.png') }}" class="max-h-30px"
                 style="filter: brightness(0) invert(1);" />
         </a>
@@ -102,7 +102,7 @@
                             <!--begin::Left-->
                             <div class="d-none d-lg-flex align-items-center mr-3">
                                 <!--begin::Logo-->
-                                <a href="{{ url('/') }}" class="mr-20">
+                                <a href="{{ url('/articles') }}" class="mr-20">
                                     <img alt="Logo" src="{{asset('tadmin/media/images/logo-192x192.png')}}" class="max-h-35px" style="filter: brightness(0) invert(1);" />
                                 </a>
                                 <!--end::Logo-->
