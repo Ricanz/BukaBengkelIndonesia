@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
     <div class="container">
         <h3 class="mb-4">Artikel Buka Bengkel Indonesia</h3>
         <!--begin::Row-->
@@ -52,9 +52,8 @@
                                     <!--end::Description-->
                                 </div>
                                 <div class="separator separator-solid my-7"></div>
-                                <a href="#"
-                                    class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-2">Baca
-                                    Selengkapnya</a>
+                                <a href="{{ url('/article', $item->slug) }}"
+                                    class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-2">Baca Selengkapnya</a>
                                 <!--end::Content-->
                             </div>
                             <!--end::Info-->
@@ -71,4 +70,4 @@
         </div>
         <!--end::Row-->
     </div>
-</x-app-layout>
+</x-guest-layout>
