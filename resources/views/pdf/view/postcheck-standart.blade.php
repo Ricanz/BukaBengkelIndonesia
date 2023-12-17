@@ -97,6 +97,10 @@
                         <td class="bodl-rc text-center not-pass-check bg-table">
                             <strong>{{ $checking->standart->low }}</strong> Psi
                         </td>
+                    @else
+                        <td class="bodl-rc text-center not-pass-check bg-table">
+                            <strong>{{ $checking->standart->low }}</strong> Psi
+                        </td>
                     @endif
                     @if (floatval($checking->post->low) >= 21.3 && floatval($checking->post->low) <= 35.5)
                         <td class="bodl-rc text-center pass-check bg-table">
