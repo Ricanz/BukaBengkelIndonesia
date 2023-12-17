@@ -36,7 +36,7 @@
                                             <a href="#"
                                                 class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
                                                 <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                                                </span>Evaporator</a>
+                                                </span>Buka Bengkel Indonesia</a>
                                         </div>
                                         <!--end::Contacts-->
                                     </div>

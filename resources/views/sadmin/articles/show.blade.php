@@ -19,7 +19,7 @@
                             <div class="d-flex flex-column mr-auto">
                                 <!--begin: Title-->
                                 <a href="#" class="card-title text-hover-primary font-weight-bolder font-size-h5 text-dark mb-1">{{ $data->title }}</a>
-                                <span class="text-muted font-weight-bold">Evaporator</span>
+                                <span class="text-muted font-weight-bold">Buka Bengkel Indonesia</span>
                                 <!--end::Title-->
                             </div>
                             <!--end::Info-->
