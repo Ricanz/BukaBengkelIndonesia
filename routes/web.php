@@ -55,13 +55,6 @@ Route::get('/view/complete-post-pdf/{id}', [CompleteController::class, 'view_pdf
 // Article
 Route::get('/articles', [ArticleController::class, 'list']);
 Route::get('/article/{slug}', [ArticleController::class, 'detail']);
-Route::get('/master/articles', [ArticleController::class, 'index']);
-Route::get('/master/article/create', [ArticleController::class, 'create']);
-Route::get('/master/article/data', [ArticleController::class, 'data']);
-Route::post('/master/article/store', [ArticleController::class, 'store']);
-Route::get('/master/article/edit/{id}', [ArticleController::class, 'edit']);
-Route::post('/master/article/update', [ArticleController::class, 'update']);
-Route::get('/master/article/destroy/{id}', [ArticleController::class, 'destroy']);
 
 
 Route::middleware('auth')->group(function () {
@@ -180,6 +173,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/completes/post', [CompleteController::class, 'store_post'])->name('complete.store_post');
 
     Route::get('/get-kuota-and-total', [ClientsController::class, 'kuota'])->name('clients.kuota');
+
+    // Article
+    
+    Route::get('/master/articles', [ArticleController::class, 'index']);
+    Route::get('/master/article/create', [ArticleController::class, 'create']);
+    Route::get('/master/article/data', [ArticleController::class, 'data']);
+    Route::post('/master/article/store', [ArticleController::class, 'store']);
+    Route::get('/master/article/edit/{id}', [ArticleController::class, 'edit']);
+    Route::post('/master/article/update', [ArticleController::class, 'update']);
+    Route::get('/master/article/destroy/{id}', [ArticleController::class, 'destroy']);
 });
 
 require __DIR__ . '/auth.php';
