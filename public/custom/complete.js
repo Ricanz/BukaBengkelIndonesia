@@ -2,19 +2,6 @@
 var avatar1 = new KTImageInput('kt_image_1');
 var avatar2 = new KTImageInput('kt_image_2');
 
-$(document).ready(function() {
-    // Menggunakan event click pada tombol "Tambah Check"
-    $("#addCheckButton").click(function() {
-        // Clone elemen form-group dan tambahkan ke dalam form-container
-        var clonedFormGroup = $(".check-group").first().clone();
-        
-        $("#form-container").append(clonedFormGroup);
-
-        // Kosongkan nilai input yang telah diclone
-        clonedFormGroup.find("input[type='text']").val("");
-    });
-});
-
 function hapusCheck(e){
     var countCheckGroups = $(".check-group").length;
     if (countCheckGroups <=1 ) {
@@ -30,22 +17,13 @@ function hapusCheck(e){
              
         });
     }
-    // var idx = countCheckGroups - 1;
-    // $(".check-group").eq(idx).remove();
 
     const clickedButton = e.target;
 
-    // Get the parent container of the button
     const parentContainer = clickedButton.closest('.check-group');
 
     if (parentContainer) {
-        // Find the index of the parent container among its siblings
         const index = Array.from(parentContainer.parentElement.children).indexOf(parentContainer);
-        
-        // Output the index (you can use it as needed)
-        console.log('Clicked button index:', index);
-
-        // Remove the parent container if needed
         parentContainer.remove();
     }
 }
