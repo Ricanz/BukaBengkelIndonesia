@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('type')->default('pre');
             $table->string('checking_type')->nullable();
             $table->string('name');
+            $table->string('slug');
             $table->string('description');
             $table->string('status')->default('active');
             $table->string('icon')->nullable();
