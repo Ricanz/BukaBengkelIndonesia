@@ -411,6 +411,7 @@ class GeneralController extends Controller
             $slug = MasterChecking::where('id', $masterId)->pluck('slug')->first();
             $results = MasterItem::whereRaw('LOWER(slug) = ?', [strtolower($slug)])
                     ->where('status', 'active')
+                    ->where('type', 'complete')
                     ->pluck('item')
                     ->first();
             if ($results) {
