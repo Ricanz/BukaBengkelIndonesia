@@ -58,6 +58,7 @@ class MasterController extends Controller
             'description' => $request->label_foto,
             'label_desc' => $request->label_description,
             'status' => 'active',
+            'slug' => Utils::slugify($request->label_judul),
             'type' => $request->type,
         ]);
 
@@ -111,6 +112,7 @@ class MasterController extends Controller
 
         $data->icon = $request->has('file') ? $img : $data->icon;
         $data->name = $request->label_judul ? $request->label_judul : $data->label_judul;
+        $data->slug = $request->label_judul ? Utils::slugify($request->label_judul) : $data->label_judul;
         $data->description = $request->label_foto ? $request->label_foto : $data->label_foto;
         $data->label_desc = $request->label_description ? $request->label_description : $data->label_description;
         $data->status = $request->status ? $request->status : $data->status;

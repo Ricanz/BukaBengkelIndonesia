@@ -13,6 +13,7 @@ class MasterChecking extends Model
         'description',
         'status',
         'type',
-        'label_desc'
+        'label_desc',
+        'slug'
     ];
 }

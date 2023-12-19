@@ -97,7 +97,7 @@
                                                         <strong>Standar Normal</strong>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
-                                                        <select name="master[]" id="master[]" class="form-control">
+                                                        <select name="master[]" id="master" onchange="selectMaster(event)" data-id="1" class="form-control">
                                                             <option value="" selected>Pilih Check</option>
                                                             @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
                                                                 <option value="{{ $type->id }}">{{ $type->name }}
@@ -116,11 +116,11 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
-                                                        <select name="judul_hasil[]" id="judul_hasil" class="form-control" data-id="1"  onchange="getItem(event)">
+                                                        <select name="judul_hasil[]" id="judul_hasil-1" class="form-control" data-id="1" onchange="getItem(event)">
                                                             <option value="" selected>Pilih Checking</option>
-                                                            @foreach (App\Models\MasterItem::where('status', 'active')->where('type', 'complete')->get() as $item)
+                                                            {{-- @foreach (App\Models\MasterItem::where('status', 'active')->where('type', 'complete')->get() as $item)
                                                                 <option value="{{ $item->item }}">{{ $item->item }}</option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
@@ -134,7 +134,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p> --}}
 
                                             <div class="separator separator-dashed my-10"></div>
                                             <div class="form-group row">
@@ -232,6 +231,38 @@
                 });
             }
 
+            function selectMaster(e) {
+                var masterId = e.target.value;
+                var dataId = e.target.getAttribute('data-id');
+                $.ajax({
+                    url: '/select-master/' + masterId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data) {
+                            swal.fire({
+                                html: "Data tidak ditemukan, hubungi Admin!",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() { });
+                        } else {
+                            $('#judul_hasil-'+dataId).empty();
+                            $('#judul_hasil-'+dataId).append('<option value="' + data.title + '">' + data.title + '</option>');
+                            $.each(data.item, function (key, value) {
+                                $('#result-'+dataId).append('<option value="' + value + '">' + value + '</option>');
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
             function addChecking(e) {
                 var dataId = e.target.getAttribute('data-id');
                 count = parseInt(dataId) + 1;
@@ -243,7 +274,7 @@
                         <strong>Standar Normal</strong>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
-                        <select name="master[]" id="master[]" class="form-control">
+                        <select name="master[]" id="master" onchange="selectMaster(event)" data-id="${count}" class="form-control">
                             <option value="" selected>Pilih Check</option>
                             @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
                                 <option value="{{ $type->id }}">{{ $type->name }}
@@ -262,11 +293,8 @@
                         </select>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
-                        <select name="judul_hasil[]" id="judul_hasil" class="form-control" data-id="${count}" onchange="getItem(event)">
+                        <select name="judul_hasil[]" id="judul_hasil-${count}" class="form-control" data-id="${count}" onchange="getItem(event)">
                             <option value="" selected>Pilih Checking</option>
-                            @foreach (App\Models\MasterItem::where('status', 'active')->where('type', 'complete')->get() as $item)
-                                <option value="{{ $item->item }}">{{ $item->item }}</option>
-                            @endforeach
                         </select>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">

@@ -404,4 +404,30 @@ class GeneralController extends Controller
                 ->first();
         return response()->json(explode(',', $results));
     }
+
+    public function selectMaster($masterId)
+    {
+        try {
+            $slug = MasterChecking::where('id', $masterId)->pluck('slug')->first();
+            $results = MasterItem::whereRaw('LOWER(slug) = ?', [strtolower($slug)])
+                    ->where('status', 'active')
+                    ->pluck('item')
+                    ->first();
+            if ($results) {
+                $item = MasterItem::whereRaw('LOWER(item) = ?', [strtolower($results)])
+                ->where('status', 'active')
+                ->pluck('checklist')
+                ->first();
+
+                $res = array(
+                    "title" => $results,
+                    "item" => explode(',', $item)
+                );
+                return response()->json($res);
+            }
+            return response()->json(false);
+        } catch (\Throwable $th) {
+            return response()->json("");
+        }
+    }
 }

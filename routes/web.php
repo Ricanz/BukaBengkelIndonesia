@@ -42,6 +42,7 @@ Route::get('/pre-check', function () {
 //     return view('sadmin.backup.success');
 // });
 Route::get('/get-results/{judulId}', [GeneralController::class, 'getResults']);
+Route::get('/select-master/{judulId}', [GeneralController::class, 'selectMaster']);
 Route::get('/check-pdf/{id}', [CheckingController::class, 'pdf'])->name('download');
 Route::get('/check-pdf/post/{id}', [CheckingController::class, 'pdf_post'])->name('download.standart_post');
 Route::get('/complete-pre/pdf/{id}', [CompleteController::class, 'pdf'])->name('download.complete_pre');
