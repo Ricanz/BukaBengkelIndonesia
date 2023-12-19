@@ -252,6 +252,7 @@
                         } else {
                             $('#judul_hasil-'+dataId).empty();
                             $('#judul_hasil-'+dataId).append('<option value="' + data.title + '">' + data.title + '</option>');
+                            $('#result-'+dataId).empty();
                             $.each(data.item, function (key, value) {
                                 $('#result-'+dataId).append('<option value="' + value + '">' + value + '</option>');
                             });
