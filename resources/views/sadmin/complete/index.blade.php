@@ -36,7 +36,7 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Standart Checking (Pre)</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Complete Checking (Pre)</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <i aria-hidden="true" class="ki ki-close"></i>
                                         </button>
@@ -115,12 +115,12 @@
                                                             <option value="0" >Tidak Lolos</option>
                                                         </select>
                                                     </div>
+                                                    <div class="col-lg-12 col-md-12 col-sm-12 text-left p-2">
+                                                        <strong>Pre-Check</strong>
+                                                    </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
                                                         <select name="judul_hasil[]" id="judul_hasil-1" class="form-control" data-id="1" onchange="getItem(event)">
                                                             <option value="" selected>Pilih Checking</option>
-                                                            {{-- @foreach (App\Models\MasterItem::where('status', 'active')->where('type', 'complete')->get() as $item)
-                                                                <option value="{{ $item->item }}">{{ $item->item }}</option>
-                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
@@ -291,6 +291,9 @@
                             <option value="1" selected>Lolos</option>
                             <option value="0" >Tidak Lolos</option>
                         </select>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-left p-2">
+                        <strong>Pre-Check</strong>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 p-2">
                         <select name="judul_hasil[]" id="judul_hasil-${count}" class="form-control" data-id="${count}" onchange="getItem(event)">
