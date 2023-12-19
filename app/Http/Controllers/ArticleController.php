@@ -89,7 +89,7 @@ class ArticleController extends Controller
 
         $data->image = $request->has('file') ? $img : $data->image;
         $data->title = $request->title ? $request->title : $data->title;
-        $data->slug = $request->title ?Utils::slugify($request->title).''.Utils::generateRandom() : $data->slug;
+        $data->slug = $request->title ? Utils::slugify($request->title).''.Utils::generateRandom() : $data->slug;
         $data->description = $request->description !== null ? $request->description : $data->description;
         $data->short_description = $request->description  !== null ? strip_tags(substr($request->description, 0, 255)) : $data->short_description;
         $data->status = $request->status ? $request->status : $data->status;
