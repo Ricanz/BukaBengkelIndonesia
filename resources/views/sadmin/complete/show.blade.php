@@ -207,10 +207,16 @@
                     <div class="separator separator-dashed my-10"></div>
                     <h2>Hasil Pre Check</h2>
                     <div id="form-container">
+                        <?php  $count = 0;  ?>
                         @for ($i = 0; $i < count($checking->complete); $i++)
+                            <?php $count++; ?>
                             <div class="form-group row check-group">
-                                <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <select name="master[]" id="master[]" class="form-control">
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-left p-0">
+                                    <div class="rounded-circle btn btn-sm btn-primary">{{$count}}</div>
+                                    <strong>Standar Normal</strong>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                                    <select name="master[]" id="master" onchange="selectMaster(event)" data-id="{{$count}}" class="form-control">
                                         <option value="{{ $checking->complete[$i]->master_checking_id }}" selected>
                                             {{ $checking->complete[$i]->master->name }}</option>
                                         @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
@@ -219,39 +225,43 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
+                                <div class="col-lg-3 col-md-3 col-sm-3 p-2">
                                     <input type="text" class="form-control" name="hasil[]"
                                         placeholder="Cth: 261 Psi"
                                         value="{{ $checking->complete[$i]->val_check }}" />
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
+                                <div class="col-lg-3 col-md-3 col-sm-4 p-2">
                                     <select name="hasil_check[]" id="hasil_check[]" class="form-control">
                                         <option value="{{ $checking->complete[$i]->pass }}" selected>
                                             {{ $checking->complete[$i]->pass ? 'Lolos' : 'Tidak Lolos' }}</option>
-                                        <option value="1">Lolos</option>
-                                        <option value="0">Tidak Lolos</option>
+                                        <option value="1" selected>Lolos</option>
+                                        <option value="0" >Tidak Lolos</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                    <select name="judul_hasil[]" id="judul_hasil" class="form-control" onchange="getItem(event)">
+                                <div class="col-lg-12 col-md-12 col-sm-12 text-left p-2">
+                                    <strong>Pre-Check</strong>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                                    <select name="judul_hasil[]" id="judul_hasil-{{$count}}" class="form-control" data-id="{{$count}}" onchange="getItem(event)">
                                         <option value="{{ $checking->complete[$i]->value_title }}" selected>{{ $checking->complete[$i]->value_title }}</option>
-                                        @foreach (App\Models\MasterItem::where('status', 'active')->where('type', 'complete')->get() as $item)
-                                            <option value="{{ $item->item }}">{{ $item->item }}</option>
-                                        @endforeach
-                                    </select>
-
-                                    <select name="result[]" id="result" class="form-control mt-2">
-                                        <option value="{{ $checking->complete[$i]->value }}" selected>{{ $checking->complete[$i]->value }}</option>
-                                        @foreach (explode(',', App\Models\MasterItem::whereRaw('LOWER(item) = ?', [strtolower($checking->complete[$i]->value_title)])->where('status', 'active')->pluck('checklist')->first()) as $item)
-                                            <option value="{{ $item }}">{{ $item }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                                    <select name="result[]" id="result-{{$count}}" class="form-control">
+                                        <option value="{{ $checking->complete[$i]->value }}" selected>{{ $checking->complete[$i]->value }}</option>
+                                        @foreach(explode(',',App\Models\MasterItem::where('status', 'active')->where('item', $checking->complete[$i]->value_title)->where('type', 'complete')->pluck('checklist')->first()) as $item)
+                                            <option value="{{ $item }}">{{ $item }}</option>
+                                        @endforeach 
+                                    </select>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 p-2 text-center">
+                                    <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
+                                    <div class="cursor-pointer btn btn-primary ml-4 mt-2" data-id="{{$count}}" onclick="addChecking(event)">Tambah</div>
+                                </div>
                             </div>
                         @endfor
                     </div>
-                    <p class="cursor-pointer" style="color: #04AA77" id="addCheckButton">Tambah Check</p>
+                    
                     <div class="form-group row">
                         <label class="col-form-label text-left col-lg-3 col-sm-12">Saran Perbaikan</label>
                         <div class="col-lg-9 col-md-9 col-sm-12">
@@ -297,24 +307,18 @@
         <script src="{{ asset('tadmin/plugins/custom/datatables/datatables.bundle.js') }}"></script>
         <script src="{{url('/custom/complete.js')}}" type="application/javascript" ></script>
         <script>
+            var count = 1;
             function getItem(e) {
                 var judulId = e.target.value;
-
-                // Temukan elemen terdekat dengan id 'result'
-                var closestResult = $(e.target).closest('div').find('#result');
-                console.log(closestResult);
-                // Ajax request untuk mengambil opsi hasil yang sesuai dengan judul yang dipilih
+                var dataId = e.target.getAttribute('data-id');
                 $.ajax({
                     url: '/get-results/' + judulId,
                     type: 'GET',
                     dataType: 'json',
                     success: function (data) {
-                        // Mengosongkan dropdown result
-                        closestResult.empty();
-
-                        // Menambahkan opsi-opsi baru ke dropdown result
+                        $('#result-'+dataId).empty();
                         $.each(data, function (key, value) {
-                            closestResult.append('<option value="' + value + '">' + value + '</option>');
+                            $('#result-'+dataId).append('<option value="' + value + '">' + value + '</option>');
                         });
                     },
                     error: function (xhr, status, error) {
@@ -322,6 +326,93 @@
                     }
                 });
             }
+
+            function selectMaster(e) {
+                var masterId = e.target.value;
+                var dataId = e.target.getAttribute('data-id');
+                $.ajax({
+                    url: '/select-master/' + masterId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        if (!data) {
+                            swal.fire({
+                                html: "Data tidak ditemukan, hubungi Admin!",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn font-weight-bold btn-light-primary"
+                                }
+                            }).then(function() { });
+                        } else {
+                            $('#judul_hasil-'+dataId).empty();
+                            $('#judul_hasil-'+dataId).append('<option value="' + data.title + '">' + data.title + '</option>');
+                            $('#result-'+dataId).empty();
+                            $.each(data.item, function (key, value) {
+                                $('#result-'+dataId).append('<option value="' + value + '">' + value + '</option>');
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(xhr.responseText);
+                    }
+                });
+            }
+
+            function addChecking(e) {
+                var dataId = e.target.getAttribute('data-id');
+                count = parseInt(dataId) + 1;
+                
+                var clonedFormGroup = `
+                <div class="form-group row check-group">
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-left p-0">
+                        <div class="rounded-circle btn btn-sm btn-primary">${count}</div>
+                        <strong>Standar Normal</strong>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                        <select name="master[]" id="master" onchange="selectMaster(event)" data-id="${count}" class="form-control">
+                            <option value="" selected>Pilih Check</option>
+                            @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
+                                <option value="{{ $type->id }}">{{ $type->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 p-2">
+                        <input type="text" class="form-control" name="hasil[]"
+                            placeholder="Cth: 261 Psi" />
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 p-2">
+                        <select name="hasil_check[]" id="hasil_check[]" class="form-control">
+                            <option value="1" selected>Lolos</option>
+                            <option value="0" >Tidak Lolos</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 text-left p-2">
+                        <strong>Pre-Check</strong>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                        <select name="judul_hasil[]" id="judul_hasil-${count}" class="form-control" data-id="${count}" onchange="getItem(event)">
+                            <option value="" selected>Pilih Checking</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                        <select name="result[]" id="result-${count}"  class="form-control">
+                            <option value="" selected>Pilih Item Checking</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-2 text-center">
+                        <div class="cursor-pointer btn btn-danger ml-4 mt-2"  onclick="hapusCheck(event)">Hapus</div>
+                        <div class="cursor-pointer btn btn-primary ml-4 mt-2" data-id="${count}" onclick="addChecking(event)">Tambah</div>
+                    </div>
+                </div>
+                `;
+
+                $("#form-container").append(clonedFormGroup);
+                $("#form-container").find(".check-group:last input[type='text']").val(""); // Reset input value
+            }
+
         </script>
     @endsection
 </x-app-layout>
