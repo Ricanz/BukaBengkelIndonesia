@@ -151,30 +151,30 @@ class CompleteController extends Controller
 
         if ($checking->save()) {
             if (count($request->master) > 0) {
-                // $total_record = CompleteChecking::where('checking_id', $checking->id)->where('type', 'pre')->count(); 
                 CompleteChecking::where('checking_id', $checking->id)->update([
                     'status' => 'inactive'
                 ]);
                 foreach ($request->master as $key => $value) {
-                    // if ($key < $total_record) {
-                    //     $complete = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
-                    //     $complete->value_title = $request->judul_hasil[$key];
-                    //     $complete->value = $request->result[$key];
-                    //     $complete->val_check = $request->hasil[$key];
-                    //     $complete->pass = $request->hasil_check[$key];
-                    //     $complete->save();
-                    // } else {
-                        CompleteChecking::create([
-                            'master_checking_id' => $value,
-                            'checking_id' => $checking->id,
-                            'type' => 'pre',
-                            'status' => 'active',
-                            'value_title' => $request->judul_hasil[$key],
-                            'value' => $request->result[$key],
-                            'val_check' => $request->hasil[$key],
-                            'pass' => $request->hasil_check[$key]
-                        ]);
-                    // }
+                        $old_check = CompleteChecking::where('checking_id', $checking->id)->where('master_checking_id', $value)->first();
+                        if (!$old_check) {
+                            CompleteChecking::create([
+                                'master_checking_id' => $value,
+                                'checking_id' => $checking->id,
+                                'type' => 'pre',
+                                'status' => 'active',
+                                'value_title' => $request->judul_hasil[$key],
+                                'value' => $request->result[$key],
+                                'val_check' => $request->hasil[$key],
+                                'pass' => $request->hasil_check[$key]
+                            ]);
+                        } else {
+                            $old_check->value_title = $request->judul_hasil[$key];
+                            $old_check->value = $request->result[$key];
+                            $old_check->val_check = $request->hasil[$key];
+                            $old_check->pass = $request->hasil_check[$key];
+                            $old_check->status = 'active';
+                            $old_check->save();
+                        }
                 }
             }
             return json_encode(['status' => true, 'message' => 'Success']);

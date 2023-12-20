@@ -209,39 +209,45 @@
                     <div class="separator separator-dashed my-10"></div>
                     <h2>Hasil Post Check</h2>
                     <div id="form-container">
+                        <?php  $count = 0;  ?>
                         @for ($i = 0; $i < count($checking->complete); $i++)
+                        <?php $count++; ?>
                         <div class="form-group row check-group">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-left p-0">
+                                <div class="rounded-circle btn btn-sm btn-primary">{{$count}}</div>
+                                <strong>Standar Normal</strong>
+                            </div>
                             <input type="hidden" name="id[]" value="{{ $checking->complete[$i]->id }}">
-                            <div class="col-lg-9 col-md-9 col-sm-12">
-                                <select name="master[]" id="master[]" class="form-control" disabled>
+                            <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                                <select name="master[]" id="master"  class="form-control" disabled>
                                     <option value="{{ $checking->complete[$i]->master_checking_id }}" selected>{{ $checking->complete[$i]->master->name }}</option>
-                                    {{-- @foreach (App\Models\MasterChecking::where('type', 'complete')->where('status', 'active')->get() as $type)
-                                        <option value="{{ $type->id }}">{{ $type->name }}
-                                        </option>
-                                    @endforeach --}}
                                 </select>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-8 mt-2">
+                            <div class="col-lg-3 col-md-3 col-sm-3 p-2">
                                 <input type="text" class="form-control" name="hasil[]"
                                     placeholder="Cth: 261 Psi" value="{{ $checking->complete[$i]->val_check_post }}" />
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-4 mt-2">
+                            <div class="col-lg-3 col-md-3 col-sm-4 p-2">
                                 <select name="hasil_check[]" id="hasil_check[]" class="form-control">
                                     <option value="{{ $checking->complete[$i]->pass_post ? 1 : 0 }}">{{ $checking->complete[$i]->pass_post ? "Lolos" : "Tidak Lolos" }}</option>
                                     <option value="1">Lolos</option>
                                     <option value="0" >Tidak Lolos</option>
                                 </select>
                             </div>
-                            <div class="col-lg-9 col-md-9 col-sm-12 mt-2">
-                                <select name="judul_hasil[]" id="judul_hasil" class="form-control" disabled onchange="getItem(event)">
+                            <div class="col-lg-12 col-md-12 col-sm-12 text-left p-2">
+                                <strong>Post-Check</strong>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                                <select name="judul_hasil[]" id="judul_hasil-{{$count}}" class="form-control" disabled>
                                     <option value="{{ $checking->complete[$i]->value_title }}" selected >{{ $checking->complete[$i]->value_title }}</option>
                                 </select>
-
-                                <select name="result[]" id="result" class="form-control mt-2">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 p-2">
+                                <select name="result[]" id="result-{{$count}}" class="form-control">
                                     <option value="{{ $checking->complete[$i]->value_post === null ? "" : $checking->complete[$i]->value_post }}" selected>{{ $checking->complete[$i]->value_post === null ? "Pilih Item Checking" : $checking->complete[$i]->value_post }}</option>
-                                    @foreach (explode(',', App\Models\MasterItem::whereRaw('LOWER(item) = ?', [strtolower($checking->complete[$i]->value_title)])->where('status', 'active')->pluck('checklist')->first()) as $item)
+                                    @foreach(explode(',',App\Models\MasterItem::where('status', 'active')->where('item', $checking->complete[$i]->value_title)->where('type', 'complete')->pluck('checklist')->first()) as $item)
                                         <option value="{{ $item }}">{{ $item }}</option>
-                                    @endforeach
+                                    @endforeach 
                                 </select>
                             </div>
                         </div>
