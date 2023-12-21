@@ -7,7 +7,7 @@
                     <span class="card-icon">
                         <i class="flaticon2-supermarket text-primary"></i>
                     </span>
-                    <h3 class="card-label">Master Data
+                    <h3 class="card-label">Master Data Lody 
                         {{ Str::ucfirst(request()->segment(count(request()->segments()))) }} Checking</h3>
                 </div>
                 <div class="card-toolbar">
