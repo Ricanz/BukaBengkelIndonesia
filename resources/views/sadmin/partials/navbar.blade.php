@@ -11,7 +11,7 @@
                         <li
                             class="menu-item menu-item-open menu-item-here menu-item-submenu menu-item-rel menu-item-open menu-item-here">
                             <a href="{{ url('/') }}" class="menu-link">
-                                <span class="menu-text">Dashboard Lody</span>
+                                <span class="menu-text">Dashboard</span>
                                 <span class="menu-desc">Buka Bengkel Indonesia</span>
                             </a>
                         </li>
