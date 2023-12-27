@@ -10,9 +10,11 @@
                     <div class="card-body">
                         <!--begin::Section-->
                         <!--begin::Pic-->
+                        @if ($data->image)
                         <div class="flex-shrink-0 mr-4 gutter-b">
                             <img src="{{ $data->image }}" style="height: auto; width: 100%; max-width: fit-content;" alt="image" />
                         </div>
+                        @endif
                         <!--end::Pic-->
                         <div class="d-flex align-items-center">
                             <!--begin::Info-->

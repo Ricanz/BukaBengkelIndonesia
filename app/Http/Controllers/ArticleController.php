@@ -41,7 +41,6 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'file' => 'required',
             'title' => 'required',
             'description' => 'required',
         ]);
@@ -52,6 +51,8 @@ class ArticleController extends Controller
         
         if ($request->has('file')) {
             $img = Utils::uploadImage($request->file, 720);
+        } else {
+            $img = null;
         }
 
         $submit = Article::create([

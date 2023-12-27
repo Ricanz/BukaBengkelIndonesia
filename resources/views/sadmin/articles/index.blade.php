@@ -14,8 +14,10 @@
                             <!--begin::Pic-->
                             <div class="flex-shrink-0 mr-5">
                                 <div class="symbol symbol-lg-150">
+                                    @if ($item->image)
                                     <img alt="Pic"
                                         src="{{ $item->image }}" />
+                                    @endif
                                 </div>
                             </div>
                             <!--end::Pic-->
@@ -26,7 +28,7 @@
                                     <!--begin::User-->
                                     <div class="mr-3">
                                         <!--begin::Name-->
-                                        <a href="#"
+                                        <a href="{{ url('/article', $item->slug) }}"
                                             class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">
                                             {{ $item->title }}
                                         </a>
