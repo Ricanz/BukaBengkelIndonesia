@@ -57,13 +57,13 @@
                                         <input type="hidden" name="type" value="post">
                                         <div class="image-input image-input-outline" id="kt_image_1">
                                             <div class="image-input-wrapper"
-                                                style="background-image: url({{ asset('tadmin/media/users/100_1.jpg') }})">
+                                                style="background-image: url({{ asset('tadmin/media/users/image_upload_fix.png') }})">
                                             </div>
 
                                             <label
                                                 class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                                 data-action="change" data-toggle="tooltip" title=""
-                                                data-original-title="Change avatar">
+                                                data-original-title="Upload Image">
                                                 <i class="fa fa-pen icon-sm text-muted"></i>
                                                 <input type="file" name="file"
                                                     accept=".png, .jpg, .jpeg" />
@@ -125,7 +125,7 @@
                                             <label
                                                 class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                                                 data-action="change" data-toggle="tooltip" title=""
-                                                data-original-title="Change avatar">
+                                                data-original-title="Upload Image">
                                                 <i class="fa fa-pen icon-sm text-muted"></i>
                                                 <input type="file" name="file"
                                                     accept=".png, .jpg, .jpeg" />
