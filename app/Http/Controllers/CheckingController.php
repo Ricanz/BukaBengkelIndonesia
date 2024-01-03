@@ -18,6 +18,7 @@ use Yajra\DataTables\Facades\DataTables;
 use PDF;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class  CheckingController extends Controller
 {
@@ -59,52 +60,60 @@ class  CheckingController extends Controller
         if ($validation->fails()) {
             return json_encode(['status' => false, 'message' => $validation->messages()]);
         }
-        $employee_id = 1;
-        $client_id = 1;
-
-        $user = Auth::user();
-        if ($user->role === 'employee') {
-            $employee = Employee::where('user_id', $user->id)->first();
-            $employee_id = $employee->id;
-            $client_id = $employee->client_id;
-        }
-
-        $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
-        $nextNumber = (int)$lastNumber + 1;
-        $formattedNextNumber = sprintf('%06d', $nextNumber);
-
-        $checking = Checking::create([
-            'user_id' => $user->id,
-            'employee_id' => $employee_id,
-            'client_id' => $client_id,
-            'sa_id' => $request->advisor,
-            'wo' => $request->wo,
-            'plat_number' => $request->nopol,
-            'type_id' => $request->type,
-            'status' => 'active',
-            'checking_type' => 'standart',
-            'number' => $formattedNextNumber,
-            'saran' => $request->saran,
-            'note' => $request->catatan
-        ]);
-        if ($checking) {
-            StandartChecking::create([
-                'checking_id' => $checking->id,
-                'km' => $request->km,
-                'high' => $request->high,
-                'low' => $request->low,
-                'suhu' => $request->suhu,
-                'wind' => $request->wind,
-                'saran' => $request->saran,
-                'compressor' => $request->compressor,
-                'cabin' => $request->cabin,
-                'blower' => $request->blower,
-                'fan' => $request->fan,
+        DB::beginTransaction();
+        try {
+            $employee_id = 1;
+            $client_id = 1;
+    
+            $user = Auth::user();
+            if ($user->role === 'employee') {
+                $employee = Employee::where('user_id', $user->id)->first();
+                $employee_id = $employee->id;
+                $client_id = $employee->client_id;
+            }
+    
+            $lastNumber = Checking::where('client_id', $employee->client->id)->orderByDesc('number')->pluck('number')->first();
+            $nextNumber = (int)$lastNumber + 1;
+            $formattedNextNumber = sprintf('%06d', $nextNumber);
+    
+            $checking = Checking::create([
+                'user_id' => $user->id,
+                'employee_id' => $employee_id,
+                'client_id' => $client_id,
+                'sa_id' => $request->advisor,
+                'wo' => $request->wo,
+                'plat_number' => $request->nopol,
+                'type_id' => $request->type,
                 'status' => 'active',
-                'type' => 'pre'
+                'checking_type' => 'standart',
+                'number' => $formattedNextNumber,
+                'saran' => $request->saran,
+                'note' => $request->catatan
             ]);
-            return json_encode(['status' => true, 'message' => 'Success', 'id' => $checking->id]);
-        } else {
+            if ($checking) {
+                StandartChecking::create([
+                    'checking_id' => $checking->id,
+                    'km' => $request->km,
+                    'high' => $request->high,
+                    'low' => $request->low,
+                    'suhu' => $request->suhu,
+                    'wind' => $request->wind,
+                    'saran' => $request->saran,
+                    'compressor' => $request->compressor,
+                    'cabin' => $request->cabin,
+                    'blower' => $request->blower,
+                    'fan' => $request->fan,
+                    'status' => 'active',
+                    'type' => 'pre'
+                ]);
+                DB::commit();
+                return json_encode(['status' => true, 'message' => 'Success', 'id' => $checking->id]);
+            } else {
+                DB::rollBack();
+                return json_encode(['status' => false, 'message' => 'Something went wrong.']);
+            }
+        } catch (\Throwable $th) {
+            DB::rollBack();
             return json_encode(['status' => false, 'message' => 'Something went wrong.']);
         }
     }

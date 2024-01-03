@@ -39,7 +39,7 @@
 
                         <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow"
                             data-action="change" data-toggle="tooltip" title=""
-                            data-original-title="Change avatar">
+                            data-original-title="Upload Image">
                             <i class="fa fa-pen icon-sm text-muted"></i>
                             <input type="file" name="file" accept=".png, .jpg, .jpeg" />
                             <input type="hidden" name="profile_avatar_remove" />
